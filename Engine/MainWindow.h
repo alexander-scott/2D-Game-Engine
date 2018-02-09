@@ -56,7 +56,7 @@ private:
 	static LRESULT WINAPI _HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	LRESULT HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-	static constexpr wchar_t* wndClassName = L"DirectXTK Simple Sample Window";
+	static constexpr wchar_t* wndClassName = L"GEPAA Engine";
 	HINSTANCE hInst = nullptr;
 	std::wstring args;
 };
