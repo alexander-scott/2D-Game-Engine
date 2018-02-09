@@ -14,6 +14,18 @@
     <Filter Include="Engine\Graphics">
       <UniqueIdentifier>{b8a59ff7-c965-4f7d-bd2a-27966ec6a9e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems">
+      <UniqueIdentifier>{1626bb87-84cb-4976-b5b8-c26cf4eb11d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Messaging">
+      <UniqueIdentifier>{2dedbc26-174d-4eda-9494-54db848ee191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Messaging\Interfaces">
+      <UniqueIdentifier>{9c9d40c7-788f-4f5f-8e1d-40ba387a23f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Messaging\PostOffice">
+      <UniqueIdentifier>{cf362e14-cac7-4df8-a249-8bece6c385f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -46,6 +58,24 @@
     <ClInclude Include="FrameTimer.h">
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="IListener.h">
+      <Filter>Engine\Systems\Messaging\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IMessage.h">
+      <Filter>Engine\Systems\Messaging\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IMessenger.h">
+      <Filter>Engine\Systems\Messaging\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="PostOffice.h">
+      <Filter>Engine\Systems\Messaging\PostOffice</Filter>
+    </ClInclude>
+    <ClInclude Include="PostOfficeMessenger.h">
+      <Filter>Engine\Systems\Messaging\PostOffice</Filter>
+    </ClInclude>
+    <ClInclude Include="PostOfficeListener.h">
+      <Filter>Engine\Systems\Messaging\PostOffice</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -65,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="FrameTimer.cpp">
       <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="PostOffice.cpp">
+      <Filter>Engine\Systems\Messaging\PostOffice</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
