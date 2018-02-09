@@ -6,12 +6,10 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 {
 	try
 	{
-		int screenWidth = 800;
-		int screenHeight = 600;
-		MainWindow wnd(hInst, pArgs, screenWidth, screenHeight);
+		MainWindow wnd(hInst, pArgs);
 		try
 		{
-			Engine engine(wnd, screenWidth, screenHeight);
+			Engine engine(wnd);
 			while (wnd.ProcessMessage())
 			{
 				engine.Update();

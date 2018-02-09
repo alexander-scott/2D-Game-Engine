@@ -11,6 +11,9 @@
     <Filter Include="Engine\Core">
       <UniqueIdentifier>{646d6cfc-a2e7-4319-b0c1-5a887269c2d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Graphics">
+      <UniqueIdentifier>{b8a59ff7-c965-4f7d-bd2a-27966ec6a9e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -40,6 +43,9 @@
     <ClInclude Include="DXErr.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="FrameTimer.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -56,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameTimer.cpp">
+      <Filter>Engine\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

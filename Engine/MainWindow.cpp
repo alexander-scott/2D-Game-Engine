@@ -4,7 +4,8 @@
 #include "Engine.h"
 #include <assert.h>
 
-MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs, int width, int height)
+// Constructor that creates a window with screen width and height defined in Consts.h
+MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs)
 	:
 	args(pArgs),
 	hInst(hInst)
@@ -21,9 +22,9 @@ MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs, int width, int height)
 	// create window & get hWnd
 	RECT wr;
 	wr.left = 350;
-	wr.right = width + wr.left;
+	wr.right = SCREEN_WIDTH + wr.left;
 	wr.top = 100;
-	wr.bottom = height + wr.top;
+	wr.bottom = SCREEN_HEIGHT + wr.top;
 	AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
 	hWnd = CreateWindow(wndClassName, L"GEPAA Engine",
 		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
@@ -42,7 +43,8 @@ MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs, int width, int height)
 	UpdateWindow(hWnd);
 }
 
-MainWindow::MainWindow(HWND hwnd, int width, int height)
+// Constructor that uses an already created window as the panel to render to
+MainWindow::MainWindow(HWND hwnd)
 {
 	// create window & get hWnd
 	hWnd = hwnd;
