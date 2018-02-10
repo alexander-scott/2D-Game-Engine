@@ -6,6 +6,8 @@
 #include "IUpdateable.h"
 #include "IDrawable.h"
 
+#include "TransformComponent.h"
+
 using namespace std;
 
 class GameObject

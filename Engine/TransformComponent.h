@@ -24,19 +24,19 @@ public:
 	float GetWorldScale() const;
 	Vec2 GetWorldPosition() const;
 
-	bool CheckChanged() { return mHasChanged; }
-	void SetChanged(bool changed) { mHasChanged = changed; }
+	bool CheckChanged() { return _hasChanged; }
+	void SetChanged(bool changed) { _hasChanged = changed; }
 
-	void SetParent(TransformComponent* parent) { mParent = parent; }
+	void SetParent(TransformComponent* parent) { _parent = parent; }
 
 private:
-	Vec2					mLocalPosition;
-	float					mLocalRotation; // RADIANS
-	float					mLocalScale;
+	Vec2					_localPosition;
+	float					_localRotation; // RADIANS
+	float					_localScale;
 
-	bool					mHasChanged;
+	bool					_hasChanged;
 
-	TransformComponent*		mParent;
+	TransformComponent*		_parent;
 };
 
 namespace ComponentFactory

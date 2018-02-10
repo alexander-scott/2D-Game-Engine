@@ -47,6 +47,9 @@
     <Filter Include="Engine\Messaging\Messages\SceneMessages">
       <UniqueIdentifier>{ddc152fd-c3a7-46d0-8459-635731dc7dd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Graphics\APIs">
+      <UniqueIdentifier>{ff139ad1-bfbe-4114-8d38-a93926f3d006}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -124,11 +127,14 @@
     <ClInclude Include="SceneBuilder.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="RequestBuildScene.h">
-      <Filter>Engine\Messaging\Messages\SceneMessages</Filter>
-    </ClInclude>
     <ClInclude Include="BuildSceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="TestGraphics.h">
+      <Filter>Engine\Graphics\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="IGraphics.h">
+      <Filter>Engine\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="IScene.cpp">
       <Filter>Engine\Scene Management\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="TestGraphics.cpp">
+      <Filter>Engine\Graphics\APIs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

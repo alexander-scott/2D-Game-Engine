@@ -1,6 +1,5 @@
 #include "Engine.h"
 
-#include "RequestBuildScene.h"
 #include "BuildSceneMessage.h"
 
 // Constructor that uses width and height from Consts.h
@@ -26,8 +25,7 @@ void Engine::InitaliseEngine()
 	SubscribeToMessageType(MessageType::eBuildSceneMessage);
 
 	// Request a new scene be built by the SceneBuilder system
-	RequestBuildScene buildMsg;
-	PostOffice::Instance().SendMessageToListeners(buildMsg);
+	PostOffice::Instance().SendMessageToListeners(IMessage(MessageType::eRequestBuildSceneMessage));
 }
 
 void Engine::RecieveMessage(IMessage & message)
@@ -42,12 +40,14 @@ void Engine::RecieveMessage(IMessage & message)
 
 void Engine::Update()
 {
-	// BEGIN FRAME
+	// Tell the Graphics system to begin the frame
+	PostOffice::Instance().SendMessageToListeners(IMessage(MessageType::eGraphicsStartFrame));
 
 	UpdateScene();
 	DrawScene();
 
-	// END FRAME
+	// Tell the Graphics system to end the frame
+	PostOffice::Instance().SendMessageToListeners(IMessage(MessageType::eGraphicsEndFrame));
 }
 
 void Engine::DrawScene()

@@ -11,9 +11,10 @@ static constexpr int SCREEN_HEIGHT = 600;
 
 enum MessageType
 {
-	eTestMessage,
 	eRequestBuildSceneMessage,
-	eBuildSceneMessage
+	eBuildSceneMessage,
+	eGraphicsStartFrame,
+	eGraphicsEndFrame
 };
 
 enum MessengerType
@@ -24,7 +25,8 @@ enum MessengerType
 
 enum SystemType
 {
-	eSceneBuilder
+	eSceneBuilder,
+	eGraphics
 };
 
 enum ComponentType

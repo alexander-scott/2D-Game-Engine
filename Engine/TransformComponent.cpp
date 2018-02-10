@@ -3,126 +3,126 @@
 TransformComponent::TransformComponent(Vec2 localPosition, float localRotation, float localScale)
 {
 	_type = ComponentType::eTransformComponent;
-	mHasChanged = false;
+	_hasChanged = false;
 
-	mLocalPosition = localPosition;
-	mLocalScale = localScale;
-	mLocalRotation = localRotation;
+	_localPosition = localPosition;
+	_localScale = localScale;
+	_localRotation = localRotation;
 
-	mParent = nullptr;
+	_parent = nullptr;
 }
 
 void TransformComponent::SetLocalPosition(Vec2 position)
 {
-	if (position.x != mLocalPosition.x || position.y != mLocalPosition.y)
+	if (position.x != _localPosition.x || position.y != _localPosition.y)
 	{
-		mHasChanged = true;
+		_hasChanged = true;
 	}
 
-	mLocalPosition = position;
+	_localPosition = position;
 }
 
 void TransformComponent::SetLocalScale(float scale)
 {
-	if (scale != mLocalScale)
+	if (scale != _localScale)
 	{
-		mHasChanged = true;
+		_hasChanged = true;
 	}
 
-	mLocalScale = scale;
+	_localScale = scale;
 }
 
 void TransformComponent::SetLocalRotation(float rot)
 {
-	if (rot != mLocalRotation)
+	if (rot != _localRotation)
 	{
-		mHasChanged = true;
+		_hasChanged = true;
 	}
 
-	mLocalRotation = rot;
+	_localRotation = rot;
 }
 
 float TransformComponent::GetLocalRotation() const
 {
-	return mLocalRotation;
+	return _localRotation;
 }
 
 float TransformComponent::GetLocalScale() const
 {
-	return mLocalScale;
+	return _localScale;
 }
 
 Vec2 TransformComponent::GetLocalPosition() const
 {
-	return mLocalPosition;
+	return _localPosition;
 }
 
 void TransformComponent::SetWorldPosition(Vec2 position)
 {
 	// Calculate the new position
 	Vec2 newPos;
-	if (mParent != nullptr)
-		newPos = position - mParent->GetWorldPosition();
+	if (_parent != nullptr)
+		newPos = position - _parent->GetWorldPosition();
 	else
 		newPos = position;
 
 	// If the new position is different to the old postion set hasChanged to true
-	if (newPos.x != mLocalPosition.x || newPos.y != mLocalPosition.y)
-		mHasChanged = true;
+	if (newPos.x != _localPosition.x || newPos.y != _localPosition.y)
+		_hasChanged = true;
 
-	mLocalPosition = newPos;
+	_localPosition = newPos;
 }
 
 void TransformComponent::SetWorldScale(float scale)
 {
 	float newScale;
-	if (mParent != nullptr)
-		newScale = (mParent->GetWorldScale() + scale) / 2;
+	if (_parent != nullptr)
+		newScale = (_parent->GetWorldScale() + scale) / 2;
 	else
 		newScale = scale;
 
-	if (newScale != mLocalScale)
-		mHasChanged = true;
+	if (newScale != _localScale)
+		_hasChanged = true;
 
-	mLocalScale = newScale;
+	_localScale = newScale;
 }
 
 void TransformComponent::SetWorldRotation(float rot)
 {
 	float newRot;
-	if (mParent != nullptr)
-		newRot = rot - mParent->GetWorldRotation();
+	if (_parent != nullptr)
+		newRot = rot - _parent->GetWorldRotation();
 	else
 		newRot = rot;
 
-	if (newRot != mLocalRotation)
-		mHasChanged = true;
+	if (newRot != _localRotation)
+		_hasChanged = true;
 
-	mLocalRotation = newRot;
+	_localRotation = newRot;
 }
 
 float TransformComponent::GetWorldRotation() const
 {
-	if (mParent != nullptr)
-		return mLocalRotation + mParent->GetWorldRotation();
+	if (_parent != nullptr)
+		return _localRotation + _parent->GetWorldRotation();
 	else
-		return mLocalRotation;
+		return _localRotation;
 }
 
 float TransformComponent::GetWorldScale() const
 {
-	if (mParent != nullptr)
-		return mLocalScale * mParent->GetWorldScale();
+	if (_parent != nullptr)
+		return _localScale * _parent->GetWorldScale();
 	else
-		return mLocalScale;
+		return _localScale;
 }
 
 Vec2 TransformComponent::GetWorldPosition() const
 {
-	if (mParent != nullptr)
-		return mLocalPosition + mParent->GetWorldPosition();
+	if (_parent != nullptr)
+		return _localPosition + _parent->GetWorldPosition();
 	else
-		return mLocalPosition;
+		return _localPosition;
 }
 
 TransformComponent * ComponentFactory::MakeTransformComponent(Vec2 position, float rotation, float scale)

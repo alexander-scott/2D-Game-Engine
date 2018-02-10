@@ -265,6 +265,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IDrawable.h" />
+    <ClInclude Include="IGraphics.h" />
     <ClInclude Include="IListener.h" />
     <ClInclude Include="IMessage.h" />
     <ClInclude Include="IMessenger.h" />
@@ -275,9 +276,9 @@
     <ClInclude Include="PostOffice.h" />
     <ClInclude Include="PostOfficeListener.h" />
     <ClInclude Include="PostOfficeMessenger.h" />
-    <ClInclude Include="RequestBuildScene.h" />
     <ClInclude Include="SceneBuilder.h" />
     <ClInclude Include="SystemManager.h" />
+    <ClInclude Include="TestGraphics.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="WinDefines.h" />
     <ClInclude Include="COMInitializer.h" />
@@ -297,6 +298,7 @@
     <ClCompile Include="PostOffice.cpp" />
     <ClCompile Include="SceneBuilder.cpp" />
     <ClCompile Include="SystemManager.cpp" />
+    <ClCompile Include="TestGraphics.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>

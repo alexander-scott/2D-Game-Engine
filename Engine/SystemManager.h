@@ -3,7 +3,9 @@
 #include "Consts.h"
 
 #include "ISystem.h"
+
 #include "SceneBuilder.h"
+#include "TestGraphics.h"
 
 class SystemManager
 {

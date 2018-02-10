@@ -4,6 +4,9 @@ SystemManager::SystemManager()
 {
 	auto sceneBuilder = make_shared<SceneBuilder>();
 	_systems.insert(std::make_pair(sceneBuilder->SysType, sceneBuilder));
+
+	auto graphics = make_shared<TestGraphics>(); // Create a test graphics instance for now
+	_systems.insert(std::make_pair(graphics->SysType, graphics));
 }
 
 SystemManager::~SystemManager()
