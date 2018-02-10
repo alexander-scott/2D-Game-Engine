@@ -22,9 +22,6 @@ Engine::~Engine()
 
 void Engine::InitaliseEngine()
 {
-	// Add a listener for when the new scene gets built
-	SubscribeToMessageType(SystemMessageType::eBuildSceneMessage);
-
 	// Initalise Graphics system
 	PostOffice::Instance().SendMessageToListeners(InitaliseGraphicsMessage(_mainWindow));
 
@@ -32,41 +29,17 @@ void Engine::InitaliseEngine()
 	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eRequestBuildSceneMessage));
 }
 
-void Engine::RecieveMessage(ISystemMessage & message)
-{
-	if (message.Type == SystemMessageType::eBuildSceneMessage)
-	{
-		// Set the scene built by the SceneBuilder system as the current scene
-		BuildSceneMessage& msg = static_cast<BuildSceneMessage&>(message);
-		_currentScene = msg.GetScene();
-	}
-}
-
 void Engine::Update()
 {
 	// Tell the Graphics system to begin the frame
 	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame));
 
-	UpdateScene();
-	DrawScene();
+	// Update the current scene in the SceneManager system
+	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
+
+	// Draw the current scene in the SceneManager system
+	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene));
 
 	// Tell the Graphics system to end the frame
 	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame));
-}
-
-void Engine::DrawScene()
-{
-	if (_currentScene == nullptr)
-		return;
-
-	_currentScene->Draw();
-}
-
-void Engine::UpdateScene()
-{
-	if (_currentScene == nullptr)
-		return;
-
-	float deltaTime = _frameTimer.Mark();
-	_currentScene->Update(deltaTime);
 }

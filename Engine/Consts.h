@@ -12,6 +12,10 @@ static constexpr int SCREEN_HEIGHT = 600;
 enum SystemMessageType
 {
 	// Scene messages
+	eDrawScene,
+	eUpdateScene,
+
+	// Scene build messages
 	eRequestBuildSceneMessage,
 	eBuildSceneMessage,
 
@@ -25,6 +29,7 @@ enum SystemMessageType
 
 enum SystemType
 {
+	eSceneManager,
 	eSceneBuilder,
 	eGraphics
 };

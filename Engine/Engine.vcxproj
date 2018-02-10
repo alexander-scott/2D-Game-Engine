@@ -282,6 +282,7 @@
     <ClInclude Include="PostOfficeListener.h" />
     <ClInclude Include="PostOfficeMessenger.h" />
     <ClInclude Include="SceneBuilder.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="TestGraphics.h" />
     <ClInclude Include="TransformComponent.h" />

@@ -5,6 +5,7 @@
 #include "ISystem.h"
 
 #include "SceneBuilder.h"
+#include "SceneManager.h"
 #include "TestGraphics.h"
 
 class SystemManager
