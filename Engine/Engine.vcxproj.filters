@@ -14,17 +14,29 @@
     <Filter Include="Engine\Graphics">
       <UniqueIdentifier>{b8a59ff7-c965-4f7d-bd2a-27966ec6a9e3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Systems">
-      <UniqueIdentifier>{1626bb87-84cb-4976-b5b8-c26cf4eb11d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Systems\Messaging">
+    <Filter Include="Engine\Messaging">
       <UniqueIdentifier>{2dedbc26-174d-4eda-9494-54db848ee191}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Systems\Messaging\Interfaces">
+    <Filter Include="Engine\Messaging\Interfaces">
       <UniqueIdentifier>{9c9d40c7-788f-4f5f-8e1d-40ba387a23f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Systems\Messaging\PostOffice">
+    <Filter Include="Engine\Messaging\PostOffice">
       <UniqueIdentifier>{cf362e14-cac7-4df8-a249-8bece6c385f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Messaging\Messages">
+      <UniqueIdentifier>{e63b7ddb-2442-4b92-85d8-ba70e5a76d8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{fb9a0179-661c-4111-9bcd-07ddef011699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene\GameObject">
+      <UniqueIdentifier>{010bd2a2-5328-4f7e-9921-50132ab2c5d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene\GameObject\Components">
+      <UniqueIdentifier>{60661f79-2e5e-4278-91fa-877bee3dcba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene\GameObject\Components\ComponentTypes">
+      <UniqueIdentifier>{909407a2-42de-4a86-8a15-237e1be804fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -59,22 +71,37 @@
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="IListener.h">
-      <Filter>Engine\Systems\Messaging\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IMessage.h">
-      <Filter>Engine\Systems\Messaging\Interfaces</Filter>
+      <Filter>Engine\Messaging\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="IMessenger.h">
-      <Filter>Engine\Systems\Messaging\Interfaces</Filter>
+      <Filter>Engine\Messaging\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="PostOffice.h">
-      <Filter>Engine\Systems\Messaging\PostOffice</Filter>
+      <Filter>Engine\Messaging\PostOffice</Filter>
     </ClInclude>
     <ClInclude Include="PostOfficeMessenger.h">
-      <Filter>Engine\Systems\Messaging\PostOffice</Filter>
+      <Filter>Engine\Messaging\PostOffice</Filter>
     </ClInclude>
     <ClInclude Include="PostOfficeListener.h">
-      <Filter>Engine\Systems\Messaging\PostOffice</Filter>
+      <Filter>Engine\Messaging\PostOffice</Filter>
+    </ClInclude>
+    <ClInclude Include="IMessage.h">
+      <Filter>Engine\Messaging\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Engine\Scene\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>Engine\Scene\GameObject\Components\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawable.h">
+      <Filter>Engine\Scene\GameObject\Components\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="IUpdateable.h">
+      <Filter>Engine\Scene\GameObject\Components\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
+      <Filter>Engine\Scene\GameObject\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -97,7 +124,13 @@
       <Filter>Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="PostOffice.cpp">
-      <Filter>Engine\Systems\Messaging\PostOffice</Filter>
+      <Filter>Engine\Messaging\PostOffice</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Engine\Scene\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
+      <Filter>Engine\Scene\GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

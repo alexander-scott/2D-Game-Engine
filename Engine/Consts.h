@@ -2,6 +2,7 @@
 
 #include <map>
 #include <vector>
+#include <memory>
 
 #include "Math.h"
 
@@ -17,4 +18,9 @@ enum MessengerType
 {
 	eEngine,
 	eMessengerTypeCount
+};
+
+enum ComponentType
+{
+	eTransformComponent
 };
