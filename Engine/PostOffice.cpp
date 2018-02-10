@@ -9,22 +9,6 @@ PostOffice::~PostOffice()
 {
 }
 
-void PostOffice::InitaliseMessenger(IMessenger * messenger)
-{
-	if (messenger == nullptr)
-		throw std::exception("MESSENGER NOT INITALISED");
-
-	_messengers[messenger->Type] = messenger;
-}
-
-IMessenger * PostOffice::GetMessenger(MessengerType messengerType)
-{
-	if (_messengers[messengerType] == nullptr)
-		throw std::exception("MESSENGER NOT INITALISED");
-
-	return _messengers[messengerType];
-}
-
 void PostOffice::AddListener(IListener * listener, MessageType messageType)
 {
 	_listeners[messageType].push_back(listener);

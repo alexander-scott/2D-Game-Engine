@@ -2,7 +2,7 @@
 
 #include "IMessage.h"
 
-#include "IScene.h"
+class IScene;
 
 class BuildSceneMessage : public IMessage
 {

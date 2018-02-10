@@ -1,13 +1,12 @@
 #pragma once
 
-#include "PlayScene.h"
+#include "IScene.h"
 
 #include "ISystem.h"
 #include "PostOfficeListener.h"
-#include "PostOfficeMessenger.h"
 #include "PostOffice.h"
 
-class SceneBuilder : public ISystem, public PostOfficeListener, public PostOfficeMessenger
+class SceneBuilder : public ISystem, public PostOfficeListener
 {
 public:
 	SceneBuilder();
@@ -15,6 +14,5 @@ public:
 	void RecieveMessage(IMessage& message) override;
 
 private:
-	shared_ptr<PlayScene> BuildScene();
+	shared_ptr<IScene> BuildScene();
 };
-

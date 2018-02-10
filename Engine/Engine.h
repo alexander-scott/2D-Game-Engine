@@ -6,14 +6,13 @@
 #include "IScene.h"
 
 #include "PostOfficeListener.h"
-#include "PostOfficeMessenger.h"
 #include "PostOffice.h"
 
 #include "SystemManager.h"
 
 using namespace std;
 
-class Engine : public PostOfficeListener, public PostOfficeMessenger
+class Engine : public PostOfficeListener
 {
 public:
 	Engine(class MainWindow& wnd);

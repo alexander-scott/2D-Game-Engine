@@ -4,13 +4,13 @@
 #include "BuildSceneMessage.h"
 
 // Constructor that uses width and height from Consts.h
-Engine::Engine(MainWindow & wnd) : _mainWindow(wnd), PostOfficeMessenger(MessengerType::eEngineMessenger)
+Engine::Engine(MainWindow & wnd) : _mainWindow(wnd)
 {
 	InitaliseEngine();
 }
 
 // Constructor that uses width and height that are passed in from MainWindow.h
-Engine::Engine(MainWindow& wnd, int width, int height) : _mainWindow(wnd), PostOfficeMessenger(MessengerType::eEngineMessenger)
+Engine::Engine(MainWindow& wnd, int width, int height) : _mainWindow(wnd)
 {
 	InitaliseEngine();
 }
@@ -22,8 +22,10 @@ Engine::~Engine()
 
 void Engine::InitaliseEngine()
 {
-	PostOffice::Instance().AddListener(this, MessageType::eBuildSceneMessage);
+	// Add a listener for when the new scene gets built
+	SubscribeToMessageType(MessageType::eBuildSceneMessage);
 
+	// Request a new scene be built by the SceneBuilder system
 	RequestBuildScene buildMsg;
 	PostOffice::Instance().SendMessageToListeners(buildMsg);
 }
@@ -32,6 +34,7 @@ void Engine::RecieveMessage(IMessage & message)
 {
 	if (message.Type == MessageType::eBuildSceneMessage)
 	{
+		// Set the scene built by the SceneBuilder system as the current scene
 		BuildSceneMessage& msg = static_cast<BuildSceneMessage&>(message);
 		_currentScene = msg.GetScene();
 	}

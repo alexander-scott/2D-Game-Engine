@@ -2,23 +2,26 @@
 
 #include "BuildSceneMessage.h"
 
-SceneBuilder::SceneBuilder() : ISystem(SystemType::eSceneBuilder), PostOfficeMessenger(MessengerType::eSceneBuilderMessenger)
+SceneBuilder::SceneBuilder() : ISystem(SystemType::eSceneBuilder)
 {
-	PostOffice::Instance().AddListener(this, MessageType::eRequestBuildSceneMessage);
+	SubscribeToMessageType(MessageType::eRequestBuildSceneMessage);
 }
 
 void SceneBuilder::RecieveMessage(IMessage & message)
 {
 	if (message.Type == MessageType::eRequestBuildSceneMessage)
 	{
-		shared_ptr<PlayScene> scene = BuildScene();
+		// If the engine asks the SceneBuilder system to create a Scene, build one and send a pointer to it in a message.
+		// In the future the ReqestBuildScene message will contain info like scene name or scene file path etc.
+		shared_ptr<IScene> scene = BuildScene();
 
 		BuildSceneMessage sceneMsg(scene);
 		PostOffice::Instance().SendMessageToListeners(sceneMsg);
 	}
 }
 
-shared_ptr<PlayScene> SceneBuilder::BuildScene()
+shared_ptr<IScene> SceneBuilder::BuildScene()
 {
-	return make_shared<PlayScene>();
+	// BUILD AND RETURN AN EMPTY ISCENE FOR NOW.
+	return make_shared<IScene>();
 }

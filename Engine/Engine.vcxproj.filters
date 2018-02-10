@@ -44,6 +44,9 @@
     <Filter Include="Engine\Systems">
       <UniqueIdentifier>{ae4d192a-01ce-42f1-b1ad-1b7a2b681e72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Messaging\Messages\SceneMessages">
+      <UniqueIdentifier>{ddc152fd-c3a7-46d0-8459-635731dc7dd4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -121,14 +124,11 @@
     <ClInclude Include="SceneBuilder.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="BuildSceneMessage.h">
-      <Filter>Engine\Messaging\Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayScene.h">
-      <Filter>Engine\Scene Management\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="RequestBuildScene.h">
-      <Filter>Engine\Messaging\Messages</Filter>
+      <Filter>Engine\Messaging\Messages\SceneMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildSceneMessage.h">
+      <Filter>Engine\Messaging\Messages\SceneMessages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -159,16 +159,13 @@
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Engine\Scene Management\GameObject\Components</Filter>
     </ClCompile>
-    <ClCompile Include="IScene.cpp">
-      <Filter>Engine\Scene Management\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="SystemManager.cpp">
       <Filter>Engine\Systems</Filter>
     </ClCompile>
     <ClCompile Include="SceneBuilder.cpp">
       <Filter>Engine\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="PlayScene.cpp">
+    <ClCompile Include="IScene.cpp">
       <Filter>Engine\Scene Management\Scenes</Filter>
     </ClCompile>
   </ItemGroup>

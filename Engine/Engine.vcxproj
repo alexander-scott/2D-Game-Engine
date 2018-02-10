@@ -272,7 +272,6 @@
     <ClInclude Include="ISystem.h" />
     <ClInclude Include="IUpdateable.h" />
     <ClInclude Include="Math.h" />
-    <ClInclude Include="PlayScene.h" />
     <ClInclude Include="PostOffice.h" />
     <ClInclude Include="PostOfficeListener.h" />
     <ClInclude Include="PostOfficeMessenger.h" />
@@ -295,7 +294,6 @@
     <ClCompile Include="IScene.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="PostOffice.cpp" />
     <ClCompile Include="SceneBuilder.cpp" />
     <ClCompile Include="SystemManager.cpp" />

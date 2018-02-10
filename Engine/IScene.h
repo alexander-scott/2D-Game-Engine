@@ -7,15 +7,23 @@ using namespace std;
 class IScene
 {
 public:
-	void Draw();
+	~IScene()
+	{
+		for (auto go : _gameObjects)
+		{
+			go = nullptr;
+		}
+	}
 
-	virtual void Update(float deltaTime) = 0;
-	virtual void CacheComponents(shared_ptr<GameObject> gameObj) = 0;
+	virtual void Draw();
+	virtual void Update(float deltaTime);
 
-	int GetNumberOfGameObjects() { return (int)mGameObjects.size(); }
-	shared_ptr<GameObject> GetGameObjectAtIndex(int index) { return mGameObjects.at(index); }
+	void AddGameObject(shared_ptr<GameObject> gameObject);
+
+	int GetNumberOfGameObjects() { return (int)_gameObjects.size(); }
+	shared_ptr<GameObject> GetGameObjectAtIndex(int index) { return _gameObjects.at(index); }
 
 protected:
-	map<int, vector<shared_ptr<GameObject>>>			mRenderLayers;
-	vector<shared_ptr<GameObject>>						mGameObjects;
+	map<int, vector<shared_ptr<GameObject>>>			_renderLayers;
+	vector<shared_ptr<GameObject>>						_gameObjects;
 };
