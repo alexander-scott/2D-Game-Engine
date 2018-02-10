@@ -9,18 +9,18 @@
 static constexpr int SCREEN_WIDTH = 800;
 static constexpr int SCREEN_HEIGHT = 600;
 
-enum MessageType
+enum SystemMessageType
 {
+	// Scene messages
 	eRequestBuildSceneMessage,
 	eBuildSceneMessage,
-	eGraphicsStartFrame,
-	eGraphicsEndFrame
-};
 
-enum MessengerType
-{
-	eEngineMessenger,
-	eSceneBuilderMessenger
+	// Graphics messages
+	eGraphicsInitalise,
+	eGraphicsStartFrame,
+	eGraphicsEndFrame,
+	eGraphicsDrawSprite,
+	eGraphicsDrawText
 };
 
 enum SystemType
@@ -32,4 +32,14 @@ enum SystemType
 enum ComponentType
 {
 	eTransformComponent
+};
+
+enum ComponentMessageType
+{
+	eTestMessage
+};
+
+enum MessengerType
+{
+	eTestMessenger,
 };

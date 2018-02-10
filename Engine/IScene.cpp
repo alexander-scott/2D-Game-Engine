@@ -17,7 +17,7 @@ void IScene::Draw()
 void IScene::Update(float deltaTime)
 {
 	// Update gameobjects
-	for (auto& go : _gameObjects)
+	for (auto go : _gameObjects)
 	{
 		go->Update(deltaTime);
 	}

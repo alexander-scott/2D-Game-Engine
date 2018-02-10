@@ -1,12 +1,15 @@
 #pragma once
 
 #include "IComponent.h"
+#include "IMessageable.h"
 #include "Consts.h"
 
-class TransformComponent : public IComponent
+class TransformComponent : public IComponent, public IMessageable
 {
 public:
 	TransformComponent(Vec2 worldPosition, float worldRotation, float worldScale);
+
+	virtual void RecieveMessage(IComponentMessage& message);
 
 	void SetLocalPosition(Vec2 position);
 	void SetLocalScale(float scale);

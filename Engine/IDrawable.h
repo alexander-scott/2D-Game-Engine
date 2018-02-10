@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PostOffice.h"
+
 class IDrawable
 {
 public:

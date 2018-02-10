@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IListener.h"
-#include "IMessage.h"
+#include "ISystemMessage.h"
 
 #include <vector>
 
@@ -20,7 +20,7 @@ public:
 		_listeners.erase(std::remove(_listeners.begin(), _listeners.end(), listener), _listeners.end());
 	}
 
-	void SendMessage(IMessage& message)
+	void SendMessage(ISystemMessage& message)
 	{
 		for (int i = 0; i < _listeners.size(); i++)
 		{

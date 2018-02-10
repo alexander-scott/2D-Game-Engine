@@ -11,9 +11,6 @@
     <Filter Include="Engine\Core">
       <UniqueIdentifier>{646d6cfc-a2e7-4319-b0c1-5a887269c2d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Graphics">
-      <UniqueIdentifier>{b8a59ff7-c965-4f7d-bd2a-27966ec6a9e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Messaging">
       <UniqueIdentifier>{2dedbc26-174d-4eda-9494-54db848ee191}</UniqueIdentifier>
     </Filter>
@@ -47,8 +44,20 @@
     <Filter Include="Engine\Messaging\Messages\SceneMessages">
       <UniqueIdentifier>{ddc152fd-c3a7-46d0-8459-635731dc7dd4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Graphics\APIs">
+    <Filter Include="Engine\Scene Management\GameObject\Components\ComponentMessages">
+      <UniqueIdentifier>{287c9858-2952-4663-a672-e3d222c81de4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\SceneBuilding">
+      <UniqueIdentifier>{e85f2dae-88a6-4048-909c-ce979cf5746e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Graphics">
+      <UniqueIdentifier>{b8a59ff7-c965-4f7d-bd2a-27966ec6a9e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Graphics\APIs">
       <UniqueIdentifier>{ff139ad1-bfbe-4114-8d38-a93926f3d006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Messaging\Messages\GraphicsMessages">
+      <UniqueIdentifier>{4494ebbc-216f-43b6-902f-e7811906c722}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -76,11 +85,8 @@
     <ClInclude Include="Engine.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="DXErr.h">
-      <Filter>Engine\Core</Filter>
-    </ClInclude>
     <ClInclude Include="FrameTimer.h">
-      <Filter>Engine\Graphics</Filter>
+      <Filter>Engine\Systems\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="IListener.h">
       <Filter>Engine\Messaging\Interfaces</Filter>
@@ -96,9 +102,6 @@
     </ClInclude>
     <ClInclude Include="PostOfficeListener.h">
       <Filter>Engine\Messaging\PostOffice</Filter>
-    </ClInclude>
-    <ClInclude Include="IMessage.h">
-      <Filter>Engine\Messaging\Messages</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Engine\Scene Management\GameObject</Filter>
@@ -124,17 +127,35 @@
     <ClInclude Include="SystemManager.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="SceneBuilder.h">
-      <Filter>Engine\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="BuildSceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneMessages</Filter>
     </ClInclude>
     <ClInclude Include="TestGraphics.h">
-      <Filter>Engine\Graphics\APIs</Filter>
+      <Filter>Engine\Systems\Graphics\APIs</Filter>
     </ClInclude>
     <ClInclude Include="IGraphics.h">
-      <Filter>Engine\Graphics</Filter>
+      <Filter>Engine\Systems\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="DXErr.h">
+      <Filter>Engine\Systems\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystemMessage.h">
+      <Filter>Engine\Messaging\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponentMessage.h">
+      <Filter>Engine\Scene Management\GameObject\Components\ComponentInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IMessageable.h">
+      <Filter>Engine\Scene Management\GameObject\Components\ComponentInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBuilder.h">
+      <Filter>Engine\Systems\SceneBuilding</Filter>
+    </ClInclude>
+    <ClInclude Include="InitaliseGraphicsMessage.h">
+      <Filter>Engine\Messaging\Messages\GraphicsMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawSpriteMessage.h">
+      <Filter>Engine\Messaging\Messages\GraphicsMessages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +165,6 @@
     <ClCompile Include="COMInitializer.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="DXErr.cpp">
-      <Filter>Engine\Core</Filter>
-    </ClCompile>
     <ClCompile Include="MainWindow.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
@@ -154,7 +172,7 @@
       <Filter>Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="FrameTimer.cpp">
-      <Filter>Engine\Graphics</Filter>
+      <Filter>Engine\Systems\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="PostOffice.cpp">
       <Filter>Engine\Messaging\PostOffice</Filter>
@@ -168,14 +186,17 @@
     <ClCompile Include="SystemManager.cpp">
       <Filter>Engine\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="SceneBuilder.cpp">
-      <Filter>Engine\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="IScene.cpp">
       <Filter>Engine\Scene Management\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="TestGraphics.cpp">
-      <Filter>Engine\Graphics\APIs</Filter>
+      <Filter>Engine\Systems\Graphics\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="DXErr.cpp">
+      <Filter>Engine\Systems\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBuilder.cpp">
+      <Filter>Engine\Systems\SceneBuilding</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

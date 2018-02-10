@@ -6,7 +6,7 @@
 class PostOfficeListener : public IListener
 {
 public:
-	void SubscribeToMessageType(MessageType messageType)
+	void SubscribeToMessageType(SystemMessageType messageType)
 	{
 		PostOffice::Instance().AddListener(this, messageType);
 	}

@@ -20,12 +20,12 @@ public:
 	PostOffice();
 	~PostOffice();
 
-	// Adding a listener with a specific MessageType means that any time a Message of that type gets sent through the PostOffice,
-	// it will be sent to all Listeners added with that MessageType.
-	void AddListener(IListener* listener, MessageType messageType);
-	void RemoveListener(IListener* listener, MessageType messageType);
-	// Send a message to all Listeners that have been added to the PostOffice's registry with this messages MessageType
-	void SendMessageToListeners(IMessage& message);
+	// Adding a listener with a specific SystemMessageType means that any time a Message of that type gets sent through the PostOffice,
+	// it will be sent to all Listeners added with that SystemMessageType.
+	void AddListener(IListener* listener, SystemMessageType messageType);
+	void RemoveListener(IListener* listener, SystemMessageType messageType);
+	// Send a message to all Listeners that have been added to the PostOffice's registry with this messages SystemMessageType
+	void SendMessageToListeners(ISystemMessage& message);
 
 	static PostOffice& Instance()
 	{
@@ -35,6 +35,6 @@ public:
 
 private:
 	// Holds a map of MessageTypes, with each method type having numerous Listeners listening for a message being sent of that type
-	std::map<MessageType, std::vector<IListener*>>	_listeners;
+	std::map<SystemMessageType, std::vector<IListener*>>	_listeners;
 };
 

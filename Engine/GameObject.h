@@ -5,6 +5,7 @@
 #include "IComponent.h"
 #include "IUpdateable.h"
 #include "IDrawable.h"
+#include "IMessageable.h"
 
 #include "TransformComponent.h"
 
@@ -22,6 +23,7 @@ public:
 	void AddComponent(IComponent* component);
 
 	vector<IComponent*> GetAllComponents() { return _components; }
+	void SendMessageToComponent(IComponentMessage& message);
 
 	void SetActive(bool active);
 	bool GetActive() { return _active; }

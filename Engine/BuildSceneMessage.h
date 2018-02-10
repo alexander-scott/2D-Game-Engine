@@ -1,13 +1,13 @@
 #pragma once
 
-#include "IMessage.h"
+#include "ISystemMessage.h"
 
 class IScene;
 
-class BuildSceneMessage : public IMessage
+class BuildSceneMessage : public ISystemMessage
 {
 public:
-	BuildSceneMessage(shared_ptr<IScene> scene) : IMessage(MessageType::eBuildSceneMessage), _scene(scene) { }
+	BuildSceneMessage(shared_ptr<IScene> scene) : ISystemMessage(SystemMessageType::eBuildSceneMessage), _scene(scene) { }
 
 	shared_ptr<IScene> GetScene() { return _scene; }
 

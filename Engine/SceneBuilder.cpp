@@ -4,12 +4,12 @@
 
 SceneBuilder::SceneBuilder() : ISystem(SystemType::eSceneBuilder)
 {
-	SubscribeToMessageType(MessageType::eRequestBuildSceneMessage);
+	SubscribeToMessageType(SystemMessageType::eRequestBuildSceneMessage);
 }
 
-void SceneBuilder::RecieveMessage(IMessage & message)
+void SceneBuilder::RecieveMessage(ISystemMessage & message)
 {
-	if (message.Type == MessageType::eRequestBuildSceneMessage)
+	if (message.Type == SystemMessageType::eRequestBuildSceneMessage)
 	{
 		// If the engine asks the SceneBuilder system to create a Scene, build one and send a pointer to it in a message.
 		// In the future the ReqestBuildScene message will contain info like scene name or scene file path etc.

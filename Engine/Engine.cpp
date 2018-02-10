@@ -1,6 +1,7 @@
 #include "Engine.h"
 
 #include "BuildSceneMessage.h"
+#include "InitaliseGraphicsMessage.h"
 
 // Constructor that uses width and height from Consts.h
 Engine::Engine(MainWindow & wnd) : _mainWindow(wnd)
@@ -22,15 +23,18 @@ Engine::~Engine()
 void Engine::InitaliseEngine()
 {
 	// Add a listener for when the new scene gets built
-	SubscribeToMessageType(MessageType::eBuildSceneMessage);
+	SubscribeToMessageType(SystemMessageType::eBuildSceneMessage);
+
+	// Initalise Graphics system
+	PostOffice::Instance().SendMessageToListeners(InitaliseGraphicsMessage(_mainWindow));
 
 	// Request a new scene be built by the SceneBuilder system
-	PostOffice::Instance().SendMessageToListeners(IMessage(MessageType::eRequestBuildSceneMessage));
+	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eRequestBuildSceneMessage));
 }
 
-void Engine::RecieveMessage(IMessage & message)
+void Engine::RecieveMessage(ISystemMessage & message)
 {
-	if (message.Type == MessageType::eBuildSceneMessage)
+	if (message.Type == SystemMessageType::eBuildSceneMessage)
 	{
 		// Set the scene built by the SceneBuilder system as the current scene
 		BuildSceneMessage& msg = static_cast<BuildSceneMessage&>(message);
@@ -41,13 +45,13 @@ void Engine::RecieveMessage(IMessage & message)
 void Engine::Update()
 {
 	// Tell the Graphics system to begin the frame
-	PostOffice::Instance().SendMessageToListeners(IMessage(MessageType::eGraphicsStartFrame));
+	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame));
 
 	UpdateScene();
 	DrawScene();
 
 	// Tell the Graphics system to end the frame
-	PostOffice::Instance().SendMessageToListeners(IMessage(MessageType::eGraphicsEndFrame));
+	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame));
 }
 
 void Engine::DrawScene()
