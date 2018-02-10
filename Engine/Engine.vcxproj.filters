@@ -82,9 +82,6 @@
     <ClInclude Include="Engine.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="FrameTimer.h">
-      <Filter>Engine\Systems\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="IListener.h">
       <Filter>Engine\Messaging\Interfaces</Filter>
     </ClInclude>
@@ -160,6 +157,9 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Engine\Systems\SceneManagement</Filter>
     </ClInclude>
+    <ClInclude Include="FrameTimer.h">
+      <Filter>Engine\Systems\SceneManagement</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -173,9 +173,6 @@
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Engine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameTimer.cpp">
-      <Filter>Engine\Systems\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="PostOffice.cpp">
       <Filter>Engine\Messaging\PostOffice</Filter>
@@ -199,6 +196,9 @@
       <Filter>Engine\Systems\SceneBuilding</Filter>
     </ClCompile>
     <ClCompile Include="IScene.cpp">
+      <Filter>Engine\Systems\SceneManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameTimer.cpp">
       <Filter>Engine\Systems\SceneManagement</Filter>
     </ClCompile>
   </ItemGroup>

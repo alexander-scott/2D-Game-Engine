@@ -22,6 +22,6 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 
 shared_ptr<IScene> SceneBuilder::BuildScene()
 {
-	// BUILD AND RETURN AN EMPTY ISCENE FOR NOW.
+	// BUILD AND RETURN AN EMPTY ISCENE FOR NOW. IN FUTURE PARSE SCENE FILES AND BUILD SCENE FROM THERE.
 	return make_shared<IScene>();
 }

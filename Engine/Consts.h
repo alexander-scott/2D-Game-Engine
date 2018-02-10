@@ -21,6 +21,7 @@ enum SystemMessageType
 
 	// Graphics messages
 	eGraphicsInitalise,
+	eGraphicsDestroy,
 	eGraphicsStartFrame,
 	eGraphicsEndFrame,
 	eGraphicsDrawSprite,

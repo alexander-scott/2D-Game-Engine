@@ -49,6 +49,12 @@ public:
 				PreloadTextures();
 				break;
 			}
+
+			case SystemMessageType::eGraphicsDestroy:
+			{
+				Destroy();
+				break;
+			}
 				
 			case SystemMessageType::eGraphicsStartFrame:
 			{
@@ -70,7 +76,6 @@ public:
 
 			case SystemMessageType::eGraphicsDrawText:
 			{
-				// COPY THE ABOVE CODE BUT CHANGE TO DRAW TEXT
 				DrawTextMessage & msg = static_cast<DrawTextMessage&>(message);
 				DrawText(msg.Text, msg.Pos, msg.Rot, msg.RgbColours, msg.Scale, msg.Offset);
 			}
