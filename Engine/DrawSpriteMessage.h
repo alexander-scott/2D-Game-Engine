@@ -2,8 +2,6 @@
 
 #include "ISystemMessage.h"
 
-struct Vec2;
-
 class DrawSpriteMessage : public ISystemMessage
 {
 public:
@@ -17,10 +15,10 @@ public:
 		Offset = offset;
 	}
 
-	std::string Name;
-	Vec2 Pos;
-	RECT* Rect;
-	float Rot;
-	float Scale;
-	Vec2 Offset;
+	std::string		Name;
+	Vec2			Pos;
+	RECT*			Rect;
+	float			Rot;
+	float			Scale;
+	Vec2			Offset;
 };

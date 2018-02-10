@@ -7,6 +7,7 @@ class TestGraphics : public IGraphics
 public:
 	TestGraphics() : IGraphics() { }
 
+protected:
 	virtual void Initalise(class HWNDKey& key) override;
 	virtual void Destroy() override;
 

@@ -157,6 +157,9 @@
     <ClInclude Include="DrawSpriteMessage.h">
       <Filter>Engine\Messaging\Messages\GraphicsMessages</Filter>
     </ClInclude>
+    <ClInclude Include="DrawTextMessage.h">
+      <Filter>Engine\Messaging\Messages\GraphicsMessages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

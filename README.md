@@ -1,29 +1,12 @@
-# README #
+# GEAPA Game Engine #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This repository contains the source code for the GEPAA Game Engine, a team-developed Game Engine built for the Game Engine Programming and Architecture
+module at Staffordshire University. 
 
-### What is this repository for? ###
+Created by: Alex Scott, Myriam Sarah, Paul-Emile Kim.
 
-* Quick summary
-* Version
+### Useful Links ###
+
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* [Module Page](http://www.staffs.ac.uk/current/student/modules/showmodule.php?code=COSE70635)
+* [Private Trello Board](https://trello.com/b/jZPgM3R2/gepaa-group-1)

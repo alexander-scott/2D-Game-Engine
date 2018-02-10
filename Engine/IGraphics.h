@@ -9,6 +9,7 @@
 
 #include "InitaliseGraphicsMessage.h"
 #include "DrawSpriteMessage.h"
+#include "DrawTextMessage.h"
 
 #include <wrl.h>
 
@@ -70,12 +71,14 @@ public:
 			case SystemMessageType::eGraphicsDrawText:
 			{
 				// COPY THE ABOVE CODE BUT CHANGE TO DRAW TEXT
+				DrawTextMessage & msg = static_cast<DrawTextMessage&>(message);
+				DrawText(msg.Text, msg.Pos, msg.Rot, msg.RgbColours, msg.Scale, msg.Offset);
 			}
 		}
 	}
 
-private:
-	// Mandatory overrides
+protected:
+	// Mandatory overrides //
 	virtual void Initalise(class HWNDKey& key) = 0;
 	virtual void Destroy() = 0;
 
@@ -87,6 +90,6 @@ private:
 	virtual void DrawSprite(std::string name, Vec2 pos, RECT* rect, float rot, float scale, Vec2 offset) = 0;
 	virtual void DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset) = 0;
 
-	// Optional overrides
+	// Optional overrides //
 	virtual void DrawLine(Vec2 v1, Vec2 v2) { }
 };
