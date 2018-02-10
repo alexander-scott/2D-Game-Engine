@@ -257,6 +257,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BuildSceneMessage.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="CustomException.h" />
     <ClInclude Include="DXErr.h" />
@@ -267,11 +268,17 @@
     <ClInclude Include="IListener.h" />
     <ClInclude Include="IMessage.h" />
     <ClInclude Include="IMessenger.h" />
+    <ClInclude Include="IScene.h" />
+    <ClInclude Include="ISystem.h" />
     <ClInclude Include="IUpdateable.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="PlayScene.h" />
     <ClInclude Include="PostOffice.h" />
     <ClInclude Include="PostOfficeListener.h" />
     <ClInclude Include="PostOfficeMessenger.h" />
+    <ClInclude Include="RequestBuildScene.h" />
+    <ClInclude Include="SceneBuilder.h" />
+    <ClInclude Include="SystemManager.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="WinDefines.h" />
     <ClInclude Include="COMInitializer.h" />
@@ -285,9 +292,13 @@
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="IScene.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="PostOffice.cpp" />
+    <ClCompile Include="SceneBuilder.cpp" />
+    <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
