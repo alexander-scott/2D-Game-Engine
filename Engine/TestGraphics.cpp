@@ -34,7 +34,7 @@ TestGraphics::Exception::Exception(HRESULT hr, const std::wstring& note, const w
 	:
 	CustomException(file, line, note),
 	hr(hr)
-{}
+{ }
 
 std::wstring TestGraphics::Exception::GetFullMessage() const
 {
@@ -56,14 +56,10 @@ std::wstring TestGraphics::Exception::GetFullMessage() const
 std::wstring TestGraphics::Exception::GetErrorName() const
 {
 	return L"Graphics Error name";
-	//return DXGetErrorString(hr);
 }
 
 std::wstring TestGraphics::Exception::GetErrorDescription() const
 {
-	/*std::array<wchar_t, 512> wideDescription;
-	DXGetErrorDescription(hr, wideDescription.data(), wideDescription.size());
-	return wideDescription.data();*/
 	return L"Graphics Error Description";
 }
 

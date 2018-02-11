@@ -100,7 +100,7 @@ shared_ptr<GameObject> GameObject::MakeGameObject(string tag)
 {
 	GUID gidReference;
 	HRESULT hCreateGuid = CoCreateGuid(&gidReference);
-	if (!hCreateGuid)
+	if (FAILED(hCreateGuid))
 		throw std::exception("ERROR CREATING GUID FOR GAMEOBJECT");
 
 	return make_shared<GameObject>(tag, gidReference);

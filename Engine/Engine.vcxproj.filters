@@ -65,6 +65,12 @@
     <Filter Include="Engine\Messaging\Messages\InputMessages">
       <UniqueIdentifier>{b0f3cda0-58c8-419a-9a95-8a88b9d2bc93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems\Input">
+      <UniqueIdentifier>{245b14c1-47c6-4e82-9002-48da06b22402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\SceneBuilding\RapidXML">
+      <UniqueIdentifier>{857784c9-8012-4c85-8bc4-6126d48ca639}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -178,6 +184,21 @@
     <ClInclude Include="InputMouseMessage.h">
       <Filter>Engine\Messaging\Messages\InputMessages</Filter>
     </ClInclude>
+    <ClInclude Include="SetParentTransformMessage.h">
+      <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml.hpp">
+      <Filter>Engine\Systems\SceneBuilding\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_print.hpp">
+      <Filter>Engine\Systems\SceneBuilding\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="RequestBuildSceneMessage.h">
+      <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentBuilder.h">
+      <Filter>Engine\Systems\SceneBuilding</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -216,6 +237,9 @@
     <ClCompile Include="SystemMessageDispatcher.cpp">
       <Filter>Engine\Messaging\SystemMessaging</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentBuilder.cpp">
+      <Filter>Engine\Systems\SceneBuilding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -226,5 +250,10 @@
     <Image Include="directx.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Resources\Scenes\Scene1.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

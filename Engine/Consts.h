@@ -45,7 +45,10 @@ enum SystemMessageType
 
 	// Input messages
 	eInputKeyboardMessage,
-	eInputMouseMessage
+	eInputMouseMessage,
+
+	// Windows messages
+	eWindowLostFocus,
 };
 
 enum ComponentType
@@ -55,6 +58,7 @@ enum ComponentType
 
 enum ComponentMessageType
 {
+	eSetParentTransformMessage,
 	eTestMessage
 };
 
