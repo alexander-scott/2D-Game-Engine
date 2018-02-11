@@ -1,8 +1,8 @@
 #include "TransformComponent.h"
 
 TransformComponent::TransformComponent(Vec2 localPosition, float localRotation, float localScale)
+	: IComponent(ComponentType::eTransformComponent)
 {
-	_type = ComponentType::eTransformComponent;
 	_hasChanged = false;
 
 	_localPosition = localPosition;

@@ -5,6 +5,8 @@
 #include <assert.h>
 
 #include "InitaliseGraphicsMessage.h"
+#include "InputKeyboardMessage.h"
+#include "InputMouseMessage.h"
 
 // Constructor that creates a window with screen width and height defined in Consts.h
 MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs)
@@ -152,32 +154,64 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 		// ************ KEYBOARD MESSAGES ************ //
 	case WM_KEYDOWN:
-
+	{
+		if (!(lParam & 0x40000000) || KEY_PRESS_AUTOREPEAT)
+		{
+			InputKeyboardMessage message(KeyboardMessageType::eKeyDown, static_cast<unsigned char>(wParam));
+			SystemMessageDispatcher::Instance().SendMessageToListeners(message);
+		}
 		break;
+	}
 	case WM_KEYUP:
-
+	{
+		InputKeyboardMessage message(KeyboardMessageType::eKeyUp, static_cast<unsigned char>(wParam));
+		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 		break;
+	}
 	case WM_CHAR:
-
+	{
+		InputKeyboardMessage message(KeyboardMessageType::eCharPressed, static_cast<unsigned char>(wParam));
+		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 		break;
+	}
 		// ************ END KEYBOARD MESSAGES ************ //
 
 		// ************ MOUSE MESSAGES ************ //
 	case WM_MOUSEMOVE:
-
+	{
+		POINTS pt = MAKEPOINTS(lParam);
+		InputMouseMessage message(MouseMessageType::eMouseMoved, pt.x, pt.y);
+		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 		break;
+	}
 	case WM_LBUTTONDOWN:
-	
+	{
+		POINTS pt = MAKEPOINTS(lParam);
+		InputMouseMessage message(MouseMessageType::eLeftMouseClicked, pt.x, pt.y);
+		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 		break;
+	}
 	case WM_RBUTTONDOWN:
-	
+	{
+		POINTS pt = MAKEPOINTS(lParam);
+		InputMouseMessage message(MouseMessageType::eRightMouseClicked, pt.x, pt.y);
+		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 		break;
+	}
 	case WM_LBUTTONUP:
-
+	{
+		POINTS pt = MAKEPOINTS(lParam);
+		InputMouseMessage message(MouseMessageType::eLeftMouseReleased, pt.x, pt.y);
+		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 		break;
+	}
 	case WM_RBUTTONUP:
-
+	{
+		POINTS pt = MAKEPOINTS(lParam);
+		InputMouseMessage message(MouseMessageType::eRightMouseReleased, pt.x, pt.y);
+		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 		break;
+	}
 	case WM_MOUSEWHEEL:
 	
 		break;

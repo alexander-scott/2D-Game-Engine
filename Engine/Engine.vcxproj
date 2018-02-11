@@ -261,6 +261,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BuildSceneMessage.h" />
+    <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="CustomException.h" />
     <ClInclude Include="DrawSpriteMessage.h" />
@@ -276,6 +277,8 @@
     <ClInclude Include="IMessage.h" />
     <ClInclude Include="IMessageableComponent.h" />
     <ClInclude Include="InitaliseGraphicsMessage.h" />
+    <ClInclude Include="InputKeyboardMessage.h" />
+    <ClInclude Include="InputMouseMessage.h" />
     <ClInclude Include="ISystemMessage.h" />
     <ClInclude Include="IMessenger.h" />
     <ClInclude Include="IScene.h" />

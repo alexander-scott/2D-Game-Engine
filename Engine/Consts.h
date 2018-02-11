@@ -11,6 +11,8 @@
 static constexpr int SCREEN_WIDTH = 800;
 static constexpr int SCREEN_HEIGHT = 600;
 
+static constexpr bool KEY_PRESS_AUTOREPEAT = false;
+
 #pragma endregion
 
 #pragma region Enums
@@ -39,7 +41,11 @@ enum SystemMessageType
 	eGraphicsStartFrame,
 	eGraphicsEndFrame,
 	eGraphicsDrawSprite,
-	eGraphicsDrawText
+	eGraphicsDrawText,
+
+	// Input messages
+	eInputKeyboardMessage,
+	eInputMouseMessage
 };
 
 enum ComponentType
@@ -55,6 +61,22 @@ enum ComponentMessageType
 enum MessengerType
 {
 	eTestMessenger,
+};
+
+enum KeyboardMessageType
+{
+	eKeyDown,
+	eKeyUp,
+	eCharPressed
+};
+
+enum MouseMessageType
+{
+	eMouseMoved,
+	eLeftMouseClicked,
+	eLeftMouseReleased,
+	eRightMouseClicked,
+	eRightMouseReleased
 };
 
 #pragma endregion

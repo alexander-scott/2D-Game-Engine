@@ -62,6 +62,9 @@
     <Filter Include="Engine\Messaging\SystemMessaging">
       <UniqueIdentifier>{cf362e14-cac7-4df8-a249-8bece6c385f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Messaging\Messages\InputMessages">
+      <UniqueIdentifier>{b0f3cda0-58c8-419a-9a95-8a88b9d2bc93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -165,6 +168,15 @@
     </ClInclude>
     <ClInclude Include="ISystem.h">
       <Filter>Engine\Systems\SceneManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentFactory.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="InputKeyboardMessage.h">
+      <Filter>Engine\Messaging\Messages\InputMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMouseMessage.h">
+      <Filter>Engine\Messaging\Messages\InputMessages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

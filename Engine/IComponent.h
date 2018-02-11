@@ -9,6 +9,11 @@ using namespace std;
 class IComponent
 {
 public:
+	IComponent(ComponentType componentType) : _type(componentType) 
+	{
+		_active = true;
+	}
+	
 	virtual ComponentType GetType() { return _type; }
 
 	void SetActive(bool active) { _active = active; }
@@ -16,5 +21,5 @@ public:
 
 protected:
 	ComponentType	_type;
-	bool			_active = true;
+	bool			_active;
 };

@@ -1,14 +1,5 @@
 #include "SystemMessageDispatcher.h"
 
-SystemMessageDispatcher::SystemMessageDispatcher()
-{
-
-}
-
-SystemMessageDispatcher::~SystemMessageDispatcher()
-{
-}
-
 void SystemMessageDispatcher::AddListener(IListener * listener, SystemMessageType messageType)
 {
 	_listeners[messageType].push_back(listener);

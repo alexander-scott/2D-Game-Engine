@@ -17,9 +17,6 @@ the message sent will recieve the message.
 class SystemMessageDispatcher
 {
 public:
-	SystemMessageDispatcher();
-	~SystemMessageDispatcher();
-
 	// Adding a listener with a specific SystemMessageType means that any time a Message of that type gets sent through the SystemMessageDispatcher,
 	// it will be sent to all Listeners added with that SystemMessageType.
 	void AddListener(IListener* listener, SystemMessageType messageType);
