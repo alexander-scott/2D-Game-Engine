@@ -5,6 +5,10 @@
 #include "ISystem.h"
 #include "SystemMessageDispatcher.h"
 
+#include "rapidjson\document.h"
+#include "rapidjson\writer.h"
+#include "rapidjson\stringbuffer.h"
+
 class SceneBuilder : public ISystem
 {
 public:
