@@ -13,6 +13,8 @@ static constexpr int SCREEN_HEIGHT = 600;
 
 static constexpr bool KEY_PRESS_AUTOREPEAT = false;
 
+static constexpr float MS_PER_UPDATE = 0.01;
+
 #pragma endregion
 
 #pragma region Enums
@@ -50,6 +52,7 @@ enum SystemMessageType
 	eInputMouseMessage,
 
 	// Windows messages
+	eWindowUpdate,
 	eWindowLostFocus,
 };
 

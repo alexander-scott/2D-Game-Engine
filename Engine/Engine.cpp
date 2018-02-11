@@ -29,29 +29,48 @@ void Engine::InitaliseEngine()
 	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
 	SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 
+	_lastTime = std::chrono::steady_clock::now();
+	_lag = 0;
+
+	SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eWindowUpdate);
+
 	// Start the update loop
 	EngineUpdateLoop(); 
 }
 
 void Engine::EngineUpdateLoop()
 {
-	while (true) // TODO: Change this to update at a select interval, say 60fps
-	{
-		// Tell the Graphics system to begin the frame
-		SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame));
+	auto currentTime = std::chrono::steady_clock::now();
+	const std::chrono::duration<float> elapsedTime = currentTime - _lastTime;
+	_lastTime = currentTime;
+	_lag += elapsedTime.count();
 
+	// ProcessInput()
+
+	while (_lag >= MS_PER_UPDATE)
+	{
+		// ProcessPhysics()
+		
 		// Update the current scene in the SceneManager system
 		SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
 
-		// Draw the current scene in the SceneManager system
-		SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene));
-
-		// Tell the Graphics system to end the frame
-		SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame));
+		_lag -= MS_PER_UPDATE;
 	}
+
+	// Tell the Graphics system to begin the frame
+	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame));
+
+	// Draw the current scene in the SceneManager system
+	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene));
+
+	// Tell the Graphics system to end the frame
+	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame));
 }
 
 void Engine::RecieveMessage(ISystemMessage& message)
 {
-	// No messages to recieve yet
+	if (message.Type == SystemMessageType::eWindowUpdate)
+	{
+		EngineUpdateLoop();
+	}
 }
