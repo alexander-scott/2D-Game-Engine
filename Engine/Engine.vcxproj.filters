@@ -65,6 +65,9 @@
     <Filter Include="Engine\Messaging\Messages\InputMessages">
       <UniqueIdentifier>{b0f3cda0-58c8-419a-9a95-8a88b9d2bc93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems\Input">
+      <UniqueIdentifier>{245b14c1-47c6-4e82-9002-48da06b22402}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -177,6 +180,9 @@
     </ClInclude>
     <ClInclude Include="InputMouseMessage.h">
       <Filter>Engine\Messaging\Messages\InputMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="SetParentTransformMessage.h">
+      <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

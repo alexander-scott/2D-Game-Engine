@@ -285,6 +285,7 @@
     <ClInclude Include="ISystem.h" />
     <ClInclude Include="IUpdateableComponent.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="SetParentTransformMessage.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />
     <ClInclude Include="SystemMessageListener.h" />
     <ClInclude Include="SystemMessageMessenger.h" />

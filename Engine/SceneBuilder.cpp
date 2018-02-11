@@ -15,6 +15,7 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 		// In the future the ReqestBuildScene message will contain info like scene name or scene file path etc.
 		shared_ptr<IScene> scene = BuildScene();
 
+		// Send built scene to SceneManager system
 		BuildSceneMessage sceneMsg(scene);
 		SystemMessageDispatcher::Instance().SendMessageToListeners(sceneMsg);
 	}
@@ -23,5 +24,10 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 shared_ptr<IScene> SceneBuilder::BuildScene()
 {
 	// BUILD AND RETURN AN EMPTY ISCENE FOR NOW. IN FUTURE PARSE SCENE FILES AND BUILD SCENE FROM THERE.
-	return make_shared<IScene>();
+	auto scene = make_shared<IScene>();
+	
+	auto testGameObject = GameObject::MakeGameObject("TestObject");
+	scene->AddGameObject(testGameObject);
+
+	return scene;
 }

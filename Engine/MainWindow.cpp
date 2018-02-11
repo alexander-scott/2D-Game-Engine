@@ -80,6 +80,7 @@ void MainWindow::EngineInitalised()
 
 void MainWindow::RecieveMessage(ISystemMessage & message)
 {
+	// No messages to recieve as of yet
 }
 
 bool MainWindow::IsActive() const
@@ -149,10 +150,13 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		break;
 	case WM_KILLFOCUS:
-
+	{
+		ISystemMessage message(SystemMessageType::eWindowLostFocus);
+		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 		break;
+	}
 
-		// ************ KEYBOARD MESSAGES ************ //
+	// ************ KEYBOARD MESSAGES ************ //
 	case WM_KEYDOWN:
 	{
 		if (!(lParam & 0x40000000) || KEY_PRESS_AUTOREPEAT)
@@ -174,9 +178,9 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 		break;
 	}
-		// ************ END KEYBOARD MESSAGES ************ //
+	// ************ END KEYBOARD MESSAGES ************ //
 
-		// ************ MOUSE MESSAGES ************ //
+	// ************ MOUSE MESSAGES ************ //
 	case WM_MOUSEMOVE:
 	{
 		POINTS pt = MAKEPOINTS(lParam);
@@ -215,13 +219,13 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_MOUSEWHEEL:
 	
 		break;
-		// ************ END MOUSE MESSAGES ************ //
+	// ************ END MOUSE MESSAGES ************ //
 
-		// ************ AUDIO MESSAGES ************ //
+	// ************ AUDIO MESSAGES ************ //
 	case WM_DEVICECHANGE:
 
 		break;
-		// ************ END AUDIO MESSAGES ************ //
+	// ************ END AUDIO MESSAGES ************ //
 	}
 
 	return DefWindowProc(hWnd, msg, wParam, lParam);
