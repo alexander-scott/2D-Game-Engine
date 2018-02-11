@@ -73,9 +73,6 @@
     <ClInclude Include="Consts.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="COMInitializer.h">
-      <Filter>Engine\Core</Filter>
-    </ClInclude>
     <ClInclude Include="WinDefines.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
@@ -99,9 +96,6 @@
     </ClInclude>
     <ClInclude Include="TransformComponent.h">
       <Filter>Engine\GameObject\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="ISystem.h">
-      <Filter>Engine\Systems</Filter>
     </ClInclude>
     <ClInclude Include="SystemManager.h">
       <Filter>Engine\Systems</Filter>
@@ -169,12 +163,12 @@
     <ClInclude Include="SystemMessageMessenger.h">
       <Filter>Engine\Messaging\SystemMessaging</Filter>
     </ClInclude>
+    <ClInclude Include="ISystem.h">
+      <Filter>Engine\Systems\SceneManagement</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
-      <Filter>Engine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="COMInitializer.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">

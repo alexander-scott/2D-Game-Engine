@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-GameObject::GameObject(string tag, int id)
+GameObject::GameObject(string tag, GUID id) : _tag(tag), _ID(id)
 {
 	_parent = nullptr;
 }
@@ -91,10 +91,19 @@ void GameObject::RemoveChild(shared_ptr<GameObject> child)
 		_children.erase(it);
 }
 
-shared_ptr<GameObject> GameObject::MakeGameObject(string tag, int ID)
+shared_ptr<GameObject> GameObject::MakeGameObject(string tag, GUID ID)
 {
-	auto gameObject = make_shared<GameObject>(tag, ID);
-	return gameObject;
+	return make_shared<GameObject>(tag, ID);
+}
+
+shared_ptr<GameObject> GameObject::MakeGameObject(string tag)
+{
+	GUID gidReference;
+	HRESULT hCreateGuid = CoCreateGuid(&gidReference);
+	if (!hCreateGuid)
+		throw std::exception("ERROR CREATING GUID FOR GAMEOBJECT");
+
+	return make_shared<GameObject>(tag, gidReference);
 }
 
 void GameObject::Draw()

@@ -1,6 +1,6 @@
 #include "CppUnitTest.h"
 
-#include "..\Engine\Engine.h"
+#include "..\Engine\SceneBuilder.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

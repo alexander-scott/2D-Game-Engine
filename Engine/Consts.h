@@ -6,8 +6,22 @@
 
 #include "Math.h"
 
+#pragma region Values
+
 static constexpr int SCREEN_WIDTH = 800;
 static constexpr int SCREEN_HEIGHT = 600;
+
+#pragma endregion
+
+#pragma region Enums
+
+enum SystemType
+{
+	eMainWindow,
+	eSceneManager,
+	eSceneBuilder,
+	eGraphics
+};
 
 enum SystemMessageType
 {
@@ -28,14 +42,6 @@ enum SystemMessageType
 	eGraphicsDrawText
 };
 
-enum SystemType
-{
-	eMainWindow,
-	eSceneManager,
-	eSceneBuilder,
-	eGraphics
-};
-
 enum ComponentType
 {
 	eTransformComponent
@@ -50,3 +56,5 @@ enum MessengerType
 {
 	eTestMessenger,
 };
+
+#pragma endregion

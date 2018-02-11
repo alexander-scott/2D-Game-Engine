@@ -9,12 +9,14 @@
 
 #include "TransformComponent.h"
 
+#include <objbase.h>
+
 using namespace std;
 
 class GameObject
 {
 public:
-	GameObject(string tag, int id);
+	GameObject(string tag, GUID id);
 	~GameObject();
 
 	virtual void Draw();
@@ -27,6 +29,9 @@ public:
 
 	void SetActive(bool active);
 	bool GetActive() { return _active; }
+
+	GUID GetID() { return _ID; }
+	string GetTag() { return _tag; }
 
 	void SetParent(shared_ptr<GameObject> parent);
 	shared_ptr<GameObject> GetParent() { return _parent; }
@@ -84,11 +89,15 @@ public:
 		}
 	}
 
-	static shared_ptr<GameObject> MakeGameObject(string tag, int ID);
+	static shared_ptr<GameObject> MakeGameObject(string tag, GUID ID);
+	static shared_ptr<GameObject> MakeGameObject(string tag);
 
 protected:
 	vector<IComponent*>				_components;
 	shared_ptr<GameObject>			_parent;
 	vector<shared_ptr<GameObject>>	_children;
+
 	bool							_active;
+	string							_tag;
+	GUID							_ID;
 };

@@ -22,7 +22,7 @@ void TestGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot
 {
 }
 
-void TestGraphics::DrawText(std::string text, Vec2 pos, float rot, float * rgb, float scale, Vec2 offset)
+void TestGraphics::DrawText2D(std::string text, Vec2 pos, float rot, float * rgb, float scale, Vec2 offset)
 {
 }
 
