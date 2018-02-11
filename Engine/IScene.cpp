@@ -1,5 +1,7 @@
 #include "IScene.h"
 
+IScene::IScene(std::string sceneName) : _sceneName(sceneName) { }
+
 void IScene::Draw()
 {
 	map<int, vector<shared_ptr<GameObject>>>::iterator renderLayer;

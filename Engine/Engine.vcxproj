@@ -285,6 +285,9 @@
     <ClInclude Include="ISystem.h" />
     <ClInclude Include="IUpdateableComponent.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="rapidxml.hpp" />
+    <ClInclude Include="rapidxml_print.hpp" />
+    <ClInclude Include="RequestBuildSceneMessage.h" />
     <ClInclude Include="SetParentTransformMessage.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />
     <ClInclude Include="SystemMessageListener.h" />
@@ -326,6 +329,9 @@
     <ProjectReference Include="DirectXTK\DirectXTK_Desktop_2013.vcxproj">
       <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Resources\Scenes\Scene1.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

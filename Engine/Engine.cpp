@@ -1,6 +1,7 @@
 #include "Engine.h"
 
 #include "BuildSceneMessage.h"
+#include "RequestBuildSceneMessage.h"
 
 // Constructor that uses width and height from Consts.h
 Engine::Engine()
@@ -22,7 +23,8 @@ Engine::~Engine()
 void Engine::InitaliseEngine()
 {
 	// Request a new scene be built by the SceneBuilder system
-	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eRequestBuildSceneMessage));
+	RequestBuildSceneMessage message("");
+	SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 }
 
 void Engine::Update()
