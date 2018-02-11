@@ -2,11 +2,11 @@
 
 #include "SystemMessageDispatcher.h"
 
-#include "SystemManager.h"
+#include "ISystem.h"
 
 using namespace std;
 
-class Engine
+class Engine : public ISystem
 {
 public:
 	Engine();
@@ -14,12 +14,11 @@ public:
 	Engine(const Engine&) = delete;
 	Engine& operator=(const Engine&) = delete;
 
-	void Update();
+	void RecieveMessage(ISystemMessage& message) override;
 
 	~Engine();
 
 private:
+	void EngineUpdateLoop();
 	void InitaliseEngine();
-
-	SystemManager			_systemsManager;
 };

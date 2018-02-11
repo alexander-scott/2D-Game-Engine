@@ -36,8 +36,6 @@ public:
 	MainWindow(const MainWindow&) = delete;
 	MainWindow& operator=(const MainWindow&) = delete;
 	~MainWindow();
-	
-	void EngineInitalised();
 
 	virtual void RecieveMessage(ISystemMessage& message) override;
 

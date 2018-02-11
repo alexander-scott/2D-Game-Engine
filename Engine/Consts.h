@@ -20,6 +20,7 @@ static constexpr bool KEY_PRESS_AUTOREPEAT = false;
 enum SystemType
 {
 	eMainWindow,
+	eEngine,
 	eSceneManager,
 	eSceneBuilder,
 	eGraphics
@@ -36,6 +37,7 @@ enum SystemMessageType
 	eBuildSceneMessage,
 
 	// Graphics messages
+	eGraphicsRequestInitalise,
 	eGraphicsInitalise,
 	eGraphicsDestroy,
 	eGraphicsStartFrame,

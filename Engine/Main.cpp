@@ -1,41 +1,21 @@
-#include "MainWindow.h"
-#include "Engine.h"
 #include "CustomException.h"
+
+#include "SystemManager.h"
 
 int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 {
 	try
 	{
-		MainWindow window(hInst, pArgs);
-		try
-		{
-			Engine engine;
-			window.EngineInitalised();
+		SystemManager manager;
 
-			while (window.ProcessMessage())
-			{
-				engine.Update();
-			}
-		}
-		catch (const CustomException& e)
-		{
-			const std::wstring eMsg = e.GetFullMessage() +
-				L"\n\nException caught at Windows message loop.";
-			window.ShowMessageBox(e.GetExceptionType(), eMsg, MB_ICONERROR);
-		}
-		catch (const std::exception& e)
-		{
-			// need to convert std::exception what() string from narrow to wide string
-			const std::string whatStr(e.what());
-			const std::wstring eMsg = std::wstring(whatStr.begin(), whatStr.end()) +
-				L"\n\nException caught at Windows message loop.";
-			window.ShowMessageBox(L"Unhandled STL Exception", eMsg, MB_ICONERROR);
-		}
-		catch (...)
-		{
-			window.ShowMessageBox(L"Unhandled Non-STL Exception",
-				L"\n\nException caught at Windows message loop.", MB_ICONERROR);
-		}
+		// Initalise main window before anything else as it's special
+		manager.InitaliseMainWindow(hInst, pArgs);
+
+		// Initalise all other systems
+		manager.InitaliseSystems();
+
+		// Update the window until the user presses esc or closes the window
+		do { } while (manager.UpdateMainWindow()); 
 	}
 	catch (const CustomException& e)
 	{

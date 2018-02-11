@@ -1,6 +1,25 @@
 #include "SystemManager.h"
 
-SystemManager::SystemManager()
+SystemManager::~SystemManager()
+{
+	for (auto s : _systems)
+	{
+		s.second = nullptr;
+	}
+}
+
+void SystemManager::InitaliseMainWindow(HINSTANCE hInst, wchar_t * pArgs)
+{
+	_mainWindow = make_shared<MainWindow>(hInst, pArgs);
+	_systems.insert(std::make_pair(_mainWindow->SysType, _mainWindow));
+}
+
+bool SystemManager::UpdateMainWindow()
+{
+	return _mainWindow->ProcessMessage();
+}
+
+void SystemManager::InitaliseSystems()
 {
 	// Initalise systems
 	auto sceneBuilder = make_shared<SceneBuilder>();
@@ -11,14 +30,9 @@ SystemManager::SystemManager()
 
 	auto graphics = make_shared<TestGraphics>(); // Create a test graphics instance for now
 	_systems.insert(std::make_pair(graphics->SysType, graphics));
-}
 
-SystemManager::~SystemManager()
-{
-	for (auto s : _systems)
-	{
-		s.second = nullptr;
-	}
+	auto engine = make_shared<Engine>(); // Create engine last
+	_systems.insert(std::make_pair(engine->SysType, engine));
 }
 
 std::shared_ptr<ISystem> SystemManager::GetSystem(SystemType type)

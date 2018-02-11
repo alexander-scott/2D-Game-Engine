@@ -1,7 +1,6 @@
 #include "MainWindow.h"
 #include "Resource.h"
 #include "CustomException.h"
-#include "Engine.h"
 #include <assert.h>
 
 #include "InitaliseGraphicsMessage.h"
@@ -72,15 +71,13 @@ MainWindow::~MainWindow()
 	UnregisterClass(wndClassName, hInst);
 }
 
-void MainWindow::EngineInitalised()
-{
-	// Initalise Graphics system
-	SystemMessageDispatcher::Instance().SendMessageToListeners(InitaliseGraphicsMessage(*this));
-}
-
 void MainWindow::RecieveMessage(ISystemMessage & message)
 {
-	// No messages to recieve as of yet
+	if (message.Type == SystemMessageType::eGraphicsRequestInitalise)
+	{
+		// Initalise Graphics system
+		SystemMessageDispatcher::Instance().SendMessageToListeners(InitaliseGraphicsMessage(*this));
+	}
 }
 
 bool MainWindow::IsActive() const
