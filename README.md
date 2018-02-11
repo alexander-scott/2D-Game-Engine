@@ -11,6 +11,7 @@ Created by: Alex Scott, Myriam Sarah, Paul-Emile Kim.
 * [Private Trello Board](https://trello.com/b/jZPgM3R2/gepaa-group-1)
 
 ## Architecture Overview ##
+When building the project make sure the build is set to StandaloneDebug and the Test Processor Architecture is set to x64.
 There are two main parts to the engine: Systems and Messaging; and Scenes and GameObjects. I will briefly go over each.
 
 ### Systems and Messaging ###

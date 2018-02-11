@@ -2,7 +2,9 @@
 
 #include "Consts.h"
 
-class ISystemMessage
+#include "IMessage.h"
+
+class ISystemMessage : public IMessage
 {
 public:
 	ISystemMessage(SystemMessageType messageType) : Type(messageType) { }

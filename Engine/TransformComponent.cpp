@@ -12,10 +12,6 @@ TransformComponent::TransformComponent(Vec2 localPosition, float localRotation, 
 	_parent = nullptr;
 }
 
-void TransformComponent::RecieveMessage(IComponentMessage & message)
-{
-}
-
 void TransformComponent::SetLocalPosition(Vec2 position)
 {
 	if (position.x != _localPosition.x || position.y != _localPosition.y)

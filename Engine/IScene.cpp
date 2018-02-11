@@ -24,14 +24,14 @@ void IScene::Update(float deltaTime)
 }
 
 // In this function you can dissassemble GameObjects and add them to various structures, 
-// e.g. if the GameObject has a IDrawable component add it to renderLayer structure
+// e.g. if the GameObject has a IDrawableComponent component add it to renderLayer structure
 void IScene::AddGameObject(shared_ptr<GameObject> gameObject)
 {
 	_gameObjects.push_back(gameObject);
 
 	for (auto component : gameObject->GetAllComponents())
 	{
-		IDrawable * drawableComponent = dynamic_cast<IDrawable *> (component);
+		IDrawableComponent * drawableComponent = dynamic_cast<IDrawableComponent *> (component);
 
 		if (drawableComponent != nullptr)
 		{

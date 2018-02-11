@@ -28,8 +28,8 @@ void GameObject::SendMessageToComponent(IComponentMessage & message)
 	{
 		if (_components[i]->GetType() == message.ComponentRecipient)
 		{
-			// Cast component to IMessageable
-			IMessageable * messageableComponent = dynamic_cast<IMessageable *> (_components[i]);
+			// Cast component to IMessageableComponent
+			IMessageableComponent * messageableComponent = dynamic_cast<IMessageableComponent *> (_components[i]);
 
 			if (messageableComponent != nullptr)
 			{
@@ -63,6 +63,7 @@ void GameObject::SetParent(shared_ptr<GameObject> parent)
 	for (auto component : _components)
 	{
 		// Cast component to TransformComponent
+		// TODO: Remove this. This is bad. GameObject should not know about TransformComponent
 		TransformComponent * transformComponent = dynamic_cast<TransformComponent *> (component);
 		if (transformComponent != nullptr)
 		{
@@ -102,8 +103,8 @@ void GameObject::Draw()
 	{
 		if (component->GetActive())
 		{
-			// Cast component to IDrawable
-			IDrawable * drawableComponent = dynamic_cast<IDrawable *> (component);
+			// Cast component to IDrawableComponent
+			IDrawableComponent * drawableComponent = dynamic_cast<IDrawableComponent *> (component);
 
 			if (drawableComponent != nullptr)
 			{
@@ -121,8 +122,8 @@ void GameObject::Update(float deltaTime)
 	{
 		if (component->GetActive())
 		{
-			// Cast component to IUpdateable - This is bad!!
-			IUpdateable * updateableComponent = dynamic_cast<IUpdateable *> (component);
+			// Cast component to IUpdateableComponent
+			IUpdateableComponent * updateableComponent = dynamic_cast<IUpdateableComponent *> (component);
 
 			if (updateableComponent != nullptr)
 			{

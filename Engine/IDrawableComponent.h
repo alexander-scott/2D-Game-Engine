@@ -2,7 +2,7 @@
 
 #include "PostOffice.h"
 
-class IDrawable
+class IDrawableComponent
 {
 public:
 	// Draw function must be overriden

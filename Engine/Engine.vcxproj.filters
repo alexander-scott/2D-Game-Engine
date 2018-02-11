@@ -26,9 +26,6 @@
     <Filter Include="Engine\Systems">
       <UniqueIdentifier>{ae4d192a-01ce-42f1-b1ad-1b7a2b681e72}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Messaging\Messages\SceneMessages">
-      <UniqueIdentifier>{ddc152fd-c3a7-46d0-8459-635731dc7dd4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Systems\SceneBuilding">
       <UniqueIdentifier>{e85f2dae-88a6-4048-909c-ce979cf5746e}</UniqueIdentifier>
     </Filter>
@@ -37,9 +34,6 @@
     </Filter>
     <Filter Include="Engine\Systems\Graphics\APIs">
       <UniqueIdentifier>{ff139ad1-bfbe-4114-8d38-a93926f3d006}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Messaging\Messages\GraphicsMessages">
-      <UniqueIdentifier>{4494ebbc-216f-43b6-902f-e7811906c722}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\GameObject">
       <UniqueIdentifier>{010bd2a2-5328-4f7e-9921-50132ab2c5d8}</UniqueIdentifier>
@@ -50,11 +44,20 @@
     <Filter Include="Engine\GameObject\Components\ComponentInterfaces">
       <UniqueIdentifier>{909407a2-42de-4a86-8a15-237e1be804fe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\Components\ComponentMessages">
-      <UniqueIdentifier>{287c9858-2952-4663-a672-e3d222c81de4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Systems\SceneManagement">
       <UniqueIdentifier>{fb9a0179-661c-4111-9bcd-07ddef011699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Messaging\Messages\GraphicsSystemMessages">
+      <UniqueIdentifier>{4494ebbc-216f-43b6-902f-e7811906c722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Messaging\Messages\SceneSystemMessages">
+      <UniqueIdentifier>{ddc152fd-c3a7-46d0-8459-635731dc7dd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Messaging\Messages\ComponentMessages">
+      <UniqueIdentifier>{b0e39682-ba6b-41da-b8b6-c14133a36eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Messaging\ComponentMessaging">
+      <UniqueIdentifier>{7edb3620-1674-4d24-b5b0-3180993d6781}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,12 +106,6 @@
     <ClInclude Include="IComponent.h">
       <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
     </ClInclude>
-    <ClInclude Include="IDrawable.h">
-      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IUpdateable.h">
-      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
-    </ClInclude>
     <ClInclude Include="TransformComponent.h">
       <Filter>Engine\GameObject\Components</Filter>
     </ClInclude>
@@ -119,7 +116,7 @@
       <Filter>Engine\Systems</Filter>
     </ClInclude>
     <ClInclude Include="BuildSceneMessage.h">
-      <Filter>Engine\Messaging\Messages\SceneMessages</Filter>
+      <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
     </ClInclude>
     <ClInclude Include="TestGraphics.h">
       <Filter>Engine\Systems\Graphics\APIs</Filter>
@@ -133,23 +130,17 @@
     <ClInclude Include="ISystemMessage.h">
       <Filter>Engine\Messaging\Messages</Filter>
     </ClInclude>
-    <ClInclude Include="IComponentMessage.h">
-      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IMessageable.h">
-      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
-    </ClInclude>
     <ClInclude Include="SceneBuilder.h">
       <Filter>Engine\Systems\SceneBuilding</Filter>
     </ClInclude>
     <ClInclude Include="InitaliseGraphicsMessage.h">
-      <Filter>Engine\Messaging\Messages\GraphicsMessages</Filter>
+      <Filter>Engine\Messaging\Messages\GraphicsSystemMessages</Filter>
     </ClInclude>
     <ClInclude Include="DrawSpriteMessage.h">
-      <Filter>Engine\Messaging\Messages\GraphicsMessages</Filter>
+      <Filter>Engine\Messaging\Messages\GraphicsSystemMessages</Filter>
     </ClInclude>
     <ClInclude Include="DrawTextMessage.h">
-      <Filter>Engine\Messaging\Messages\GraphicsMessages</Filter>
+      <Filter>Engine\Messaging\Messages\GraphicsSystemMessages</Filter>
     </ClInclude>
     <ClInclude Include="IScene.h">
       <Filter>Engine\Systems\SceneManagement</Filter>
@@ -159,6 +150,21 @@
     </ClInclude>
     <ClInclude Include="FrameTimer.h">
       <Filter>Engine\Systems\SceneManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponentMessage.h">
+      <Filter>Engine\Messaging\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="IMessage.h">
+      <Filter>Engine\Messaging\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="IMessageableComponent.h">
+      <Filter>Engine\Messaging\ComponentMessaging</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawableComponent.h">
+      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IUpdateableComponent.h">
+      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

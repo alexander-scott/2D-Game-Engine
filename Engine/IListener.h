@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ISystemMessage.h"
+#include "IMessage.h"
 
 #include "Consts.h"
 
 class IListener
 {
 public:
-	virtual void RecieveMessage(ISystemMessage& message) = 0;
+	virtual void RecieveMessage(IMessage& message) = 0;
 };

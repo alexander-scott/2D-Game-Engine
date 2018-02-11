@@ -3,9 +3,9 @@
 #include "Consts.h"
 
 #include "IComponent.h"
-#include "IUpdateable.h"
-#include "IDrawable.h"
-#include "IMessageable.h"
+#include "IUpdateableComponent.h"
+#include "IDrawableComponent.h"
+#include "IMessageableComponent.h"
 
 #include "TransformComponent.h"
 
