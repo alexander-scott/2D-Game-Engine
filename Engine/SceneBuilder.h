@@ -5,6 +5,8 @@
 #include "ISystem.h"
 #include "SystemMessageDispatcher.h"
 
+#include "ComponentBuilder.h"
+
 #include "rapidxml.hpp"
 #include <fstream>
 
@@ -18,6 +20,5 @@ public:
 	void RecieveMessage(ISystemMessage& message) override;
 
 private:
-	shared_ptr<IScene> BuildTestScene(string filePath);
 	shared_ptr<IScene> BuildScene(string filePath);
 };

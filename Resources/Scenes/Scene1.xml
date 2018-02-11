@@ -3,7 +3,7 @@
 Test scene file
 <!- -->
 
-<scene name="1">
+<scene name="scene1">
   <!-- - TEST GAMEOBJECT <!- -->
   <GameObject tag="TestGameObject" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
     <Component type="TransformComponent" xpos="0" ypos="0" rotation="0" scale="1"></Component>

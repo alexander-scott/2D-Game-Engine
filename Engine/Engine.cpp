@@ -23,7 +23,7 @@ Engine::~Engine()
 void Engine::InitaliseEngine()
 {
 	// Request a new scene be built by the SceneBuilder system
-	RequestBuildSceneMessage message("");
+	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
 	SystemMessageDispatcher::Instance().SendMessageToListeners(message);
 }
 

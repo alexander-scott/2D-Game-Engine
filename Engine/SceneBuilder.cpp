@@ -15,23 +15,12 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 		RequestBuildSceneMessage& msg = static_cast<RequestBuildSceneMessage&>(message);
 
 		// If the engine asks the SceneBuilder system to create a Scene, build one and send a pointer to it in a message.
-		shared_ptr<IScene> scene = BuildTestScene(msg.FilePath);
+		shared_ptr<IScene> scene = BuildScene(msg.FilePath);
 
 		// Send built scene to SceneManager system
 		BuildSceneMessage sceneMsg(scene);
 		SystemMessageDispatcher::Instance().SendMessageToListeners(sceneMsg);
 	}
-}
-
-shared_ptr<IScene> SceneBuilder::BuildTestScene(string filePath)
-{
-	// BUILD AND RETURN AN EMPTY ISCENE FOR NOW. IN FUTURE PARSE SCENE FILES AND BUILD SCENE FROM THERE.
-	auto scene = make_shared<IScene>("TestScene");
-	
-	auto testGameObject = GameObject::MakeGameObject("TestObject");
-	scene->AddGameObject(testGameObject);
-
-	return scene;
 }
 
 shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
@@ -41,7 +30,7 @@ shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
 	ifstream inFile(filePath);
 
 	if (!inFile)
-		throw "Could not load file at path: " + filePath;
+		throw std::exception("Could not load XML file!");
 
 	//Dump contents of file into a string
 	string xmlContents;
@@ -64,10 +53,27 @@ shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
 	//Get the root node
 	xml_node<>* root = doc.first_node();
 
+	// Initalise the scene
 	auto scene = make_shared<IScene>(string(root->first_attribute("name")->value()));
+
+	// Build the gameobjects
 	xml_node<>* gameObjectNode = root->first_node("GameObject");
 	while (gameObjectNode)
 	{
+		auto gameObject = GameObject::MakeGameObject(gameObjectNode->first_attribute("tag")->value());
+
+		// Create this gameobjects components
+		xml_node<>* component = gameObjectNode->first_node("Component");
+		while (component)
+		{
+			IComponent* newComponent = ComponentBuilder::BuildComponent(component);
+			gameObject->AddComponent(newComponent);
+
+			component = component->next_sibling("Component");
+		}
+
+		scene->AddGameObject(gameObject);
+
 		gameObjectNode = gameObjectNode->next_sibling("GameObject");
 	}
 

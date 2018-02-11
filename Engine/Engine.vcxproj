@@ -261,6 +261,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BuildSceneMessage.h" />
+    <ClInclude Include="ComponentBuilder.h" />
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="CustomException.h" />
@@ -303,6 +304,7 @@
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ComponentBuilder.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="FrameTimer.cpp" />

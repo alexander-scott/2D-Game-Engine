@@ -196,6 +196,9 @@
     <ClInclude Include="RequestBuildSceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
     </ClInclude>
+    <ClInclude Include="ComponentBuilder.h">
+      <Filter>Engine\Systems\SceneBuilding</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -233,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="SystemMessageDispatcher.cpp">
       <Filter>Engine\Messaging\SystemMessaging</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentBuilder.cpp">
+      <Filter>Engine\Systems\SceneBuilding</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

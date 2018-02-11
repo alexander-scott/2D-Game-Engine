@@ -28,13 +28,13 @@ public:
 				break;
 			}
 
-			case SystemMessageType::eDrawScene:
+			case SystemMessageType::eDrawScene: // Recieved from engine
 			{
 				_currentScene->Draw();
 				break;
 			}
 
-			case SystemMessageType::eUpdateScene:
+			case SystemMessageType::eUpdateScene: // Recieved from engine
 			{
 				_currentScene->Update(_frameTimer.Mark());
 				break;
