@@ -16,7 +16,7 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 		shared_ptr<IScene> scene = BuildScene();
 
 		BuildSceneMessage sceneMsg(scene);
-		PostOffice::Instance().SendMessageToListeners(sceneMsg);
+		SystemMessageDispatcher::Instance().SendMessageToListeners(sceneMsg);
 	}
 }
 

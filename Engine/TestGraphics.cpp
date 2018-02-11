@@ -18,10 +18,6 @@ void TestGraphics::BeginFrame()
 {
 }
 
-void TestGraphics::PreloadTextures()
-{
-}
-
 void TestGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
 {
 }

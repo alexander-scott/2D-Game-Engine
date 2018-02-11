@@ -5,7 +5,7 @@
 #include "Consts.h"
 
 #include "ISystem.h"
-#include "PostOffice.h"
+#include "SystemMessageDispatcher.h"
 
 #include "InitaliseGraphicsMessage.h"
 #include "DrawSpriteMessage.h"
@@ -31,11 +31,11 @@ public:
 
 	IGraphics() : ISystem(SystemType::eGraphics) 
 	{ 
-		PostOffice::Instance().AddListener(this, SystemMessageType::eGraphicsInitalise);
-		PostOffice::Instance().AddListener(this, SystemMessageType::eGraphicsStartFrame);
-		PostOffice::Instance().AddListener(this, SystemMessageType::eGraphicsEndFrame);
-		PostOffice::Instance().AddListener(this, SystemMessageType::eGraphicsDrawSprite);
-		PostOffice::Instance().AddListener(this, SystemMessageType::eGraphicsDrawText);
+		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eGraphicsInitalise);
+		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eGraphicsStartFrame);
+		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eGraphicsEndFrame);
+		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eGraphicsDrawSprite);
+		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eGraphicsDrawText);
 	}
 
 	virtual void RecieveMessage(ISystemMessage& message) override
@@ -46,7 +46,6 @@ public:
 			{
 				InitaliseGraphicsMessage & msg = static_cast<InitaliseGraphicsMessage&>(message);
 				Initalise(msg.Key);
-				PreloadTextures();
 				break;
 			}
 
@@ -89,8 +88,6 @@ protected:
 
 	virtual void EndFrame() = 0;
 	virtual void BeginFrame() = 0;
-
-	virtual void PreloadTextures() = 0;
 
 	virtual void DrawSprite(std::string name, Vec2 pos, RECT* rect, float rot, float scale, Vec2 offset) = 0;
 	virtual void DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset) = 0;

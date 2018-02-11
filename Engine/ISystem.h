@@ -2,9 +2,9 @@
 
 #include "Consts.h"
 
-#include "PostOfficeListener.h"
+#include "SystemMessageListener.h"
 
-class ISystem : public PostOfficeListener
+class ISystem : public SystemMessageListener
 {
 public:
 	ISystem(SystemType sysType) : SysType(sysType) { }

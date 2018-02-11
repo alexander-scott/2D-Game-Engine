@@ -3,7 +3,7 @@
 #include "IScene.h"
 
 #include "ISystem.h"
-#include "PostOffice.h"
+#include "SystemMessageDispatcher.h"
 
 class SceneBuilder : public ISystem
 {

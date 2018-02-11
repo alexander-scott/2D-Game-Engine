@@ -12,9 +12,9 @@ class SceneManager : public ISystem
 public:
 	SceneManager() : ISystem(SystemType::eSceneManager) 
 	{ 
-		PostOffice::Instance().AddListener(this, SystemMessageType::eBuildSceneMessage);
-		PostOffice::Instance().AddListener(this, SystemMessageType::eDrawScene);
-		PostOffice::Instance().AddListener(this, SystemMessageType::eUpdateScene);
+		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eBuildSceneMessage);
+		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eDrawScene);
+		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eUpdateScene);
 	}
 
 	void RecieveMessage(ISystemMessage& message) override

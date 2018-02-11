@@ -73,7 +73,7 @@ MainWindow::~MainWindow()
 void MainWindow::EngineInitalised()
 {
 	// Initalise Graphics system
-	PostOffice::Instance().SendMessageToListeners(InitaliseGraphicsMessage(*this));
+	SystemMessageDispatcher::Instance().SendMessageToListeners(InitaliseGraphicsMessage(*this));
 }
 
 void MainWindow::RecieveMessage(ISystemMessage & message)

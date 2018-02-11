@@ -22,20 +22,20 @@ Engine::~Engine()
 void Engine::InitaliseEngine()
 {
 	// Request a new scene be built by the SceneBuilder system
-	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eRequestBuildSceneMessage));
+	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eRequestBuildSceneMessage));
 }
 
 void Engine::Update()
 {
 	// Tell the Graphics system to begin the frame
-	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame));
+	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame));
 
 	// Update the current scene in the SceneManager system
-	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
+	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
 
 	// Draw the current scene in the SceneManager system
-	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene));
+	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene));
 
 	// Tell the Graphics system to end the frame
-	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame));
+	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame));
 }

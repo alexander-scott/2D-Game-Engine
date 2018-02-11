@@ -1,14 +1,14 @@
 #pragma once
 
 #include "IListener.h"
-#include "PostOffice.h"
+#include "SystemMessageDispatcher.h"
 
-class PostOfficeListener : public IListener
+class SystemMessageListener : public IListener
 {
 public:
 	void SubscribeToMessageType(SystemMessageType messageType)
 	{
-		PostOffice::Instance().AddListener(this, messageType);
+		SystemMessageDispatcher::Instance().AddListener(this, messageType);
 	}
 
 	virtual void RecieveMessage(ISystemMessage& message) = 0;

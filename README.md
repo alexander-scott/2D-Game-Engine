@@ -1,4 +1,4 @@
-# GEAPA Game Engine #
+# GEPAA Game Engine #
 
 This repository contains the source code for the GEPAA Game Engine, a team-developed Game Engine built for the Game Engine Programming and Architecture
 module at Staffordshire University. 
@@ -19,8 +19,8 @@ Every significant part of the engine is classed as a system, and must inherit fr
 file I/O etc. Currently there's only a few systems implemented, mainly to demonstrate their usage. To register a new system, make sure it inherits ISystem
 and also make sure it is initalised in the SystemManager class. 
 
-Systems can communicate with other systems by sending messages through the PostOffice, a singleton instance that has a job of delivering messages to
-the correct recipiants. To do this, systems must subscribe to a certain message type (an enum) with the PostOffice. Once doing this the PostOffice
+Systems can communicate with other systems by sending messages through the SystemMessageDispatcher, a singleton instance that has a job of delivering messages to
+the correct recipiants. To do this, systems must subscribe to a certain message type (an enum) with the SystemMessageDispatcher. Once doing this the SystemMessageDispatcher
 will deliver the messages to the system by calling the RecieveMessage() method in ISystem (which needs to be overriden). From here, the recieved
 message can be statically cast to any other message type and data can be extracted from it.
 

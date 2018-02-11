@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PostOffice.h"
+#include "SystemMessageDispatcher.h"
 
 #include "SystemManager.h"
 

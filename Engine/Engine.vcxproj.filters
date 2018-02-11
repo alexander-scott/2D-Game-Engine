@@ -17,9 +17,6 @@
     <Filter Include="Engine\Messaging\Interfaces">
       <UniqueIdentifier>{9c9d40c7-788f-4f5f-8e1d-40ba387a23f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Messaging\PostOffice">
-      <UniqueIdentifier>{cf362e14-cac7-4df8-a249-8bece6c385f5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Messaging\Messages">
       <UniqueIdentifier>{e63b7ddb-2442-4b92-85d8-ba70e5a76d8c}</UniqueIdentifier>
     </Filter>
@@ -62,6 +59,9 @@
     <Filter Include="Engine\Systems\MainWindow">
       <UniqueIdentifier>{44b8c23a-8fac-42d8-b0b3-b712175c9218}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Messaging\SystemMessaging">
+      <UniqueIdentifier>{cf362e14-cac7-4df8-a249-8bece6c385f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -90,15 +90,6 @@
     </ClInclude>
     <ClInclude Include="IMessenger.h">
       <Filter>Engine\Messaging\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="PostOffice.h">
-      <Filter>Engine\Messaging\PostOffice</Filter>
-    </ClInclude>
-    <ClInclude Include="PostOfficeMessenger.h">
-      <Filter>Engine\Messaging\PostOffice</Filter>
-    </ClInclude>
-    <ClInclude Include="PostOfficeListener.h">
-      <Filter>Engine\Messaging\PostOffice</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Engine\GameObject</Filter>
@@ -169,6 +160,15 @@
     <ClInclude Include="MainWindow.h">
       <Filter>Engine\Systems\MainWindow</Filter>
     </ClInclude>
+    <ClInclude Include="SystemMessageDispatcher.h">
+      <Filter>Engine\Messaging\SystemMessaging</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemMessageListener.h">
+      <Filter>Engine\Messaging\SystemMessaging</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemMessageMessenger.h">
+      <Filter>Engine\Messaging\SystemMessaging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -179,9 +179,6 @@
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Engine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="PostOffice.cpp">
-      <Filter>Engine\Messaging\PostOffice</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Engine\GameObject</Filter>
@@ -209,6 +206,9 @@
     </ClCompile>
     <ClCompile Include="MainWindow.cpp">
       <Filter>Engine\Systems\MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemMessageDispatcher.cpp">
+      <Filter>Engine\Messaging\SystemMessaging</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
