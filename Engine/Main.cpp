@@ -6,11 +6,13 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 {
 	try
 	{
-		MainWindow wnd(hInst, pArgs);
+		MainWindow window(hInst, pArgs);
 		try
 		{
-			Engine engine(wnd);
-			while (wnd.ProcessMessage())
+			Engine engine;
+			window.EngineInitalised();
+
+			while (window.ProcessMessage())
 			{
 				engine.Update();
 			}
@@ -19,7 +21,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 		{
 			const std::wstring eMsg = e.GetFullMessage() +
 				L"\n\nException caught at Windows message loop.";
-			wnd.ShowMessageBox(e.GetExceptionType(), eMsg, MB_ICONERROR);
+			window.ShowMessageBox(e.GetExceptionType(), eMsg, MB_ICONERROR);
 		}
 		catch (const std::exception& e)
 		{
@@ -27,11 +29,11 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 			const std::string whatStr(e.what());
 			const std::wstring eMsg = std::wstring(whatStr.begin(), whatStr.end()) +
 				L"\n\nException caught at Windows message loop.";
-			wnd.ShowMessageBox(L"Unhandled STL Exception", eMsg, MB_ICONERROR);
+			window.ShowMessageBox(L"Unhandled STL Exception", eMsg, MB_ICONERROR);
 		}
 		catch (...)
 		{
-			wnd.ShowMessageBox(L"Unhandled Non-STL Exception",
+			window.ShowMessageBox(L"Unhandled Non-STL Exception",
 				L"\n\nException caught at Windows message loop.", MB_ICONERROR);
 		}
 	}

@@ -30,6 +30,7 @@ enum SystemMessageType
 
 enum SystemType
 {
+	eMainWindow,
 	eSceneManager,
 	eSceneBuilder,
 	eGraphics

@@ -4,11 +4,14 @@
 #include "Engine.h"
 #include <assert.h>
 
+#include "InitaliseGraphicsMessage.h"
+
 // Constructor that creates a window with screen width and height defined in Consts.h
 MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs)
 	:
 	args(pArgs),
-	hInst(hInst)
+	hInst(hInst),
+	ISystem(SystemType::eMainWindow)
 {
 	// register window class
 	WNDCLASSEX wc = { sizeof(WNDCLASSEX),CS_CLASSDC,_HandleMsgSetup,0,0,
@@ -44,7 +47,7 @@ MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs)
 }
 
 // Constructor that uses an already created window as the panel to render to
-MainWindow::MainWindow(HWND hwnd)
+MainWindow::MainWindow(HWND hwnd) : ISystem(SystemType::eMainWindow)
 {
 	// create window & get hWnd
 	hWnd = hwnd;
@@ -65,6 +68,16 @@ MainWindow::~MainWindow()
 {
 	// unregister window class
 	UnregisterClass(wndClassName, hInst);
+}
+
+void MainWindow::EngineInitalised()
+{
+	// Initalise Graphics system
+	PostOffice::Instance().SendMessageToListeners(InitaliseGraphicsMessage(*this));
+}
+
+void MainWindow::RecieveMessage(ISystemMessage & message)
+{
 }
 
 bool MainWindow::IsActive() const

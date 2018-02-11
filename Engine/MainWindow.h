@@ -4,12 +4,14 @@
 #include <string>
 #include <Dbt.h>
 
+#include "PostOffice.h"
+#include "ISystem.h"
+
 #include "Consts.h"
 
 // for granting special access to hWnd only for Graphics constructor
 class HWNDKey
 {
-
 public:
 	HWNDKey(const HWNDKey&) = delete;
 	HWNDKey& operator=(HWNDKey&) = delete;
@@ -17,7 +19,7 @@ public:
 	HWND hWnd = nullptr;
 };
 
-class MainWindow : public HWNDKey
+class MainWindow : public HWNDKey, public ISystem
 {
 public:
 	class Exception : public CustomException
@@ -34,6 +36,11 @@ public:
 	MainWindow(const MainWindow&) = delete;
 	MainWindow& operator=(const MainWindow&) = delete;
 	~MainWindow();
+	
+	void EngineInitalised();
+
+	virtual void RecieveMessage(ISystemMessage& message) override;
+
 	bool IsActive() const;
 	bool IsMinimized() const;
 	void ShowMessageBox(const std::wstring& title, const std::wstring& message, UINT type = MB_OK) const;

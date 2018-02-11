@@ -1,16 +1,15 @@
 #include "Engine.h"
 
 #include "BuildSceneMessage.h"
-#include "InitaliseGraphicsMessage.h"
 
 // Constructor that uses width and height from Consts.h
-Engine::Engine(MainWindow & wnd) : _mainWindow(wnd)
+Engine::Engine()
 {
 	InitaliseEngine();
 }
 
 // Constructor that uses width and height that are passed in from MainWindow.h
-Engine::Engine(MainWindow& wnd, int width, int height) : _mainWindow(wnd)
+Engine::Engine(int width, int height)
 {
 	InitaliseEngine();
 }
@@ -22,9 +21,6 @@ Engine::~Engine()
 
 void Engine::InitaliseEngine()
 {
-	// Initalise Graphics system
-	PostOffice::Instance().SendMessageToListeners(InitaliseGraphicsMessage(_mainWindow));
-
 	// Request a new scene be built by the SceneBuilder system
 	PostOffice::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eRequestBuildSceneMessage));
 }
