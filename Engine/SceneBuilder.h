@@ -21,6 +21,5 @@ public:
 	void RecieveMessage(ISystemMessage& message) override;
 
 protected:
-	xml_node<>* ExtractRootNode(string filePath);
 	shared_ptr<IScene> BuildScene(string filePath);
 };

@@ -10,7 +10,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 		SystemManager manager(hInst, pArgs);
 
 		// Update the window until the user presses esc or closes the window
-		do { } while (manager.UpdateMainWindow()); 
+		do { } while (manager.SystemUpdate()); 
 	}
 	catch (const CustomException& e)
 	{

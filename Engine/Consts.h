@@ -51,8 +51,10 @@ enum SystemMessageType
 	eInputMouseMessage,
 
 	// Windows messages
-	eWindowUpdate,
 	eWindowLostFocus,
+
+	// System messages
+	eSystemUpdate,
 };
 
 enum ComponentType

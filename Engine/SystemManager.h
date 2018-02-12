@@ -17,7 +17,7 @@ public:
 	SystemManager(HINSTANCE hInst, wchar_t * pArgs);
 	~SystemManager();
 
-	bool UpdateMainWindow();
+	bool SystemUpdate();
 
 	std::shared_ptr<ISystem> GetSystem(SystemType type);
 	void AddSystem(shared_ptr<ISystem> system, SystemType type);

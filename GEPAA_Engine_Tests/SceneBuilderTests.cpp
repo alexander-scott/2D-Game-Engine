@@ -12,7 +12,33 @@ namespace GEPAA_Engine_Tests
 	public:
 		void TestOpenFile(std::string path)
 		{
-			ExtractRootNode(path);
+			//Load the file
+			ifstream inFile(path);
+			if (!inFile)
+				throw std::exception("Could not load XML file!");
+
+			//Dump contents of file into a string
+			string xmlContents;
+
+			//Blocked out of preference
+			{
+				string line;
+				while (getline(inFile, line))
+					xmlContents += line;
+			}
+
+			//Convert string to rapidxml readable char*
+			vector<char> mXmlData = vector<char>(xmlContents.begin(), xmlContents.end());
+			mXmlData.push_back('\0');
+
+			//Create a parsed document with &xmlData[0] which is the char*
+			xml_document<> doc;
+			doc.parse<parse_no_data_nodes>(&mXmlData[0]);
+
+			//Get the root node
+			xml_node<>* root = doc.first_node();
+
+			std::string sceneName = string(root->first_attribute("name")->value());
 		}
 
 		shared_ptr<IScene> TestBuildScene(std::string path)

@@ -15,9 +15,14 @@ SystemManager::~SystemManager()
 	}
 }
 
-bool SystemManager::UpdateMainWindow()
+bool SystemManager::SystemUpdate()
 {
-	return _mainWindow->ProcessMessage();
+	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eSystemUpdate));
+
+	if (_mainWindow != nullptr)
+		return _mainWindow->ProcessMessage();
+	else
+		return true;
 }
 
 void SystemManager::InitaliseSystems(HINSTANCE hInst, wchar_t * pArgs)

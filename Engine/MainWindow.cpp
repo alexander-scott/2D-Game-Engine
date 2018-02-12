@@ -104,8 +104,6 @@ void MainWindow::ShowMessageBox(const std::wstring& title, const std::wstring& m
 
 bool MainWindow::ProcessMessage()
 {
-	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eWindowUpdate));
-
 	MSG msg;
 	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 	{

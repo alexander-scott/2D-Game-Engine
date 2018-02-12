@@ -53,7 +53,7 @@ void Engine::UpdateEngine()
 
 void Engine::RecieveMessage(ISystemMessage& message)
 {
-	if (message.Type == SystemMessageType::eWindowUpdate)
+	if (message.Type == SystemMessageType::eSystemUpdate)
 	{
 		UpdateEngine();
 	}
@@ -61,7 +61,7 @@ void Engine::RecieveMessage(ISystemMessage& message)
 
 void Engine::InitaliseListeners()
 {
-	SubscribeToMessageType(SystemMessageType::eWindowUpdate);
+	SubscribeToMessageType(SystemMessageType::eSystemUpdate);
 }
 
 void Engine::SystemsInitalised()
