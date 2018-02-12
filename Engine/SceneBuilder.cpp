@@ -25,7 +25,7 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 	}
 }
 
-shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
+xml_node<>* SceneBuilder::ExtractRootNode(string filePath)
 {
 	//Loads a level from xml file
 	//Load the file
@@ -52,8 +52,13 @@ shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
 	xml_document<> doc;
 	doc.parse<parse_no_data_nodes>(&mXmlData[0]);
 
+	return doc.first_node();
+}
+
+shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
+{
 	//Get the root node
-	xml_node<>* root = doc.first_node();
+	xml_node<>* root = ExtractRootNode(filePath);
 
 	// Initalise the scene
 	auto scene = make_shared<IScene>(string(root->first_attribute("name")->value()));

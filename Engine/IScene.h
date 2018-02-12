@@ -20,6 +20,7 @@ public:
 	virtual void Draw();
 	virtual void Update(float deltaTime);
 
+	std::string GetSceneName() { return _sceneName; }
 	void AddGameObject(shared_ptr<GameObject> gameObject);
 
 	int GetNumberOfGameObjects() { return (int)_gameObjects.size(); }

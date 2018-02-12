@@ -20,6 +20,7 @@ public:
 	void InitaliseListeners() override;
 	void RecieveMessage(ISystemMessage& message) override;
 
-private:
+protected:
+	xml_node<>* ExtractRootNode(string filePath);
 	shared_ptr<IScene> BuildScene(string filePath);
 };

@@ -214,7 +214,7 @@
       <CallingConvention>Cdecl</CallingConvention>
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PreprocessorDefinitions>SIMPLESAMPLE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GEPAA_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatSpecificWarningsAsErrors>
       </TreatSpecificWarningsAsErrors>
       <TreatWarningAsError>true</TreatWarningAsError>

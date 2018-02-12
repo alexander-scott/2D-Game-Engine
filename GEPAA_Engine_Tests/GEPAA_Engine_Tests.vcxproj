@@ -98,6 +98,7 @@
       <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -158,7 +159,65 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="unittest1.cpp" />
+    <ClCompile Include="..\Engine\ComponentBuilder.cpp" />
+    <ClCompile Include="..\Engine\DXErr.cpp" />
+    <ClCompile Include="..\Engine\Engine.cpp" />
+    <ClCompile Include="..\Engine\FrameTimer.cpp" />
+    <ClCompile Include="..\Engine\GameObject.cpp" />
+    <ClCompile Include="..\Engine\IScene.cpp" />
+    <ClCompile Include="..\Engine\Main.cpp" />
+    <ClCompile Include="..\Engine\MainWindow.cpp" />
+    <ClCompile Include="..\Engine\SceneBuilder.cpp" />
+    <ClCompile Include="..\Engine\SystemManager.cpp" />
+    <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp" />
+    <ClCompile Include="..\Engine\TestGraphics.cpp" />
+    <ClCompile Include="..\Engine\TransformComponent.cpp" />
+    <ClCompile Include="SceneBuilderTests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Engine\BuildSceneMessage.h" />
+    <ClInclude Include="..\Engine\ComponentBuilder.h" />
+    <ClInclude Include="..\Engine\ComponentFactory.h" />
+    <ClInclude Include="..\Engine\Consts.h" />
+    <ClInclude Include="..\Engine\CustomException.h" />
+    <ClInclude Include="..\Engine\DrawSpriteMessage.h" />
+    <ClInclude Include="..\Engine\DrawTextMessage.h" />
+    <ClInclude Include="..\Engine\DXErr.h" />
+    <ClInclude Include="..\Engine\Engine.h" />
+    <ClInclude Include="..\Engine\FrameTimer.h" />
+    <ClInclude Include="..\Engine\GameObject.h" />
+    <ClInclude Include="..\Engine\IComponent.h" />
+    <ClInclude Include="..\Engine\IComponentMessage.h" />
+    <ClInclude Include="..\Engine\IDrawableComponent.h" />
+    <ClInclude Include="..\Engine\IGraphics.h" />
+    <ClInclude Include="..\Engine\IListener.h" />
+    <ClInclude Include="..\Engine\IMessage.h" />
+    <ClInclude Include="..\Engine\IMessageableComponent.h" />
+    <ClInclude Include="..\Engine\IMessenger.h" />
+    <ClInclude Include="..\Engine\InitaliseGraphicsMessage.h" />
+    <ClInclude Include="..\Engine\InputKeyboardMessage.h" />
+    <ClInclude Include="..\Engine\InputMouseMessage.h" />
+    <ClInclude Include="..\Engine\IScene.h" />
+    <ClInclude Include="..\Engine\ISystem.h" />
+    <ClInclude Include="..\Engine\ISystemMessage.h" />
+    <ClInclude Include="..\Engine\IUpdateableComponent.h" />
+    <ClInclude Include="..\Engine\MainWindow.h" />
+    <ClInclude Include="..\Engine\Math.h" />
+    <ClInclude Include="..\Engine\rapidxml.hpp" />
+    <ClInclude Include="..\Engine\rapidxml_print.hpp" />
+    <ClInclude Include="..\Engine\Rect.h" />
+    <ClInclude Include="..\Engine\RequestBuildSceneMessage.h" />
+    <ClInclude Include="..\Engine\Resource.h" />
+    <ClInclude Include="..\Engine\SceneBuilder.h" />
+    <ClInclude Include="..\Engine\SceneManager.h" />
+    <ClInclude Include="..\Engine\SetParentTransformMessage.h" />
+    <ClInclude Include="..\Engine\SystemManager.h" />
+    <ClInclude Include="..\Engine\SystemMessageDispatcher.h" />
+    <ClInclude Include="..\Engine\SystemMessageListener.h" />
+    <ClInclude Include="..\Engine\SystemMessageMessenger.h" />
+    <ClInclude Include="..\Engine\TestGraphics.h" />
+    <ClInclude Include="..\Engine\TransformComponent.h" />
+    <ClInclude Include="..\Engine\WinDefines.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
