@@ -4,7 +4,6 @@
 #include <string>
 #include <Dbt.h>
 
-#include "SystemMessageDispatcher.h"
 #include "ISystem.h"
 
 #include "Consts.h"

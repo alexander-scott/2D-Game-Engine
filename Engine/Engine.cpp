@@ -1,5 +1,6 @@
 #include "Engine.h"
 
+#include "SMDSingleton.h"
 #include "BuildSceneMessage.h"
 #include "RequestBuildSceneMessage.h"
 
@@ -36,19 +37,19 @@ void Engine::UpdateEngine()
 		// ProcessPhysics()
 		
 		// Update the current scene in the SceneManager system
-		SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
+		SMDSingleton::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
 
 		_lag -= MS_PER_UPDATE;
 	}
 
 	// Tell the Graphics system to begin the frame
-	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame));
+	SMDSingleton::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame));
 
 	// Draw the current scene in the SceneManager system
-	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene));
+	SMDSingleton::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene));
 
 	// Tell the Graphics system to end the frame
-	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame));
+	SMDSingleton::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame));
 }
 
 void Engine::RecieveMessage(ISystemMessage& message)
@@ -68,5 +69,5 @@ void Engine::SystemsInitalised()
 {
 	// Request a new scene be built by the SceneBuilder system
 	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
-	SystemMessageDispatcher::Instance().SendMessageToListeners(message);
+	SMDSingleton::Instance().SendMessageToListeners(message);
 }

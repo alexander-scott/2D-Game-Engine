@@ -1,14 +1,14 @@
 #pragma once
 
 #include "IListener.h"
-#include "SystemMessageDispatcher.h"
+#include "SMDSingleton.h"
 
 class SystemMessageListener : public IListener
 {
 public:
 	void SubscribeToMessageType(SystemMessageType messageType)
 	{
-		SystemMessageDispatcher::Instance().AddListener(this, messageType);
+		SMDSingleton::Instance().AddListener(this, messageType);
 	}
 
 	virtual void RecieveMessage(ISystemMessage& message) = 0;

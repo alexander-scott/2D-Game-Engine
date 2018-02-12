@@ -1,7 +1,11 @@
 #include "SceneBuilder.h"
 
+#include "ComponentBuilder.h"
+
 #include "BuildSceneMessage.h"
 #include "RequestBuildSceneMessage.h"
+
+#include <fstream>
 
 SceneBuilder::SceneBuilder() : ISystem(SystemType::eSceneBuilder) { }
 
@@ -21,7 +25,7 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 
 		// Send built scene to SceneManager system
 		BuildSceneMessage sceneMsg(scene);
-		SystemMessageDispatcher::Instance().SendMessageToListeners(sceneMsg);
+		SMDSingleton::Instance().SendMessageToListeners(sceneMsg);
 	}
 }
 

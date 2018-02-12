@@ -3,6 +3,7 @@
 #include "CustomException.h"
 #include <assert.h>
 
+#include "SMDSingleton.h"
 #include "InitaliseGraphicsMessage.h"
 #include "InputKeyboardMessage.h"
 #include "InputMouseMessage.h"
@@ -84,7 +85,7 @@ void MainWindow::RecieveMessage(ISystemMessage & message)
 void MainWindow::SystemsInitalised()
 {
 	// Initalise Graphics system
-	SystemMessageDispatcher::Instance().SendMessageToListeners(InitaliseGraphicsMessage(*this));
+	SMDSingleton::Instance().SendMessageToListeners(InitaliseGraphicsMessage(*this));
 }
 
 bool MainWindow::IsActive() const
@@ -156,7 +157,7 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_KILLFOCUS:
 	{
 		ISystemMessage message(SystemMessageType::eWindowLostFocus);
-		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
+		SMDSingleton::Instance().SendMessageToListeners(message);
 		break;
 	}
 
@@ -166,20 +167,20 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		if (!(lParam & 0x40000000) || KEY_PRESS_AUTOREPEAT) // Prevents this being called multiple times when held down
 		{
 			InputKeyboardMessage message(KeyboardMessageType::eKeyDown, static_cast<unsigned char>(wParam));
-			SystemMessageDispatcher::Instance().SendMessageToListeners(message);
+			SMDSingleton::Instance().SendMessageToListeners(message);
 		}
 		break;
 	}
 	case WM_KEYUP:
 	{
 		InputKeyboardMessage message(KeyboardMessageType::eKeyUp, static_cast<unsigned char>(wParam));
-		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
+		SMDSingleton::Instance().SendMessageToListeners(message);
 		break;
 	}
 	case WM_CHAR:
 	{
 		InputKeyboardMessage message(KeyboardMessageType::eCharPressed, static_cast<unsigned char>(wParam));
-		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
+		SMDSingleton::Instance().SendMessageToListeners(message);
 		break;
 	}
 	// ************ END KEYBOARD MESSAGES ************ //
@@ -189,35 +190,35 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		POINTS pt = MAKEPOINTS(lParam);
 		InputMouseMessage message(MouseMessageType::eMouseMoved, pt.x, pt.y);
-		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
+		SMDSingleton::Instance().SendMessageToListeners(message);
 		break;
 	}
 	case WM_LBUTTONDOWN:
 	{
 		POINTS pt = MAKEPOINTS(lParam);
 		InputMouseMessage message(MouseMessageType::eLeftMouseClicked, pt.x, pt.y);
-		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
+		SMDSingleton::Instance().SendMessageToListeners(message);
 		break;
 	}
 	case WM_RBUTTONDOWN:
 	{
 		POINTS pt = MAKEPOINTS(lParam);
 		InputMouseMessage message(MouseMessageType::eRightMouseClicked, pt.x, pt.y);
-		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
+		SMDSingleton::Instance().SendMessageToListeners(message);
 		break;
 	}
 	case WM_LBUTTONUP:
 	{
 		POINTS pt = MAKEPOINTS(lParam);
 		InputMouseMessage message(MouseMessageType::eLeftMouseReleased, pt.x, pt.y);
-		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
+		SMDSingleton::Instance().SendMessageToListeners(message);
 		break;
 	}
 	case WM_RBUTTONUP:
 	{
 		POINTS pt = MAKEPOINTS(lParam);
 		InputMouseMessage message(MouseMessageType::eRightMouseReleased, pt.x, pt.y);
-		SystemMessageDispatcher::Instance().SendMessageToListeners(message);
+		SMDSingleton::Instance().SendMessageToListeners(message);
 		break;
 	}
 	case WM_MOUSEWHEEL:

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Consts.h"
-
 #include "SystemMessageListener.h"
 
 class ISystem : public SystemMessageListener

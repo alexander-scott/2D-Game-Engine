@@ -1,7 +1,6 @@
 #pragma once
 
 #include <chrono>
-#include "SystemMessageDispatcher.h"
 
 #include "ISystem.h"
 

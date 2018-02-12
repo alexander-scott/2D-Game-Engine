@@ -3,8 +3,6 @@
 #include "IListener.h"
 #include "ISystemMessage.h"
 
-#include <vector>
-
 class IMessenger
 {
 public:

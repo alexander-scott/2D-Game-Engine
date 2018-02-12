@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IComponent.h"
-#include "Consts.h"
 
 class TransformComponent : public IComponent
 {

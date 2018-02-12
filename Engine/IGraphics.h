@@ -5,7 +5,6 @@
 #include "Consts.h"
 
 #include "ISystem.h"
-#include "SystemMessageDispatcher.h"
 
 #include "InitaliseGraphicsMessage.h"
 #include "DrawSpriteMessage.h"

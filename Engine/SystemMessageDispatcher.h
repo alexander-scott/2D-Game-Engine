@@ -24,13 +24,7 @@ public:
 	// Send a message to all Listeners that have been added to the SystemMessageDispatcher's registry with this messages SystemMessageType
 	void SendMessageToListeners(ISystemMessage& message);
 
-	static SystemMessageDispatcher& Instance()
-	{
-		static SystemMessageDispatcher Instance;
-		return Instance;
-	}
-
-private:
+protected:
 	// Holds a map of MessageTypes, with each message type having numerous Listeners listening for a message being sent of that type
 	std::map<SystemMessageType, std::vector<IListener*>>	_listeners;
 };

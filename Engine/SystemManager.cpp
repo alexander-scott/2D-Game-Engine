@@ -1,5 +1,10 @@
 #include "SystemManager.h"
 
+#include "Engine.h"
+#include "SceneBuilder.h"
+#include "SceneManager.h"
+#include "TestGraphics.h"
+
 SystemManager::SystemManager(HINSTANCE hInst, wchar_t * pArgs)
 {
 	InitaliseSystems(hInst, pArgs);
@@ -17,7 +22,7 @@ SystemManager::~SystemManager()
 
 bool SystemManager::SystemUpdate()
 {
-	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eSystemUpdate));
+	SMDSingleton::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eSystemUpdate));
 
 	if (_mainWindow != nullptr)
 		return _mainWindow->ProcessMessage();

@@ -1,6 +1,7 @@
 #include "CppUnitTest.h"
 
 #include "../Engine/GameObject.h"
+#include "../Engine/ComponentFactory.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

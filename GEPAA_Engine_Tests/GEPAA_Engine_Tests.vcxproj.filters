@@ -13,6 +13,12 @@
     <Filter Include="GameObjectTests">
       <UniqueIdentifier>{5b950b75-0597-4281-a421-4bb9c32aaef2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MessagingTests">
+      <UniqueIdentifier>{e916b4f1-e469-45bb-a1a4-f16269df86b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemTests\Engine">
+      <UniqueIdentifier>{a01191b9-eee7-4924-be97-ec432502dce4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine\ComponentBuilder.cpp">
@@ -59,6 +65,12 @@
     </ClCompile>
     <ClCompile Include="GameObjectTests.cpp">
       <Filter>GameObjectTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MessagingTests.cpp">
+      <Filter>MessagingTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineTests.cpp">
+      <Filter>SystemTests\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

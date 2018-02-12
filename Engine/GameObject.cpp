@@ -1,5 +1,7 @@
 #include "GameObject.h"
 
+#include "TransformComponent.h"
+
 GameObject::GameObject(string tag, GUID id) : _tag(tag), _ID(id)
 {
 	_parent = nullptr;
