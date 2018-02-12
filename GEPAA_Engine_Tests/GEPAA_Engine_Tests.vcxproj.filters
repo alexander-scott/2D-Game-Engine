@@ -10,6 +10,9 @@
     <Filter Include="Source">
       <UniqueIdentifier>{6c8cbbe5-799d-4751-b065-08f08354ad33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjectTests">
+      <UniqueIdentifier>{5b950b75-0597-4281-a421-4bb9c32aaef2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine\ComponentBuilder.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="SceneBuilderTests.cpp">
       <Filter>SystemTests\SceneBuilder</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectTests.cpp">
+      <Filter>GameObjectTests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

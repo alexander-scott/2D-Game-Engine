@@ -47,7 +47,7 @@ namespace GEPAA_Engine_Tests
 			// Test GameObject name is correct
 			Assert::AreEqual(scene->GetGameObjectAtIndex(0)->GetTag(), std::string("TestGameObject"));
 
-			// Test Component has been build and added to GameObject
+			// Test Component has been built and added to GameObject
 			Assert::AreEqual(scene->GetGameObjectAtIndex(0)->GetAllComponents().size(), (size_t)1);
 		}
 	};

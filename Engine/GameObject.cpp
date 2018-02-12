@@ -9,8 +9,11 @@ GameObject::~GameObject()
 {
 	for (auto component : _components)
 	{
-		delete component;
-		component = nullptr;
+		if (component != nullptr)
+		{
+			delete component;
+			component = nullptr;
+		}
 	}
 }
 
@@ -54,7 +57,7 @@ void GameObject::SetParent(shared_ptr<GameObject> parent)
 	if (_parent != nullptr)
 	{
 		// Remove THIS GAMEOBJECT as a child from the previous parent
-		_parent->RemoveChild(shared_ptr<GameObject>(this));
+		_parent->RemoveChild(GetSmartPointer());
 	}
 
 	_parent = parent; // Set the new parent for THIS GAMEOBJECT
@@ -74,7 +77,7 @@ void GameObject::SetParent(shared_ptr<GameObject> parent)
 
 	if (_parent != nullptr)
 	{
-		_parent->AddChild(shared_ptr<GameObject>(this)); // Set THIS GAMEOBJECT as a child for the new parent
+		_parent->AddChild(GetSmartPointer()); // Set THIS GAMEOBJECT as a child for the new parent
 	}
 }
 

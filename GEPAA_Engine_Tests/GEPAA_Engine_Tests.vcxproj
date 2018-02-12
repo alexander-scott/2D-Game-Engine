@@ -172,6 +172,7 @@
     <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp" />
     <ClCompile Include="..\Engine\TestGraphics.cpp" />
     <ClCompile Include="..\Engine\TransformComponent.cpp" />
+    <ClCompile Include="GameObjectTests.cpp" />
     <ClCompile Include="SceneBuilderTests.cpp" />
   </ItemGroup>
   <ItemGroup>

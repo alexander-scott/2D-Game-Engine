@@ -13,7 +13,7 @@
 
 using namespace std;
 
-class GameObject
+class GameObject : public std::enable_shared_from_this<GameObject>
 {
 public:
 	GameObject(string tag, GUID id);
@@ -87,6 +87,11 @@ public:
 				return;
 			}
 		}
+	}
+
+	std::shared_ptr<GameObject> GetSmartPointer()
+	{
+		return shared_from_this();
 	}
 
 	static shared_ptr<GameObject> MakeGameObject(string tag, GUID ID);
