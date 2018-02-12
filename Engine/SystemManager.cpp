@@ -1,5 +1,12 @@
 #include "SystemManager.h"
 
+SystemManager::SystemManager(HINSTANCE hInst, wchar_t * pArgs)
+{
+	InitaliseSystems(hInst, pArgs);
+	InitaliseListeners();
+	SystemsInitalised();
+}
+
 SystemManager::~SystemManager()
 {
 	for (auto s : _systems)
@@ -8,20 +15,17 @@ SystemManager::~SystemManager()
 	}
 }
 
-void SystemManager::InitaliseMainWindow(HINSTANCE hInst, wchar_t * pArgs)
-{
-	_mainWindow = make_shared<MainWindow>(hInst, pArgs);
-	_systems.insert(std::make_pair(_mainWindow->SysType, _mainWindow));
-}
-
 bool SystemManager::UpdateMainWindow()
 {
 	return _mainWindow->ProcessMessage();
 }
 
-void SystemManager::InitaliseSystems()
+void SystemManager::InitaliseSystems(HINSTANCE hInst, wchar_t * pArgs)
 {
 	// Initalise systems
+	_mainWindow = make_shared<MainWindow>(hInst, pArgs);
+	_systems.insert(std::make_pair(_mainWindow->SysType, _mainWindow));
+
 	auto sceneBuilder = make_shared<SceneBuilder>();
 	_systems.insert(std::make_pair(sceneBuilder->SysType, sceneBuilder));
 
@@ -31,8 +35,28 @@ void SystemManager::InitaliseSystems()
 	auto graphics = make_shared<TestGraphics>(); // Create a test graphics instance for now
 	_systems.insert(std::make_pair(graphics->SysType, graphics));
 
-	auto engine = make_shared<Engine>(); // Create engine last
+	auto engine = make_shared<Engine>();
 	_systems.insert(std::make_pair(engine->SysType, engine));
+}
+
+void SystemManager::InitaliseListeners()
+{
+	map<SystemType, std::shared_ptr<ISystem>>::iterator system;
+
+	for (system = _systems.begin(); system != _systems.end(); system++)
+	{
+		system->second->InitaliseListeners();
+	}
+}
+
+void SystemManager::SystemsInitalised()
+{
+	map<SystemType, std::shared_ptr<ISystem>>::iterator system;
+
+	for (system = _systems.begin(); system != _systems.end(); system++)
+	{
+		system->second->SystemsInitalised();
+	}
 }
 
 std::shared_ptr<ISystem> SystemManager::GetSystem(SystemType type)

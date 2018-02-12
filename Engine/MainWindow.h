@@ -37,7 +37,8 @@ public:
 	MainWindow& operator=(const MainWindow&) = delete;
 	~MainWindow();
 
-	virtual void RecieveMessage(ISystemMessage& message) override;
+	void InitaliseListeners() override;
+	void RecieveMessage(ISystemMessage& message) override;
 
 	bool IsActive() const;
 	bool IsMinimized() const;

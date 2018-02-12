@@ -17,6 +17,7 @@ class SceneBuilder : public ISystem
 public:
 	SceneBuilder(); 
 
+	void InitaliseListeners() override;
 	void RecieveMessage(ISystemMessage& message) override;
 
 private:

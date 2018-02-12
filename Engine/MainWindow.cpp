@@ -71,6 +71,11 @@ MainWindow::~MainWindow()
 	UnregisterClass(wndClassName, hInst);
 }
 
+void MainWindow::InitaliseListeners()
+{
+	SubscribeToMessageType(eGraphicsRequestInitalise);
+}
+
 void MainWindow::RecieveMessage(ISystemMessage & message)
 {
 	if (message.Type == SystemMessageType::eGraphicsRequestInitalise)
@@ -158,7 +163,7 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	// ************ KEYBOARD MESSAGES ************ //
 	case WM_KEYDOWN:
 	{
-		if (!(lParam & 0x40000000) || KEY_PRESS_AUTOREPEAT)
+		if (!(lParam & 0x40000000) || KEY_PRESS_AUTOREPEAT) // Prevents this being called multiple times when held down
 		{
 			InputKeyboardMessage message(KeyboardMessageType::eKeyDown, static_cast<unsigned char>(wParam));
 			SystemMessageDispatcher::Instance().SendMessageToListeners(message);

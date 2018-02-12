@@ -3,7 +3,9 @@
 #include "BuildSceneMessage.h"
 #include "RequestBuildSceneMessage.h"
 
-SceneBuilder::SceneBuilder() : ISystem(SystemType::eSceneBuilder)
+SceneBuilder::SceneBuilder() : ISystem(SystemType::eSceneBuilder) { }
+
+void SceneBuilder::InitaliseListeners()
 {
 	SubscribeToMessageType(SystemMessageType::eRequestBuildSceneMessage);
 }

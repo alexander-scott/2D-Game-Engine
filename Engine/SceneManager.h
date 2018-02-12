@@ -10,11 +10,13 @@
 class SceneManager : public ISystem
 {
 public:
-	SceneManager() : ISystem(SystemType::eSceneManager) 
-	{ 
-		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eBuildSceneMessage);
-		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eDrawScene);
-		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eUpdateScene);
+	SceneManager() : ISystem(SystemType::eSceneManager) { }
+
+	void InitaliseListeners() override
+	{
+		SubscribeToMessageType(SystemMessageType::eBuildSceneMessage);
+		SubscribeToMessageType(SystemMessageType::eDrawScene);
+		SubscribeToMessageType(SystemMessageType::eUpdateScene);
 	}
 
 	void RecieveMessage(ISystemMessage& message) override

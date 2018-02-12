@@ -6,13 +6,8 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 {
 	try
 	{
-		SystemManager manager;
-
-		// Initalise main window before anything else as it's special
-		manager.InitaliseMainWindow(hInst, pArgs);
-
-		// Initalise all other systems
-		manager.InitaliseSystems();
+		// Initalise systems
+		SystemManager manager(hInst, pArgs);
 
 		// Update the window until the user presses esc or closes the window
 		do { } while (manager.UpdateMainWindow()); 

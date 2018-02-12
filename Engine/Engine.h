@@ -17,12 +17,13 @@ public:
 	Engine& operator=(const Engine&) = delete;
 
 	void RecieveMessage(ISystemMessage& message) override;
+	void InitaliseListeners() override;
+	void SystemsInitalised() override;
 
 	~Engine();
 
 private:
-	void EngineUpdateLoop();
-	void InitaliseEngine();
+	void UpdateEngine();
 
 	std::chrono::steady_clock::time_point	_lastTime;
 	float									_lag;

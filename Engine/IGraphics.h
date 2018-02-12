@@ -29,16 +29,18 @@ public:
 			HRESULT hr;
 	};
 
-	IGraphics() : ISystem(SystemType::eGraphics) 
-	{ 
-		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eGraphicsInitalise);
-		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eGraphicsStartFrame);
-		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eGraphicsEndFrame);
-		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eGraphicsDrawSprite);
-		SystemMessageDispatcher::Instance().AddListener(this, SystemMessageType::eGraphicsDrawText);
+	IGraphics() : ISystem(SystemType::eGraphics) { }
+
+	void InitaliseListeners() override
+	{
+		SubscribeToMessageType(SystemMessageType::eGraphicsInitalise);
+		SubscribeToMessageType(SystemMessageType::eGraphicsStartFrame);
+		SubscribeToMessageType(SystemMessageType::eGraphicsEndFrame);
+		SubscribeToMessageType(SystemMessageType::eGraphicsDrawSprite);
+		SubscribeToMessageType(SystemMessageType::eGraphicsDrawText);
 	}
 
-	virtual void RecieveMessage(ISystemMessage& message) override
+	void RecieveMessage(ISystemMessage& message) override
 	{
 		switch (message.Type)
 		{
