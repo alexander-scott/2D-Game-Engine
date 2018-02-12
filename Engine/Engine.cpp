@@ -66,9 +66,6 @@ void Engine::InitaliseListeners()
 
 void Engine::SystemsInitalised()
 {
-	// Request graphics initalised
-	SystemMessageDispatcher::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsRequestInitalise));
-
 	// Request a new scene be built by the SceneBuilder system
 	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
 	SystemMessageDispatcher::Instance().SendMessageToListeners(message);

@@ -39,7 +39,6 @@ enum SystemMessageType
 	eBuildSceneMessage,
 
 	// Graphics messages
-	eGraphicsRequestInitalise,
 	eGraphicsInitalise,
 	eGraphicsDestroy,
 	eGraphicsStartFrame,

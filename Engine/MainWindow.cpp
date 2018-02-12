@@ -73,16 +73,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::InitaliseListeners()
 {
-	SubscribeToMessageType(eGraphicsRequestInitalise);
+	// Not listening to any messages
 }
 
 void MainWindow::RecieveMessage(ISystemMessage & message)
 {
-	if (message.Type == SystemMessageType::eGraphicsRequestInitalise)
-	{
-		// Initalise Graphics system
-		SystemMessageDispatcher::Instance().SendMessageToListeners(InitaliseGraphicsMessage(*this));
-	}
+	// No messages to recieve
+}
+
+void MainWindow::SystemsInitalised()
+{
+	// Initalise Graphics system
+	SystemMessageDispatcher::Instance().SendMessageToListeners(InitaliseGraphicsMessage(*this));
 }
 
 bool MainWindow::IsActive() const

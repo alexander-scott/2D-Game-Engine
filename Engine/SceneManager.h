@@ -32,12 +32,18 @@ public:
 
 			case SystemMessageType::eDrawScene: // Recieved from engine
 			{
+				if (_currentScene == nullptr)
+					throw std::exception("CURRENT SCENE NOT INITALISED");
+
 				_currentScene->Draw();
 				break;
 			}
 
 			case SystemMessageType::eUpdateScene: // Recieved from engine
 			{
+				if (_currentScene == nullptr)
+					throw std::exception("CURRENT SCENE NOT INITALISED");
+
 				_currentScene->Update(_frameTimer.Mark());
 				break;
 			}

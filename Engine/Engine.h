@@ -1,7 +1,6 @@
 #pragma once
 
 #include <chrono>
-
 #include "SystemMessageDispatcher.h"
 
 #include "ISystem.h"
@@ -25,6 +24,6 @@ public:
 private:
 	void UpdateEngine();
 
-	std::chrono::steady_clock::time_point	_lastTime;
 	float									_lag;
+	std::chrono::steady_clock::time_point	_lastTime;
 };

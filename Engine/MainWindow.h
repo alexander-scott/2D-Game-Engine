@@ -39,6 +39,7 @@ public:
 
 	void InitaliseListeners() override;
 	void RecieveMessage(ISystemMessage& message) override;
+	void SystemsInitalised() override;
 
 	bool IsActive() const;
 	bool IsMinimized() const;
