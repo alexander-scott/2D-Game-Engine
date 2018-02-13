@@ -3,13 +3,12 @@
 #include "IScene.h"
 
 #include "ISystem.h"
-#include "SystemMessageMessenger.h"
 
 #include "rapidxml.hpp"
 
 using namespace rapidxml;
 
-class SceneBuilder : public ISystem, public SystemMessageMessenger
+class SceneBuilder : public ISystem
 {
 public:
 	SceneBuilder(std::shared_ptr<SystemMessageDispatcher> dispatcher);

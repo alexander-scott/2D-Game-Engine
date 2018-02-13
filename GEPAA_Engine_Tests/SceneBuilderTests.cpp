@@ -10,6 +10,8 @@ namespace GEPAA_Engine_Tests
 	class SceneBuilderFixture : public SceneBuilder
 	{
 	public:
+		SceneBuilderFixture(shared_ptr<SystemMessageDispatcher> dispatcher) : SceneBuilder(dispatcher) { }
+
 		shared_ptr<IScene> TestBuildScene(std::string path)
 		{
 			return BuildScene(path);
@@ -22,7 +24,9 @@ namespace GEPAA_Engine_Tests
 
 		TEST_METHOD(SceneBuilderBuildScene)
 		{
-			SceneBuilderFixture sceneBuilder; // Remove hardcoded path
+			auto dispatcher = make_shared<SystemMessageDispatcher>();
+
+			SceneBuilderFixture sceneBuilder(dispatcher); // Remove hardcoded path
 			auto scene = sceneBuilder.TestBuildScene("C:\\Users\\Alex\\Dropbox\\University Year 4\\GAME ENGINE PROGRAMMING AND ARCHITECTURE\\Semester 2\\gepaa-group-1\\GEPAA_Engine_Tests\\TestResources\\TestScene.xml");
 		
 			// Test scene is not null and scene name is correct

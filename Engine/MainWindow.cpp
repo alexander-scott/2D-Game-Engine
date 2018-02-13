@@ -12,8 +12,7 @@ MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs, std::shared_ptr<SystemM
 	:
 	args(pArgs),
 	hInst(hInst),
-	ISystem(SystemType::eMainWindow, dispatcher),
-	SystemMessageMessenger(dispatcher)
+	ISystem(SystemType::eMainWindow, dispatcher)
 {
 	// register window class
 	WNDCLASSEX wc = { sizeof(WNDCLASSEX),CS_CLASSDC,_HandleMsgSetup,0,0,
@@ -50,8 +49,7 @@ MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs, std::shared_ptr<SystemM
 
 // Constructor that uses an already created window as the panel to render to
 MainWindow::MainWindow(HWND hwnd, std::shared_ptr<SystemMessageDispatcher> dispatcher)
-	: ISystem(SystemType::eMainWindow, dispatcher),
-	SystemMessageMessenger(dispatcher)
+	: ISystem(SystemType::eMainWindow, dispatcher)
 {
 	// create window & get hWnd
 	hWnd = hwnd;

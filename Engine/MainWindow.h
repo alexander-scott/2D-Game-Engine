@@ -5,7 +5,6 @@
 #include <Dbt.h>
 
 #include "ISystem.h"
-#include "SystemMessageMessenger.h"
 
 #include "Consts.h"
 
@@ -19,7 +18,7 @@ public:
 	HWND hWnd = nullptr;
 };
 
-class MainWindow : public HWNDKey, public ISystem, public SystemMessageMessenger
+class MainWindow : public HWNDKey, public ISystem
 {
 public:
 	class Exception : public CustomException

@@ -1,7 +1,5 @@
 #include "CppUnitTest.h"
 
-#include "../Engine/SystemMessageDispatcher.h"
-
 #include "../Engine/SceneManager.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -11,6 +9,8 @@ namespace GEPAA_Engine_Tests
 	class SceneManagerFixture : public SceneManager
 	{
 	public:
+		SceneManagerFixture(shared_ptr<SystemMessageDispatcher> dispatcher) : SceneManager(dispatcher) { }
+
 		void RecieveMessage(ISystemMessage& message) override
 		{
 			if (message.Type == SystemMessageType::eDrawScene)
@@ -26,15 +26,15 @@ namespace GEPAA_Engine_Tests
 	{
 		TEST_METHOD(MessageSend)
 		{
-			SystemMessageDispatcher systemMessageDispatcher;
+			auto dispatcher = make_shared<SystemMessageDispatcher>();
 
-			auto sceneManager = make_unique<SceneManagerFixture>();
+			auto sceneManager = make_unique<SceneManagerFixture>(dispatcher);
 
 			// Add listener
-			systemMessageDispatcher.AddListener(sceneManager._Myptr(), SystemMessageType::eDrawScene);
+			dispatcher->AddListener(sceneManager._Myptr(), SystemMessageType::eDrawScene);
 
 			// Send message
-			systemMessageDispatcher.SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene));
+			dispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene));
 		
 			// Test the system recieved the correct message type
 			Assert::IsTrue(sceneManager->RecievedMessage);

@@ -8,7 +8,7 @@
 #include <fstream>
 
 SceneBuilder::SceneBuilder(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
-	: ISystem(SystemType::eSceneBuilder, dispatcher), SystemMessageMessenger(dispatcher) { }
+	: ISystem(SystemType::eSceneBuilder, dispatcher){ }
 
 void SceneBuilder::InitaliseListeners()
 {

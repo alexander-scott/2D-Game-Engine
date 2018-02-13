@@ -32,7 +32,7 @@ bool SystemManager::SystemUpdate()
 		return true;
 }
 
-// Create an instance of every system. Can be initalised in any order.
+// Create an instance of every system. Can be initalised in any order. Inject instance of message dispatcher.
 void SystemManager::InitaliseSystems(HINSTANCE hInst, wchar_t * pArgs)
 {
 	// Initalise MainWindow system

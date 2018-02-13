@@ -5,7 +5,7 @@
 
 // Constructor that uses width and height from Consts.h
 Engine::Engine(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
-	: ISystem(SystemType::eEngine, dispatcher), SystemMessageMessenger(dispatcher)
+	: ISystem(SystemType::eEngine, dispatcher)
 {
 	_lastTime = std::chrono::steady_clock::now();
 	_lag = 0;
@@ -13,7 +13,7 @@ Engine::Engine(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 
 // Constructor that uses width and height that are passed in from MainWindow.h
 Engine::Engine(int width, int height, std::shared_ptr<SystemMessageDispatcher> dispatcher) 
-	: ISystem(SystemType::eEngine, dispatcher), SystemMessageMessenger(dispatcher)
+	: ISystem(SystemType::eEngine, dispatcher)
 {
 	_lastTime = std::chrono::steady_clock::now();
 	_lag = 0;

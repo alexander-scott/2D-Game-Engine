@@ -3,11 +3,10 @@
 #include <chrono>
 
 #include "ISystem.h"
-#include "SystemMessageMessenger.h"
 
 using namespace std;
 
-class Engine : public ISystem, public SystemMessageMessenger
+class Engine : public ISystem
 {
 public:
 	Engine(std::shared_ptr<SystemMessageDispatcher> dispatcher);
