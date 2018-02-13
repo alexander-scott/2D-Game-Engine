@@ -133,12 +133,6 @@
     <ClInclude Include="InitaliseGraphicsMessage.h">
       <Filter>Engine\Messaging\Messages\GraphicsSystemMessages</Filter>
     </ClInclude>
-    <ClInclude Include="DrawSpriteMessage.h">
-      <Filter>Engine\Messaging\Messages\GraphicsSystemMessages</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawTextMessage.h">
-      <Filter>Engine\Messaging\Messages\GraphicsSystemMessages</Filter>
-    </ClInclude>
     <ClInclude Include="IScene.h">
       <Filter>Engine\Systems\SceneManagement</Filter>
     </ClInclude>
@@ -204,6 +198,9 @@
     </ClInclude>
     <ClInclude Include="ISystem.h">
       <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawSceneMessage.h">
+      <Filter>Engine\Messaging\Messages\GraphicsSystemMessages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

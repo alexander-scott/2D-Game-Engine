@@ -6,6 +6,7 @@
 
 #include "ISystem.h"
 #include "BuildSceneMessage.h"
+#include "DrawSceneMessage.h"
 
 class SceneManager : public ISystem
 {
@@ -36,7 +37,9 @@ public:
 				if (_currentScene == nullptr)
 					throw std::exception("CURRENT SCENE NOT INITALISED");
 
-				_currentScene->Draw();
+				DrawSceneMessage message; // Initalise the draw scene message
+				_currentScene->Draw(message); // Populate it from the scene
+				SendMessageToDispatcher(message); // Send it to the Graphics system
 				break;
 			}
 

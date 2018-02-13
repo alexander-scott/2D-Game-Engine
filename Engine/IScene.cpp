@@ -2,7 +2,7 @@
 
 IScene::IScene(std::string sceneName) : _sceneName(sceneName) { }
 
-void IScene::Draw()
+void IScene::Draw(DrawSceneMessage& message)
 {
 	map<int, vector<shared_ptr<GameObject>>>::iterator renderLayer;
 
@@ -11,7 +11,7 @@ void IScene::Draw()
 	{
 		for (int i = 0; i < renderLayer->second.size(); i++)
 		{
-			renderLayer->second[i]->Draw();
+			renderLayer->second[i]->Draw(message);
 		}
 	}
 }

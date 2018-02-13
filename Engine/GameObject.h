@@ -7,6 +7,8 @@
 #include "IDrawableComponent.h"
 #include "IMessageableComponent.h"
 
+#include "DrawSceneMessage.h"
+
 #include <objbase.h>
 
 using namespace std;
@@ -17,7 +19,7 @@ public:
 	GameObject(string tag, GUID id);
 	~GameObject();
 
-	virtual void Draw();
+	virtual void Draw(DrawSceneMessage& message);
 	virtual void Update(float deltaTime);
 
 	void AddComponent(IComponent* component);

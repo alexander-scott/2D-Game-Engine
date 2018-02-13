@@ -17,7 +17,7 @@ public:
 		}
 	}
 
-	virtual void Draw();
+	virtual void Draw(DrawSceneMessage& message);
 	virtual void Update(float deltaTime);
 
 	std::string GetSceneName() { return _sceneName; }

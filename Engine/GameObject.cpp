@@ -103,7 +103,7 @@ shared_ptr<GameObject> GameObject::MakeGameObject(string tag)
 	return make_shared<GameObject>(tag, gidReference);
 }
 
-void GameObject::Draw()
+void GameObject::Draw(DrawSceneMessage& message)
 {
 	for (auto component : _components)
 	{
@@ -115,7 +115,7 @@ void GameObject::Draw()
 			if (drawableComponent != nullptr)
 			{
 				// Is drawable
-				drawableComponent->Draw();
+				drawableComponent->Draw(message);
 			}
 		}
 	}

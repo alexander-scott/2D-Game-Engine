@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "Math.h"
+#include "WinDefines.h"
 
 #pragma region Values
 
@@ -45,6 +46,7 @@ enum SystemMessageType
 	eGraphicsEndFrame,
 	eGraphicsDrawSprite,
 	eGraphicsDrawText,
+	eGraphicsDrawScene,
 
 	// Input messages
 	eInputKeyboardMessage,
@@ -82,6 +84,31 @@ enum MouseMessageType
 	eLeftMouseReleased,
 	eRightMouseClicked,
 	eRightMouseReleased
+};
+
+#pragma endregion
+
+#pragma region Structs
+
+struct SpriteData
+{
+public:
+	std::string		Name;
+	Vec2			Pos;
+	RECT*			Rect;
+	float			Rot;
+	float			Scale;
+	Vec2			Offset;
+};
+
+struct TextData
+{
+	std::string		Text;
+	Vec2			Pos;
+	float			Rot;
+	float*			RgbColours;
+	float			Scale;
+	Vec2			Offset;
 };
 
 #pragma endregion

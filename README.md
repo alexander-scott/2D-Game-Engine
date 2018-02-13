@@ -97,9 +97,17 @@ The Graphics system can be extended to implement different graphics APIs such as
 APIs would need to inherit from IGraphics and implement all the required virtual functions. And in SystemsManager
 the Graphics system instance would be created from this new API such as DX11Graphics.
 
-The drawing functionality is currently incomplete. There is nothing calling the DrawSprite or DrawText functions
-within IGraphics (or any implementation of it). The way this needs to be achieved is by creating a drawing
-GameObject component, such as SpriteRendererComponent. This component would inherit IDrawableComponent and override
-the Draw virtual function. Inside this function the component would send a DrawSpriteMessage containing
-all the required drawing information to the SMDSingleton. The Graphics system would need to be extended 
-to recieve this message and then add the sprite to the graphic API's draw list (sprite batch in DX11).
+The way the Graphics system gets drawing data from the current scene is through a message sent to it
+from the SceneManager system: DrawSceneMessage. This message contains two vectors of two structs
+which represent the sprites to be drawn in the scene and the text to be draw in the scene. In the Draw()
+function in SceneManager the scene is asked to populate the DrawSceneMessage with drawing information and then
+the system sends that to the Graphics system, full of drawing information.
+
+However there is currently nothing adding to this message when it passed around the scene. To fix this a drawing
+GameObject component, such as SpriteRendererComponent needs to be created. This component would inherit 
+IDrawableComponent and override the Draw virtual function. Inside this function the component would add
+its drawing data to the message that is passed to the Draw function. This way the data will be sent to 
+the Graphics system to be drawn.
+
+The Graphics system would need to be extended to recieve this message and then add the sprite to the 
+graphic API's draw list (sprite batch in DX11). This would be done in the DrawSprite() and DrawText2D() functions.

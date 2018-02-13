@@ -265,8 +265,7 @@
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="CustomException.h" />
-    <ClInclude Include="DrawSpriteMessage.h" />
-    <ClInclude Include="DrawTextMessage.h" />
+    <ClInclude Include="DrawSceneMessage.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="GameObject.h" />

@@ -1,14 +1,12 @@
 #pragma once
 
 #include "CustomException.h"
-#include "WinDefines.h"
 #include "Consts.h"
 
 #include "ISystem.h"
 
 #include "InitaliseGraphicsMessage.h"
-#include "DrawSpriteMessage.h"
-#include "DrawTextMessage.h"
+#include "DrawSceneMessage.h"
 
 #include <wrl.h>
 
@@ -36,8 +34,7 @@ public:
 		SubscribeToMessageType(SystemMessageType::eGraphicsInitalise);
 		SubscribeToMessageType(SystemMessageType::eGraphicsStartFrame);
 		SubscribeToMessageType(SystemMessageType::eGraphicsEndFrame);
-		SubscribeToMessageType(SystemMessageType::eGraphicsDrawSprite);
-		SubscribeToMessageType(SystemMessageType::eGraphicsDrawText);
+		SubscribeToMessageType(SystemMessageType::eGraphicsDrawScene);
 	}
 
 	void RecieveMessage(ISystemMessage& message) override
@@ -69,16 +66,34 @@ public:
 				break;
 			}	
 
-			case SystemMessageType::eGraphicsDrawSprite:
+			case SystemMessageType::eGraphicsDrawScene:
 			{
-				DrawSpriteMessage & msg = static_cast<DrawSpriteMessage&>(message);
-				DrawSprite(msg.Name, msg.Pos, msg.Rect, msg.Rot, msg.Scale, msg.Offset);
-			}
+				DrawSceneMessage & msg = static_cast<DrawSceneMessage&>(message);
+				
+				// Draw all sprites
+				auto spritesToDraw = msg.GetSpriteData();
+				for (int i = 0; i < spritesToDraw.size(); i++)
+				{
+					DrawSprite(spritesToDraw[i].Name, 
+						spritesToDraw[i].Pos, 
+						spritesToDraw[i].Rect, 
+						spritesToDraw[i].Rot, 
+						spritesToDraw[i].Scale, 
+						spritesToDraw[i].Offset);
+				}
 
-			case SystemMessageType::eGraphicsDrawText:
-			{
-				DrawTextMessage & msg = static_cast<DrawTextMessage&>(message);
-				DrawText2D(msg.Text, msg.Pos, msg.Rot, msg.RgbColours, msg.Scale, msg.Offset);
+				// Draw all text
+				auto textToDraw = msg.GetTextData();
+				for (int i = 0; i < textToDraw.size(); i++)
+				{
+					DrawText2D(textToDraw[i].Text,
+						textToDraw[i].Pos,
+						textToDraw[i].Rot,
+						textToDraw[i].RgbColours,
+						textToDraw[i].Scale, 
+						textToDraw[i].Offset);
+				}
+				break;
 			}
 		}
 	}
