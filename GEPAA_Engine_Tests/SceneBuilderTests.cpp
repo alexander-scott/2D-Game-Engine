@@ -6,6 +6,22 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace GEPAA_Engine_Tests
 {		
+	// This is a workaround to return the current directory. 
+	// Normal method doesn't seem to work during tests.
+	// However this workaround will not work if unit tests aren't run on the same machine
+	// as they are built.
+	#define TEST_CASE_DIRECTORY GetDirectoryName(__FILE__)
+
+	string GetDirectoryName(string path) 
+	{
+		const size_t last_slash_idx = path.rfind('\\');
+		if (std::string::npos != last_slash_idx)
+		{
+			return path.substr(0, last_slash_idx + 1);
+		}
+		return "";
+	}
+
 	// Build an instance of the class that can access protected methods
 	class SceneBuilderFixture : public SceneBuilder
 	{
@@ -25,9 +41,9 @@ namespace GEPAA_Engine_Tests
 		TEST_METHOD(SceneBuilderBuildScene)
 		{
 			auto dispatcher = make_shared<SystemMessageDispatcher>();
-
-			SceneBuilderFixture sceneBuilder(dispatcher); // Remove hardcoded path
-			auto scene = sceneBuilder.TestBuildScene("C:\\Users\\Alex\\Dropbox\\University Year 4\\GAME ENGINE PROGRAMMING AND ARCHITECTURE\\Semester 2\\gepaa-group-1\\GEPAA_Engine_Tests\\TestResources\\TestScene.xml");
+			SceneBuilderFixture sceneBuilder(dispatcher);
+			auto scene = sceneBuilder.TestBuildScene(std::string(GetDirectoryName(TEST_CASE_DIRECTORY)) 
+				+ std::string("\\TestResources\\TestScene.xml"));
 		
 			// Test scene is not null and scene name is correct
 			Assert::AreEqual(scene->GetSceneName(), std::string("testscene"));

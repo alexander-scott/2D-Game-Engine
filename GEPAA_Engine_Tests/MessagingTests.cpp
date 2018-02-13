@@ -6,10 +6,10 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace GEPAA_Engine_Tests
 {
-	class SceneManagerFixture : public SceneManager
+	class SceneManagerFixtureMessaging : public SceneManager
 	{
 	public:
-		SceneManagerFixture(shared_ptr<SystemMessageDispatcher> dispatcher) : SceneManager(dispatcher) { }
+		SceneManagerFixtureMessaging(shared_ptr<SystemMessageDispatcher> dispatcher) : SceneManager(dispatcher) { }
 
 		void RecieveMessage(ISystemMessage& message) override
 		{
@@ -28,7 +28,7 @@ namespace GEPAA_Engine_Tests
 		{
 			auto dispatcher = make_shared<SystemMessageDispatcher>();
 
-			auto sceneManager = make_unique<SceneManagerFixture>(dispatcher);
+			auto sceneManager = make_unique<SceneManagerFixtureMessaging>(dispatcher);
 
 			// Add listener
 			dispatcher->AddListener(sceneManager._Myptr(), SystemMessageType::eDrawScene);
