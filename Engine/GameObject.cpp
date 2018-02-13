@@ -65,17 +65,9 @@ void GameObject::SetParent(shared_ptr<GameObject> parent)
 	_parent = parent; // Set the new parent for THIS GAMEOBJECT
 
 	// Set the parent transform in THIS GAMEOBJECT'S transform
-	for (auto component : _components)
-	{
-		// Cast component to TransformComponent
-		// TODO: Remove this. This is bad. GameObject should not know about TransformComponent
-		TransformComponent * transformComponent = dynamic_cast<TransformComponent *> (component);
-		if (transformComponent != nullptr)
-		{
-			transformComponent->SetParent(_parent->GetComponent<TransformComponent>());
-			break;
-		}
-	}
+	// TODO: Remove this. This is bad. GameObject should not know about TransformComponent
+	TransformComponent * transformComponent = GetComponent<TransformComponent>();
+	transformComponent->SetParent(_parent->GetComponent<TransformComponent>());
 
 	if (_parent != nullptr)
 	{

@@ -25,10 +25,10 @@ This includes things suchs as Graphics, Input, Networking, file I/O etc. Current
 few systems implemented, mainly to demonstrate their usage. To register a new system, make sure it 
 inherits ISystem and also make sure it is initalised in the SystemManager class. 
 
-Systems can communicate with other systems by sending messages through the SystemMessageDispatcher, a 
+Systems can communicate with other systems by sending messages through the SMDSingleton, a 
 singleton instance that has a job of delivering messages to the correct recipiants. To do this, 
-systems must subscribe to a certain message type (an enum) with the SystemMessageDispatcher. Once doing 
-this the SystemMessageDispatcher will deliver the messages to the system by calling the RecieveMessage() 
+systems must subscribe to a certain message type (an enum) with the SMDSingleton. Once doing 
+this the SMDSingleton will deliver the messages to the system by calling the RecieveMessage() 
 method in ISystem (which needs to be overriden). From here, the recieved message can be statically cast 
 to any other message type and data can be extracted from it.
 
@@ -51,15 +51,30 @@ ComponentFactory namespace that builds and returns an instance of the component.
 
 ## Code Flow ##
 The application is initalised in Main.cpp. Here an instance of SystemManager is created. The purpose
-of SystemManager is simply to initalise all other systems. First off the MainWindow is initalised, as
-this is a slightly special system that requires arguments generated from WinMain and for the instance
-to be updated regularly. Then all the other systems are initalised in the InitaliseSystems() function.
+of SystemManager is simply to initalise all other systems, which is done in the SystemManager constructor.
+All systems are created as shared_ptr's, then all their message listeners are initalised with the
+InitaliseListeners() function, then an optional function, SystemsInitalised(), is called on each 
+system after everything has been set up. 
 
-The Engine system is probably the highest level system. It controls when the Graphics system gets
-initalised, when the current active scene gets built and when to draw/update the scene.
+The Engine system is probably the highest level system. It's purpose is to oversee operations
+and provide a gateway to the rest of the engine. It's SystemsInitalised() function sends a message to
+the SceneBuilder system with a filePath detailing which scene it should build. It listens for the
+SystemUpdate message type, which is sent from the SystemManager class every iteration of the while loop
+keeping the program alive. Once the Engine system recieves this message it calls the UpdateEngine() 
+function which has a controlled update loop in it. This function sends out messages to other systems
+such as update scene, draw scene, prepare graphics frame, end graphics frame and in the future will
+have physics and input update messages. However because this is a controlled update loop, certain messages
+won't be sent out every time the function is called. Instead they will sent out at defined intervals, such
+as 60 times a second. 
+
+The MainWindow system deals with creating an application window and recieving application level messages,
+such as move mouse or key pressed. It's SystemsInitalised() function sends a message to the Graphics
+system with a reference to the HWND of the application window, which is used to initalise the Graphics. 
+It also sends regular messages input to the SMDSingleton, such as mouse move and keyboard key pressed, with
+the messages containg relevant data such as position of the mouse and what key was pressed.
 
 The Graphics system deals with what to draw each frame. It recieves start and end frame messages from
-the Engine system and in the future will recieve drawing data from IDrawable components.
+the Engine system and in the future will recieve drawing data from IDrawableComponent components.
 
 The SceneBuilder system deals with parsing scene XML files from disk and building a scene instance from it.
 
@@ -69,10 +84,10 @@ The SceneManagement system holds and stores the current scene and recieves draw/
 ### Input ###
 An Input system will need to be created in the future. This system will inherit from ISystem and will need to
 be added to the SystemManager initalisation function. Currently, the MainWindow system is sending input messages
-to the SystemMessageDispatcher when it recieves them from the windows application, such as key or mouse press. 
+to the SMDSingleton when it recieves them from the windows application, such as key or mouse press. 
 The Input system will need to subscribe to this message type and then perform logic based on what it recieves.
 The MainWindow system can also be improved to translate more message types and then also send those to the 
-SystemMessageDispatcher, such as Xbox conntroller inputs or distinction between input methods (to allow for multiplayer).
+SMDSingleton, such as Xbox conntroller inputs or distinction between input methods (to allow for multiplayer).
 
 ### Graphics ###
 The Graphics system can be extended to implement different graphics APIs such as DirectX or OpenGL. These new
@@ -83,5 +98,5 @@ The drawing functionality is currently incomplete. There is nothing calling the 
 within IGraphics (or any implementation of it). The way this needs to be achieved is by creating a drawing
 GameObject component, such as SpriteRendererComponent. This component would inherit IDrawableComponent and override
 the Draw virtual function. Inside this function the component would send a DrawSpriteMessage containing
-all the required drawing information. The Graphics system would need to be extended to recieve this message
-and then add the sprite to the graphic API's draw list (sprite batch in DX11).
+all the required drawing information to the SMDSingleton. The Graphics system would need to be extended 
+to recieve this message and then add the sprite to the graphic API's draw list (sprite batch in DX11).
