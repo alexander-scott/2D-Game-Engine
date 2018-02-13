@@ -5,7 +5,8 @@
 class TestGraphics : public IGraphics
 {
 public:
-	TestGraphics() : IGraphics() { }
+	TestGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
+		: IGraphics(dispatcher) { }
 
 protected:
 	virtual void Initalise(class HWNDKey& key) override;

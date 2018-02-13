@@ -205,9 +205,6 @@
     <ClInclude Include="ISystem.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="SMDSingleton.h">
-      <Filter>Engine\Messaging\SystemMessaging</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

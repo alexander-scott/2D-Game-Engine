@@ -3,17 +3,17 @@
 #include "CustomException.h"
 #include <assert.h>
 
-#include "SMDSingleton.h"
 #include "InitaliseGraphicsMessage.h"
 #include "InputKeyboardMessage.h"
 #include "InputMouseMessage.h"
 
 // Constructor that creates a window with screen width and height defined in Consts.h
-MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs)
+MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs, std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	:
 	args(pArgs),
 	hInst(hInst),
-	ISystem(SystemType::eMainWindow)
+	ISystem(SystemType::eMainWindow, dispatcher),
+	SystemMessageMessenger(dispatcher)
 {
 	// register window class
 	WNDCLASSEX wc = { sizeof(WNDCLASSEX),CS_CLASSDC,_HandleMsgSetup,0,0,
@@ -49,7 +49,9 @@ MainWindow::MainWindow(HINSTANCE hInst, wchar_t * pArgs)
 }
 
 // Constructor that uses an already created window as the panel to render to
-MainWindow::MainWindow(HWND hwnd) : ISystem(SystemType::eMainWindow)
+MainWindow::MainWindow(HWND hwnd, std::shared_ptr<SystemMessageDispatcher> dispatcher)
+	: ISystem(SystemType::eMainWindow, dispatcher),
+	SystemMessageMessenger(dispatcher)
 {
 	// create window & get hWnd
 	hWnd = hwnd;
@@ -85,7 +87,7 @@ void MainWindow::RecieveMessage(ISystemMessage & message)
 void MainWindow::SystemsInitalised()
 {
 	// Initalise Graphics system
-	SMDSingleton::Instance().SendMessageToListeners(InitaliseGraphicsMessage(*this));
+	SendMessageToDispatcher(InitaliseGraphicsMessage(*this));
 }
 
 bool MainWindow::IsActive() const
@@ -157,7 +159,7 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_KILLFOCUS:
 	{
 		ISystemMessage message(SystemMessageType::eWindowLostFocus);
-		SMDSingleton::Instance().SendMessageToListeners(message);
+		SendMessageToDispatcher(message);
 		break;
 	}
 
@@ -167,20 +169,20 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		if (!(lParam & 0x40000000) || KEY_PRESS_AUTOREPEAT) // Prevents this being called multiple times when held down
 		{
 			InputKeyboardMessage message(KeyboardMessageType::eKeyDown, static_cast<unsigned char>(wParam));
-			SMDSingleton::Instance().SendMessageToListeners(message);
+			SendMessageToDispatcher(message);
 		}
 		break;
 	}
 	case WM_KEYUP:
 	{
 		InputKeyboardMessage message(KeyboardMessageType::eKeyUp, static_cast<unsigned char>(wParam));
-		SMDSingleton::Instance().SendMessageToListeners(message);
+		SendMessageToDispatcher(message);
 		break;
 	}
 	case WM_CHAR:
 	{
 		InputKeyboardMessage message(KeyboardMessageType::eCharPressed, static_cast<unsigned char>(wParam));
-		SMDSingleton::Instance().SendMessageToListeners(message);
+		SendMessageToDispatcher(message);
 		break;
 	}
 	// ************ END KEYBOARD MESSAGES ************ //
@@ -190,35 +192,35 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		POINTS pt = MAKEPOINTS(lParam);
 		InputMouseMessage message(MouseMessageType::eMouseMoved, pt.x, pt.y);
-		SMDSingleton::Instance().SendMessageToListeners(message);
+		SendMessageToDispatcher(message);
 		break;
 	}
 	case WM_LBUTTONDOWN:
 	{
 		POINTS pt = MAKEPOINTS(lParam);
 		InputMouseMessage message(MouseMessageType::eLeftMouseClicked, pt.x, pt.y);
-		SMDSingleton::Instance().SendMessageToListeners(message);
+		SendMessageToDispatcher(message);
 		break;
 	}
 	case WM_RBUTTONDOWN:
 	{
 		POINTS pt = MAKEPOINTS(lParam);
 		InputMouseMessage message(MouseMessageType::eRightMouseClicked, pt.x, pt.y);
-		SMDSingleton::Instance().SendMessageToListeners(message);
+		SendMessageToDispatcher(message);
 		break;
 	}
 	case WM_LBUTTONUP:
 	{
 		POINTS pt = MAKEPOINTS(lParam);
 		InputMouseMessage message(MouseMessageType::eLeftMouseReleased, pt.x, pt.y);
-		SMDSingleton::Instance().SendMessageToListeners(message);
+		SendMessageToDispatcher(message);
 		break;
 	}
 	case WM_RBUTTONUP:
 	{
 		POINTS pt = MAKEPOINTS(lParam);
 		InputMouseMessage message(MouseMessageType::eRightMouseReleased, pt.x, pt.y);
-		SMDSingleton::Instance().SendMessageToListeners(message);
+		SendMessageToDispatcher(message);
 		break;
 	}
 	case WM_MOUSEWHEEL:

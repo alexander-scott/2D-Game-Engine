@@ -7,6 +7,8 @@
 
 SystemManager::SystemManager(HINSTANCE hInst, wchar_t * pArgs)
 {
+	_messageDispatcher = make_shared<SystemMessageDispatcher>();
+
 	InitaliseSystems(hInst, pArgs);
 	InitaliseListeners();
 	SystemsInitalised();
@@ -22,7 +24,7 @@ SystemManager::~SystemManager()
 
 bool SystemManager::SystemUpdate()
 {
-	SMDSingleton::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eSystemUpdate));
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eSystemUpdate));
 
 	if (_mainWindow != nullptr)
 		return _mainWindow->ProcessMessage();
@@ -30,25 +32,31 @@ bool SystemManager::SystemUpdate()
 		return true;
 }
 
+// Create an instance of every system. Can be initalised in any order.
 void SystemManager::InitaliseSystems(HINSTANCE hInst, wchar_t * pArgs)
 {
-	// Initalise systems
-	_mainWindow = make_shared<MainWindow>(hInst, pArgs);
+	// Initalise MainWindow system
+	_mainWindow = make_shared<MainWindow>(hInst, pArgs, _messageDispatcher);
 	_systems.insert(std::make_pair(_mainWindow->SysType, _mainWindow));
 
-	auto sceneBuilder = make_shared<SceneBuilder>();
+	// Initalise SceneBuilder system
+	auto sceneBuilder = make_shared<SceneBuilder>(_messageDispatcher);
 	_systems.insert(std::make_pair(sceneBuilder->SysType, sceneBuilder));
 
-	auto sceneManager = make_shared<SceneManager>();
+	// Initalise SceneManager system
+	auto sceneManager = make_shared<SceneManager>(_messageDispatcher);
 	_systems.insert(std::make_pair(sceneManager->SysType, sceneManager));
 
-	auto graphics = make_shared<TestGraphics>(); // Create a test graphics instance for now
+	// Initalise Graphics system
+	auto graphics = make_shared<TestGraphics>(_messageDispatcher); // Create a test graphics instance for now
 	_systems.insert(std::make_pair(graphics->SysType, graphics));
 
-	auto engine = make_shared<Engine>();
+	// Initalise Engine system
+	auto engine = make_shared<Engine>(_messageDispatcher);
 	_systems.insert(std::make_pair(engine->SysType, engine));
 }
 
+// If any of the systems are listening for message this function sets it up. Called after system initalisation.
 void SystemManager::InitaliseListeners()
 {
 	map<SystemType, std::shared_ptr<ISystem>>::iterator system;
@@ -59,6 +67,7 @@ void SystemManager::InitaliseListeners()
 	}
 }
 
+// This is a simple callback for each system after every system has been intialised with listeners
 void SystemManager::SystemsInitalised()
 {
 	map<SystemType, std::shared_ptr<ISystem>>::iterator system;

@@ -290,7 +290,6 @@
     <ClInclude Include="rapidxml_print.hpp" />
     <ClInclude Include="RequestBuildSceneMessage.h" />
     <ClInclude Include="SetParentTransformMessage.h" />
-    <ClInclude Include="SMDSingleton.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />
     <ClInclude Include="SystemMessageListener.h" />
     <ClInclude Include="SystemMessageMessenger.h" />

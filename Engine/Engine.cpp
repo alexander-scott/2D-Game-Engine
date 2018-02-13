@@ -1,18 +1,19 @@
 #include "Engine.h"
 
-#include "SMDSingleton.h"
 #include "BuildSceneMessage.h"
 #include "RequestBuildSceneMessage.h"
 
 // Constructor that uses width and height from Consts.h
-Engine::Engine() : ISystem(SystemType::eEngine)
+Engine::Engine(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
+	: ISystem(SystemType::eEngine, dispatcher), SystemMessageMessenger(dispatcher)
 {
 	_lastTime = std::chrono::steady_clock::now();
 	_lag = 0;
 }
 
 // Constructor that uses width and height that are passed in from MainWindow.h
-Engine::Engine(int width, int height) : ISystem(SystemType::eEngine)
+Engine::Engine(int width, int height, std::shared_ptr<SystemMessageDispatcher> dispatcher) 
+	: ISystem(SystemType::eEngine, dispatcher), SystemMessageMessenger(dispatcher)
 {
 	_lastTime = std::chrono::steady_clock::now();
 	_lag = 0;
@@ -37,19 +38,19 @@ void Engine::UpdateEngine()
 		// ProcessPhysics()
 		
 		// Update the current scene in the SceneManager system
-		SMDSingleton::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
+		SendMessageToDispatcher(ISystemMessage(SystemMessageType::eUpdateScene));
 
 		_lag -= MS_PER_UPDATE;
 	}
 
 	// Tell the Graphics system to begin the frame
-	SMDSingleton::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame));
+	SendMessageToDispatcher(ISystemMessage(SystemMessageType::eGraphicsStartFrame));
 
 	// Draw the current scene in the SceneManager system
-	SMDSingleton::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene));
+	SendMessageToDispatcher(ISystemMessage(SystemMessageType::eDrawScene));
 
 	// Tell the Graphics system to end the frame
-	SMDSingleton::Instance().SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame));
+	SendMessageToDispatcher(ISystemMessage(SystemMessageType::eGraphicsEndFrame));
 }
 
 void Engine::RecieveMessage(ISystemMessage& message)
@@ -69,5 +70,5 @@ void Engine::SystemsInitalised()
 {
 	// Request a new scene be built by the SceneBuilder system
 	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
-	SMDSingleton::Instance().SendMessageToListeners(message);
+	SendMessageToDispatcher(message);
 }

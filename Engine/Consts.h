@@ -68,11 +68,6 @@ enum ComponentMessageType
 	eTestMessage
 };
 
-enum MessengerType
-{
-	eTestMessenger,
-};
-
 enum KeyboardMessageType
 {
 	eKeyDown,

@@ -6,8 +6,6 @@
 class IMessenger
 {
 public:
-	IMessenger(MessengerType type) : Type(type) { }
-
 	void Subscribe(IListener* listener)
 	{
 		_listeners.push_back(listener);
@@ -18,15 +16,13 @@ public:
 		_listeners.erase(std::remove(_listeners.begin(), _listeners.end(), listener), _listeners.end());
 	}
 
-	void SendMessage(ISystemMessage& message)
+	void SendMessageToListeners(IMessage& message)
 	{
 		for (int i = 0; i < _listeners.size(); i++)
 		{
 			_listeners[i]->RecieveMessage(message);
 		}
 	}
-
-	MessengerType				Type;
 
 private:
 	std::vector<IListener*>		_listeners;

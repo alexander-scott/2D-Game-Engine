@@ -3,14 +3,15 @@
 #include <chrono>
 
 #include "ISystem.h"
+#include "SystemMessageMessenger.h"
 
 using namespace std;
 
-class Engine : public ISystem
+class Engine : public ISystem, public SystemMessageMessenger
 {
 public:
-	Engine();
-	Engine(int width, int height);
+	Engine(std::shared_ptr<SystemMessageDispatcher> dispatcher);
+	Engine(int width, int height, std::shared_ptr<SystemMessageDispatcher> dispatcher);
 	Engine(const Engine&) = delete;
 	Engine& operator=(const Engine&) = delete;
 

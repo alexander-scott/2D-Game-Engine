@@ -1,14 +1,20 @@
 #pragma once
 
 #include "IMessenger.h"
-#include "SMDSingleton.h"
+#include "SystemMessageDispatcher.h"
 
 // BROKEN
 class SystemMessageMessenger : public IMessenger
 {
 public:
-	//SystemMessageMessenger(MessengerType messengerType) : IMessenger(messengerType)
-	//{
-	//	//SMDSingleton::Instance().InitaliseMessenger(this);
-	//}
+	SystemMessageMessenger(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
+		: SMDispatcher(dispatcher) { }
+
+	void SendMessageToDispatcher(ISystemMessage& message)
+	{
+		SMDispatcher->SendMessageToListeners(message);
+	}
+
+private:
+	std::shared_ptr<SystemMessageDispatcher> SMDispatcher;
 };

@@ -20,6 +20,8 @@ private:
 	void InitaliseListeners();
 	void SystemsInitalised();
 
+	std::shared_ptr<SystemMessageDispatcher>			_messageDispatcher;
+
 	std::shared_ptr<MainWindow>							_mainWindow;
 	std::map<SystemType, std::shared_ptr<ISystem>>		_systems;
 };

@@ -10,7 +10,8 @@
 class SceneManager : public ISystem
 {
 public:
-	SceneManager() : ISystem(SystemType::eSceneManager) { }
+	SceneManager(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
+		: ISystem(SystemType::eSceneManager, dispatcher) { }
 
 	void InitaliseListeners() override
 	{

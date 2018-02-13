@@ -28,7 +28,8 @@ public:
 			HRESULT hr;
 	};
 
-	IGraphics() : ISystem(SystemType::eGraphics) { }
+	IGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
+		: ISystem(SystemType::eGraphics, dispatcher) { }
 
 	void InitaliseListeners() override
 	{

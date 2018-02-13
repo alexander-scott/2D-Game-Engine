@@ -7,7 +7,8 @@
 
 #include <fstream>
 
-SceneBuilder::SceneBuilder() : ISystem(SystemType::eSceneBuilder) { }
+SceneBuilder::SceneBuilder(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
+	: ISystem(SystemType::eSceneBuilder, dispatcher), SystemMessageMessenger(dispatcher) { }
 
 void SceneBuilder::InitaliseListeners()
 {
@@ -25,7 +26,7 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 
 		// Send built scene to SceneManager system
 		BuildSceneMessage sceneMsg(scene);
-		SMDSingleton::Instance().SendMessageToListeners(sceneMsg);
+		SendMessageToDispatcher(sceneMsg);
 	}
 }
 

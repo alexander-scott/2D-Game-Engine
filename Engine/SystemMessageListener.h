@@ -1,14 +1,17 @@
 #pragma once
 
 #include "IListener.h"
-#include "SMDSingleton.h"
+#include "SystemMessageDispatcher.h"
 
 class SystemMessageListener : public IListener
 {
 public:
+	SystemMessageListener(std::shared_ptr<SystemMessageDispatcher> dispatcher)
+		: SMDispatcher(dispatcher) { }
+
 	void SubscribeToMessageType(SystemMessageType messageType)
 	{
-		SMDSingleton::Instance().AddListener(this, messageType);
+		SMDispatcher->AddListener(this, messageType);
 	}
 
 	virtual void RecieveMessage(ISystemMessage& message) = 0;
@@ -17,4 +20,7 @@ public:
 	{
 		RecieveMessage(static_cast<ISystemMessage&>(message));
 	}
+
+private:
+	std::shared_ptr<SystemMessageDispatcher> SMDispatcher;
 };

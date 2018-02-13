@@ -5,6 +5,7 @@
 #include <Dbt.h>
 
 #include "ISystem.h"
+#include "SystemMessageMessenger.h"
 
 #include "Consts.h"
 
@@ -18,7 +19,7 @@ public:
 	HWND hWnd = nullptr;
 };
 
-class MainWindow : public HWNDKey, public ISystem
+class MainWindow : public HWNDKey, public ISystem, public SystemMessageMessenger
 {
 public:
 	class Exception : public CustomException
@@ -30,8 +31,8 @@ public:
 	};
 
 public:
-	MainWindow(HINSTANCE hInst, wchar_t * pArgs);
-	MainWindow(HWND hWnd);
+	MainWindow(HINSTANCE hInst, wchar_t * pArgs, std::shared_ptr<SystemMessageDispatcher> dispatcher);
+	MainWindow(HWND hWnd, std::shared_ptr<SystemMessageDispatcher> dispatcher);
 	MainWindow(const MainWindow&) = delete;
 	MainWindow& operator=(const MainWindow&) = delete;
 	~MainWindow();
