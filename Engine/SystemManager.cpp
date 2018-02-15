@@ -4,6 +4,7 @@
 #include "SceneBuilder.h"
 #include "SceneManager.h"
 #include "TestGraphics.h"
+#include "InputHandler.h"
 
 SystemManager::SystemManager(HINSTANCE hInst, wchar_t * pArgs)
 {
@@ -54,6 +55,10 @@ void SystemManager::InitaliseSystems(HINSTANCE hInst, wchar_t * pArgs)
 	// Initalise Engine system
 	auto engine = make_shared<Engine>(_messageDispatcher);
 	_systems.insert(std::make_pair(engine->SysType, engine));
+
+	// Initalise Input Handler System
+	auto inputHandler = make_shared<InputHandler>(_messageDispatcher);
+	_systems.insert(std::make_pair(inputHandler->SysType, inputHandler));
 }
 
 // If any of the systems are listening for message this function sets it up. Called after system initalisation.

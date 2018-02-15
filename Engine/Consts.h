@@ -26,7 +26,8 @@ enum SystemType
 	eEngine,
 	eSceneManager,
 	eSceneBuilder,
-	eGraphics
+	eGraphics,
+	eInputHandler
 };
 
 enum SystemMessageType

@@ -123,7 +123,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -164,6 +164,7 @@
     <ClCompile Include="..\Engine\Engine.cpp" />
     <ClCompile Include="..\Engine\FrameTimer.cpp" />
     <ClCompile Include="..\Engine\GameObject.cpp" />
+    <ClCompile Include="..\Engine\InputHandler.cpp" />
     <ClCompile Include="..\Engine\IScene.cpp" />
     <ClCompile Include="..\Engine\Main.cpp" />
     <ClCompile Include="..\Engine\MainWindow.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="..\Engine\IMessageableComponent.h" />
     <ClInclude Include="..\Engine\IMessenger.h" />
     <ClInclude Include="..\Engine\InitaliseGraphicsMessage.h" />
+    <ClInclude Include="..\Engine\InputHandler.h" />
     <ClInclude Include="..\Engine\InputKeyboardMessage.h" />
     <ClInclude Include="..\Engine\InputMouseMessage.h" />
     <ClInclude Include="..\Engine\IScene.h" />
