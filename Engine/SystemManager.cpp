@@ -11,7 +11,7 @@ SystemManager::SystemManager(HINSTANCE hInst, wchar_t * pArgs)
 
 	InitaliseSystems(hInst, pArgs);
 	InitaliseListeners();
-	SystemsInitalised();
+	SystemsInitalised();	
 }
 
 SystemManager::~SystemManager()

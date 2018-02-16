@@ -4,6 +4,7 @@
 
 void TestGraphics::Initalise(HWNDKey & key)
 {
+	//test Branch graphics
 }
 
 void TestGraphics::Destroy()
