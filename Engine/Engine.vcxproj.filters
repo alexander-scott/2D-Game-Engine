@@ -77,6 +77,9 @@
     <Filter Include="Engine\Systems\Engine">
       <UniqueIdentifier>{f5284d41-7fbd-45f4-acf9-6ae76f473b35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems\Logging">
+      <UniqueIdentifier>{33a719dd-cb4b-4db2-8859-c2ae1e259de3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -204,6 +207,9 @@
     </ClInclude>
     <ClInclude Include="ISystemToGameObjectMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Engine\Systems\Logging</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

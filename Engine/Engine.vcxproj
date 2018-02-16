@@ -285,6 +285,7 @@
     <ClInclude Include="ISystem.h" />
     <ClInclude Include="ISystemToGameObjectMessage.h" />
     <ClInclude Include="IUpdateableComponent.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="rapidxml_print.hpp" />
