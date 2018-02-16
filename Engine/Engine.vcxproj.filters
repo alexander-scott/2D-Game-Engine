@@ -202,6 +202,9 @@
     <ClInclude Include="DrawSceneMessage.h">
       <Filter>Engine\Messaging\Messages\GraphicsSystemMessages</Filter>
     </ClInclude>
+    <ClInclude Include="ISystemToGameObjectMessage.h">
+      <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -242,6 +245,9 @@
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Engine\Systems\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Engine\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

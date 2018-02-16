@@ -283,6 +283,7 @@
     <ClInclude Include="IMessenger.h" />
     <ClInclude Include="IScene.h" />
     <ClInclude Include="ISystem.h" />
+    <ClInclude Include="ISystemToGameObjectMessage.h" />
     <ClInclude Include="IUpdateableComponent.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="rapidxml.hpp" />
@@ -311,6 +312,7 @@
     <ClCompile Include="IScene.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SystemMessageDispatcher.cpp" />
     <ClCompile Include="SceneBuilder.cpp" />
     <ClCompile Include="SystemManager.cpp" />

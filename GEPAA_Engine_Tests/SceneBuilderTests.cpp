@@ -52,10 +52,10 @@ namespace GEPAA_Engine_Tests
 			Assert::AreEqual(scene->GetNumberOfGameObjects(), 1);
 
 			// Test GameObject name is correct
-			Assert::AreEqual(scene->GetGameObjectAtIndex(0)->GetTag(), std::string("TestGameObject"));
+			Assert::AreEqual(scene->GetGameObject(0)->GetTag(), std::string("TestGameObject"));
 
 			// Test Component has been built and added to GameObject
-			Assert::AreEqual(scene->GetGameObjectAtIndex(0)->GetAllComponents().size(), (size_t)1);
+			Assert::AreEqual(scene->GetGameObject(0)->GetAllComponents().size(), (size_t)1);
 		}
 	};
 }

@@ -111,3 +111,11 @@ the Graphics system to be drawn.
 
 The Graphics system would need to be extended to recieve this message and then add the sprite to the 
 graphic API's draw list (sprite batch in DX11). This would be done in the DrawSprite() and DrawText2D() functions.
+
+## Troubleshooting ##
+
+###Adding new file to project and referencing it in a test
+
+You will need to include the new file in the tests project under the source filter. The testing 
+framework needs a local copy of the file in order to perform the tests. To do this simply right
+click the source filter and add the existing item.

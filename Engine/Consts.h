@@ -34,6 +34,7 @@ enum SystemMessageType
 	// Scene messages
 	eDrawScene,
 	eUpdateScene,
+	eSendMessageToGameObjects,
 
 	// Scene build messages
 	eRequestBuildSceneMessage,
@@ -110,5 +111,15 @@ struct TextData
 	float			Scale;
 	Vec2			Offset;
 };
+
+#pragma endregion
+
+#pragma region Operators
+
+// This fixes an issue where you are unable to have a GUID as a key in a map
+inline bool operator<(const GUID & lhs, const GUID & rhs)
+{
+	return (memcmp(&lhs, &rhs, sizeof(GUID)) > 0 ? true : false);
+}
 
 #pragma endregion

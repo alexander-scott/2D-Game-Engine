@@ -168,6 +168,7 @@
     <ClCompile Include="..\Engine\Main.cpp" />
     <ClCompile Include="..\Engine\MainWindow.cpp" />
     <ClCompile Include="..\Engine\SceneBuilder.cpp" />
+    <ClCompile Include="..\Engine\SceneManager.cpp" />
     <ClCompile Include="..\Engine\SystemManager.cpp" />
     <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp" />
     <ClCompile Include="..\Engine\TestGraphics.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="..\Engine\IScene.h" />
     <ClInclude Include="..\Engine\ISystem.h" />
     <ClInclude Include="..\Engine\ISystemMessage.h" />
+    <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h" />
     <ClInclude Include="..\Engine\IUpdateableComponent.h" />
     <ClInclude Include="..\Engine\MainWindow.h" />
     <ClInclude Include="..\Engine\Math.h" />
