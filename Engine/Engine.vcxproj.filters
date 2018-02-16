@@ -205,6 +205,10 @@
     <ClInclude Include="InputHandler.h">
       <Filter>Engine\Systems\Input</Filter>
     </ClInclude>
+    <ClInclude Include="ICommand.h">
+      <Filter>Engine\Systems\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -249,6 +253,7 @@
     <ClCompile Include="InputHandler.cpp">
       <Filter>Engine\Systems\Input</Filter>
     </ClCompile>
+    <ClCompile Include="TestCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">

@@ -269,6 +269,7 @@
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="ICommand.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentMessage.h" />
     <ClInclude Include="IDrawableComponent.h" />
@@ -296,6 +297,7 @@
     <ClInclude Include="SceneBuilder.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SystemManager.h" />
+    <ClInclude Include="TestCommand.h" />
     <ClInclude Include="TestGraphics.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="WinDefines.h" />
@@ -316,6 +318,7 @@
     <ClCompile Include="SystemMessageDispatcher.cpp" />
     <ClCompile Include="SceneBuilder.cpp" />
     <ClCompile Include="SystemManager.cpp" />
+    <ClCompile Include="TestCommand.cpp" />
     <ClCompile Include="TestGraphics.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
   </ItemGroup>
