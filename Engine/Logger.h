@@ -2,57 +2,66 @@
 
 #include "spdlog/spdlog.h"
 
-#include "Consts.h"
+enum LogSeverity
+{
+	eTrace,
+	eDebug,
+	eInfo,
+	eWarning,
+	eError,
+	eCritical 
+};
 
 class Logger
 {
 public:
 	const std::string filePath = "logs/LogFile.txt"; // Should this be in consts.h?
 
-	void LogMessage(std::string message)
+	Logger()
 	{
-		spdlog::basic_logger_mt("UNDEFINED_SYSTEM", filePath)->info(message);
+		_logger = spdlog::basic_logger_mt("GEPAA", filePath);
 	}
 
-	void LogMessage(std::string message, std::string systemName)
-	{
-		spdlog::basic_logger_mt(systemName, filePath)->error(message);
-	}
-
-	void LogMessage(std::string message, std::string systemName, LogSeverity logSeverity)
+	void LogMessage(std::string msg, LogSeverity logSeverity)
 	{
 		switch (logSeverity)
 		{
 			case LogSeverity::eTrace:
 			{
-				spdlog::basic_logger_mt(systemName, filePath)->trace(message);
+				_logger->trace(msg);
 				break;
 			}
 
 			case LogSeverity::eInfo:
 			{
-				spdlog::basic_logger_mt(systemName, filePath)->info(message);
+				_logger->info(msg);
 				break;
 			}
 
 			case LogSeverity::eWarning:
 			{
-				spdlog::basic_logger_mt(systemName, filePath)->warn(message);
+				_logger->warn(msg);
 				break;
 			}
 
 			case LogSeverity::eError:
 			{
-				spdlog::basic_logger_mt(systemName, filePath)->error(message);
+				_logger->error(msg);
 				break;
 			}
 
 			case LogSeverity::eCritical:
 			{
-				spdlog::basic_logger_mt(systemName, filePath)->critical(message);
+				_logger->critical(msg);
 				break;
 			}
 		}
+	}
+
+	void LogMessage(std::string message, std::string systemName, LogSeverity logSeverity)
+	{
+		std::string msg = "[" + systemName + "]: " + message;
+		LogMessage(msg, logSeverity);
 	}
 
 	~Logger()
@@ -65,4 +74,7 @@ public:
 		static Logger Instance;
 		return Instance;
 	}
+
+private:
+	std::shared_ptr<spdlog::logger> _logger;
 };

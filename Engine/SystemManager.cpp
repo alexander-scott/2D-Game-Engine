@@ -77,19 +77,3 @@ void SystemManager::SystemsInitalised()
 		system->second->SystemsInitalised();
 	}
 }
-
-std::shared_ptr<ISystem> SystemManager::GetSystem(SystemType type)
-{
-	if (_systems[type] == nullptr)
-		throw std::exception("SYSTEM NOT INITALISED");
-
-	return _systems[type];
-}
-
-void SystemManager::AddSystem(shared_ptr<ISystem> system, SystemType type)
-{
-	if (system == nullptr)
-		throw std::exception("SYSTEM NOT INITALISED");
-
-	_systems[type] = system;
-}

@@ -12,9 +12,6 @@ public:
 
 	bool SystemUpdate();
 
-	std::shared_ptr<ISystem> GetSystem(SystemType type);
-	void AddSystem(std::shared_ptr<ISystem> system, SystemType type);
-
 private:
 	void InitaliseSystems(HINSTANCE hInst, wchar_t * pArgs);
 	void InitaliseListeners();

@@ -87,16 +87,6 @@ enum MouseMessageType
 	eRightMouseReleased
 };
 
-enum LogSeverity
-{
-	eTrace,
-	eDebug,
-	eInfo,
-	eWarning,
-	eError,
-	eCritical
-};
-
 #pragma endregion
 
 #pragma region Structs

@@ -7,6 +7,8 @@
 
 #include <fstream>
 
+#include "Logger.h"
+
 SceneBuilder::SceneBuilder(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
 	: ISystem(SystemType::eSceneBuilder, dispatcher){ }
 
@@ -37,7 +39,10 @@ shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
 	ifstream inFile(filePath);
 
 	if (!inFile)
+	{
+		Logger::Instance().LogMessage("Could not load XML file!", "SCENE_BUILDER", LogSeverity::eError);
 		throw std::exception("Could not load XML file!");
+	}
 
 	//Dump contents of file into a string
 	string xmlContents;

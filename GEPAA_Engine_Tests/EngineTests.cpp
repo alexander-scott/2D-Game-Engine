@@ -60,9 +60,9 @@ namespace GEPAA_Engine_Tests
 			// Test that Draw was called the exact number of times the loop was run
 			Assert::AreEqual(sceneManager->DrawCount, 1000);
 
-			// Test that Update was called at a fixed timestep
-			// Resulting iN 137 in this case (DEPENDANT ON MS_PER_UPDATE AND LOOP SLEEP TIME)
-			Assert::AreNotEqual(sceneManager->UpdateCount, 137);
+			// Test that Update was called at a fixed timestep, should be much less than draw count
+			// (DEPENDANT ON MS_PER_UPDATE AND LOOP SLEEP TIME)
+			Assert::AreNotEqual(sceneManager->UpdateCount, 1000);
 		}
 	};
 }

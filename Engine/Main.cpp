@@ -7,11 +7,15 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 {
 	try
 	{
-		// Initalise systems
+		Logger::Instance().LogMessage("Initalising Systems", LogSeverity::eInfo);
 		SystemManager manager(hInst, pArgs);
 
 		// Update the systems until the user presses esc or closes the window
+		Logger::Instance().LogMessage("Starting main update loop", LogSeverity::eInfo);
 		do { } while (manager.SystemUpdate()); 
+
+		Logger::Instance().LogMessage("Program shutting down", LogSeverity::eInfo);
+		Logger::Instance().LogMessage("---------------------", LogSeverity::eInfo);
 	}
 	catch (const CustomException& e)
 	{

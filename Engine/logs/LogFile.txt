@@ -1,1 +1,4 @@
-[2018-02-16 21:27:04.282] [basic_logger] [info] Some log message
+[2018-02-18 11:57:15.728] [GEPAA] [info] Initalising Systems
+[2018-02-18 11:57:15.783] [GEPAA] [info] Starting main update loop
+[2018-02-18 11:57:17.622] [GEPAA] [info] Program shutting down
+[2018-02-18 11:57:17.622] [GEPAA] [info] ---------------------
