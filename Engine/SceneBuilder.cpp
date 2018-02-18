@@ -65,8 +65,8 @@ shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
 	//Get the root node
 	xml_node<>* root = doc.first_node();
 
-	// Initalise the scene
 	auto scene = make_shared<IScene>(string(root->first_attribute("name")->value()));
+	ComponentBuilder componentBuilder;
 
 	// Build the gameobjects
 	xml_node<>* gameObjectNode = root->first_node("GameObject");
@@ -78,7 +78,7 @@ shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
 		xml_node<>* component = gameObjectNode->first_node("Component");
 		while (component)
 		{
-			IComponent* newComponent = ComponentBuilder::BuildComponent(component);
+			IComponent* newComponent = componentBuilder.BuildComponent(component);
 			gameObject->AddComponent(newComponent);
 
 			component = component->next_sibling("Component");

@@ -1,6 +1,7 @@
 #include "CppUnitTest.h"
 
 #include "..\Engine\SceneBuilder.h"
+#include "..\Engine\TransformComponent.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -56,6 +57,9 @@ namespace GEPAA_Engine_Tests
 
 			// Test Component has been built and added to GameObject
 			Assert::AreEqual(scene->GetGameObject(0)->GetAllComponents().size(), (size_t)1);
+
+			// Test Component values have been successfully set
+			Assert::AreEqual(scene->GetGameObject(0)->GetComponent<TransformComponent>()->GetWorldPosition().x, (float)17);
 		}
 	};
 }
