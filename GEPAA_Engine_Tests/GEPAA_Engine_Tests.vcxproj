@@ -171,6 +171,7 @@
     <ClCompile Include="..\Engine\SceneBuilder.cpp" />
     <ClCompile Include="..\Engine\SystemManager.cpp" />
     <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp" />
+    <ClCompile Include="..\Engine\TestCommand.cpp" />
     <ClCompile Include="..\Engine\TestGraphics.cpp" />
     <ClCompile Include="..\Engine\TransformComponent.cpp" />
     <ClCompile Include="EngineTests.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="..\Engine\SystemMessageDispatcher.h" />
     <ClInclude Include="..\Engine\SystemMessageListener.h" />
     <ClInclude Include="..\Engine\SystemMessageMessenger.h" />
+    <ClInclude Include="..\Engine\TestCommand.h" />
     <ClInclude Include="..\Engine\TestGraphics.h" />
     <ClInclude Include="..\Engine\TransformComponent.h" />
     <ClInclude Include="..\Engine\WinDefines.h" />
