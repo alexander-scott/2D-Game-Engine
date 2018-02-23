@@ -72,7 +72,10 @@
     <ClCompile Include="EngineTests.cpp">
       <Filter>SystemTests\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\SceneManager.cpp">
+    <ClCompile Include="..\Engine\InputHandler.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\TestCommand.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -206,7 +209,10 @@
     <ClInclude Include="..\Engine\WinDefines.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h">
+    <ClInclude Include="..\Engine\InputHandler.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\TestCommand.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

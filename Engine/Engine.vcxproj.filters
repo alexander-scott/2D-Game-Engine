@@ -68,14 +68,14 @@
     <Filter Include="Engine\Systems\Input">
       <UniqueIdentifier>{245b14c1-47c6-4e82-9002-48da06b22402}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems\SceneBuilding\RapidXML">
+      <UniqueIdentifier>{857784c9-8012-4c85-8bc4-6126d48ca639}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Resource Files\Scenes">
       <UniqueIdentifier>{f3d69617-5a79-4f65-9709-f8d2afd2f651}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Systems\Engine">
       <UniqueIdentifier>{f5284d41-7fbd-45f4-acf9-6ae76f473b35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Systems\Logging">
-      <UniqueIdentifier>{33a719dd-cb4b-4db2-8859-c2ae1e259de3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +181,12 @@
     <ClInclude Include="SetParentTransformMessage.h">
       <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
+    <ClInclude Include="rapidxml.hpp">
+      <Filter>Engine\Systems\SceneBuilding\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_print.hpp">
+      <Filter>Engine\Systems\SceneBuilding\RapidXML</Filter>
+    </ClInclude>
     <ClInclude Include="RequestBuildSceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
     </ClInclude>
@@ -196,11 +202,14 @@
     <ClInclude Include="DrawSceneMessage.h">
       <Filter>Engine\Messaging\Messages\GraphicsSystemMessages</Filter>
     </ClInclude>
-    <ClInclude Include="ISystemToGameObjectMessage.h">
-      <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Engine\Systems\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>Engine\Systems\Logging</Filter>
+    <ClInclude Include="ICommand.h">
+      <Filter>Engine\Systems\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCommand.h">
+      <Filter>Engine\Systems\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -243,8 +252,11 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Engine\Systems\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Engine\Systems</Filter>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Engine\Systems\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCommand.cpp">
+      <Filter>Engine\Systems\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
