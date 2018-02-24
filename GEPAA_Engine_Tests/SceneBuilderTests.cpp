@@ -29,7 +29,7 @@ namespace GEPAA_Engine_Tests
 	public:
 		SceneBuilderFixture(shared_ptr<SystemMessageDispatcher> dispatcher) : SceneBuilder(dispatcher) { }
 
-		shared_ptr<IScene> TestBuildScene(std::string path)
+		shared_ptr<Scene> TestBuildScene(std::string path)
 		{
 			return BuildScene(path);
 		}

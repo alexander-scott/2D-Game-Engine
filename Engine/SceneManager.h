@@ -2,7 +2,7 @@
 
 #include "FrameTimer.h"
 
-#include "IScene.h"
+#include "Scene.h"
 
 #include "ISystem.h"
 
@@ -16,6 +16,6 @@ public:
 	void RecieveMessage(ISystemMessage& message) override;
 
 private:
-	shared_ptr<IScene>		_currentScene;
+	shared_ptr<Scene>		_currentScene;
 	FrameTimer				_frameTimer;
 };

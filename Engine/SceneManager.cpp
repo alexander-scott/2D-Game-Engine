@@ -33,9 +33,9 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 			if (_currentScene == nullptr)
 				throw std::exception("CURRENT SCENE NOT INITALISED");
 
-			DrawSceneMessage message; // Initalise the draw scene message
-			_currentScene->Draw(message); // Populate it from the scene
-			SendMessageToDispatcher(message); // Send it to the Graphics system
+			// Pass a pointer to the current scene to the Graphics system to be drawn
+			DrawSceneMessage message(_currentScene);
+			SendMessageToDispatcher(message);
 			break;
 		}
 

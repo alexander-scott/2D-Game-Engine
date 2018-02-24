@@ -24,7 +24,7 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 		RequestBuildSceneMessage& msg = static_cast<RequestBuildSceneMessage&>(message);
 
 		// If the engine asks the SceneBuilder system to create a Scene, build one and send a pointer to it in a message.
-		shared_ptr<IScene> scene = BuildScene(msg.FilePath);
+		shared_ptr<Scene> scene = BuildScene(msg.FilePath);
 
 		// Send built scene to SceneManager system
 		BuildSceneMessage sceneMsg(scene);
@@ -32,7 +32,7 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 	}
 }
 
-shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
+shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 {
 	//Loads a level from xml file
 	//Load the file
@@ -65,7 +65,7 @@ shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
 	//Get the root node
 	xml_node<>* root = doc.first_node();
 
-	auto scene = make_shared<IScene>(string(root->first_attribute("name")->value()));
+	auto scene = make_shared<Scene>(string(root->first_attribute("name")->value()));
 	ComponentBuilder componentBuilder;
 
 	// Build the gameobjects

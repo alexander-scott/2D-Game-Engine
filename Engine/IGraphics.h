@@ -8,6 +8,8 @@
 #include "InitaliseGraphicsMessage.h"
 #include "DrawSceneMessage.h"
 
+#include "Scene.h"
+
 #include <wrl.h>
 
 class IGraphics : public ISystem
@@ -69,30 +71,27 @@ public:
 			case SystemMessageType::eGraphicsDrawScene:
 			{
 				DrawSceneMessage & msg = static_cast<DrawSceneMessage&>(message);
-				
-				// Draw all sprites
-				auto spritesToDraw = msg.GetSpriteData();
-				for (int i = 0; i < spritesToDraw.size(); i++)
+				auto gameObjects = msg.GetScene()->GetAllGameObjects();
+
+				// Create render layers
+				map<int, vector<IDrawableComponent*>> renderLayers;
+				for (auto go : gameObjects)
 				{
-					DrawSprite(spritesToDraw[i].Name, 
-						spritesToDraw[i].Pos, 
-						spritesToDraw[i].Rect, 
-						spritesToDraw[i].Rot, 
-						spritesToDraw[i].Scale, 
-						spritesToDraw[i].Offset);
+					go->GetDrawableComponents(renderLayers);
 				}
 
-				// Draw all text
-				auto textToDraw = msg.GetTextData();
-				for (int i = 0; i < textToDraw.size(); i++)
+				map<int, vector<IDrawableComponent*>>::iterator renderLayer;
+				for (renderLayer = renderLayers.begin(); renderLayer != renderLayers.end(); renderLayer++)
 				{
-					DrawText2D(textToDraw[i].Text,
-						textToDraw[i].Pos,
-						textToDraw[i].Rot,
-						textToDraw[i].RgbColours,
-						textToDraw[i].Scale, 
-						textToDraw[i].Offset);
+					for (int i = 0; i < renderLayer->second.size(); i++)
+					{
+						// Each GameObject is 'renderLayer->second[i]'.
+						// Dynamic cast it to a component type with more drawing
+						// information such as SpriteRendererComponent.
+						// Call relevant IGraphics drawing functions passing in the drawing information
+					}
 				}
+
 				break;
 			}
 		}

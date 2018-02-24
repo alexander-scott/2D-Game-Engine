@@ -283,13 +283,13 @@
     <ClInclude Include="InputMouseMessage.h" />
     <ClInclude Include="ISystemMessage.h" />
     <ClInclude Include="IMessenger.h" />
-    <ClInclude Include="IScene.h" />
     <ClInclude Include="ISystem.h" />
     <ClInclude Include="ISystemToGameObjectMessage.h" />
     <ClInclude Include="IUpdateableComponent.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="RequestBuildSceneMessage.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="SetParentTransformMessage.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />
     <ClInclude Include="SystemMessageListener.h" />
@@ -312,9 +312,9 @@
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
-    <ClCompile Include="IScene.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SystemMessageDispatcher.cpp" />
     <ClCompile Include="SceneBuilder.cpp" />

@@ -90,31 +90,6 @@ enum MouseMessageType
 
 #pragma endregion
 
-#pragma region Structs
-
-struct SpriteData
-{
-public:
-	std::string		Name;
-	Vec2			Pos;
-	RECT*			Rect;
-	float			Rot;
-	float			Scale;
-	Vec2			Offset;
-};
-
-struct TextData
-{
-	std::string		Text;
-	Vec2			Pos;
-	float			Rot;
-	float*			RgbColours;
-	float			Scale;
-	Vec2			Offset;
-};
-
-#pragma endregion
-
 #pragma region Operators
 
 // This fixes an issue where you are unable to have a GUID as a key in a map

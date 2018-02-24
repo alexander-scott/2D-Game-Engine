@@ -36,9 +36,6 @@
     <ClCompile Include="..\Engine\GameObject.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\IScene.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Engine\Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -76,6 +73,10 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine\TestCommand.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\SceneManager.cpp" />
+    <ClCompile Include="..\Engine\Scene.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,9 +147,6 @@
     <ClInclude Include="..\Engine\InputMouseMessage.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\IScene.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\Engine\ISystem.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -213,6 +211,10 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\TestCommand.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h" />
+    <ClInclude Include="..\Engine\Scene.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

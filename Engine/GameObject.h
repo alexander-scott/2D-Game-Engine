@@ -19,12 +19,12 @@ public:
 	GameObject(string tag, GUID id);
 	~GameObject();
 
-	virtual void Draw(DrawSceneMessage& message);
-	virtual void Update(float deltaTime);
+	void Update(float deltaTime);
 
 	void AddComponent(IComponent* component);
 
 	vector<IComponent*> GetAllComponents() { return _components; }
+	void GetDrawableComponents(map<int, vector<IDrawableComponent*>>& message);
 	void SendMessageToComponent(IComponentMessage& message);
 
 	void SetActive(bool active);
