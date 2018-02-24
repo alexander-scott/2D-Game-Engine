@@ -80,15 +80,13 @@ public:
 					go->GetDrawableComponents(renderLayers);
 				}
 
+				// Draw render layers in order
 				map<int, vector<IDrawableComponent*>>::iterator renderLayer;
 				for (renderLayer = renderLayers.begin(); renderLayer != renderLayers.end(); renderLayer++)
 				{
 					for (int i = 0; i < renderLayer->second.size(); i++)
 					{
-						// Each GameObject is 'renderLayer->second[i]'.
-						// Dynamic cast it to a component type with more drawing
-						// information such as SpriteRendererComponent.
-						// Call relevant IGraphics drawing functions passing in the drawing information
+						DrawComponent(renderLayer->second[i]);
 					}
 				}
 
@@ -98,16 +96,11 @@ public:
 	}
 
 protected:
-	// Mandatory overrides //
 	virtual void Initalise(class HWNDKey& key) = 0;
 	virtual void Destroy() = 0;
 
 	virtual void EndFrame() = 0;
 	virtual void BeginFrame() = 0;
 
-	virtual void DrawSprite(std::string name, Vec2 pos, RECT* rect, float rot, float scale, Vec2 offset) = 0;
-	virtual void DrawText2D(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset) = 0;
-
-	// Optional overrides //
-	virtual void DrawLine(Vec2 v1, Vec2 v2) { }
+	virtual void DrawComponent(IDrawableComponent* component) = 0;
 };

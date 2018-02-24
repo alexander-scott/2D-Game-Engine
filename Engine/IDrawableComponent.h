@@ -5,5 +5,6 @@
 class IDrawableComponent
 {
 public:
-	int				RenderLayer;
+	DrawableComponentType	Type;
+	int						RenderLayer;
 };

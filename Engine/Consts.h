@@ -68,8 +68,12 @@ enum ComponentType
 
 enum ComponentMessageType
 {
-	eSetParentTransformMessage,
-	eTestMessage
+	eSetParentTransformMessage
+};
+
+enum DrawableComponentType
+{
+	eTestDrawingType
 };
 
 enum KeyboardMessageType
