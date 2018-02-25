@@ -7,13 +7,14 @@
 class SystemManager
 {
 public:
+	SystemManager(HWND hWnd);
 	SystemManager(HINSTANCE hInst, wchar_t * pArgs);
 	~SystemManager();
 
 	bool SystemUpdate();
 
 private:
-	void InitaliseSystems(HINSTANCE hInst, wchar_t * pArgs);
+	void InitaliseSystems();
 	void InitaliseListeners();
 	void SystemsInitalised();
 

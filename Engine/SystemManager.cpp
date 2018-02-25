@@ -6,11 +6,28 @@
 #include "TestGraphics.h"
 #include "InputHandler.h"
 
+SystemManager::SystemManager(HWND hWnd)
+{
+	_messageDispatcher = make_shared<SystemMessageDispatcher>();
+
+	// Initalise MainWindow system
+	_mainWindow = make_shared<MainWindow>(hWnd, _messageDispatcher);
+	_systems.push_back(_mainWindow);
+
+	InitaliseSystems();
+	InitaliseListeners();
+	SystemsInitalised();
+}
+
 SystemManager::SystemManager(HINSTANCE hInst, wchar_t * pArgs)
 {
 	_messageDispatcher = make_shared<SystemMessageDispatcher>();
 
-	InitaliseSystems(hInst, pArgs);
+	// Initalise MainWindow system
+	_mainWindow = make_shared<MainWindow>(hInst, pArgs, _messageDispatcher);
+	_systems.push_back(_mainWindow);
+
+	InitaliseSystems();
 	InitaliseListeners();
 	SystemsInitalised();
 }
@@ -34,12 +51,8 @@ bool SystemManager::SystemUpdate()
 }
 
 // Create an instance of every system. Can be initalised in any order. Inject instance of message dispatcher.
-void SystemManager::InitaliseSystems(HINSTANCE hInst, wchar_t * pArgs)
+void SystemManager::InitaliseSystems()
 {
-	// Initalise MainWindow system
-	_mainWindow = make_shared<MainWindow>(hInst, pArgs, _messageDispatcher);
-	_systems.push_back(_mainWindow);
-
 	// Initalise SceneBuilder system
 	auto sceneBuilder = make_shared<SceneBuilder>(_messageDispatcher);
 	_systems.push_back(sceneBuilder);

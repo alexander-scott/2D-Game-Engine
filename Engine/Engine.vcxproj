@@ -267,6 +267,7 @@
     <ClInclude Include="CustomException.h" />
     <ClInclude Include="DrawSceneMessage.h" />
     <ClInclude Include="DXErr.h" />
+    <ClInclude Include="EditorInterface.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ICommand.h" />
@@ -307,6 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentBuilder.cpp" />
+    <ClCompile Include="EditorInterface.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="FrameTimer.cpp" />

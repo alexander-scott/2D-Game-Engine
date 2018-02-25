@@ -77,6 +77,9 @@
     <Filter Include="Engine\Systems\Logging">
       <UniqueIdentifier>{8179bf38-109e-44b5-b23f-4f515c928087}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Editor">
+      <UniqueIdentifier>{79a17cc0-d40b-4f62-baa1-4952dddb647c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -211,6 +214,9 @@
     <ClInclude Include="ISystemToGameObjectMessage.h">
       <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
+    <ClInclude Include="EditorInterface.h">
+      <Filter>Engine\Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -260,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Engine\Systems\SceneManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorInterface.cpp">
+      <Filter>Engine\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
