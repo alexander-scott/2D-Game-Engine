@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "TestGraphics.h"
 #include "InputHandler.h"
+#include "Editor.h"
 
 #include "RequestBuildSceneMessage.h"
 
@@ -14,11 +15,15 @@ SystemManager::SystemManager(HWND hWnd)
 
 	// Initalise MainWindow system
 	_mainWindow = make_shared<MainWindow>(hWnd, _messageDispatcher);
-	_systems.push_back(_mainWindow);
+	_systems.insert(std::make_pair(_mainWindow->SysType,_mainWindow));
 
 	InitaliseSystems();
 	InitaliseListeners();
 	SystemsInitalised();
+
+	// Initalise the Editor system
+	auto editorSystem = make_shared<Editor>(_messageDispatcher);
+	_systems.insert(std::make_pair(editorSystem->SysType, editorSystem));
 }
 
 SystemManager::SystemManager(HINSTANCE hInst, wchar_t * pArgs)
@@ -27,7 +32,7 @@ SystemManager::SystemManager(HINSTANCE hInst, wchar_t * pArgs)
 
 	// Initalise MainWindow system
 	_mainWindow = make_shared<MainWindow>(hInst, pArgs, _messageDispatcher);
-	_systems.push_back(_mainWindow);
+	_systems.insert(std::make_pair(_mainWindow->SysType, _mainWindow));
 
 	InitaliseSystems();
 	InitaliseListeners();
@@ -42,18 +47,23 @@ SystemManager::~SystemManager()
 {
 	for (auto s : _systems)
 	{
-		s = nullptr;
+		s.second = nullptr;
 	}
 }
 
-bool SystemManager::SystemUpdate()
+void SystemManager::StartUpdateLoop()
 {
-	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eSystemUpdate));
+	bool result = true;
+	do 
+	{
+		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eSystemUpdate));
 
-	if (_mainWindow != nullptr)
-		return _mainWindow->ProcessMessage();
-	else
-		return true;
+		if (_mainWindow != nullptr)
+			result = _mainWindow->ProcessMessage();
+		else
+			result = true;
+	} 
+	while (result);
 }
 
 // Create an instance of every system. Can be initalised in any order. Inject instance of message dispatcher.
@@ -61,23 +71,23 @@ void SystemManager::InitaliseSystems()
 {
 	// Initalise SceneBuilder system
 	auto sceneBuilder = make_shared<SceneBuilder>(_messageDispatcher);
-	_systems.push_back(sceneBuilder);
+	_systems.insert(std::make_pair(sceneBuilder->SysType, sceneBuilder));
 
 	// Initalise SceneManager system
 	auto sceneManager = make_shared<SceneManager>(_messageDispatcher);
-	_systems.push_back(sceneManager);
+	_systems.insert(std::make_pair(sceneManager->SysType, sceneManager));
 
 	// Initalise Graphics system
 	auto graphics = make_shared<TestGraphics>(_messageDispatcher); // Create a test graphics instance for now
-	_systems.push_back(graphics);
+	_systems.insert(std::make_pair(graphics->SysType, graphics));
 
 	// Initalise Engine system
 	auto engine = make_shared<Engine>(_messageDispatcher);
-	_systems.push_back(engine);
+	_systems.insert(std::make_pair(engine->SysType, engine));
 
 	// Initalise Input Handler System
 	auto inputHandler = make_shared<InputHandler>(_messageDispatcher);
-	_systems.push_back(inputHandler);
+	_systems.insert(std::make_pair(inputHandler->SysType, inputHandler));
 }
 
 // If any of the systems are listening for message this function sets it up. Called after system initalisation.
@@ -85,7 +95,7 @@ void SystemManager::InitaliseListeners()
 {
 	for (auto s : _systems)
 	{
-		s->InitaliseListeners();
+		s.second->InitaliseListeners();
 	}
 }
 
@@ -94,6 +104,6 @@ void SystemManager::SystemsInitalised()
 {
 	for (auto s : _systems)
 	{
-		s->SystemsInitalised();
+		s.second->SystemsInitalised();
 	}
 }

@@ -12,7 +12,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 
 		// Update the systems until the user presses esc or closes the window
 		Logger::Instance().LogMessage("Starting main update loop", LogSeverity::eInfo);
-		do { } while (manager.SystemUpdate()); 
+		manager.StartUpdateLoop(); 
 
 		Logger::Instance().LogMessage("Program shutting down", LogSeverity::eInfo);
 		Logger::Instance().LogMessage("---------------------", LogSeverity::eInfo);

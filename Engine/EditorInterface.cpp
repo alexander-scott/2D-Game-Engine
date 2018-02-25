@@ -3,12 +3,13 @@
 #include "Logger.h"
 #include "SystemManager.h"
 
-void * EditorInterface::InitaliseEngine(HWND hWnd, int Width, int Height, const char * filePath)
+void * EditorInterface::InitaliseEngine(HWND hWnd)
 {
 	try
 	{
 		Logger::Instance().LogMessage("Initalising Systems", LogSeverity::eInfo);
-		SystemManager* manager = new SystemManager(hWnd);
+
+		return new SystemManager(hWnd);
 	}
 	catch (const CustomException& e)
 	{
@@ -44,8 +45,66 @@ void EditorInterface::StartUpdateLoop(void * systemsPtr)
 
 	Logger::Instance().LogMessage("Starting main update loop", LogSeverity::eInfo);
 
-	do { } while (systemManager->SystemUpdate());
+	systemManager->StartUpdateLoop();
 
 	Logger::Instance().LogMessage("Program shutting down", LogSeverity::eInfo);
 	Logger::Instance().LogMessage("---------------------", LogSeverity::eInfo);
+}
+
+void EditorInterface::LoadNewScene(void * systemsPtr, const char * filePath)
+{
+
+}
+
+void EditorInterface::SaveScene(void * systemsPtr, const char * filePath)
+{
+}
+
+void EditorInterface::PlayStarted(void * systemsPtr)
+{
+}
+
+void EditorInterface::PlayStopped(void * systemsPtr)
+{
+}
+
+void EditorInterface::CleanD3D(void * systemsPtr)
+{
+	SystemManager* systemManager = static_cast<SystemManager*>(systemsPtr);
+	delete systemManager;
+}
+
+void EditorInterface::MouseMove(void * systemsPtr, int xPos, int yPos)
+{
+	
+}
+
+void EditorInterface::LeftMouseClick(void * systemsPtr, int xPos, int yPos)
+{
+	
+}
+
+void EditorInterface::LeftMouseRelease(void * systemsPtr, int xPos, int yPos)
+{
+	
+}
+
+void EditorInterface::RightMouseClick(void * systemsPtr, int xPos, int yPos)
+{
+	
+}
+
+void EditorInterface::RightMouseRelease(void * systemsPtr, int xPos, int yPos)
+{
+
+}
+
+void EditorInterface::KeyDown(void * systemsPtr, int keyCode)
+{
+	
+}
+
+void EditorInterface::KeyUp(void * systemsPtr, int keyCode)
+{
+	
 }

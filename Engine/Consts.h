@@ -24,6 +24,7 @@ enum SystemType
 {
 	eMainWindow,
 	eEngine,
+	eEditor,
 	eSceneManager,
 	eSceneBuilder,
 	eGraphics,

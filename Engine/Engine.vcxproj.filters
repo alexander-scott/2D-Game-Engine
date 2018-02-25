@@ -77,8 +77,11 @@
     <Filter Include="Engine\Systems\Logging">
       <UniqueIdentifier>{8179bf38-109e-44b5-b23f-4f515c928087}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Editor">
+    <Filter Include="Engine\EditorInterface">
       <UniqueIdentifier>{79a17cc0-d40b-4f62-baa1-4952dddb647c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Editor">
+      <UniqueIdentifier>{7aa82932-b61f-4bce-8d03-2b8ec4c9a855}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +218,10 @@
       <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
     <ClInclude Include="EditorInterface.h">
-      <Filter>Engine\Editor</Filter>
+      <Filter>Engine\EditorInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>Engine\Systems\Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -268,7 +274,10 @@
       <Filter>Engine\Systems\SceneManagement</Filter>
     </ClCompile>
     <ClCompile Include="EditorInterface.cpp">
-      <Filter>Engine\Editor</Filter>
+      <Filter>Engine\EditorInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor.cpp">
+      <Filter>Engine\Systems\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

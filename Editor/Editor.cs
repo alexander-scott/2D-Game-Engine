@@ -21,6 +21,8 @@ namespace SimpleSampleEditor
         /// </summary>
         private IntPtr mEngine;
 
+        private IntPtr _editorSystem;
+
         private Hierachy mHierachy;
 
         private bool mPlaying = false;
@@ -82,7 +84,7 @@ namespace SimpleSampleEditor
 
         private void EditorLoading(object sender, EventArgs e)
         {
-            mEngine = EngineInterface.InitaliseEngine(panel1.Handle, panel1.Width, panel1.Height, mResoucesPath);
+            mEngine = EngineInterface.InitaliseEngine(panel1.Handle);
             panel1.Focus();
         }
 
@@ -90,7 +92,7 @@ namespace SimpleSampleEditor
         {
             mHierachy.CreateHierachyList(mEngine);
 
-            EngineInterface.StartUpdateLoop(mEngine);  
+            //EngineInterface.StartUpdateLoop(mEngine);  
         }
 
         private void EditorClosing(object sender, FormClosingEventArgs e)

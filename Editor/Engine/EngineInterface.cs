@@ -6,7 +6,7 @@ namespace SimpleSampleEditor.Engine
     class EngineInterface
     {
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr InitaliseEngine(IntPtr window, int Width, int Height, string filePath);
+        public static extern IntPtr InitaliseEngine(IntPtr window);
 
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void StartUpdateLoop(IntPtr gamePtr);

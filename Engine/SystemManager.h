@@ -11,7 +11,7 @@ public:
 	SystemManager(HINSTANCE hInst, wchar_t * pArgs);
 	~SystemManager();
 
-	bool SystemUpdate();
+	void StartUpdateLoop();
 
 private:
 	void InitaliseSystems();
@@ -21,5 +21,5 @@ private:
 	std::shared_ptr<SystemMessageDispatcher>			_messageDispatcher;
 
 	std::shared_ptr<MainWindow>							_mainWindow;
-	std::vector<std::shared_ptr<ISystem>>				_systems;
+	std::map<SystemType,std::shared_ptr<ISystem>>		_systems;
 };

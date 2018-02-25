@@ -1,0 +1,13 @@
+#pragma once
+#include "ISystem.h"
+
+class Editor :	public ISystem
+{
+public:
+	Editor(std::shared_ptr<SystemMessageDispatcher> dispatcher);
+	~Editor();
+
+	void InitaliseListeners() override;
+	void RecieveMessage(ISystemMessage& message) override;
+};
+
