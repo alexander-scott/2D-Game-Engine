@@ -34,7 +34,7 @@ void Engine::UpdateEngine()
 	// ProcessInput()
 
 	// This while loop processes scene updates and physics at a fixed rate.
-	// Whilst allowing graphics to render as fast as possible.
+	// Whilst allowing input and graphics to process/draw as fast as possible.
 	while (_lag >= MS_PER_UPDATE)
 	{
 		// ProcessPhysics()

@@ -20,5 +20,5 @@ private:
 	std::shared_ptr<SystemMessageDispatcher>			_messageDispatcher;
 
 	std::shared_ptr<MainWindow>							_mainWindow;
-	std::map<SystemType, std::shared_ptr<ISystem>>		_systems;
+	std::vector<std::shared_ptr<ISystem>>				_systems;
 };
