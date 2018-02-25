@@ -16,7 +16,6 @@ public:
 
 	void RecieveMessage(ISystemMessage& message) override;
 	void InitaliseListeners() override;
-	void SystemsInitalised() override;
 
 	~Engine();
 

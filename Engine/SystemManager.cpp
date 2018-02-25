@@ -6,6 +6,8 @@
 #include "TestGraphics.h"
 #include "InputHandler.h"
 
+#include "RequestBuildSceneMessage.h"
+
 SystemManager::SystemManager(HWND hWnd)
 {
 	_messageDispatcher = make_shared<SystemMessageDispatcher>();
@@ -30,6 +32,10 @@ SystemManager::SystemManager(HINSTANCE hInst, wchar_t * pArgs)
 	InitaliseSystems();
 	InitaliseListeners();
 	SystemsInitalised();
+
+	// Request a new scene be built by the SceneBuilder system
+	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
+	_messageDispatcher->SendMessageToListeners(message);
 }
 
 SystemManager::~SystemManager()

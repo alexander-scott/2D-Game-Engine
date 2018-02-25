@@ -1,0 +1,4 @@
+[2018-02-25 11:21:08.950] [GEPAA] [info] Initalising Systems
+[2018-02-25 11:21:09.019] [GEPAA] [info] Starting main update loop
+[2018-02-25 11:21:11.703] [GEPAA] [info] Program shutting down
+[2018-02-25 11:21:11.703] [GEPAA] [info] ---------------------

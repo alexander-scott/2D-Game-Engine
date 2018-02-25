@@ -94,7 +94,7 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 		string tag = gameObjectNode->first_attribute("tag")->value();
 		string guids = string(gameObjectNode->first_attribute("guid")->value());
 
-		GUID test = stringToGUID(guids);
+		//GUID test = stringToGUID(guids);
 
 		auto gameObject = GameObject::MakeGameObject(tag);
 

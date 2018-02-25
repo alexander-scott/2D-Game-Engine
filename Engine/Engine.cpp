@@ -1,7 +1,6 @@
 #include "Engine.h"
 
 #include "BuildSceneMessage.h"
-#include "RequestBuildSceneMessage.h"
 
 // Constructor that uses width and height from Consts.h
 Engine::Engine(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
@@ -24,6 +23,7 @@ Engine::~Engine()
 
 }
 
+// Main update loop
 void Engine::UpdateEngine()
 {
 	auto currentTime = std::chrono::steady_clock::now();
@@ -66,11 +66,4 @@ void Engine::RecieveMessage(ISystemMessage& message)
 void Engine::InitaliseListeners()
 {
 	SubscribeToMessageType(SystemMessageType::eSystemUpdate);
-}
-
-void Engine::SystemsInitalised()
-{
-	// Request a new scene be built by the SceneBuilder system
-	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
-	SendMessageToDispatcher(message);
 }
