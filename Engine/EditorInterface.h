@@ -10,5 +10,5 @@
 namespace EditorInterface
 {
 	extern "C" { DllExport void* InitaliseEngine(HWND hWnd, int Width, int Height, const char* filePath); }
-	extern "C" { DllExport void StartUpdateLoop(void* enginePtr); }
+	extern "C" { DllExport void StartUpdateLoop(void* systemsPtr); }
 }

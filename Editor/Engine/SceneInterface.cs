@@ -14,13 +14,13 @@ namespace SimpleSampleEditor.Engine
 
     class SceneInterface
     {
-        [DllImport("SimpleSample.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetGameObjectCount(IntPtr window);
 
-        [DllImport("SimpleSample.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr PopulateHierarchyItems(IntPtr window, int itemCount);
 
-        [DllImport("SimpleSample.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void FreeHierarchyMemory(IntPtr hierarchy);
     }
 }

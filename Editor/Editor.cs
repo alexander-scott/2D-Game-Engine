@@ -7,15 +7,17 @@ using System.Windows.Forms;
 
 using SimpleSampleEditor.EditorHierachy;
 using SimpleSampleEditor.EditorComponents;
+using System.IO;
+using System.Reflection;
 
 namespace SimpleSampleEditor
 {
     public partial class Editor : Form
     {
-        private string mResoucesPath = "C:\\Users\\s005973c\\Dropbox\\Unversity Year 4\\GAME ENGINE PROGRAMMING AND ARCHITECTURE\\Semester 1\\DirectX2DFrameworkNew\\Resources";
+        private string mResoucesPath;
 
         /// <summary>
-        /// Pointer to the instance of the Game. Used to make sure all calls to the engine use the same instance of the Game
+        /// Pointer to the instance of the Engine. Used to make sure all calls to the engine use the same instance of the Game
         /// </summary>
         private IntPtr mEngine;
 
@@ -33,6 +35,8 @@ namespace SimpleSampleEditor
             panel1.MouseUp += new MouseEventHandler(PanelMouseRelease);
             panel1.MouseMove += new MouseEventHandler(PanelMouseMove);
             this.Controls.Add(this.panel1);
+
+            mResoucesPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\Resources"));
 
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(KeyboardKeyDown);
@@ -86,7 +90,7 @@ namespace SimpleSampleEditor
         {
             mHierachy.CreateHierachyList(mEngine);
 
-            EngineInterface.StartEngineLoop(mEngine);  
+            EngineInterface.StartUpdateLoop(mEngine);  
         }
 
         private void EditorClosing(object sender, FormClosingEventArgs e)
