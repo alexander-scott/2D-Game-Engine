@@ -1,30 +1,37 @@
 #include "Engine.h"
 
-#include "BuildSceneMessage.h"
+#include "SceneBuilder.h"
+#include "SceneManager.h"
+#include "TestGraphics.h"
+#include "InputHandler.h"
+
 #include "RequestBuildSceneMessage.h"
 
-// Constructor that uses width and height from Consts.h
-Engine::Engine(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
-	: ISystem(SystemType::eEngine, dispatcher)
+Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 {
-	_lastTime = std::chrono::steady_clock::now();
-	_lag = 0;
-}
+	_messageDispatcher = make_shared<SystemMessageDispatcher>();
 
-// Constructor that uses width and height that are passed in from MainWindow.h
-Engine::Engine(int width, int height, std::shared_ptr<SystemMessageDispatcher> dispatcher) 
-	: ISystem(SystemType::eEngine, dispatcher)
-{
 	_lastTime = std::chrono::steady_clock::now();
 	_lag = 0;
+
+	InitaliseSystems(hInst, pArgs);
+	InitaliseListeners();
+	SystemsInitalised();
+
+	// Request a new scene be built by the SceneBuilder system
+	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
+	_messageDispatcher->SendMessageToListeners(message);
 }
 
 Engine::~Engine()
 {
-
+	for (auto s : _systems)
+	{
+		s.second = nullptr;
+	}
 }
 
-void Engine::UpdateEngine()
+bool Engine::Update()
 {
 	auto currentTime = std::chrono::steady_clock::now();
 	const std::chrono::duration<float> elapsedTime = currentTime - _lastTime;
@@ -38,39 +45,67 @@ void Engine::UpdateEngine()
 	while (_lag >= MS_PER_UPDATE)
 	{
 		// ProcessPhysics()
-		
+
 		// Update the current scene in the SceneManager system
-		SendMessageToDispatcher(ISystemMessage(SystemMessageType::eUpdateScene));
+		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
 
 		_lag -= MS_PER_UPDATE;
 	}
 
-	// Tell the Graphics system to begin the frame
-	SendMessageToDispatcher(ISystemMessage(SystemMessageType::eGraphicsStartFrame));
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame)); // Tell the Graphics system to begin the frame
 
-	// Draw the current scene in the SceneManager system
-	SendMessageToDispatcher(ISystemMessage(SystemMessageType::eDrawScene));
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene)); // Draw the current scene in the SceneManager system
+	
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame)); // Tell the Graphics system to end the frame
 
-	// Tell the Graphics system to end the frame
-	SendMessageToDispatcher(ISystemMessage(SystemMessageType::eGraphicsEndFrame));
+	if (_mainWindow != nullptr)
+		return _mainWindow->ProcessMessage(); // Check if the user presses close on the window
+	else
+		return true;
 }
 
-void Engine::RecieveMessage(ISystemMessage& message)
+// Create an instance of every system. Can be initalised in any order. Inject instance of message dispatcher.
+void Engine::InitaliseSystems(HINSTANCE hInst, wchar_t * pArgs)
 {
-	if (message.Type == SystemMessageType::eSystemUpdate)
+	// Initalise MainWindow system
+	_mainWindow = make_shared<MainWindow>(hInst, pArgs, _messageDispatcher);
+	_systems.insert(std::make_pair(_mainWindow->SysType, _mainWindow));
+
+	// Initalise SceneBuilder system
+	auto sceneBuilder = make_shared<SceneBuilder>(_messageDispatcher);
+	_systems.insert(std::make_pair(sceneBuilder->SysType, sceneBuilder));
+
+	// Initalise SceneManager system
+	auto sceneManager = make_shared<SceneManager>(_messageDispatcher);
+	_systems.insert(std::make_pair(sceneManager->SysType, sceneManager));
+
+	// Initalise Graphics system
+	auto graphics = make_shared<TestGraphics>(_messageDispatcher); // Create a test graphics instance for now
+	_systems.insert(std::make_pair(graphics->SysType, graphics));
+
+	// Initalise Input Handler System
+	auto inputHandler = make_shared<InputHandler>(_messageDispatcher);
+	_systems.insert(std::make_pair(inputHandler->SysType, inputHandler));
+}
+
+// If any of the systems are listening for message this function sets it up. Called after system initalisation.
+void Engine::InitaliseListeners()
+{
+	map<SystemType, std::shared_ptr<ISystem>>::iterator system;
+
+	for (system = _systems.begin(); system != _systems.end(); system++)
 	{
-		UpdateEngine();
+		system->second->InitaliseListeners();
 	}
 }
 
-void Engine::InitaliseListeners()
-{
-	SubscribeToMessageType(SystemMessageType::eSystemUpdate);
-}
-
+// This is a simple callback for each system after every system has been intialised with listeners
 void Engine::SystemsInitalised()
 {
-	// Request a new scene be built by the SceneBuilder system
-	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
-	SendMessageToDispatcher(message);
+	map<SystemType, std::shared_ptr<ISystem>>::iterator system;
+
+	for (system = _systems.begin(); system != _systems.end(); system++)
+	{
+		system->second->SystemsInitalised();
+	}
 }

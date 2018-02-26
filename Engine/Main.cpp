@@ -1,6 +1,6 @@
 #include "CustomException.h"
 
-#include "SystemManager.h"
+#include "Engine.h"
 #include "Logger.h"
 
 int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
@@ -8,11 +8,15 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 	try
 	{
 		Logger::Instance().LogMessage("Initalising Systems", LogSeverity::eInfo);
-		SystemManager manager(hInst, pArgs);
+		Engine engine(hInst, pArgs);
 
 		// Update the systems until the user presses esc or closes the window
 		Logger::Instance().LogMessage("Starting main update loop", LogSeverity::eInfo);
-		do { } while (manager.SystemUpdate()); 
+		
+		while (engine.Update())
+		{
+
+		}
 
 		Logger::Instance().LogMessage("Program shutting down", LogSeverity::eInfo);
 		Logger::Instance().LogMessage("---------------------", LogSeverity::eInfo);
