@@ -300,24 +300,22 @@
     <ClInclude Include="SystemMessageMessenger.h" />
     <ClInclude Include="SceneBuilder.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Engine.h" />
+    <ClInclude Include="SystemManager.h" />
     <ClInclude Include="TestCommand.h" />
     <ClInclude Include="TestGraphics.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="WinDefines.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentBuilder.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorInputInterface.cpp" />
     <ClCompile Include="EditorEngineInterface.cpp" />
     <ClCompile Include="EditorSceneInterface.cpp" />
     <ClCompile Include="Engine.cpp" />
-=======
->>>>>>> master
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -328,7 +326,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SystemMessageDispatcher.cpp" />
     <ClCompile Include="SceneBuilder.cpp" />
-    <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="TestCommand.cpp" />
     <ClCompile Include="TestGraphics.cpp" />
     <ClCompile Include="TransformComponent.cpp" />

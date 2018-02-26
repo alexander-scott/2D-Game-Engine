@@ -170,10 +170,12 @@
     <ClCompile Include="..\Engine\Scene.cpp" />
     <ClCompile Include="..\Engine\SceneBuilder.cpp" />
     <ClCompile Include="..\Engine\SceneManager.cpp" />
+    <ClCompile Include="..\Engine\SystemManager.cpp" />
     <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp" />
     <ClCompile Include="..\Engine\TestCommand.cpp" />
     <ClCompile Include="..\Engine\TestGraphics.cpp" />
     <ClCompile Include="..\Engine\TransformComponent.cpp" />
+    <ClCompile Include="EngineTests.cpp" />
     <ClCompile Include="GameObjectTests.cpp" />
     <ClCompile Include="MessagingTests.cpp" />
     <ClCompile Include="SceneBuilderTests.cpp" />
@@ -217,6 +219,7 @@
     <ClInclude Include="..\Engine\SceneBuilder.h" />
     <ClInclude Include="..\Engine\SceneManager.h" />
     <ClInclude Include="..\Engine\SetParentTransformMessage.h" />
+    <ClInclude Include="..\Engine\SystemManager.h" />
     <ClInclude Include="..\Engine\SystemMessageDispatcher.h" />
     <ClInclude Include="..\Engine\SystemMessageListener.h" />
     <ClInclude Include="..\Engine\SystemMessageMessenger.h" />
