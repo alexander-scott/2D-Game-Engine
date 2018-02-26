@@ -16,9 +16,6 @@
     <Filter Include="MessagingTests">
       <UniqueIdentifier>{e916b4f1-e469-45bb-a1a4-f16269df86b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemTests\Engine">
-      <UniqueIdentifier>{a01191b9-eee7-4924-be97-ec432502dce4}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine\ComponentBuilder.cpp">
@@ -45,9 +42,6 @@
     <ClCompile Include="..\Engine\SceneBuilder.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\SystemManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -65,9 +59,6 @@
     </ClCompile>
     <ClCompile Include="MessagingTests.cpp">
       <Filter>MessagingTests</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineTests.cpp">
-      <Filter>SystemTests\Engine</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine\InputHandler.cpp">
       <Filter>Source</Filter>
@@ -184,9 +175,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\SetParentTransformMessage.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Engine\SystemManager.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\SystemMessageDispatcher.h">
