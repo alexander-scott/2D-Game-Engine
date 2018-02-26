@@ -2,25 +2,19 @@
 
 #include "ISystemMessage.h"
 
+class Scene;
+
 class DrawSceneMessage : public ISystemMessage
 {
 public:
-	DrawSceneMessage() : ISystemMessage(SystemMessageType::eGraphicsDrawScene) { }
-
-	void AddSpriteData(SpriteData spriteData)
+	DrawSceneMessage(std::shared_ptr<Scene> scene) 
+		: ISystemMessage(SystemMessageType::eGraphicsDrawScene) 
 	{
-		_spriteData.push_back(spriteData);
+		_scene = scene;
 	}
 
-	void AddTextData(TextData textData)
-	{
-		_textData.push_back(textData);
-	}
-
-	std::vector<SpriteData>& GetSpriteData() { return _spriteData; }
-	std::vector<TextData>& GetTextData() { return _textData; }
+	std::shared_ptr<Scene> GetScene() { return _scene; }
 
 private:
-	std::vector<SpriteData>		_spriteData;
-	std::vector<TextData>		_textData;
+	std::shared_ptr<Scene>		_scene;
 };

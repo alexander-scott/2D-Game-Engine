@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IScene.h"
+#include "Scene.h"
 
 #include "ISystem.h"
 
@@ -17,5 +17,5 @@ public:
 	void RecieveMessage(ISystemMessage& message) override;
 
 protected:
-	shared_ptr<IScene> BuildScene(string filePath);
+	shared_ptr<Scene> BuildScene(string filePath);
 };

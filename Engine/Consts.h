@@ -26,7 +26,8 @@ enum SystemType
 	eEngine,
 	eSceneManager,
 	eSceneBuilder,
-	eGraphics
+	eGraphics,
+	eInputHandler
 };
 
 enum SystemMessageType
@@ -34,6 +35,7 @@ enum SystemMessageType
 	// Scene messages
 	eDrawScene,
 	eUpdateScene,
+	eSendMessageToGameObjects,
 
 	// Scene build messages
 	eRequestBuildSceneMessage,
@@ -66,8 +68,12 @@ enum ComponentType
 
 enum ComponentMessageType
 {
-	eSetParentTransformMessage,
-	eTestMessage
+	eSetParentTransformMessage
+};
+
+enum DrawableComponentType
+{
+	eTestDrawingType
 };
 
 enum KeyboardMessageType
@@ -88,27 +94,12 @@ enum MouseMessageType
 
 #pragma endregion
 
-#pragma region Structs
+#pragma region Operators
 
-struct SpriteData
+// This fixes an issue where you are unable to have a GUID as a key in a map
+inline bool operator<(const GUID & lhs, const GUID & rhs)
 {
-public:
-	std::string		Name;
-	Vec2			Pos;
-	RECT*			Rect;
-	float			Rot;
-	float			Scale;
-	Vec2			Offset;
-};
-
-struct TextData
-{
-	std::string		Text;
-	Vec2			Pos;
-	float			Rot;
-	float*			RgbColours;
-	float			Scale;
-	Vec2			Offset;
-};
+	return (memcmp(&lhs, &rhs, sizeof(GUID)) > 0 ? true : false);
+}
 
 #pragma endregion

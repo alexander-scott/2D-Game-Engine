@@ -16,9 +16,6 @@
     <Filter Include="MessagingTests">
       <UniqueIdentifier>{e916b4f1-e469-45bb-a1a4-f16269df86b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemTests\Engine">
-      <UniqueIdentifier>{a01191b9-eee7-4924-be97-ec432502dce4}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine\ComponentBuilder.cpp">
@@ -36,9 +33,6 @@
     <ClCompile Include="..\Engine\GameObject.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\IScene.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Engine\Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -46,9 +40,6 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine\SceneBuilder.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Engine\SystemManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp">
@@ -69,8 +60,15 @@
     <ClCompile Include="MessagingTests.cpp">
       <Filter>MessagingTests</Filter>
     </ClCompile>
-    <ClCompile Include="EngineTests.cpp">
-      <Filter>SystemTests\Engine</Filter>
+    <ClCompile Include="..\Engine\InputHandler.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\TestCommand.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\SceneManager.cpp" />
+    <ClCompile Include="..\Engine\Scene.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,9 +138,6 @@
     <ClInclude Include="..\Engine\InputMouseMessage.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\IScene.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\Engine\ISystem.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -182,9 +177,6 @@
     <ClInclude Include="..\Engine\SetParentTransformMessage.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\SystemManager.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\Engine\SystemMessageDispatcher.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -201,6 +193,16 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\WinDefines.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\InputHandler.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\TestCommand.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h" />
+    <ClInclude Include="..\Engine\Scene.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

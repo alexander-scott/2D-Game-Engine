@@ -123,7 +123,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -164,15 +164,16 @@
     <ClCompile Include="..\Engine\Engine.cpp" />
     <ClCompile Include="..\Engine\FrameTimer.cpp" />
     <ClCompile Include="..\Engine\GameObject.cpp" />
-    <ClCompile Include="..\Engine\IScene.cpp" />
+    <ClCompile Include="..\Engine\InputHandler.cpp" />
     <ClCompile Include="..\Engine\Main.cpp" />
     <ClCompile Include="..\Engine\MainWindow.cpp" />
+    <ClCompile Include="..\Engine\Scene.cpp" />
     <ClCompile Include="..\Engine\SceneBuilder.cpp" />
-    <ClCompile Include="..\Engine\SystemManager.cpp" />
+    <ClCompile Include="..\Engine\SceneManager.cpp" />
     <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp" />
+    <ClCompile Include="..\Engine\TestCommand.cpp" />
     <ClCompile Include="..\Engine\TestGraphics.cpp" />
     <ClCompile Include="..\Engine\TransformComponent.cpp" />
-    <ClCompile Include="EngineTests.cpp" />
     <ClCompile Include="GameObjectTests.cpp" />
     <ClCompile Include="MessagingTests.cpp" />
     <ClCompile Include="SceneBuilderTests.cpp" />
@@ -198,11 +199,12 @@
     <ClInclude Include="..\Engine\IMessageableComponent.h" />
     <ClInclude Include="..\Engine\IMessenger.h" />
     <ClInclude Include="..\Engine\InitaliseGraphicsMessage.h" />
+    <ClInclude Include="..\Engine\InputHandler.h" />
     <ClInclude Include="..\Engine\InputKeyboardMessage.h" />
     <ClInclude Include="..\Engine\InputMouseMessage.h" />
-    <ClInclude Include="..\Engine\IScene.h" />
     <ClInclude Include="..\Engine\ISystem.h" />
     <ClInclude Include="..\Engine\ISystemMessage.h" />
+    <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h" />
     <ClInclude Include="..\Engine\IUpdateableComponent.h" />
     <ClInclude Include="..\Engine\MainWindow.h" />
     <ClInclude Include="..\Engine\Math.h" />
@@ -211,13 +213,14 @@
     <ClInclude Include="..\Engine\Rect.h" />
     <ClInclude Include="..\Engine\RequestBuildSceneMessage.h" />
     <ClInclude Include="..\Engine\Resource.h" />
+    <ClInclude Include="..\Engine\Scene.h" />
     <ClInclude Include="..\Engine\SceneBuilder.h" />
     <ClInclude Include="..\Engine\SceneManager.h" />
     <ClInclude Include="..\Engine\SetParentTransformMessage.h" />
-    <ClInclude Include="..\Engine\SystemManager.h" />
     <ClInclude Include="..\Engine\SystemMessageDispatcher.h" />
     <ClInclude Include="..\Engine\SystemMessageListener.h" />
     <ClInclude Include="..\Engine\SystemMessageMessenger.h" />
+    <ClInclude Include="..\Engine\TestCommand.h" />
     <ClInclude Include="..\Engine\TestGraphics.h" />
     <ClInclude Include="..\Engine\TransformComponent.h" />
     <ClInclude Include="..\Engine\WinDefines.h" />

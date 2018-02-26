@@ -7,6 +7,8 @@
 
 #include <fstream>
 
+#include "Logger.h"
+
 SceneBuilder::SceneBuilder(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
 	: ISystem(SystemType::eSceneBuilder, dispatcher){ }
 
@@ -22,7 +24,7 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 		RequestBuildSceneMessage& msg = static_cast<RequestBuildSceneMessage&>(message);
 
 		// If the engine asks the SceneBuilder system to create a Scene, build one and send a pointer to it in a message.
-		shared_ptr<IScene> scene = BuildScene(msg.FilePath);
+		shared_ptr<Scene> scene = BuildScene(msg.FilePath);
 
 		// Send built scene to SceneManager system
 		BuildSceneMessage sceneMsg(scene);
@@ -30,14 +32,17 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 	}
 }
 
-shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
+shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 {
 	//Loads a level from xml file
 	//Load the file
 	ifstream inFile(filePath);
 
 	if (!inFile)
+	{
+		Logger::Instance().LogMessage("Could not load XML file!", "SCENE_BUILDER", LogSeverity::eError);
 		throw std::exception("Could not load XML file!");
+	}
 
 	//Dump contents of file into a string
 	string xmlContents;
@@ -60,8 +65,8 @@ shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
 	//Get the root node
 	xml_node<>* root = doc.first_node();
 
-	// Initalise the scene
-	auto scene = make_shared<IScene>(string(root->first_attribute("name")->value()));
+	auto scene = make_shared<Scene>(string(root->first_attribute("name")->value()));
+	ComponentBuilder componentBuilder;
 
 	// Build the gameobjects
 	xml_node<>* gameObjectNode = root->first_node("GameObject");
@@ -73,7 +78,7 @@ shared_ptr<IScene> SceneBuilder::BuildScene(string filePath)
 		xml_node<>* component = gameObjectNode->first_node("Component");
 		while (component)
 		{
-			IComponent* newComponent = ComponentBuilder::BuildComponent(component);
+			IComponent* newComponent = componentBuilder.BuildComponent(component);
 			gameObject->AddComponent(newComponent);
 
 			component = component->next_sibling("Component");

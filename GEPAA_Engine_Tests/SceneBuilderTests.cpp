@@ -1,6 +1,7 @@
 #include "CppUnitTest.h"
 
 #include "..\Engine\SceneBuilder.h"
+#include "..\Engine\TransformComponent.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -28,7 +29,7 @@ namespace GEPAA_Engine_Tests
 	public:
 		SceneBuilderFixture(shared_ptr<SystemMessageDispatcher> dispatcher) : SceneBuilder(dispatcher) { }
 
-		shared_ptr<IScene> TestBuildScene(std::string path)
+		shared_ptr<Scene> TestBuildScene(std::string path)
 		{
 			return BuildScene(path);
 		}
@@ -52,10 +53,13 @@ namespace GEPAA_Engine_Tests
 			Assert::AreEqual(scene->GetNumberOfGameObjects(), 1);
 
 			// Test GameObject name is correct
-			Assert::AreEqual(scene->GetGameObjectAtIndex(0)->GetTag(), std::string("TestGameObject"));
+			Assert::AreEqual(scene->GetGameObject(0)->GetTag(), std::string("TestGameObject"));
 
 			// Test Component has been built and added to GameObject
-			Assert::AreEqual(scene->GetGameObjectAtIndex(0)->GetAllComponents().size(), (size_t)1);
+			Assert::AreEqual(scene->GetGameObject(0)->GetAllComponents().size(), (size_t)1);
+
+			// Test Component values have been successfully set
+			Assert::AreEqual(scene->GetGameObject(0)->GetComponent<TransformComponent>()->GetWorldPosition().x, (float)17);
 		}
 	};
 }

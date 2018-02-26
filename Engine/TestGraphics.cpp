@@ -176,6 +176,21 @@ void TestGraphics::BeginFrame()
 {
 }
 
+void TestGraphics::DrawComponent(IDrawableComponent * component)
+{
+	switch (component->Type)
+	{
+		case DrawableComponentType::eTestDrawingType:
+			break;
+
+		// Below is an example of what an implementation might look like
+		/*case DrawableComponentType::eSprite:
+			SpriteRendererComponent* drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
+			DrawSprite(drawComponent.Name, drawComponent.Pos, drawComponent.Rect, drawComponent.Rot, drawComponent.Scale, drawComponent.Offset);
+			break;*/
+	}
+}
+
 void TestGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
 {
 }

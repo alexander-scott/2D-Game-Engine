@@ -8,6 +8,8 @@
 #include "InitaliseGraphicsMessage.h"
 #include "DrawSceneMessage.h"
 
+#include "Scene.h"
+
 #include <wrl.h>
 
 class IGraphics : public ISystem
@@ -73,46 +75,36 @@ public:
 			case SystemMessageType::eGraphicsDrawScene:
 			{
 				DrawSceneMessage & msg = static_cast<DrawSceneMessage&>(message);
-				
-				// Draw all sprites
-				auto spritesToDraw = msg.GetSpriteData();
-				for (int i = 0; i < spritesToDraw.size(); i++)
+				auto gameObjects = msg.GetScene()->GetAllGameObjects();
+
+				// Create render layers
+				map<int, vector<IDrawableComponent*>> renderLayers;
+				for (auto go : gameObjects)
 				{
-					DrawSprite(spritesToDraw[i].Name, 
-						spritesToDraw[i].Pos, 
-						spritesToDraw[i].Rect, 
-						spritesToDraw[i].Rot, 
-						spritesToDraw[i].Scale, 
-						spritesToDraw[i].Offset);
+					go->GetDrawableComponents(renderLayers);
 				}
 
-				// Draw all text
-				auto textToDraw = msg.GetTextData();
-				for (int i = 0; i < textToDraw.size(); i++)
+				// Draw render layers in order
+				map<int, vector<IDrawableComponent*>>::iterator renderLayer;
+				for (renderLayer = renderLayers.begin(); renderLayer != renderLayers.end(); renderLayer++)
 				{
-					DrawText2D(textToDraw[i].Text,
-						textToDraw[i].Pos,
-						textToDraw[i].Rot,
-						textToDraw[i].RgbColours,
-						textToDraw[i].Scale, 
-						textToDraw[i].Offset);
+					for (int i = 0; i < renderLayer->second.size(); i++)
+					{
+						DrawComponent(renderLayer->second[i]);
+					}
 				}
+
 				break;
 			}
 		}
 	}
 
 protected:
-	// Mandatory overrides //
 	virtual void Initalise(class HWNDKey& key) = 0;
 	virtual void Destroy() = 0;
 
 	virtual void EndFrame() = 0;
 	virtual void BeginFrame() = 0;
 
-	virtual void DrawSprite(std::string name, Vec2 pos, RECT* rect, float rot, float scale, Vec2 offset) = 0;
-	virtual void DrawText2D(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset) = 0;
-
-	// Optional overrides //
-	virtual void DrawLine(Vec2 v1, Vec2 v2) { }
+	virtual void DrawComponent(IDrawableComponent* component) = 0;
 };
