@@ -104,7 +104,7 @@ namespace SimpleSampleEditor.EditorHierachy
         {
             int numberOfGameObjects = SceneInterface.GetGameObjectCount(engine);
             IntPtr hierarchy = SceneInterface.PopulateHierarchyItems(engine, numberOfGameObjects);
-            int structSize = Marshal.SizeOf(typeof(HierarchyItem));
+            int structSize = Marshal.SizeOf(typeof(SceneItem));
 
             hierarchyItems.Clear();
             displayedHierarchyIDs.Clear();
@@ -115,7 +115,7 @@ namespace SimpleSampleEditor.EditorHierachy
             {
                 // Parse the data recieved from the engine
                 IntPtr data = new IntPtr(hierarchy.ToInt64() + structSize * i);
-                HierarchyItem hItem = (HierarchyItem)Marshal.PtrToStructure(data, typeof(HierarchyItem));
+                SceneItem hItem = (SceneItem)Marshal.PtrToStructure(data, typeof(SceneItem));
 
                 // Create the item that will be stored in the hierarchy
                 HItem item = new HItem(hItem.GameObjectName, (int)hItem.GameObjectID);

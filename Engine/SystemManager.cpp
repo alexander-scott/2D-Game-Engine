@@ -107,3 +107,8 @@ void SystemManager::SystemsInitalised()
 		s.second->SystemsInitalised();
 	}
 }
+
+std::shared_ptr<ISystem> SystemManager::GetSystem(SystemType type)
+{
+	return _systems.at(type);
+}

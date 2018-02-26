@@ -268,7 +268,9 @@
     <ClInclude Include="DrawSceneMessage.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="Editor.h" />
-    <ClInclude Include="EditorInterface.h" />
+    <ClInclude Include="EditorInputInterface.h" />
+    <ClInclude Include="EditorEngineInterface.h" />
+    <ClInclude Include="EditorSceneInterface.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ICommand.h" />
@@ -310,7 +312,9 @@
   <ItemGroup>
     <ClCompile Include="ComponentBuilder.cpp" />
     <ClCompile Include="Editor.cpp" />
-    <ClCompile Include="EditorInterface.cpp" />
+    <ClCompile Include="EditorInputInterface.cpp" />
+    <ClCompile Include="EditorEngineInterface.cpp" />
+    <ClCompile Include="EditorSceneInterface.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="FrameTimer.cpp" />

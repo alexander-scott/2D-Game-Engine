@@ -9,5 +9,11 @@ public:
 
 	void InitaliseListeners() override;
 	void RecieveMessage(ISystemMessage& message) override;
+
+	void PlayStarted();
+	void PlayStopped();
+
+	void LoadNewScene(const char* filePath);
+	void SaveScene(const char* filePath);
 };
 

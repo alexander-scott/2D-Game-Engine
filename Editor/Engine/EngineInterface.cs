@@ -9,6 +9,12 @@ namespace SimpleSampleEditor.Engine
         public static extern IntPtr InitaliseEngine(IntPtr window);
 
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr GetEditorSystem(IntPtr systemsPtr);
+
+        [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr GetSceneManagerSystem(IntPtr systemsPtr);
+
+        [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void StartUpdateLoop(IntPtr gamePtr);
 
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]

@@ -13,6 +13,8 @@ public:
 
 	void StartUpdateLoop();
 
+	std::shared_ptr<ISystem> GetSystem(SystemType type);
+
 private:
 	void InitaliseSystems();
 	void InitaliseListeners();

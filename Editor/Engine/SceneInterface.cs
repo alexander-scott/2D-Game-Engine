@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace SimpleSampleEditor.Engine
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct HierarchyItem
+    public struct SceneItem
     {
         public uint GameObjectID;
         public uint GameObjectParentID;

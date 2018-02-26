@@ -1,9 +1,11 @@
-#include "EditorInterface.h"
+#include "EditorEngineInterface.h"
 
 #include "Logger.h"
 #include "SystemManager.h"
 
-void * EditorInterface::InitaliseEngine(HWND hWnd)
+#include "Editor.h"
+
+void * EditorEngineInterface::InitaliseEngine(HWND hWnd)
 {
 	try
 	{
@@ -37,9 +39,21 @@ void * EditorInterface::InitaliseEngine(HWND hWnd)
 	return nullptr;
 }
 
+void * EditorEngineInterface::GetEditorSystem(void* systemsPtr)
+{
+	SystemManager* systemManager = static_cast<SystemManager*>(systemsPtr);
+	return systemManager->GetSystem(SystemType::eEditor).get();
+}
+
+void * EditorEngineInterface::GetSceneManagerSystem(void* systemsPtr)
+{
+	SystemManager* systemManager = static_cast<SystemManager*>(systemsPtr);
+	return systemManager->GetSystem(SystemType::eSceneManager).get();
+}
+
 // Reason this is in a seperate function to initalise engine is because we need to 
 // return a pointer to the system manager which will never happen if we started a while loop
-void EditorInterface::StartUpdateLoop(void * systemsPtr)
+void EditorEngineInterface::StartUpdateLoop(void * systemsPtr)
 {
 	SystemManager* systemManager = static_cast<SystemManager*>(systemsPtr);
 
@@ -51,60 +65,32 @@ void EditorInterface::StartUpdateLoop(void * systemsPtr)
 	Logger::Instance().LogMessage("---------------------", LogSeverity::eInfo);
 }
 
-void EditorInterface::LoadNewScene(void * systemsPtr, const char * filePath)
-{
-
-}
-
-void EditorInterface::SaveScene(void * systemsPtr, const char * filePath)
-{
-}
-
-void EditorInterface::PlayStarted(void * systemsPtr)
-{
-}
-
-void EditorInterface::PlayStopped(void * systemsPtr)
-{
-}
-
-void EditorInterface::CleanD3D(void * systemsPtr)
+void EditorEngineInterface::CleanD3D(void * systemsPtr)
 {
 	SystemManager* systemManager = static_cast<SystemManager*>(systemsPtr);
 	delete systemManager;
 }
 
-void EditorInterface::MouseMove(void * systemsPtr, int xPos, int yPos)
+void EditorEngineInterface::LoadNewScene(void * editorPtr, const char * filePath)
 {
-	
+	Editor* editorSystem = static_cast<Editor*>(editorPtr);
+	editorSystem->LoadNewScene(filePath);
 }
 
-void EditorInterface::LeftMouseClick(void * systemsPtr, int xPos, int yPos)
+void EditorEngineInterface::SaveScene(void * editorPtr, const char * filePath)
 {
-	
+	Editor* editorSystem = static_cast<Editor*>(editorPtr);
+	editorSystem->SaveScene(filePath);
 }
 
-void EditorInterface::LeftMouseRelease(void * systemsPtr, int xPos, int yPos)
+void EditorEngineInterface::PlayStarted(void * editorPtr)
 {
-	
+	Editor* editorSystem = static_cast<Editor*>(editorPtr);
+	editorSystem->PlayStarted();
 }
 
-void EditorInterface::RightMouseClick(void * systemsPtr, int xPos, int yPos)
+void EditorEngineInterface::PlayStopped(void * editorPtr)
 {
-	
-}
-
-void EditorInterface::RightMouseRelease(void * systemsPtr, int xPos, int yPos)
-{
-
-}
-
-void EditorInterface::KeyDown(void * systemsPtr, int keyCode)
-{
-	
-}
-
-void EditorInterface::KeyUp(void * systemsPtr, int keyCode)
-{
-	
+	Editor* editorSystem = static_cast<Editor*>(editorPtr);
+	editorSystem->PlayStopped();
 }

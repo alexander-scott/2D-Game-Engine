@@ -217,11 +217,17 @@
     <ClInclude Include="ISystemToGameObjectMessage.h">
       <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
-    <ClInclude Include="EditorInterface.h">
-      <Filter>Engine\EditorInterface</Filter>
-    </ClInclude>
     <ClInclude Include="Editor.h">
       <Filter>Engine\Systems\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorInputInterface.h">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorEngineInterface.h">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorSceneInterface.h">
+      <Filter>Engine\EditorInterface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -273,11 +279,17 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Engine\Systems\SceneManagement</Filter>
     </ClCompile>
-    <ClCompile Include="EditorInterface.cpp">
-      <Filter>Engine\EditorInterface</Filter>
-    </ClCompile>
     <ClCompile Include="Editor.cpp">
       <Filter>Engine\Systems\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorInputInterface.cpp">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorEngineInterface.cpp">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSceneInterface.cpp">
+      <Filter>Engine\EditorInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

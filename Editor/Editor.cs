@@ -14,18 +14,14 @@ namespace SimpleSampleEditor
 {
     public partial class Editor : Form
     {
-        private string mResoucesPath;
-
-        /// <summary>
-        /// Pointer to the instance of the Engine. Used to make sure all calls to the engine use the same instance of the Game
-        /// </summary>
-        private IntPtr mEngine;
-
+        private IntPtr _systemManager;
         private IntPtr _editorSystem;
+        private IntPtr _sceneSystem;
 
         private Hierachy mHierachy;
 
         private bool mPlaying = false;
+        private string mResoucesPath;
 
         public Editor()
         {
@@ -71,33 +67,35 @@ namespace SimpleSampleEditor
             if (!mPlaying)
             {
                 mPlaying = true;
-                EngineInterface.PlayStarted(mEngine);
-                mHierachy.CreateHierachyList(mEngine); // Update hierarchy
+                EngineInterface.PlayStarted(_systemManager);
+                mHierachy.CreateHierachyList(_sceneSystem); // Update hierarchy
             }
             else
             {
                 mPlaying = false;
-                EngineInterface.PlayStopped(mEngine);
-                mHierachy.CreateHierachyList(mEngine); // Update hierarchy
+                EngineInterface.PlayStopped(_systemManager);
+                mHierachy.CreateHierachyList(_sceneSystem); // Update hierarchy
             }
         }
 
         private void EditorLoading(object sender, EventArgs e)
         {
-            mEngine = EngineInterface.InitaliseEngine(panel1.Handle);
+            _systemManager = EngineInterface.InitaliseEngine(panel1.Handle);
+
+            _editorSystem = EngineInterface.GetEditorSystem(_systemManager);
+            _sceneSystem = EngineInterface.GetSceneManagerSystem(_systemManager);
+
             panel1.Focus();
         }
 
         private void EditorLoaded(object sender, EventArgs e)
         {
-            mHierachy.CreateHierachyList(mEngine);
-
-            //EngineInterface.StartUpdateLoop(mEngine);  
+            mHierachy.CreateHierachyList(_sceneSystem);
         }
 
         private void EditorClosing(object sender, FormClosingEventArgs e)
         {
-            EngineInterface.CleanD3D(mEngine);
+            EngineInterface.CleanD3D(_systemManager);
         }
 
         #region Basic Input
@@ -107,9 +105,9 @@ namespace SimpleSampleEditor
             Point point = panel1.PointToClient(Cursor.Position);
 
             if (e.Button == MouseButtons.Left)
-                EngineInterface.LeftMouseClick(mEngine, point.X, point.Y);
+                EngineInterface.LeftMouseClick(_systemManager, point.X, point.Y);
             else
-                EngineInterface.RightMouseClick(mEngine, point.X, point.Y);
+                EngineInterface.RightMouseClick(_systemManager, point.X, point.Y);
         }
 
         private void PanelMouseRelease(object sender, MouseEventArgs e)
@@ -117,25 +115,25 @@ namespace SimpleSampleEditor
             Point point = panel1.PointToClient(Cursor.Position);
 
             if (e.Button == MouseButtons.Left)
-                EngineInterface.LeftMouseRelease(mEngine, point.X, point.Y);
+                EngineInterface.LeftMouseRelease(_systemManager, point.X, point.Y);
             else
-                EngineInterface.RightMouseRelease(mEngine, point.X, point.Y);
+                EngineInterface.RightMouseRelease(_systemManager, point.X, point.Y);
         }
 
         private void PanelMouseMove(object sender, MouseEventArgs e)
         {
             Point point = panel1.PointToClient(Cursor.Position);
-            EngineInterface.MouseMove(mEngine, point.X, point.Y);
+            EngineInterface.MouseMove(_systemManager, point.X, point.Y);
         }
 
         private void KeyboardKeyUp(object sender, KeyEventArgs e)
         {
-            EngineInterface.KeyUp(mEngine, e.KeyValue);
+            EngineInterface.KeyUp(_systemManager, e.KeyValue);
         }
 
         private void KeyboardKeyDown(object sender, KeyEventArgs e)
         {
-            EngineInterface.KeyDown(mEngine, e.KeyValue);
+            EngineInterface.KeyDown(_systemManager, e.KeyValue);
         }
 
         #endregion
@@ -149,8 +147,8 @@ namespace SimpleSampleEditor
             };
             if (theDialog.ShowDialog() == DialogResult.OK)
             {
-                EngineInterface.LoadNewScene(mEngine, theDialog.FileName);
-                mHierachy.CreateHierachyList(mEngine);
+                EngineInterface.LoadNewScene(_systemManager, theDialog.FileName);
+                mHierachy.CreateHierachyList(_systemManager);
             }
         }
 
