@@ -1,7 +1,7 @@
 #include "EditorEngineInterface.h"
 
 #include "Logger.h"
-#include "SystemManager.h"
+#include "Engine.h"
 
 #include "Editor.h"
 
@@ -11,7 +11,7 @@ void * EditorEngineInterface::InitaliseEngine(HWND hWnd)
 	{
 		Logger::Instance().LogMessage("Initalising Systems", LogSeverity::eInfo);
 
-		return new SystemManager(hWnd);
+		return new Engine(hWnd);
 	}
 	catch (const CustomException& e)
 	{
@@ -41,13 +41,13 @@ void * EditorEngineInterface::InitaliseEngine(HWND hWnd)
 
 void * EditorEngineInterface::GetEditorSystem(void* systemsPtr)
 {
-	SystemManager* systemManager = static_cast<SystemManager*>(systemsPtr);
+	Engine* systemManager = static_cast<Engine*>(systemsPtr);
 	return systemManager->GetSystem(SystemType::eEditor).get();
 }
 
 void * EditorEngineInterface::GetSceneManagerSystem(void* systemsPtr)
 {
-	SystemManager* systemManager = static_cast<SystemManager*>(systemsPtr);
+	Engine* systemManager = static_cast<Engine*>(systemsPtr);
 	return systemManager->GetSystem(SystemType::eSceneManager).get();
 }
 
@@ -55,7 +55,7 @@ void * EditorEngineInterface::GetSceneManagerSystem(void* systemsPtr)
 // return a pointer to the system manager which will never happen if we started a while loop
 void EditorEngineInterface::StartUpdateLoop(void * systemsPtr)
 {
-	SystemManager* systemManager = static_cast<SystemManager*>(systemsPtr);
+	Engine* systemManager = static_cast<Engine*>(systemsPtr);
 
 	Logger::Instance().LogMessage("Starting main update loop", LogSeverity::eInfo);
 
@@ -67,7 +67,7 @@ void EditorEngineInterface::StartUpdateLoop(void * systemsPtr)
 
 void EditorEngineInterface::CleanD3D(void * systemsPtr)
 {
-	SystemManager* systemManager = static_cast<SystemManager*>(systemsPtr);
+	Engine* systemManager = static_cast<Engine*>(systemsPtr);
 	delete systemManager;
 }
 

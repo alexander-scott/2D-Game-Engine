@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="..\Engine\ComponentBuilder.cpp" />
     <ClCompile Include="..\Engine\DXErr.cpp" />
+    <ClCompile Include="..\Engine\Editor.cpp" />
     <ClCompile Include="..\Engine\Engine.cpp" />
     <ClCompile Include="..\Engine\FrameTimer.cpp" />
     <ClCompile Include="..\Engine\GameObject.cpp" />
@@ -170,12 +171,10 @@
     <ClCompile Include="..\Engine\Scene.cpp" />
     <ClCompile Include="..\Engine\SceneBuilder.cpp" />
     <ClCompile Include="..\Engine\SceneManager.cpp" />
-    <ClCompile Include="..\Engine\SystemManager.cpp" />
     <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp" />
     <ClCompile Include="..\Engine\TestCommand.cpp" />
     <ClCompile Include="..\Engine\TestGraphics.cpp" />
     <ClCompile Include="..\Engine\TransformComponent.cpp" />
-    <ClCompile Include="EngineTests.cpp" />
     <ClCompile Include="GameObjectTests.cpp" />
     <ClCompile Include="MessagingTests.cpp" />
     <ClCompile Include="SceneBuilderTests.cpp" />
@@ -189,6 +188,7 @@
     <ClInclude Include="..\Engine\DrawSpriteMessage.h" />
     <ClInclude Include="..\Engine\DrawTextMessage.h" />
     <ClInclude Include="..\Engine\DXErr.h" />
+    <ClInclude Include="..\Engine\Editor.h" />
     <ClInclude Include="..\Engine\Engine.h" />
     <ClInclude Include="..\Engine\FrameTimer.h" />
     <ClInclude Include="..\Engine\GameObject.h" />
@@ -219,7 +219,6 @@
     <ClInclude Include="..\Engine\SceneBuilder.h" />
     <ClInclude Include="..\Engine\SceneManager.h" />
     <ClInclude Include="..\Engine\SetParentTransformMessage.h" />
-    <ClInclude Include="..\Engine\SystemManager.h" />
     <ClInclude Include="..\Engine\SystemMessageDispatcher.h" />
     <ClInclude Include="..\Engine\SystemMessageListener.h" />
     <ClInclude Include="..\Engine\SystemMessageMessenger.h" />
