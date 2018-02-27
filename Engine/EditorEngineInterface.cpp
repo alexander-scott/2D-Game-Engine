@@ -41,25 +41,25 @@ void * EditorEngineInterface::InitaliseEngine(HWND hWnd)
 
 void * EditorEngineInterface::GetEditorSystem(void* systemsPtr)
 {
-	Engine* systemManager = static_cast<Engine*>(systemsPtr);
-	return systemManager->GetSystem(SystemType::eEditor).get();
+	Engine* engine = static_cast<Engine*>(systemsPtr);
+	return engine->GetSystem(SystemType::eEditor).get();
 }
 
 void * EditorEngineInterface::GetSceneManagerSystem(void* systemsPtr)
 {
-	Engine* systemManager = static_cast<Engine*>(systemsPtr);
-	return systemManager->GetSystem(SystemType::eSceneManager).get();
+	Engine* engine = static_cast<Engine*>(systemsPtr);
+	return engine->GetSystem(SystemType::eSceneManager).get();
 }
 
 // Reason this is in a seperate function to initalise engine is because we need to 
 // return a pointer to the system manager which will never happen if we started a while loop
 void EditorEngineInterface::StartUpdateLoop(void * systemsPtr)
 {
-	Engine* systemManager = static_cast<Engine*>(systemsPtr);
+	Engine* engine = static_cast<Engine*>(systemsPtr);
 
 	Logger::Instance().LogMessage("Starting main update loop", LogSeverity::eInfo);
 
-	systemManager->StartUpdateLoop();
+	engine->StartUpdateLoop();
 
 	Logger::Instance().LogMessage("Program shutting down", LogSeverity::eInfo);
 	Logger::Instance().LogMessage("---------------------", LogSeverity::eInfo);
@@ -67,30 +67,30 @@ void EditorEngineInterface::StartUpdateLoop(void * systemsPtr)
 
 void EditorEngineInterface::CleanD3D(void * systemsPtr)
 {
-	Engine* systemManager = static_cast<Engine*>(systemsPtr);
-	delete systemManager;
+	Engine* engine = static_cast<Engine*>(systemsPtr);
+	delete engine;
 }
 
 void EditorEngineInterface::LoadNewScene(void * editorPtr, const char * filePath)
 {
-	Editor* editorSystem = static_cast<Editor*>(editorPtr);
-	editorSystem->LoadNewScene(filePath);
+	Editor* engine = static_cast<Editor*>(editorPtr);
+	engine->LoadNewScene(filePath);
 }
 
 void EditorEngineInterface::SaveScene(void * editorPtr, const char * filePath)
 {
-	Editor* editorSystem = static_cast<Editor*>(editorPtr);
-	editorSystem->SaveScene(filePath);
+	Editor* engine = static_cast<Editor*>(editorPtr);
+	engine->SaveScene(filePath);
 }
 
 void EditorEngineInterface::PlayStarted(void * editorPtr)
 {
-	Editor* editorSystem = static_cast<Editor*>(editorPtr);
-	editorSystem->PlayStarted();
+	Editor* engine = static_cast<Editor*>(editorPtr);
+	engine->PlayStarted();
 }
 
 void EditorEngineInterface::PlayStopped(void * editorPtr)
 {
-	Editor* editorSystem = static_cast<Editor*>(editorPtr);
-	editorSystem->PlayStopped();
+	Editor* engine = static_cast<Editor*>(editorPtr);
+	engine->PlayStopped();
 }

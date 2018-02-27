@@ -2,6 +2,7 @@
 
 #include "SceneBuilder.h"
 #include "SceneManager.h"
+#include "SceneSaver.h"
 #include "TestGraphics.h"
 #include "InputHandler.h"
 #include "MainWindow.h"
@@ -27,6 +28,10 @@ Engine::Engine(HWND hWnd)
 	// Initalise the Editor system
 	auto editorSystem = make_shared<Editor>(_messageDispatcher);
 	_systems.insert(std::make_pair(editorSystem->SysType, editorSystem));
+
+	// Initalise the SceneSaver system
+	auto sceneSaverSystem = make_shared<SceneSaver>(_messageDispatcher);
+	_systems.insert(std::make_pair(sceneSaverSystem->SysType, sceneSaverSystem));
 }
 
 Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)

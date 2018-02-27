@@ -201,7 +201,7 @@ void TestGraphics::Initalise(HWNDKey& key)
 		throw GFX_EXCEPTION(hr, L"Creating sampler state");
 	}
 
-	std::string fontFile = "..\\Resources\\fonts\\italic.spritefont";
+	std::string fontFile = "..\\..\\..\\..\\Resources\\fonts\\italic.spritefont";
 	std::wstring widestr = std::wstring(fontFile.begin(), fontFile.end());
 	const wchar_t* szFile = widestr.c_str();
 	_fonts.reset(new SpriteFont(_device.Get(), szFile));
