@@ -1,5 +1,7 @@
 #include "SceneSaver.h"
 
+#include "ComponentSaver.h"
+
 #include "SaveSceneMessage.h"
 
 SceneSaver::SceneSaver(std::shared_ptr<SystemMessageDispatcher> dispatcher)
@@ -52,6 +54,8 @@ void SceneSaver::BuildXMLFile(shared_ptr<Scene> scene)
 	root->append_attribute(doc.allocate_attribute("name", scene->GetSceneName().c_str()));
 	doc.append_node(root);
 
+	ComponentSaver componentSaver;
+
 	// For every gameobject in the scene
 	for (int i = 0; i < scene->GetNumberOfGameObjects(); i++)
 	{
@@ -59,10 +63,19 @@ void SceneSaver::BuildXMLFile(shared_ptr<Scene> scene)
 		gameObject->append_attribute(doc.allocate_attribute("tag", scene->GetGameObject(i)->GetTag().c_str()));
 		gameObject->append_attribute(doc.allocate_attribute("guid", GUIDToString(&scene->GetGameObject(i)->GetID()).c_str()));
 
+		// For every component the gameobject has
 		auto components = scene->GetGameObject(i)->GetAllComponents();
 		for (int j = 0; j < components.size(); j++)
 		{
 			xml_node<>* component = doc.allocate_node(node_element, "Component");
+
+			auto componentValues = componentSaver.SaveComponent(components[j]);
+			for (auto value : componentValues)
+			{
+				component->append_attribute(doc.allocate_attribute(value.first.c_str(), value.second.c_str()));
+			}
+
+			gameObject->append_node(component);
 		}
 
 		root->append_node(gameObject);

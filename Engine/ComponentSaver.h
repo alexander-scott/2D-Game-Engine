@@ -1,25 +1,21 @@
 #pragma once
 
-#include "rapidxml.hpp"
-
 #include "ComponentFactory.h"
 
 #include <typeindex>
 
-using namespace rapidxml;
-
 // every function pointer will be stored as this type
 typedef void(*voidFunctionType)(void);
 
-class ComponentBuilder
+class ComponentSaver
 {
 public:
 	struct FunctionMapper
 	{
-		std::map<std::string, std::pair<voidFunctionType, std::type_index>> m1;
+		std::map<ComponentType, std::pair<voidFunctionType, std::type_index>> m1;
 
 		template<typename T>
-		void Insert(std::string s1, T f1)
+		void Insert(ComponentType s1, T f1)
 		{
 			auto tt = std::type_index(typeid(f1));
 			m1.insert(std::make_pair(s1,
@@ -27,7 +23,7 @@ public:
 		}
 
 		template<typename T, typename... Args>
-		T CallFunction(std::string s1, Args&&... args)
+		T CallFunction(ComponentType s1, Args&&... args)
 		{
 			auto mapIter = m1.find(s1);
 			/*chk if not end*/
@@ -42,10 +38,11 @@ public:
 		}
 	};
 
-	ComponentBuilder();
+	ComponentSaver();
 
-	IComponent * BuildComponent(xml_node<>* node);
+	map<string, string> SaveComponent(IComponent* component);
 
 private:
 	FunctionMapper functionMapper;
 };
+
