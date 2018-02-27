@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "TestGraphics.h"
 #include "InputHandler.h"
+#include "MainWindow.h"
 #include "Editor.h"
 
 #include "RequestBuildSceneMessage.h"
@@ -12,7 +13,7 @@ Engine::Engine(HWND hWnd)
 {
 	_messageDispatcher = make_shared<SystemMessageDispatcher>();
 
-	// Initalise MainWindow system
+	// Initalise MainWindow system with a HWND
 	_mainWindow = make_shared<MainWindow>(hWnd, _messageDispatcher);
 	_systems.insert(std::make_pair(_mainWindow->SysType,_mainWindow));
 
@@ -32,7 +33,7 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 {
 	_messageDispatcher = make_shared<SystemMessageDispatcher>();
 
-	// Initalise MainWindow system
+	// Initalise MainWindow system with a HINSTANCE
 	_mainWindow = make_shared<MainWindow>(hInst, pArgs, _messageDispatcher);
 	_systems.insert(std::make_pair(_mainWindow->SysType, _mainWindow));
 

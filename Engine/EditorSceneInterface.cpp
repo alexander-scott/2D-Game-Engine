@@ -32,7 +32,7 @@ SceneItem* EditorSceneInterface::PopulateHierarchyItems(void* sceneManagerPtr, i
 		items[i].GameObjectName = result; // Set the GameObject's name
 	}
 
-	return nullptr;
+	return items;
 }
 
 void EditorSceneInterface::FreeHierarchyMemory(void * hierarchy)

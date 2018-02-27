@@ -16,7 +16,7 @@ namespace SimpleSampleEditor
     {
         private IntPtr _systemManager;
         private IntPtr _editorSystem;
-        private IntPtr _sceneSystem;
+        private IntPtr _sceneManagerSystem;
 
         private Hierachy mHierachy;
 
@@ -68,13 +68,13 @@ namespace SimpleSampleEditor
             {
                 mPlaying = true;
                 EngineInterface.PlayStarted(_systemManager);
-                mHierachy.CreateHierachyList(_sceneSystem); // Update hierarchy
+                mHierachy.CreateHierachyList(_sceneManagerSystem); // Update hierarchy
             }
             else
             {
                 mPlaying = false;
                 EngineInterface.PlayStopped(_systemManager);
-                mHierachy.CreateHierachyList(_sceneSystem); // Update hierarchy
+                mHierachy.CreateHierachyList(_sceneManagerSystem); // Update hierarchy
             }
         }
 
@@ -83,14 +83,14 @@ namespace SimpleSampleEditor
             _systemManager = EngineInterface.InitaliseEngine(panel1.Handle);
 
             _editorSystem = EngineInterface.GetEditorSystem(_systemManager);
-            _sceneSystem = EngineInterface.GetSceneManagerSystem(_systemManager);
+            _sceneManagerSystem = EngineInterface.GetSceneManagerSystem(_systemManager);
 
             panel1.Focus();
         }
 
         private void EditorLoaded(object sender, EventArgs e)
         {
-            mHierachy.CreateHierachyList(_sceneSystem);
+            mHierachy.CreateHierachyList(_sceneManagerSystem);
         }
 
         private void EditorClosing(object sender, FormClosingEventArgs e)
@@ -147,8 +147,8 @@ namespace SimpleSampleEditor
             };
             if (theDialog.ShowDialog() == DialogResult.OK)
             {
-                EngineInterface.LoadNewScene(_systemManager, theDialog.FileName);
-                mHierachy.CreateHierachyList(_systemManager);
+                EngineInterface.LoadNewScene(_editorSystem, theDialog.FileName);
+                mHierachy.CreateHierachyList(_sceneManagerSystem);
             }
         }
 

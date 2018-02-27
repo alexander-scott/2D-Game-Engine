@@ -2,9 +2,9 @@
 
 #include "ISystem.h"
 
-#include "MainWindow.h"
-
 #include <chrono>
+
+class MainWindow;
 
 class Engine
 {
