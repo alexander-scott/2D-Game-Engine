@@ -3,12 +3,13 @@
 #include "CustomException.h"
 #include <string>
 #include <Dbt.h>
-
 #include "ISystem.h"
 
 #include "Consts.h"
 
 // for granting special access to hWnd only for Graphics constructor
+
+
 class HWNDKey
 {
 public:
