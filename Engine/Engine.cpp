@@ -22,8 +22,6 @@ Engine::Engine(HWND hWnd)
 	_lag = 0;
 
 	InitaliseSystems();
-	InitaliseListeners();
-	SystemsInitalised();
 
 	// Initalise the Editor system
 	auto editorSystem = make_shared<Editor>(_messageDispatcher);
@@ -32,6 +30,9 @@ Engine::Engine(HWND hWnd)
 	// Initalise the SceneSaver system
 	auto sceneSaverSystem = make_shared<SceneSaver>(_messageDispatcher);
 	_systems.insert(std::make_pair(sceneSaverSystem->SysType, sceneSaverSystem));
+
+	InitaliseListeners();
+	SystemsInitalised();
 }
 
 Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)

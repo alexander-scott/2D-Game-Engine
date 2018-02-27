@@ -9,6 +9,7 @@
 SceneSaver::SceneSaver(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: ISystem(SystemType::eSceneSaver, dispatcher)
 {
+	
 }
 
 void SceneSaver::InitaliseListeners()

@@ -16,6 +16,7 @@ SceneManager::SceneManager(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 void SceneManager::InitaliseListeners()
 {
 	SubscribeToMessageType(SystemMessageType::eBuildSceneMessage);
+	SubscribeToMessageType(SystemMessageType::eRequestSaveSceneMessage);
 	SubscribeToMessageType(SystemMessageType::eDrawScene);
 	SubscribeToMessageType(SystemMessageType::eUpdateScene);
 	SubscribeToMessageType(SystemMessageType::eSendMessageToGameObjects);
