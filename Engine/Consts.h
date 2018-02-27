@@ -27,6 +27,7 @@ enum SystemType
 	eEditor,
 	eSceneManager,
 	eSceneBuilder,
+	eSceneSaver,
 	eGraphics,
 	eInputHandler
 };
@@ -38,9 +39,10 @@ enum SystemMessageType
 	eUpdateScene,
 	eSendMessageToGameObjects,
 
-	// Scene build messages
+	// Scene build/save messages
 	eRequestBuildSceneMessage,
 	eBuildSceneMessage,
+	eSaveSceneMessage,
 
 	// Graphics messages
 	eGraphicsInitalise,

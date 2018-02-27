@@ -35,12 +35,6 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 #pragma warning( push )
 #pragma warning( disable : 4477)
 
-std::string guidToString(GUID guid) {
-	std::array<char, 40> output;
-	snprintf(output.data(), output.size(), "{%08X-%04hX-%04hX-%02X%02X-%02X%02X%02X%02X%02X%02X}", guid.Data1, guid.Data2, guid.Data3, guid.Data4[0], guid.Data4[1], guid.Data4[2], guid.Data4[3], guid.Data4[4], guid.Data4[5], guid.Data4[6], guid.Data4[7]);
-	return std::string(output.data());
-}
-
 GUID stringToGUID(const std::string& guid) {
 	GUID output;
 	const auto ret = sscanf_s(guid.c_str(), "{%8X-%4hX-%4hX-%2hX%2hX-%2hX%2hX%2hX%2hX%2hX%2hX}", &output.Data1, &output.Data2, &output.Data3, &output.Data4[0], &output.Data4[1], &output.Data4[2], &output.Data4[3], &output.Data4[4], &output.Data4[5], &output.Data4[6], &output.Data4[7]);

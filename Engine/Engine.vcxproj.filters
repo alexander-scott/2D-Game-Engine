@@ -80,6 +80,9 @@
     <Filter Include="Engine\Systems\Editor">
       <UniqueIdentifier>{7aa82932-b61f-4bce-8d03-2b8ec4c9a855}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems\SceneSaving">
+      <UniqueIdentifier>{2eccfda8-6f7a-4ab5-b524-83434fe0e948}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -223,6 +226,12 @@
     <ClInclude Include="Engine.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="SceneSaver.h">
+      <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveSceneMessage.h">
+      <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -281,6 +290,9 @@
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneSaver.cpp">
+      <Filter>Engine\Systems\SceneSaving</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
