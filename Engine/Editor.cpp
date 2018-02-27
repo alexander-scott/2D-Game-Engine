@@ -1,6 +1,7 @@
 #include "Editor.h"
 
 #include "RequestBuildSceneMessage.h"
+#include "RequestSaveSceneMessage.h"
 
 Editor::Editor(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: ISystem(SystemType::eEditor, dispatcher)
@@ -37,4 +38,6 @@ void Editor::LoadNewScene(const char * filePath)
 
 void Editor::SaveScene(const char * filePath)
 {
+	RequestSaveSceneMessage message(filePath);
+	SendMessageToDispatcher(message);
 }

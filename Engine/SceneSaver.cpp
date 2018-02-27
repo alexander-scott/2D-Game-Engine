@@ -4,6 +4,8 @@
 
 #include "SaveSceneMessage.h"
 
+#include <fstream>
+
 SceneSaver::SceneSaver(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: ISystem(SystemType::eSceneSaver, dispatcher)
 {
@@ -19,8 +21,7 @@ void SceneSaver::RecieveMessage(ISystemMessage & message)
 	if (message.Type == SystemMessageType::eSaveSceneMessage)
 	{
 		SaveSceneMessage& msg = static_cast<SaveSceneMessage&>(message);
-
-
+		SaveScene(msg.GetScene(), msg.GetFilePath());
 	}
 }
 
@@ -41,8 +42,10 @@ std::string GUIDToString(GUID *guid) {
 
 #pragma warning( pop ) 
 
-void SceneSaver::BuildXMLFile(shared_ptr<Scene> scene)
+void SceneSaver::SaveScene(shared_ptr<Scene> scene, string filePath)
 {
+	std::ofstream theFile(filePath);
+
 	xml_document<> doc;
 	xml_node<>* decl = doc.allocate_node(node_declaration);
 	decl->append_attribute(doc.allocate_attribute("version", "1.0"));
@@ -80,8 +83,8 @@ void SceneSaver::BuildXMLFile(shared_ptr<Scene> scene)
 
 		root->append_node(gameObject);
 	}
-}
 
-void SceneSaver::SaveScene(string filePath)
-{
+	theFile << doc;
+	theFile.close();
+	doc.clear();
 }

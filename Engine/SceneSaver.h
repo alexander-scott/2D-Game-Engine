@@ -4,6 +4,7 @@
 
 #include "ISystem.h"
 
+#include "rapidxml_print.hpp"
 #include "rapidxml.hpp"
 
 using namespace rapidxml;
@@ -17,7 +18,6 @@ public:
 	void RecieveMessage(ISystemMessage& message) override;
 
 private:
-	void BuildXMLFile(shared_ptr<Scene> scene);
-	void SaveScene(string filePath);
+	void SaveScene(shared_ptr<Scene> scene, string filePath);
 };
 

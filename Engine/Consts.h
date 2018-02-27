@@ -41,6 +41,7 @@ enum SystemMessageType
 
 	// Scene build/save messages
 	eRequestBuildSceneMessage,
+	eRequestSaveSceneMessage,
 	eBuildSceneMessage,
 	eSaveSceneMessage,
 

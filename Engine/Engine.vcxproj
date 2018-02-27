@@ -294,6 +294,7 @@
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="RequestBuildSceneMessage.h" />
+    <ClInclude Include="RequestSaveSceneMessage.h" />
     <ClInclude Include="SaveSceneMessage.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneSaver.h" />

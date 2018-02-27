@@ -2,6 +2,10 @@
 
 #include "BuildSceneMessage.h"
 #include "DrawSceneMessage.h"
+
+#include "RequestSaveSceneMessage.h"
+#include "SaveSceneMessage.h"
+
 #include "ISystemToGameObjectMessage.h"
 
 SceneManager::SceneManager(std::shared_ptr<SystemMessageDispatcher> dispatcher)
@@ -25,6 +29,17 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 		{
 			BuildSceneMessage & msg = static_cast<BuildSceneMessage&>(message);
 			_currentScene = msg.GetScene();
+			break;
+		}
+
+		case SystemMessageType::eRequestSaveSceneMessage:
+		{
+			if (_currentScene == nullptr)
+				throw std::exception("CURRENT SCENE NOT INITALISED");
+
+			RequestSaveSceneMessage& msg = static_cast<RequestSaveSceneMessage&>(message);
+			SaveSceneMessage newMsg(_currentScene, msg.FilePath);
+			SendMessageToDispatcher(newMsg);
 			break;
 		}
 

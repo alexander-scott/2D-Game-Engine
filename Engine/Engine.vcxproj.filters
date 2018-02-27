@@ -235,6 +235,9 @@
     <ClInclude Include="ComponentSaver.h">
       <Filter>Engine\Systems\SceneSaving</Filter>
     </ClInclude>
+    <ClInclude Include="RequestSaveSceneMessage.h">
+      <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

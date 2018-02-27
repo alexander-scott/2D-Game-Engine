@@ -142,7 +142,7 @@ namespace SimpleSampleEditor
         {
             OpenFileDialog theDialog = new OpenFileDialog
             {
-                Title = "Open Scene",
+                Title = "Load Scene",
                 Filter = "XML files|*.xml"
             };
             if (theDialog.ShowDialog() == DialogResult.OK)
@@ -166,7 +166,7 @@ namespace SimpleSampleEditor
             };
             if (theDialog.ShowDialog() == DialogResult.OK)
             {
-
+                EngineInterface.SaveScene(_editorSystem, theDialog.FileName);
             }
         }
     }

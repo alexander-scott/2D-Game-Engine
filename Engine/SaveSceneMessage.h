@@ -11,6 +11,7 @@ public:
 		: ISystemMessage(SystemMessageType::eBuildSceneMessage), _scene(scene), _filePath(filePath) { }
 
 	std::shared_ptr<Scene> GetScene() { return _scene; }
+	std::string GetFilePath() { return _filePath; }
 
 private:
 	std::string					_filePath;
