@@ -79,7 +79,7 @@ void MainWindow::InitaliseListeners()
 
 void MainWindow::RecieveMessage(ISystemMessage & message)
 {
-	// No messages to recieve
+	// No messages to receive
 }
 
 void MainWindow::SystemsInitalised()
@@ -114,6 +114,13 @@ bool MainWindow::ProcessMessage()
 		{
 			return false;
 		}
+		
+		//else
+			//testgraphics update
+			//testgraphics draw
+		
+
+
 	}
 	return true;
 }

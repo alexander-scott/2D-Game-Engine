@@ -30,6 +30,10 @@ public:
 
 	IGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
 		: ISystem(SystemType::eGraphics, dispatcher) { }
+	
+	IGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher, HWNDKey &key)
+		: ISystem(SystemType::eGraphics, dispatcher) { }
+
 
 	void InitaliseListeners() override
 	{
