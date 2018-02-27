@@ -1,179 +1,213 @@
 #include "TestGraphics.h"
 
-#include <DirectXMath.h>
-#pragma comment(lib, "d3d11.lib")
+#include "MainWindow.h"
+#include "DXErr.h"
+#include <assert.h>
+#include <string>
+#include <array>
+
+namespace FramebufferShaders
+{
+	#include "FramebufferPS.shh"
+	#include "FramebufferVS.shh"
+}
+
+#pragma comment( lib,"d3d11.lib" )
+
 #define GFX_EXCEPTION( hr,note ) TestGraphics::Exception( hr,note,_CRT_WIDE(__FILE__),__LINE__ )
 
-class HWNDKey
-{
-public:
-	HWNDKey(const HWNDKey&) = delete;
-	HWNDKey& operator=(HWNDKey&) = delete;
-	HWNDKey() = default;
-	HWND hWnd = nullptr;
-};
+using Microsoft::WRL::ComPtr;
 
-TestGraphics::TestGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher, HWNDKey & key) : IGraphics(dispatcher)
+TestGraphics::TestGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher)
+	: IGraphics(dispatcher)
 {
-	//assert(key.hWnd != nullptr);
-	HWND hWnd = key.hWnd;
-
 }
 
-TestGraphics::~TestGraphics()
+void TestGraphics::Initalise(HWNDKey& key)
 {
-	Destroy();
-}
-
-void TestGraphics::Initalise(HWNDKey & key)
-{
-	//TODO : make testgraphic friend with main window + use key
-	//Initialization of the Dxdevice
-		//nb : SCREEN_WIDTH & SCREEN_HEIGHT : dimensions of the window
 	assert(key.hWnd != nullptr);
-	
-	HWND hWnd = key.hWnd;
-	
-	RECT rc;
-	GetClientRect(hWnd, &rc);
-	UINT width = rc.right - rc.left;
-	UINT height = rc.bottom - rc.top;
 
-	HRESULT hr;
+	// Create device and swap chain
+	DXGI_SWAP_CHAIN_DESC sd = {};
+	sd.BufferCount = 1;
+	sd.BufferDesc.Width = SCREEN_WIDTH;
+	sd.BufferDesc.Height = SCREEN_HEIGHT;
+	sd.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+	sd.BufferDesc.RefreshRate.Numerator = 1;
+	sd.BufferDesc.RefreshRate.Denominator = 60;
+	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+	sd.OutputWindow = key.hWnd;
+	sd.SampleDesc.Count = 1;
+	sd.SampleDesc.Quality = 0;
+	sd.Windowed = TRUE;
 
+	HRESULT				hr;
+	UINT				createFlags = 0u;
+#ifdef USE_D3D_DEBUG_LAYER
+#ifdef _DEBUG
+	createFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
+#endif
 
-	//Device flag, driver types & feature levels
-
-	UINT createDeviceFlags = 0;
-	#ifdef _DEBUG
-		createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
-	#endif
-
-
-	D3D_DRIVER_TYPE driverTypes[] =
-	{
+	// Create device buffers
+	if (FAILED(hr = D3D11CreateDeviceAndSwapChain(
+		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
-		D3D_DRIVER_TYPE_WARP,
-		D3D_DRIVER_TYPE_REFERENCE,
-	};
-	UINT numDriverTypes = ARRAYSIZE(driverTypes);
-
-
-	D3D_FEATURE_LEVEL featureLevels[] =
+		nullptr,
+		createFlags,
+		nullptr,
+		0,
+		D3D11_SDK_VERSION,
+		&sd,
+		&_swapChain,
+		&_device,
+		nullptr,
+		&_immediateContext)))
 	{
-		D3D_FEATURE_LEVEL_11_0,
-		D3D_FEATURE_LEVEL_10_1,
-		D3D_FEATURE_LEVEL_10_0,
+		throw GFX_EXCEPTION(hr, L"Creating device and swap chain");
+	}
+
+	// Get handle to backbuffer
+	ComPtr<ID3D11Resource> pBackBuffer;
+	if (FAILED(hr = _swapChain->GetBuffer(
+		0,
+		__uuidof(ID3D11Texture2D),
+		(LPVOID*)&pBackBuffer)))
+	{
+		throw GFX_EXCEPTION(hr, L"Getting back buffer");
+	}
+
+	// Create a view on backbuffer that we can render to
+	if (FAILED(hr = _device->CreateRenderTargetView(
+		pBackBuffer.Get(),
+		nullptr,
+		&_renderTargetView)))
+	{
+		throw GFX_EXCEPTION(hr, L"Creating render target view on backbuffer");
+	}
+
+	// set backbuffer as the render target using created view
+	_immediateContext->OMSetRenderTargets(1, _renderTargetView.GetAddressOf(), nullptr);
+
+	// set viewport dimensions
+	D3D11_VIEWPORT vp;
+	vp.Width = float(SCREEN_WIDTH);
+	vp.Height = float(SCREEN_HEIGHT);
+	vp.MinDepth = 0.0f;
+	vp.MaxDepth = 1.0f;
+	vp.TopLeftX = 0.0f;
+	vp.TopLeftY = 0.0f;
+	_immediateContext->RSSetViewports(1, &vp);
+
+	// Create texture for cpu render target
+	D3D11_TEXTURE2D_DESC sysTexDesc;
+	sysTexDesc.Width = SCREEN_WIDTH;
+	sysTexDesc.Height = SCREEN_HEIGHT;
+	sysTexDesc.MipLevels = 1;
+	sysTexDesc.ArraySize = 1;
+	sysTexDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+	sysTexDesc.SampleDesc.Count = 1;
+	sysTexDesc.SampleDesc.Quality = 0;
+	sysTexDesc.Usage = D3D11_USAGE_DYNAMIC;
+	sysTexDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+	sysTexDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	sysTexDesc.MiscFlags = 0;
+
+	// create the texture
+	if (FAILED(hr = _device->CreateTexture2D(&sysTexDesc, nullptr, &_sysBufferTexture)))
+	{
+		throw GFX_EXCEPTION(hr, L"Creating sysbuffer texture");
+	}
+
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = sysTexDesc.Format;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+	// create the resource view on the texture
+	if (FAILED(hr = _device->CreateShaderResourceView(_sysBufferTexture.Get(),
+		&srvDesc, &_sysBufferTextureView)))
+	{
+		throw GFX_EXCEPTION(hr, L"Creating view on sysBuffer texture");
+	}
+
+	// Create pixel shader for framebuffer
+	if (FAILED(hr = _device->CreatePixelShader(
+		FramebufferShaders::FramebufferPSBytecode,
+		sizeof(FramebufferShaders::FramebufferPSBytecode),
+		nullptr,
+		&_pixelShader)))
+	{
+		throw GFX_EXCEPTION(hr, L"Creating pixel shader");
+	}
+
+	// Create vertex shader for framebuffer
+	if (FAILED(hr = _device->CreateVertexShader(
+		FramebufferShaders::FramebufferVSBytecode,
+		sizeof(FramebufferShaders::FramebufferVSBytecode),
+		nullptr,
+		&_vertexShader)))
+	{
+		throw GFX_EXCEPTION(hr, L"Creating vertex shader");
+	}
+
+	// Create and fill vertex buffer with quad for rendering frame
+	const FSQVertex vertices[] =
+	{
+		{ -1.0f,1.0f,0.5f,0.0f,0.0f },
+		{ 1.0f,1.0f,0.5f,1.0f,0.0f },
+		{ 1.0f,-1.0f,0.5f,1.0f,1.0f },
+		{ -1.0f,1.0f,0.5f,0.0f,0.0f },
+		{ 1.0f,-1.0f,0.5f,1.0f,1.0f },
+		{ -1.0f,-1.0f,0.5f,0.0f,1.0f },
 	};
-	UINT numFeatureLevels = ARRAYSIZE(featureLevels);
-
-
-	//Creation of the swap chain
-	DXGI_SWAP_CHAIN_DESC swapChainDesc;
-	ZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
-	swapChainDesc.BufferCount = 1;
-	swapChainDesc.BufferDesc.Width = width; 
-	swapChainDesc.BufferDesc.Height = height; 
-	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
-	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
-	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	swapChainDesc.OutputWindow = key.hWnd;
-	swapChainDesc.SampleDesc.Count = 1;
-	swapChainDesc.SampleDesc.Quality = 0;
-	swapChainDesc.Windowed = TRUE;
-
-	for (UINT driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++) {
-		_driverType = driverTypes[driverTypeIndex];
-		hr = D3D11CreateDeviceAndSwapChain(nullptr, _driverType, nullptr, createDeviceFlags, featureLevels, numFeatureLevels,
-			D3D11_SDK_VERSION, &swapChainDesc, &_swapChain, &_d3dDevice, &_featureLevel, &_immediateContext);
-		if (SUCCEEDED(hr))
-			break;
+	D3D11_BUFFER_DESC bd = {};
+	bd.Usage = D3D11_USAGE_DEFAULT;
+	bd.ByteWidth = sizeof(FSQVertex) * 6;
+	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	bd.CPUAccessFlags = 0u;
+	D3D11_SUBRESOURCE_DATA initData = {};
+	initData.pSysMem = vertices;
+	if (FAILED(hr = _device->CreateBuffer(&bd, &initData, &_vertexBuffer)))
+	{
+		throw GFX_EXCEPTION(hr, L"Creating vertex buffer");
 	}
-	if (FAILED(hr)){
-		throw GFX_EXCEPTION(hr, L"Creating device & swap chain - TestGraphics - Initialise");
-		}
 
-	//Creation of the render target view
-	//ID3D11Texture2D *backBuffer = nullptr;
-	hr = _swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&_backBuffer);
-	if (FAILED(hr))
-		throw GFX_EXCEPTION(hr, L"Problem creating backbuffer, TestGraphics.cpp");
-		
-	hr = _d3dDevice->CreateRenderTargetView(_backBuffer, nullptr, &_renderTargetView);
-	//_backBuffer->Release();
-	if (FAILED(hr))
-		throw GFX_EXCEPTION(hr, L"Problem rendering target view, TestGraphics.cpp");
-	
-	//Creation of the depth stencil structure
-	D3D11_TEXTURE2D_DESC depthStencilStructDesc;
-	ZeroMemory(&depthStencilStructDesc, sizeof(depthStencilStructDesc));
-	depthStencilStructDesc.Width = width; //TODO : Uncomment when hWnd retrieved
-	depthStencilStructDesc.Height = height; //TODO : Uncomment when hWnd retrieved
-	depthStencilStructDesc.MipLevels = 1;
-	depthStencilStructDesc.ArraySize = 1;
-	depthStencilStructDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	depthStencilStructDesc.SampleDesc.Count = 1;
-	depthStencilStructDesc.SampleDesc.Quality = 0;
-	depthStencilStructDesc.Usage = D3D11_USAGE_DEFAULT;
-	depthStencilStructDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	depthStencilStructDesc.CPUAccessFlags = 0;
-	depthStencilStructDesc.MiscFlags = 0;
-	hr = _d3dDevice->CreateTexture2D(&depthStencilStructDesc, nullptr, &_depthStencil);
+	// Create input layout for fullscreen quad
+	const D3D11_INPUT_ELEMENT_DESC ied[] =
+	{
+		{ "POSITION",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0 },
+		{ "TEXCOORD",0,DXGI_FORMAT_R32G32_FLOAT,0,12,D3D11_INPUT_PER_VERTEX_DATA,0 }
+	};
 
-	if (FAILED(hr))
-		throw GFX_EXCEPTION(hr, L"Error creating depth stencil structure - TestGraphics.cpp");
-	
-	//Creation of the depth stencil view
-	D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc;
-	ZeroMemory(&depthStencilViewDesc, sizeof(depthStencilViewDesc));
-	depthStencilViewDesc.Format = depthStencilViewDesc.Format;
-	depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-	depthStencilViewDesc.Texture2D.MipSlice = 0;
-	hr = _d3dDevice->CreateDepthStencilView(_depthStencil, &depthStencilViewDesc, &_depthStencilView);
-
-	if (FAILED(hr))
-		throw GFX_EXCEPTION(hr, L"Failed creating the depth stencil view, TestGraphics.cpp");
-
-	//Binding the targets & depth stencil view/buffer to the output merger stage
-	try {
-		_immediateContext->OMGetRenderTargets(1, &_renderTargetView, &_depthStencilView);
+	if (FAILED(hr = _device->CreateInputLayout(ied, 2,
+		FramebufferShaders::FramebufferVSBytecode,
+		sizeof(FramebufferShaders::FramebufferVSBytecode),
+		&_inputLayout)))
+	{
+		throw GFX_EXCEPTION(hr, L"Creating input layout");
 	}
-	catch (Exception e) {
-		std::wstring er = e.GetErrorDescription(); //doesn't go here
+
+	// Create sampler state for fullscreen textured quad
+	D3D11_SAMPLER_DESC sampDesc = {};
+	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	sampDesc.MinLOD = 0;
+	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+	if (FAILED(hr = _device->CreateSamplerState(&sampDesc, &_samplerState)))
+	{
+		throw GFX_EXCEPTION(hr, L"Creating sampler state");
 	}
-	
-	//Setting up the viewport (Change if you want several in your game)
-	D3D11_VIEWPORT viewport;
-	viewport.Width = (FLOAT)width;  // = SCREEN_WIDTH from Consts.h but can be changed if desired
-	viewport.Height = (FLOAT)height; 
-	viewport.MaxDepth = 1.0f;
-	viewport.MinDepth = 0.0f;
-	viewport.TopLeftX = 0;
-	viewport.TopLeftY = 0;
-	_immediateContext->RSSetViewports(1, &viewport);
-	
 
-}
+	std::string fontFile = "..\\Resources\\fonts\\italic.spritefont";
+	std::wstring widestr = std::wstring(fontFile.begin(), fontFile.end());
+	const wchar_t* szFile = widestr.c_str();
+	_fonts.reset(new SpriteFont(_device.Get(), szFile));
 
-void TestGraphics::Destroy()
-{
-	if (_immediateContext) _immediateContext->ClearState();
-	if (_depthStencilView) _depthStencilView->Release();
-	if (_depthStencil) _depthStencil->Release();
-	if (_renderTargetView) _renderTargetView->Release();
-	if (_swapChain) _swapChain->Release();
-	if (_immediateContext) _immediateContext->Release();
-	if (_d3dDevice) _d3dDevice->Release();
-
-}
-
-void TestGraphics::EndFrame()
-{
-}
-
-void TestGraphics::BeginFrame()
-{
+	_sprites.reset(new SpriteBatch(_immediateContext.Get()));
+	_primitiveBatch = std::make_unique<PrimitiveBatch<VertexPositionColor>>(_immediateContext.Get());
 }
 
 void TestGraphics::DrawComponent(IDrawableComponent * component)
@@ -195,29 +229,67 @@ void TestGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot
 {
 }
 
-void TestGraphics::DrawText2D(std::string text, Vec2 pos, float rot, float * rgb, float scale, Vec2 offset)
-{
-}
-
 void TestGraphics::DrawLine(Vec2 v1, Vec2 v2)
 {
 }
 
-void TestGraphics::DrawBackground()
+void TestGraphics::DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset)
 {
-	//just testing if drawing a color could work. 
-	//Error : renderTargetView = nullptr, didn't find why yet :/
-	//(problem starts in Initialise : createdepthstencilview lets depthStencilView null but shouldn't 
-	XMVECTORF32 couleur = { 0.90f, 0.8f, 0.95f, 1.000000000f };
-	_immediateContext->ClearRenderTargetView(_renderTargetView, couleur);
-
 }
 
+void TestGraphics::Destroy()
+{
+	// Clear the state of the device context before destruction
+	if (_immediateContext) _immediateContext->ClearState();
+}
+
+void TestGraphics::BeginFrame()
+{
+	// Clear render target view
+	_immediateContext->ClearRenderTargetView(_renderTargetView.Get(), Colors::MidnightBlue);
+	_sprites->Begin(SpriteSortMode_Deferred);
+	_primitiveBatch->Begin();
+}
+
+void TestGraphics::EndFrame()
+{
+	HRESULT hr;
+
+	// Render offscreen scene texture to back buffer
+	_immediateContext->IASetInputLayout(_inputLayout.Get());
+	_immediateContext->VSSetShader(_vertexShader.Get(), nullptr, 0u);
+	_immediateContext->PSSetShader(_pixelShader.Get(), nullptr, 0u);
+	_immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	const UINT stride = sizeof(FSQVertex);
+	const UINT offset = 0u;
+	_immediateContext->IASetVertexBuffers(0u, 1u, _vertexBuffer.GetAddressOf(), &stride, &offset);
+	_immediateContext->PSSetShaderResources(0u, 1u, _sysBufferTextureView.GetAddressOf());
+	_immediateContext->PSSetSamplers(0u, 1u, _samplerState.GetAddressOf());
+	_immediateContext->Draw(6u, 0u);
+
+	_sprites->End();
+	_primitiveBatch->End();
+
+	// Flip back/front buffers
+	if (FAILED(hr = _swapChain->Present(1u, 0u)))
+	{
+		if (hr == DXGI_ERROR_DEVICE_REMOVED)
+		{
+			throw GFX_EXCEPTION(_device->GetDeviceRemovedReason(), L"Presenting back buffer [device removed]");
+		}
+		else
+		{
+			throw GFX_EXCEPTION(hr, L"Presenting back buffer");
+		}
+	}
+}
+
+// TestGraphics Exception
 TestGraphics::Exception::Exception(HRESULT hr, const std::wstring& note, const wchar_t* file, unsigned int line)
 	:
 	CustomException(file, line, note),
 	hr(hr)
-{ }
+{}
 
 std::wstring TestGraphics::Exception::GetFullMessage() const
 {
@@ -238,15 +310,17 @@ std::wstring TestGraphics::Exception::GetFullMessage() const
 
 std::wstring TestGraphics::Exception::GetErrorName() const
 {
-	return L"Graphics Error name";
+	return DXGetErrorString(hr);
 }
 
 std::wstring TestGraphics::Exception::GetErrorDescription() const
 {
-	return L"Graphics Error Description";
+	std::array<wchar_t, 512> wideDescription;
+	DXGetErrorDescription(hr, wideDescription.data(), wideDescription.size());
+	return wideDescription.data();
 }
 
 std::wstring TestGraphics::Exception::GetExceptionType() const
 {
-	return L"Graphics Exception";
+	return L"TestGraphics Exception";
 }

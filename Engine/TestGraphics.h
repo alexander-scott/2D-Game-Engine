@@ -2,47 +2,61 @@
 
 #include "IGraphics.h"
 #include "Consts.h"
-#include "DirectXMath.h"
-#include <vector>
-#include <d3dcommon.h>
-#include "d3d11.h"
+
+#include <cassert>
+#include <map>
+#include <memory>
+
+#include <d3d11.h>
+#include "DirectXTK\Inc\SpriteBatch.h"
+#include "DirectXTK\Inc\SpriteFont.h"
+#include "DirectXTK\Inc\DDSTextureLoader.h"
+#include "directxtk\Inc\PrimitiveBatch.h"
+#include "directxtk\Inc\VertexTypes.h"
 
 using namespace DirectX;
-class HWNDKey;
 
 class TestGraphics : public IGraphics
 {
 public:
-	TestGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
-		: IGraphics(dispatcher) { }
-	TestGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher, HWNDKey &key);
-
-	//TestGraphics(HWNDKey &key);
-	~TestGraphics();
+	TestGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher);
 
 	virtual void Initalise(class HWNDKey& key) override;
-protected:
 	virtual void Destroy() override;
 
 	virtual void EndFrame() override;
 	virtual void BeginFrame() override;
 
-	virtual void DrawSprite(std::string name, Vec2 pos, RECT* rect, float rot, float scale, Vec2 offset) override;
+	virtual void DrawComponent(IDrawableComponent* component);
 
-	virtual void DrawText2D(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset) override;
+	void DrawSprite(std::string name, Vec2 pos, RECT* rect, float rot, float scale, Vec2 offset);
 
-	virtual void DrawLine(Vec2 v1, Vec2 v2) override;
+	void DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset);
 
+	void DrawLine(Vec2 v1, Vec2 v2);
 
-	void DrawBackground();
+private:
+	// vertex format for the framebuffer fullscreen textured quad
+	struct FSQVertex
+	{
+		float x, y, z;		// position
+		float u, v;			// texcoords
+	};
 
-	ID3D11Device*			_d3dDevice = nullptr;
-	ID3D11DeviceContext*	_immediateContext = nullptr;
-	IDXGISwapChain*			_swapChain = nullptr;
-	D3D_DRIVER_TYPE			_driverType = D3D_DRIVER_TYPE_NULL;
-	D3D_FEATURE_LEVEL		_featureLevel = D3D_FEATURE_LEVEL_11_0;
-	ID3D11Texture2D*		_backBuffer = nullptr;
-	ID3D11RenderTargetView*	_renderTargetView = nullptr;
-	ID3D11Texture2D*		_depthStencil = nullptr;
-	ID3D11DepthStencilView*	_depthStencilView = nullptr;
+	Microsoft::WRL::ComPtr<IDXGISwapChain>					_swapChain;
+	Microsoft::WRL::ComPtr<ID3D11Device>					_device;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext>				_immediateContext;
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView>			_renderTargetView;
+	Microsoft::WRL::ComPtr<ID3D11Texture2D>					_sysBufferTexture;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>		_sysBufferTextureView;
+	Microsoft::WRL::ComPtr<ID3D11PixelShader>				_pixelShader;
+	Microsoft::WRL::ComPtr<ID3D11VertexShader>				_vertexShader;
+	Microsoft::WRL::ComPtr<ID3D11Buffer>					_vertexBuffer;
+	Microsoft::WRL::ComPtr<ID3D11InputLayout>				_inputLayout;
+	Microsoft::WRL::ComPtr<ID3D11SamplerState>				_samplerState;
+
+	std::unique_ptr<SpriteBatch>							_sprites;
+	std::unique_ptr<SpriteFont>								_fonts;
+	std::unique_ptr<PrimitiveBatch<VertexPositionColor>>	_primitiveBatch;
+	std::map<std::string, ID3D11ShaderResourceView*>		_textures;
 };

@@ -3,7 +3,6 @@
 #include "CustomException.h"
 #include <string>
 #include <Dbt.h>
-#include "TestGraphics.h"
 #include "ISystem.h"
 
 #include "Consts.h"
@@ -13,12 +12,7 @@
 
 class HWNDKey
 {
-	
-
-	friend TestGraphics::TestGraphics(std::shared_ptr<SystemMessageDispatcher>, HWNDKey&);
 public:
-	//TO do : 
-	friend void TestGraphics::Initalise(HWNDKey&);
 	HWNDKey(const HWNDKey&) = delete;
 	HWNDKey& operator=(HWNDKey&) = delete;
 	HWNDKey() = default;

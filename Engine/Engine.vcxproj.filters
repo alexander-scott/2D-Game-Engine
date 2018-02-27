@@ -74,6 +74,9 @@
     <Filter Include="Engine\Systems\Logging">
       <UniqueIdentifier>{8179bf38-109e-44b5-b23f-4f515c928087}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems\Graphics\Shaders">
+      <UniqueIdentifier>{6b9e01f6-0d15-4025-b02c-c60c84630a3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -108,9 +111,6 @@
     </ClInclude>
     <ClInclude Include="BuildSceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
-    </ClInclude>
-    <ClInclude Include="TestGraphics.h">
-      <Filter>Engine\Systems\Graphics\APIs</Filter>
     </ClInclude>
     <ClInclude Include="IGraphics.h">
       <Filter>Engine\Systems\Graphics</Filter>
@@ -205,6 +205,9 @@
     <ClInclude Include="Engine.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="TestGraphics.h">
+      <Filter>Engine\Systems\Graphics\APIs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -215,9 +218,6 @@
     </ClCompile>
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Engine\GameObject\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TestGraphics.cpp">
-      <Filter>Engine\Systems\Graphics\APIs</Filter>
     </ClCompile>
     <ClCompile Include="DXErr.cpp">
       <Filter>Engine\Systems\Graphics</Filter>
@@ -252,6 +252,9 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Engine\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="TestGraphics.cpp">
+      <Filter>Engine\Systems\Graphics\APIs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -267,5 +270,13 @@
     <Xml Include="..\Resources\Scenes\Scene1.xml">
       <Filter>Resource Files\Scenes</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FramebufferPS.shh">
+      <Filter>Engine\Systems\Graphics\Shaders</Filter>
+    </None>
+    <None Include="FramebufferVS.shh">
+      <Filter>Engine\Systems\Graphics\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
