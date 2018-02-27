@@ -14,7 +14,7 @@ namespace SimpleSampleEditor
 {
     public partial class Editor : Form
     {
-        private IntPtr _systemManager;
+        private IntPtr _engine;
         private IntPtr _editorSystem;
         private IntPtr _sceneManagerSystem;
 
@@ -67,23 +67,23 @@ namespace SimpleSampleEditor
             if (!mPlaying)
             {
                 mPlaying = true;
-                EngineInterface.PlayStarted(_systemManager);
+                EngineInterface.PlayStarted(_editorSystem);
                 mHierachy.CreateHierachyList(_sceneManagerSystem); // Update hierarchy
             }
             else
             {
                 mPlaying = false;
-                EngineInterface.PlayStopped(_systemManager);
+                EngineInterface.PlayStopped(_editorSystem);
                 mHierachy.CreateHierachyList(_sceneManagerSystem); // Update hierarchy
             }
         }
 
         private void EditorLoading(object sender, EventArgs e)
         {
-            _systemManager = EngineInterface.InitaliseEngine(panel1.Handle);
+            _engine = EngineInterface.InitaliseEngine(panel1.Handle);
 
-            _editorSystem = EngineInterface.GetEditorSystem(_systemManager);
-            _sceneManagerSystem = EngineInterface.GetSceneManagerSystem(_systemManager);
+            _editorSystem = EngineInterface.GetEditorSystem(_engine);
+            _sceneManagerSystem = EngineInterface.GetSceneManagerSystem(_engine);
 
             panel1.Focus();
         }
@@ -95,7 +95,7 @@ namespace SimpleSampleEditor
 
         private void EditorClosing(object sender, FormClosingEventArgs e)
         {
-            EngineInterface.CleanD3D(_systemManager);
+            EngineInterface.CleanD3D(_engine);
         }
 
         #region Basic Input
@@ -105,9 +105,9 @@ namespace SimpleSampleEditor
             Point point = panel1.PointToClient(Cursor.Position);
 
             if (e.Button == MouseButtons.Left)
-                EngineInterface.LeftMouseClick(_systemManager, point.X, point.Y);
+                EngineInterface.LeftMouseClick(_editorSystem, point.X, point.Y);
             else
-                EngineInterface.RightMouseClick(_systemManager, point.X, point.Y);
+                EngineInterface.RightMouseClick(_editorSystem, point.X, point.Y);
         }
 
         private void PanelMouseRelease(object sender, MouseEventArgs e)
@@ -115,25 +115,25 @@ namespace SimpleSampleEditor
             Point point = panel1.PointToClient(Cursor.Position);
 
             if (e.Button == MouseButtons.Left)
-                EngineInterface.LeftMouseRelease(_systemManager, point.X, point.Y);
+                EngineInterface.LeftMouseRelease(_editorSystem, point.X, point.Y);
             else
-                EngineInterface.RightMouseRelease(_systemManager, point.X, point.Y);
+                EngineInterface.RightMouseRelease(_editorSystem, point.X, point.Y);
         }
 
         private void PanelMouseMove(object sender, MouseEventArgs e)
         {
             Point point = panel1.PointToClient(Cursor.Position);
-            EngineInterface.MouseMove(_systemManager, point.X, point.Y);
+            EngineInterface.MouseMove(_editorSystem, point.X, point.Y);
         }
 
         private void KeyboardKeyUp(object sender, KeyEventArgs e)
         {
-            EngineInterface.KeyUp(_systemManager, e.KeyValue);
+            EngineInterface.KeyUp(_editorSystem, e.KeyValue);
         }
 
         private void KeyboardKeyDown(object sender, KeyEventArgs e)
         {
-            EngineInterface.KeyDown(_systemManager, e.KeyValue);
+            EngineInterface.KeyDown(_editorSystem, e.KeyValue);
         }
 
         #endregion

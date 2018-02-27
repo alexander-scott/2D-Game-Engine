@@ -73,24 +73,24 @@ void EditorEngineInterface::CleanD3D(void * systemsPtr)
 
 void EditorEngineInterface::LoadNewScene(void * editorPtr, const char * filePath)
 {
-	Editor* engine = static_cast<Editor*>(editorPtr);
-	engine->LoadNewScene(filePath);
+	Editor* editor = static_cast<Editor*>(editorPtr);
+	editor->LoadNewScene(filePath);
 }
 
 void EditorEngineInterface::SaveScene(void * editorPtr, const char * filePath)
 {
-	Editor* engine = static_cast<Editor*>(editorPtr);
-	engine->SaveScene(filePath);
+	Editor* editor = static_cast<Editor*>(editorPtr);
+	editor->SaveScene(filePath);
 }
 
 void EditorEngineInterface::PlayStarted(void * editorPtr)
 {
-	Editor* engine = static_cast<Editor*>(editorPtr);
-	engine->PlayStarted();
+	Editor* editor = static_cast<Editor*>(editorPtr);
+	editor->PlayStarted();
 }
 
 void EditorEngineInterface::PlayStopped(void * editorPtr)
 {
-	Editor* engine = static_cast<Editor*>(editorPtr);
-	engine->PlayStopped();
+	Editor* editor = static_cast<Editor*>(editorPtr);
+	editor->PlayStopped();
 }
