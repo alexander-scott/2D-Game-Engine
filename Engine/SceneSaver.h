@@ -19,5 +19,6 @@ public:
 
 private:
 	void SaveScene(shared_ptr<Scene> scene, string filePath);
+	std::string GUIDToString(GUID *guid);
 };
 

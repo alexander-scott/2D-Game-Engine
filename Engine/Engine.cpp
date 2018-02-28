@@ -9,6 +9,7 @@
 #include "Editor.h"
 
 #include "RequestBuildSceneMessage.h"
+#include "RequestSaveSceneMessage.h"
 
 Engine::Engine(HWND hWnd)
 {
@@ -26,10 +27,6 @@ Engine::Engine(HWND hWnd)
 	// Initalise the Editor system
 	auto editorSystem = make_shared<Editor>(_messageDispatcher);
 	_systems.insert(std::make_pair(editorSystem->SysType, editorSystem));
-
-	// Initalise the SceneSaver system
-	auto sceneSaverSystem = make_shared<SceneSaver>(_messageDispatcher);
-	_systems.insert(std::make_pair(sceneSaverSystem->SysType, sceneSaverSystem));
 
 	InitaliseListeners();
 	SystemsInitalised();
@@ -119,6 +116,10 @@ void Engine::InitaliseSystems()
 	// Initalise Input Handler System
 	auto inputHandler = make_shared<InputHandler>(_messageDispatcher);
 	_systems.insert(std::make_pair(inputHandler->SysType, inputHandler));
+
+	// Initalise the SceneSaver system
+	auto sceneSaverSystem = make_shared<SceneSaver>(_messageDispatcher);
+	_systems.insert(std::make_pair(sceneSaverSystem->SysType, sceneSaverSystem));
 }
 
 // If any of the systems are listening for message this function sets it up. Called after system initalisation.

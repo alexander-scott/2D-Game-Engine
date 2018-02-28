@@ -32,19 +32,6 @@ void SceneBuilder::RecieveMessage(ISystemMessage & message)
 	}
 }
 
-#pragma warning( push )
-#pragma warning( disable : 4477)
-
-GUID stringToGUID(const std::string& guid) {
-	GUID output;
-	const auto ret = sscanf_s(guid.c_str(), "{%8X-%4hX-%4hX-%2hX%2hX-%2hX%2hX%2hX%2hX%2hX%2hX}", &output.Data1, &output.Data2, &output.Data3, &output.Data4[0], &output.Data4[1], &output.Data4[2], &output.Data4[3], &output.Data4[4], &output.Data4[5], &output.Data4[6], &output.Data4[7]);
-	if (ret != 11)
-		throw std::logic_error("Unvalid GUID, format should be {00000000-0000-0000-0000-000000000000}");
-	return output;
-}
-
-#pragma warning( pop ) 
-
 shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 {
 	//Loads a level from xml file
@@ -86,11 +73,9 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 	while (gameObjectNode)
 	{
 		string tag = gameObjectNode->first_attribute("tag")->value();
-		string guids = string(gameObjectNode->first_attribute("guid")->value());
+		GUID guid = StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
 
-		//GUID test = stringToGUID(guids);
-
-		auto gameObject = GameObject::MakeGameObject(tag);
+		auto gameObject = GameObject::MakeGameObject(tag, guid);
 
 		// Create this gameobjects components
 		xml_node<>* component = gameObjectNode->first_node("Component");
@@ -108,4 +93,30 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 	}
 
 	return scene;
+}
+
+GUID SceneBuilder::StringToGUID(const std::string& guid) {
+	GUID output;
+	unsigned long p0;
+	int p1, p2, p3, p4, p5, p6, p7, p8, p9, p10;
+
+	int err = sscanf_s(guid.c_str(), "%08lX-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
+		&p0, &p1, &p2, &p3, &p4, &p5, &p6, &p7, &p8, &p9, &p10);
+
+	if (err != 11)
+		throw std::logic_error("Invalid GUID, format should be {00000000-0000-0000-0000-000000000000}");
+
+	// Set the data like this to avoid corrupting the stack
+	output.Data1 = p0;
+	output.Data2 = p1;
+	output.Data3 = p2;
+	output.Data4[0] = p3;
+	output.Data4[1] = p4;
+	output.Data4[2] = p5;
+	output.Data4[3] = p6;
+	output.Data4[4] = p7;
+	output.Data4[5] = p8;
+	output.Data4[6] = p9;
+	output.Data4[7] = p10;
+	return output;
 }
