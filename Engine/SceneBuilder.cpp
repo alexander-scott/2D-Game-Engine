@@ -10,25 +10,47 @@
 #include "Logger.h"
 
 SceneBuilder::SceneBuilder(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
-	: ISystem(SystemType::eSceneBuilder, dispatcher){ }
+	: ISystem(SystemType::eSceneBuilder, dispatcher)
+{ 
+	_currentFilePath = "";
+}
 
 void SceneBuilder::InitaliseListeners()
 {
 	SubscribeToMessageType(SystemMessageType::eRequestBuildSceneMessage);
+	SubscribeToMessageType(SystemMessageType::ePlayStopped);
 }
 
 void SceneBuilder::RecieveMessage(ISystemMessage & message)
 {
-	if (message.Type == SystemMessageType::eRequestBuildSceneMessage)
+	switch (message.Type)
 	{
-		RequestBuildSceneMessage& msg = static_cast<RequestBuildSceneMessage&>(message);
+		case SystemMessageType::eRequestBuildSceneMessage:
+		{
+			RequestBuildSceneMessage& msg = static_cast<RequestBuildSceneMessage&>(message);
 
-		// If the engine asks the SceneBuilder system to create a Scene, build one and send a pointer to it in a message.
-		shared_ptr<Scene> scene = BuildScene(msg.FilePath);
+			// If the engine asks the SceneBuilder system to create a Scene, build one and send a pointer to it in a message.
+			shared_ptr<Scene> scene = BuildScene(msg.FilePath);
+			_currentFilePath = msg.FilePath;
 
-		// Send built scene to SceneManager system
-		BuildSceneMessage sceneMsg(scene);
-		SendMessageToDispatcher(sceneMsg);
+			// Send built scene to SceneManager system
+			BuildSceneMessage sceneMsg(scene);
+			SendMessageToDispatcher(sceneMsg);
+			break;
+		}
+		case SystemMessageType::ePlayStopped:
+		{
+			if (_currentFilePath == "")
+				throw std::exception("Current file path is empty");
+
+			// If the engine asks the SceneBuilder system to create a Scene, build one and send a pointer to it in a message.
+			shared_ptr<Scene> scene = BuildScene(_currentFilePath);
+
+			// Send built scene to SceneManager system
+			BuildSceneMessage sceneMsg(scene);
+			SendMessageToDispatcher(sceneMsg);
+			break;
+		}
 	}
 }
 

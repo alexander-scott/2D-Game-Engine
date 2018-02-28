@@ -67,12 +67,14 @@ namespace SimpleSampleEditor
             if (!mPlaying)
             {
                 mPlaying = true;
+                btnPlay.Text = "PLAY";
                 EngineInterface.PlayStarted(_editorSystem);
                 mHierachy.CreateHierachyList(_sceneManagerSystem); // Update hierarchy
             }
             else
             {
                 mPlaying = false;
+                btnPlay.Text = "STOP";
                 EngineInterface.PlayStopped(_editorSystem);
                 mHierachy.CreateHierachyList(_sceneManagerSystem); // Update hierarchy
             }
@@ -90,6 +92,7 @@ namespace SimpleSampleEditor
 
         private void EditorLoaded(object sender, EventArgs e)
         {
+            EngineInterface.StartUpdateLoop(_engine);
             mHierachy.CreateHierachyList(_sceneManagerSystem);
         }
 

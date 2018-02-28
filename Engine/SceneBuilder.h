@@ -21,4 +21,6 @@ protected:
 
 private:
 	GUID StringToGUID(const std::string& guid);
+
+	std::string		_currentFilePath;
 };

@@ -9,8 +9,8 @@
 #include "Editor.h"
 
 #include "RequestBuildSceneMessage.h"
-#include "RequestSaveSceneMessage.h"
 
+// Called from the editor
 Engine::Engine(HWND hWnd)
 {
 	_messageDispatcher = make_shared<SystemMessageDispatcher>();
@@ -32,6 +32,7 @@ Engine::Engine(HWND hWnd)
 	SystemsInitalised();
 }
 
+// Called in the standalone engine
 Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 {
 	_messageDispatcher = make_shared<SystemMessageDispatcher>();
@@ -50,6 +51,9 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 	// Request a new scene be built by the SceneBuilder system
 	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
 	_messageDispatcher->SendMessageToListeners(message);
+
+	// Start playing
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::ePlayStarted));
 }
 
 Engine::~Engine()

@@ -11,6 +11,7 @@
 SceneManager::SceneManager(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: ISystem(SystemType::eSceneManager, dispatcher) 
 { 
+	_isPlaying = false;
 }
 
 void SceneManager::InitaliseListeners()
@@ -20,6 +21,8 @@ void SceneManager::InitaliseListeners()
 	SubscribeToMessageType(SystemMessageType::eDrawScene);
 	SubscribeToMessageType(SystemMessageType::eUpdateScene);
 	SubscribeToMessageType(SystemMessageType::eSendMessageToGameObjects);
+	SubscribeToMessageType(SystemMessageType::ePlayStarted);
+	SubscribeToMessageType(SystemMessageType::ePlayStopped);
 }
 
 void SceneManager::RecieveMessage(ISystemMessage & message)
@@ -29,38 +32,51 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 		case SystemMessageType::eBuildSceneMessage:
 		{
 			BuildSceneMessage & msg = static_cast<BuildSceneMessage&>(message);
+			_currentScene = nullptr;
 			_currentScene = msg.GetScene();
 			break;
 		}
 
 		case SystemMessageType::eRequestSaveSceneMessage:
 		{
-			if (_currentScene == nullptr)
-				throw std::exception("CURRENT SCENE NOT INITALISED");
-
-			RequestSaveSceneMessage& msg = static_cast<RequestSaveSceneMessage&>(message);
-			SaveSceneMessage newMsg(_currentScene, msg.FilePath);
-			SendMessageToDispatcher(newMsg);
+			if (_currentScene != nullptr)
+			{
+				RequestSaveSceneMessage& msg = static_cast<RequestSaveSceneMessage&>(message);
+				SaveSceneMessage newMsg(_currentScene, msg.FilePath);
+				SendMessageToDispatcher(newMsg);
+			}
 			break;
 		}
 
-		case SystemMessageType::eDrawScene: // Recieved from engine
+		case SystemMessageType::eDrawScene:
 		{
-			if (_currentScene == nullptr)
-				throw std::exception("CURRENT SCENE NOT INITALISED");
-
-			// Pass a pointer to the current scene to the Graphics system to be drawn
-			DrawSceneMessage message(_currentScene);
-			SendMessageToDispatcher(message);
+			if (_currentScene != nullptr)
+			{
+				// Pass a pointer to the current scene to the Graphics system to be drawn
+				DrawSceneMessage message(_currentScene);
+				SendMessageToDispatcher(message);
+			}		
 			break;
 		}
 
-		case SystemMessageType::eUpdateScene: // Recieved from engine
+		case SystemMessageType::eUpdateScene:
 		{
-			if (_currentScene == nullptr)
-				throw std::exception("CURRENT SCENE NOT INITALISED");
+			if (_currentScene != nullptr && _isPlaying) // Only update scene if were are in play mode
+			{
+				_currentScene->Update(_frameTimer.Mark());
+			}
+			break;
+		}
 
-			_currentScene->Update(_frameTimer.Mark());
+		case SystemMessageType::ePlayStarted:
+		{
+			_isPlaying = true;
+			break;
+		}
+
+		case SystemMessageType::ePlayStopped:
+		{
+			_isPlaying = false;
 			break;
 		}
 

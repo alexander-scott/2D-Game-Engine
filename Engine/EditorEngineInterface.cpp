@@ -39,23 +39,23 @@ void * EditorEngineInterface::InitaliseEngine(HWND hWnd)
 	return nullptr;
 }
 
-void * EditorEngineInterface::GetEditorSystem(void* systemsPtr)
+void * EditorEngineInterface::GetEditorSystem(void* enginePtr)
 {
-	Engine* engine = static_cast<Engine*>(systemsPtr);
+	Engine* engine = static_cast<Engine*>(enginePtr);
 	return engine->GetSystem(SystemType::eEditor).get();
 }
 
-void * EditorEngineInterface::GetSceneManagerSystem(void* systemsPtr)
+void * EditorEngineInterface::GetSceneManagerSystem(void* enginePtr)
 {
-	Engine* engine = static_cast<Engine*>(systemsPtr);
+	Engine* engine = static_cast<Engine*>(enginePtr);
 	return engine->GetSystem(SystemType::eSceneManager).get();
 }
 
 // Reason this is in a seperate function to initalise engine is because we need to 
 // return a pointer to the system manager which will never happen if we started a while loop
-void EditorEngineInterface::StartUpdateLoop(void * systemsPtr)
+void EditorEngineInterface::StartUpdateLoop(void * enginePtr)
 {
-	Engine* engine = static_cast<Engine*>(systemsPtr);
+	Engine* engine = static_cast<Engine*>(enginePtr);
 
 	Logger::Instance().LogMessage("Starting main update loop", LogSeverity::eInfo);
 
@@ -65,9 +65,9 @@ void EditorEngineInterface::StartUpdateLoop(void * systemsPtr)
 	Logger::Instance().LogMessage("---------------------", LogSeverity::eInfo);
 }
 
-void EditorEngineInterface::CleanD3D(void * systemsPtr)
+void EditorEngineInterface::CleanD3D(void * enginePtr)
 {
-	Engine* engine = static_cast<Engine*>(systemsPtr);
+	Engine* engine = static_cast<Engine*>(enginePtr);
 	delete engine;
 }
 

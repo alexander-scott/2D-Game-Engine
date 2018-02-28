@@ -61,8 +61,9 @@ enum SystemMessageType
 	// Windows messages
 	eWindowLostFocus,
 
-	// System messages
-	eSystemUpdate,
+	// Editor messages
+	ePlayStarted,
+	ePlayStopped
 };
 
 enum ComponentType
