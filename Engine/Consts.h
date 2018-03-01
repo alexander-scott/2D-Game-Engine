@@ -53,6 +53,7 @@ enum SystemMessageType
 	// Input messages
 	eInputKeyboardMessage,
 	eInputMouseMessage,
+	eInputUpdateGamePad,
 
 	// Windows messages
 	eWindowLostFocus,

@@ -66,8 +66,10 @@
     <ClCompile Include="..\Engine\TestCommand.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\SceneManager.cpp" />
     <ClCompile Include="..\Engine\Scene.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\SceneManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -201,8 +203,10 @@
     <ClInclude Include="..\Engine\TestCommand.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h" />
     <ClInclude Include="..\Engine\Scene.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

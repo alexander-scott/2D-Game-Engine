@@ -49,6 +49,10 @@ bool Engine::Update()
 		// Update the current scene in the SceneManager system
 		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
 
+		/*TODO Input: Consider if the call to update the state of gamepad is better inside this loop
+		or outside of this loop*/
+		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eInputUpdateGamePad));
+
 		_lag -= MS_PER_UPDATE;
 	}
 
