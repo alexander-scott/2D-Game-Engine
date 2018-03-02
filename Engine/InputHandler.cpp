@@ -2,6 +2,7 @@
 
 #include "InputKeyboardMessage.h"
 #include "InputMouseMessage.h"
+#include "ISystemToGameObjectMessage.h"
 
 InputHandler::InputHandler(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	:ISystem(SystemType::eInputHandler, dispatcher)
@@ -43,4 +44,13 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 			_stateGamePadP1 = _gamePadP1->GetState(0);
 		}
 	}
+}
+
+// ISystemToGameObjectMessage must be initalised with an instance of IComponentMessage.
+// IComponentMessage has a ComponentMessageType that you must set (such as eMoveForward, eMoveBackward)
+// which specific GameObject components can listen for. The GameObject component must also 
+// inherit IMessageableComponent.
+void InputHandler::SendMessageToScene(ISystemToGameObjectMessage& message)
+{
+	SendMessageToDispatcher(message);
 }

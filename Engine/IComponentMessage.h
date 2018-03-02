@@ -7,7 +7,7 @@
 class IComponentMessage : public IMessage
 {
 public:
-	IComponentMessage(ComponentType componentType) : ComponentRecipient(componentType) { }
+	IComponentMessage(ComponentMessageType messageType) : MessageType(messageType) { }
 
-	ComponentType			ComponentRecipient;
+	ComponentMessageType		MessageType;
 };

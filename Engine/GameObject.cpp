@@ -31,16 +31,13 @@ void GameObject::SendMessageToComponent(IComponentMessage & message)
 {
 	for (int i = 0; i < _components.size(); i++)
 	{
-		if (_components[i]->GetType() == message.ComponentRecipient)
-		{
-			// Cast component to IMessageableComponent
-			IMessageableComponent * messageableComponent = dynamic_cast<IMessageableComponent *> (_components[i]);
+		// Cast component to IMessageableComponent
+		IMessageableComponent * messageableComponent = dynamic_cast<IMessageableComponent *> (_components[i]);
 
-			if (messageableComponent != nullptr)
-			{
-				// Is messageable
-				messageableComponent->RecieveMessage(message);
-			}
+		if (messageableComponent != nullptr)
+		{
+			// Is messageable
+			messageableComponent->RecieveMessage(message);
 		}
 	}
 }

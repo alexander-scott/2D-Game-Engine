@@ -202,11 +202,11 @@
     <ClInclude Include="ISystemToGameObjectMessage.h">
       <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
-    <ClInclude Include="Engine.h">
-      <Filter>Engine\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="TestGraphics.h">
       <Filter>Engine\Systems\Graphics\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Engine\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -249,11 +249,11 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Engine\Systems\SceneManagement</Filter>
     </ClCompile>
-    <ClCompile Include="Engine.cpp">
-      <Filter>Engine\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="TestGraphics.cpp">
       <Filter>Engine\Systems\Graphics\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Engine\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
