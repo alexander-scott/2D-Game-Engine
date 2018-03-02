@@ -74,7 +74,7 @@ void Engine::StartUpdateLoop()
 		_lastTime = currentTime;
 		_lag += elapsedTime.count();
 
-		// ProcessInput()
+		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eInputUpdateGamePad));
 
 		// This while loop processes scene updates and physics at a fixed rate.
 		// Whilst allowing graphics to render as fast as possible.

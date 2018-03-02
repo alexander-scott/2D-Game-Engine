@@ -2,6 +2,9 @@
 
 #include "ISystem.h"
 #include "TestCommand.h"
+#include "DirectXTK\Inc\GamePad.h"
+
+class ISystemToGameObjectMessage;
 
 class InputHandler : public ISystem
 {
@@ -10,7 +13,12 @@ public:
 
 	void InitaliseListeners() override;
 	void RecieveMessage(ISystemMessage& message) override;
+
+	void SendMessageToScene(ISystemToGameObjectMessage& message);
 private:
+	std::unique_ptr <DirectX::GamePad> _gamePadP1;
+	DirectX::GamePad::State _stateGamePadP1;
+
 	std::map <unsigned char, ICommand*> _keyboardCommands;
 };
 
