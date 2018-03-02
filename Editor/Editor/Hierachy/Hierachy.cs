@@ -1,6 +1,8 @@
-﻿using SimpleSampleEditor.Engine;
+﻿using SimpleSampleEditor.EditorComponents;
+using SimpleSampleEditor.Engine;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -34,9 +36,25 @@ namespace SimpleSampleEditor.EditorHierachy
 
         private ListView listView;
 
-        public Hierachy(ListView lv)
+        public Hierachy(ListView lv, string resourcesPath)
         {
             listView = lv;
+
+            listView.DisableSelect();
+            listView.Scrollable = true;
+            listView.View = View.Details;
+            listView.Columns.Add(new ColumnHeader
+            {
+                Text = "Hierarchy",
+                Name = "Hierarchy",
+                Width = 100
+            });
+            ImageList list = new ImageList();
+            list.Images.Add("ClosedTriangle", Image.FromFile(@"" + resourcesPath + "\\Editor\\ClosedTriangle.bmp"));
+            list.Images.Add("OpenTriangle", Image.FromFile(@"" + resourcesPath + "\\Editor\\OpenTriangle.bmp"));
+
+            listView.SmallImageList = list;
+            listView.FullRowSelect = true;
 
             listView.MouseDoubleClick += ItemDoubleClicked;
             listView.MouseClick += ListView_MouseClick;

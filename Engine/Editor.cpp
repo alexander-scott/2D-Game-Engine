@@ -26,10 +26,14 @@ void Editor::RecieveMessage(ISystemMessage & message)
 
 void Editor::PlayStarted()
 {
+	// Start playing
+	SendMessageToDispatcher(ISystemMessage(SystemMessageType::ePlayStarted));
 }
 
 void Editor::PlayStopped()
 {
+	// Stop playing
+	SendMessageToDispatcher(ISystemMessage(SystemMessageType::ePlayStopped));
 }
 
 void Editor::LoadNewScene(const char * filePath)

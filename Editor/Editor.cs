@@ -1,8 +1,6 @@
 ﻿using SimpleSampleEditor.Engine;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 using SimpleSampleEditor.EditorHierachy;
@@ -18,14 +16,37 @@ namespace SimpleSampleEditor
         private IntPtr _editorSystem;
         private IntPtr _sceneManagerSystem;
 
-        private Hierachy mHierachy;
+        private Scene _scene;
+
+        // Controls
+        private Hierachy _hierarchy;
 
         private bool mPlaying = false;
         private string mResoucesPath;
 
+        #region Consts
+
+        private const string EDITOR_TITLE_PREFIX = "GEPAA - ";
+
+        #endregion
+
+        #region Initilisation
+
         public Editor()
         {
             InitializeComponent();
+
+            mResoucesPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\Resources"));
+
+            InitaliseCallbacks();
+            InitaliseControls();
+
+            _scene = new Scene();
+            this.Text = EDITOR_TITLE_PREFIX + "Untilted";
+        }
+
+        private void InitaliseCallbacks()
+        {
             this.FormClosing += this.EditorClosing;
             this.Shown += this.EditorLoaded;
 
@@ -34,51 +55,22 @@ namespace SimpleSampleEditor
             panel1.MouseMove += new MouseEventHandler(PanelMouseMove);
             this.Controls.Add(this.panel1);
 
-            mResoucesPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\Resources"));
-
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(KeyboardKeyDown);
             this.KeyUp += new KeyEventHandler(KeyboardKeyUp);
+        }
 
+        private void InitaliseControls()
+        {
             btnPlay.DisableSelect();
             btnPlay.MouseClick += PlayClicked;
 
-            hierarchyListBox.DisableSelect();
-            hierarchyListBox.Scrollable = true;
-            hierarchyListBox.View = View.Details;
-            hierarchyListBox.Columns.Add(new ColumnHeader
-            {
-                Text = "Hierarchy",
-                Name = "Hierarchy",
-                Width = 100
-            });
-            ImageList list = new ImageList();
-            list.Images.Add("ClosedTriangle", Image.FromFile(@"" + mResoucesPath + "\\Editor\\ClosedTriangle.bmp"));
-            list.Images.Add("OpenTriangle", Image.FromFile(@"" + mResoucesPath + "\\Editor\\OpenTriangle.bmp"));
-            
-            hierarchyListBox.SmallImageList = list;
-            hierarchyListBox.FullRowSelect = true;
-
-            mHierachy = new Hierachy(hierarchyListBox);
+            _hierarchy = new Hierachy(hierarchyListBox, mResoucesPath);
         }
 
-        private void PlayClicked(object sender, MouseEventArgs e)
-        {
-            if (!mPlaying)
-            {
-                mPlaying = true;
-                btnPlay.Text = "PLAY";
-                EngineInterface.PlayStarted(_editorSystem);
-                mHierachy.CreateHierachyList(_sceneManagerSystem); // Update hierarchy
-            }
-            else
-            {
-                mPlaying = false;
-                btnPlay.Text = "STOP";
-                EngineInterface.PlayStopped(_editorSystem);
-                mHierachy.CreateHierachyList(_sceneManagerSystem); // Update hierarchy
-            }
-        }
+        #endregion
+
+        #region Editor load/close callbacks
 
         private void EditorLoading(object sender, EventArgs e)
         {
@@ -92,14 +84,35 @@ namespace SimpleSampleEditor
 
         private void EditorLoaded(object sender, EventArgs e)
         {
+            _hierarchy.CreateHierachyList(_sceneManagerSystem);
             EngineInterface.StartUpdateLoop(_engine);
-            mHierachy.CreateHierachyList(_sceneManagerSystem);
         }
 
         private void EditorClosing(object sender, FormClosingEventArgs e)
         {
             EngineInterface.CleanD3D(_engine);
         }
+
+        #endregion
+
+        private void PlayClicked(object sender, MouseEventArgs e)
+        {
+            if (!mPlaying)
+            {
+                mPlaying = true;
+                btnPlay.Text = "STOP";
+                EngineInterface.PlayStarted(_editorSystem);
+                _hierarchy.CreateHierachyList(_sceneManagerSystem);
+            }
+            else
+            {
+                mPlaying = false;
+                btnPlay.Text = "PLAY";
+                EngineInterface.PlayStopped(_editorSystem);
+                _hierarchy.CreateHierachyList(_sceneManagerSystem);
+            }
+        }
+
 
         #region Basic Input
 
@@ -151,7 +164,16 @@ namespace SimpleSampleEditor
             if (theDialog.ShowDialog() == DialogResult.OK)
             {
                 EngineInterface.LoadNewScene(_editorSystem, theDialog.FileName);
-                mHierachy.CreateHierachyList(_sceneManagerSystem);
+
+                _scene = new Scene
+                {
+                    Name = Path.GetFileNameWithoutExtension(theDialog.FileName),
+                    FilePath = theDialog.FileName,
+                    HasSavedOnce = true,
+                    HasChanged = false,
+                };
+                this.Text = EDITOR_TITLE_PREFIX + _scene.Name;
+                _hierarchy.CreateHierachyList(_sceneManagerSystem);
             }
         }
 
@@ -162,6 +184,19 @@ namespace SimpleSampleEditor
 
         private void SaveSceneClicked(object sender, EventArgs e)
         {
+            if (_scene.HasSavedOnce)
+            {
+                EngineInterface.SaveScene(_editorSystem, _scene.FilePath); // TODO: Check if save was successful or not
+                _scene.HasChanged = false;
+            }
+            else
+            {
+                SaveAsSceneClicked(sender, e); // Open up dialog and browse where to save scene
+            }
+        }
+
+        private void SaveAsSceneClicked(object sender, EventArgs e)
+        {
             SaveFileDialog theDialog = new SaveFileDialog
             {
                 Title = "Save Scene",
@@ -169,7 +204,13 @@ namespace SimpleSampleEditor
             };
             if (theDialog.ShowDialog() == DialogResult.OK)
             {
-                EngineInterface.SaveScene(_editorSystem, theDialog.FileName);
+                EngineInterface.SaveScene(_editorSystem, theDialog.FileName); // TODO: Check if save was successful or not
+
+                _scene.Name = Path.GetFileNameWithoutExtension(theDialog.FileName);
+                _scene.FilePath = theDialog.FileName;
+                _scene.HasSavedOnce = true;
+                _scene.HasChanged = false;
+                this.Text = EDITOR_TITLE_PREFIX + _scene.Name;
             }
         }
     }

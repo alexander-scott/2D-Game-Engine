@@ -71,10 +71,11 @@
     <Compile Include="Editor.Designer.cs">
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditorComponents\Utils.cs" />
-    <Compile Include="Engine\EngineInterface.cs" />
-    <Compile Include="Engine\Hierachy\Hierachy.cs" />
-    <Compile Include="Engine\SceneInterface.cs" />
+    <Compile Include="Editor\Scene.cs" />
+    <Compile Include="Editor\Utils.cs" />
+    <Compile Include="Editor\EngineInterface\EngineInterface.cs" />
+    <Compile Include="Editor\Hierachy\Hierachy.cs" />
+    <Compile Include="Editor\EngineInterface\SceneInterface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Editor.resx">

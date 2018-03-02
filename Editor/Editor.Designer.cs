@@ -40,6 +40,7 @@
             this.menuNewScene = new System.Windows.Forms.MenuItem();
             this.menuLoadScene = new System.Windows.Forms.MenuItem();
             this.menuSaveScene = new System.Windows.Forms.MenuItem();
+            this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // panel1
@@ -104,7 +105,8 @@
             this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuNewScene,
             this.menuLoadScene,
-            this.menuSaveScene});
+            this.menuSaveScene,
+            this.menuItem2});
             this.menuItem1.Text = "Scene";
             // 
             // menuNewScene
@@ -124,6 +126,12 @@
             this.menuSaveScene.Index = 2;
             this.menuSaveScene.Text = "Save Scene";
             this.menuSaveScene.Click += new System.EventHandler(this.SaveSceneClicked);
+            // 
+            // menuItem2
+            // 
+            this.menuItem2.Index = 3;
+            this.menuItem2.Text = "Save as Scene";
+            this.menuItem2.Click += new System.EventHandler(this.SaveAsSceneClicked);
             // 
             // Editor
             // 
@@ -157,6 +165,7 @@
         private System.Windows.Forms.MenuItem menuNewScene;
         private System.Windows.Forms.MenuItem menuLoadScene;
         private System.Windows.Forms.MenuItem menuSaveScene;
+        private System.Windows.Forms.MenuItem menuItem2;
     }
 }
 
