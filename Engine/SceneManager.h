@@ -14,11 +14,26 @@ struct SceneItem
 	int ComponentCount;
 };
 
-struct InspectorItem
+// The InspectorField will display the field name and field value
+// TODO: Pass in field type too.
+struct InspectorField
 {
 	char* FieldName;
 	char* FieldValue;
-	int FieldType;
+};
+
+// The InspectorComponent will display all the fields the component has
+struct InspectorComponent
+{
+	InspectorField* Fields;
+	int FieldCount;
+};
+
+// The Inspector will display all the components the GameObject has
+struct Inspector
+{
+	InspectorComponent* Components;
+	int ComponentCount;
 };
 
 class SceneManager : public ISystem

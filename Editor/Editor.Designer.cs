@@ -1,4 +1,4 @@
-﻿namespace SimpleSampleEditor
+﻿namespace GEPAA_Editor
 {
     partial class Editor
     {

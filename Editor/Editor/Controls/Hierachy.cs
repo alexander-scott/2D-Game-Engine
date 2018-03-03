@@ -1,12 +1,12 @@
-﻿using SimpleSampleEditor.EditorComponents;
-using SimpleSampleEditor.Engine;
+﻿using GEPAA_Editor.EditorComponents;
+using GEPAA_Editor.Engine;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace SimpleSampleEditor.EditorHierachy
+namespace GEPAA_Editor.EditorControls
 {
     public class HItem
     {

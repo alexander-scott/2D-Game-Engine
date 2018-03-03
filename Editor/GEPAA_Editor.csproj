@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C9893F5F-BFC5-49BB-A9CD-0B769D398302}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SimpleSampleEditor</RootNamespace>
-    <AssemblyName>SimpleSampleEditor</AssemblyName>
+    <RootNamespace>GEPAA_Editor</RootNamespace>
+    <AssemblyName>GEPAA_Editor</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -71,10 +71,11 @@
     <Compile Include="Editor.Designer.cs">
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor\Controls\Inspector.cs" />
     <Compile Include="Editor\Scene.cs" />
     <Compile Include="Editor\Utils.cs" />
     <Compile Include="Editor\EngineInterface\EngineInterface.cs" />
-    <Compile Include="Editor\Hierachy\Hierachy.cs" />
+    <Compile Include="Editor\Controls\Hierachy.cs" />
     <Compile Include="Editor\EngineInterface\SceneInterface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="GEPAA_Engine.lib">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -1,14 +1,14 @@
-﻿using SimpleSampleEditor.Engine;
+﻿using GEPAA_Editor.Engine;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-using SimpleSampleEditor.EditorHierachy;
-using SimpleSampleEditor.EditorComponents;
+using GEPAA_Editor.EditorControls;
+using GEPAA_Editor.EditorComponents;
 using System.IO;
 using System.Reflection;
 
-namespace SimpleSampleEditor
+namespace GEPAA_Editor
 {
     public partial class Editor : Form
     {

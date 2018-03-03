@@ -1,10 +1,4 @@
-﻿using SimpleSampleEditor.EditorComponents;
-using SimpleSampleEditor.EditorHierachy;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-
-namespace SimpleSampleEditor
+﻿namespace GEPAA_Editor
 {
     class Scene
     {
