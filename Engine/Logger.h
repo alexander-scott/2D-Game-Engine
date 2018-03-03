@@ -15,7 +15,7 @@ enum LogSeverity
 class Logger
 {
 public:
-	const std::string filePath = "logs/LogFile.txt"; // Should this be in consts.h?
+	const std::string filePath = "LogFile.txt"; // Should this be in consts.h?
 
 	Logger()
 	{

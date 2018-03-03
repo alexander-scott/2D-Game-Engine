@@ -1,11 +1,7 @@
-<!-- -
-<XmlTag variable="0" />
-Test scene file
-<!- -->
-
+<?xml?>
 <scene name="scene1">
-  <!-- - TEST GAMEOBJECT <!- -->
-  <GameObject tag="TestGameObject" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
-    <Component type="TransformComponent" xpos="0" ypos="0" rotation="0" scale="1"></Component>
-  </GameObject>
+	<GameObject tag="TestGameObject" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
+		<Component rotation="0.000000" scale="1.000000" type="TransformComponent" xpos="0.000000" ypos="-0.000000"/>
+	</GameObject>
 </scene>
+

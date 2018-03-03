@@ -18,4 +18,9 @@ public:
 
 protected:
 	shared_ptr<Scene> BuildScene(string filePath);
+
+private:
+	GUID StringToGUID(const std::string& guid);
+
+	std::string		_currentFilePath;
 };

@@ -1,0 +1,24 @@
+[2018-02-25 11:21:08.950] [GEPAA] [info] Initalising Systems
+[2018-02-25 11:21:09.019] [GEPAA] [info] Starting main update loop
+[2018-02-25 11:21:11.703] [GEPAA] [info] Program shutting down
+[2018-02-25 11:21:11.703] [GEPAA] [info] ---------------------
+[2018-02-25 14:24:34.455] [GEPAA] [info] Initalising Systems
+[2018-02-25 14:24:34.498] [GEPAA] [info] Starting main update loop
+[2018-02-25 14:24:40.310] [GEPAA] [info] Program shutting down
+[2018-02-25 14:24:40.311] [GEPAA] [info] ---------------------
+[2018-02-27 23:39:06.376] [GEPAA] [info] Initalising Systems
+[2018-02-27 23:39:06.617] [GEPAA] [info] Starting main update loop
+[2018-02-27 23:39:09.214] [GEPAA] [info] Program shutting down
+[2018-02-27 23:39:09.214] [GEPAA] [info] ---------------------
+[2018-02-27 23:57:30.009] [GEPAA] [info] Initalising Systems
+[2018-02-27 23:57:30.282] [GEPAA] [info] Starting main update loop
+[2018-02-27 23:57:32.018] [GEPAA] [info] Program shutting down
+[2018-02-27 23:57:32.018] [GEPAA] [info] ---------------------
+[2018-02-28 00:00:26.188] [GEPAA] [info] Initalising Systems
+[2018-02-28 00:00:26.417] [GEPAA] [info] Starting main update loop
+[2018-02-28 00:00:28.391] [GEPAA] [info] Program shutting down
+[2018-02-28 00:00:28.392] [GEPAA] [info] ---------------------
+[2018-02-28 00:00:48.992] [GEPAA] [info] Initalising Systems
+[2018-02-28 00:00:49.269] [GEPAA] [info] Starting main update loop
+[2018-02-28 00:00:50.996] [GEPAA] [info] Program shutting down
+[2018-02-28 00:00:50.997] [GEPAA] [info] ---------------------

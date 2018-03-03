@@ -41,4 +41,5 @@ private:
 namespace ComponentFactory
 {
 	TransformComponent * MakeTransformComponent(Vec2 position, float rotation, float scale);
+	map<string, string> ExtractTransformComponent(TransformComponent* component);
 }

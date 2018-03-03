@@ -24,8 +24,10 @@ enum SystemType
 {
 	eMainWindow,
 	eEngine,
+	eEditor,
 	eSceneManager,
 	eSceneBuilder,
+	eSceneSaver,
 	eGraphics,
 	eInputHandler
 };
@@ -37,9 +39,11 @@ enum SystemMessageType
 	eUpdateScene,
 	eSendMessageToGameObjects,
 
-	// Scene build messages
+	// Scene build/save messages
 	eRequestBuildSceneMessage,
+	eRequestSaveSceneMessage,
 	eBuildSceneMessage,
+	eSaveSceneMessage,
 
 	// Graphics messages
 	eGraphicsInitalise,
@@ -58,8 +62,9 @@ enum SystemMessageType
 	// Windows messages
 	eWindowLostFocus,
 
-	// System messages
-	eSystemUpdate,
+	// Editor messages
+	ePlayStarted,
+	ePlayStopped
 };
 
 enum ComponentType

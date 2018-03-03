@@ -6,6 +6,13 @@
 
 #include "ISystem.h"
 
+struct SceneItem
+{
+	int GameObjectID;
+	unsigned int GameObjectParentID;
+	char* GameObjectName;
+};
+
 class SceneManager : public ISystem
 {
 public:
@@ -15,7 +22,10 @@ public:
 
 	void RecieveMessage(ISystemMessage& message) override;
 
+	shared_ptr<Scene> GetScene() { return _currentScene; }
+
 private:
 	shared_ptr<Scene>		_currentScene;
 	FrameTimer				_frameTimer;
+	bool					_isPlaying;
 };

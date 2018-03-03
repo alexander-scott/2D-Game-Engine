@@ -3,7 +3,7 @@
 xml_node<>* _node;
 
 // Define component functions here
-inline TransformComponent * BuildTransformComponent();
+inline IComponent * BuildTransformComponent();
 
 // List component functions against string types found in the XML files
 ComponentBuilder::ComponentBuilder()
@@ -16,10 +16,10 @@ IComponent * ComponentBuilder::BuildComponent(xml_node<>* node)
 	_node = node;
 
 	// Call the function listed in the function mapper
-	return functionMapper.CallFunction<TransformComponent*>(string(node->first_attribute("type")->value()));
+	return functionMapper.CallFunction<IComponent*>(string(node->first_attribute("type")->value()));
 }
 
-TransformComponent * BuildTransformComponent()
+IComponent * BuildTransformComponent()
 {
 	float xPos = (float)atof(_node->first_attribute("xpos")->value());
 	float yPos = -(float)atof(_node->first_attribute("ypos")->value());

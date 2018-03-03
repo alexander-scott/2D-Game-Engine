@@ -74,8 +74,14 @@
     <Filter Include="Engine\Systems\Logging">
       <UniqueIdentifier>{8179bf38-109e-44b5-b23f-4f515c928087}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Systems\Graphics\Shaders">
-      <UniqueIdentifier>{6b9e01f6-0d15-4025-b02c-c60c84630a3f}</UniqueIdentifier>
+    <Filter Include="Engine\EditorInterface">
+      <UniqueIdentifier>{79a17cc0-d40b-4f62-baa1-4952dddb647c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Editor">
+      <UniqueIdentifier>{7aa82932-b61f-4bce-8d03-2b8ec4c9a855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\SceneSaving">
+      <UniqueIdentifier>{2eccfda8-6f7a-4ab5-b524-83434fe0e948}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +117,9 @@
     </ClInclude>
     <ClInclude Include="BuildSceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="TestGraphics.h">
+      <Filter>Engine\Systems\Graphics\APIs</Filter>
     </ClInclude>
     <ClInclude Include="IGraphics.h">
       <Filter>Engine\Systems\Graphics</Filter>
@@ -202,11 +211,32 @@
     <ClInclude Include="ISystemToGameObjectMessage.h">
       <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
-    <ClInclude Include="TestGraphics.h">
-      <Filter>Engine\Systems\Graphics\APIs</Filter>
+    <ClInclude Include="Editor.h">
+      <Filter>Engine\Systems\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorInputInterface.h">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorEngineInterface.h">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorSceneInterface.h">
+      <Filter>Engine\EditorInterface</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
       <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneSaver.h">
+      <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveSceneMessage.h">
+      <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentSaver.h">
+      <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClInclude>
+    <ClInclude Include="RequestSaveSceneMessage.h">
+      <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +248,9 @@
     </ClCompile>
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Engine\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TestGraphics.cpp">
+      <Filter>Engine\Systems\Graphics\APIs</Filter>
     </ClCompile>
     <ClCompile Include="DXErr.cpp">
       <Filter>Engine\Systems\Graphics</Filter>
@@ -249,11 +282,26 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Engine\Systems\SceneManagement</Filter>
     </ClCompile>
-    <ClCompile Include="TestGraphics.cpp">
-      <Filter>Engine\Systems\Graphics\APIs</Filter>
+    <ClCompile Include="Editor.cpp">
+      <Filter>Engine\Systems\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorInputInterface.cpp">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorEngineInterface.cpp">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSceneInterface.cpp">
+      <Filter>Engine\EditorInterface</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneSaver.cpp">
+      <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentSaver.cpp">
+      <Filter>Engine\Systems\SceneSaving</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -270,13 +318,5 @@
     <Xml Include="..\Resources\Scenes\Scene1.xml">
       <Filter>Resource Files\Scenes</Filter>
     </Xml>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="FramebufferPS.shh">
-      <Filter>Engine\Systems\Graphics\Shaders</Filter>
-    </None>
-    <None Include="FramebufferVS.shh">
-      <Filter>Engine\Systems\Graphics\Shaders</Filter>
-    </None>
   </ItemGroup>
 </Project>

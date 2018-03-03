@@ -10,25 +10,47 @@
 #include "Logger.h"
 
 SceneBuilder::SceneBuilder(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
-	: ISystem(SystemType::eSceneBuilder, dispatcher){ }
+	: ISystem(SystemType::eSceneBuilder, dispatcher)
+{ 
+	_currentFilePath = "";
+}
 
 void SceneBuilder::InitaliseListeners()
 {
 	SubscribeToMessageType(SystemMessageType::eRequestBuildSceneMessage);
+	SubscribeToMessageType(SystemMessageType::ePlayStopped);
 }
 
 void SceneBuilder::RecieveMessage(ISystemMessage & message)
 {
-	if (message.Type == SystemMessageType::eRequestBuildSceneMessage)
+	switch (message.Type)
 	{
-		RequestBuildSceneMessage& msg = static_cast<RequestBuildSceneMessage&>(message);
+		case SystemMessageType::eRequestBuildSceneMessage:
+		{
+			RequestBuildSceneMessage& msg = static_cast<RequestBuildSceneMessage&>(message);
 
-		// If the engine asks the SceneBuilder system to create a Scene, build one and send a pointer to it in a message.
-		shared_ptr<Scene> scene = BuildScene(msg.FilePath);
+			// If the engine asks the SceneBuilder system to create a Scene, build one and send a pointer to it in a message.
+			shared_ptr<Scene> scene = BuildScene(msg.FilePath);
+			_currentFilePath = msg.FilePath;
 
-		// Send built scene to SceneManager system
-		BuildSceneMessage sceneMsg(scene);
-		SendMessageToDispatcher(sceneMsg);
+			// Send built scene to SceneManager system
+			BuildSceneMessage sceneMsg(scene);
+			SendMessageToDispatcher(sceneMsg);
+			break;
+		}
+		case SystemMessageType::ePlayStopped:
+		{
+			if (_currentFilePath == "")
+				throw std::exception("Current file path is empty");
+
+			// If the engine asks the SceneBuilder system to create a Scene, build one and send a pointer to it in a message.
+			shared_ptr<Scene> scene = BuildScene(_currentFilePath);
+
+			// Send built scene to SceneManager system
+			BuildSceneMessage sceneMsg(scene);
+			SendMessageToDispatcher(sceneMsg);
+			break;
+		}
 	}
 }
 
@@ -72,7 +94,10 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 	xml_node<>* gameObjectNode = root->first_node("GameObject");
 	while (gameObjectNode)
 	{
-		auto gameObject = GameObject::MakeGameObject(gameObjectNode->first_attribute("tag")->value());
+		string tag = gameObjectNode->first_attribute("tag")->value();
+		GUID guid = StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
+
+		auto gameObject = GameObject::MakeGameObject(tag, guid);
 
 		// Create this gameobjects components
 		xml_node<>* component = gameObjectNode->first_node("Component");
@@ -90,4 +115,30 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 	}
 
 	return scene;
+}
+
+GUID SceneBuilder::StringToGUID(const std::string& guid) {
+	GUID output;
+	unsigned long p0;
+	int p1, p2, p3, p4, p5, p6, p7, p8, p9, p10;
+
+	int err = sscanf_s(guid.c_str(), "%08lX-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
+		&p0, &p1, &p2, &p3, &p4, &p5, &p6, &p7, &p8, &p9, &p10);
+
+	if (err != 11)
+		throw std::logic_error("Invalid GUID, format should be {00000000-0000-0000-0000-000000000000}");
+
+	// Set the data like this to avoid corrupting the stack
+	output.Data1 = p0;
+	output.Data2 = p1;
+	output.Data3 = p2;
+	output.Data4[0] = p3;
+	output.Data4[1] = p4;
+	output.Data4[2] = p5;
+	output.Data4[3] = p6;
+	output.Data4[4] = p7;
+	output.Data4[5] = p8;
+	output.Data4[6] = p9;
+	output.Data4[7] = p10;
+	return output;
 }
