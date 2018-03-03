@@ -7,11 +7,19 @@ namespace GEPAA_Editor.EditorControls
 {
     public class Inspector
     {
-        private ListView _listView;
+        private DataGridView _view;
 
-        public Inspector(ListView lv)
+        public Inspector(DataGridView dgv)
         {
-            _listView = lv;
+            _view = dgv;
+
+            _view.BackgroundColor = System.Drawing.Color.White;
+            _view.RowHeadersVisible = false;
+
+            _view.Columns.Clear();
+            _view.Columns.Add("Name", "Name");
+            _view.Columns[0].ReadOnly = true;
+            _view.Columns.Add("Value", "Value");
         }
 
         public void GameObjectClicked(IntPtr sceneManager, int id, int componentCount)
@@ -32,10 +40,23 @@ namespace GEPAA_Editor.EditorControls
                 IntPtr fieldsPtr = SceneInterface.PopulateInspector(sceneManager, (ulong)id, i);
                 int structSize = Marshal.SizeOf(typeof(InspectorField));
 
-                // Parse the data recieved from the engine
-                IntPtr data = new IntPtr(fieldsPtr.ToInt64() + structSize * i);
-                InspectorField field = (InspectorField)Marshal.PtrToStructure(data, typeof(InspectorField));
+                for (int j = 0; j < fieldCount[i]; j++)
+                {
+                    // Parse the data recieved from the engine
+                    IntPtr data = new IntPtr(fieldsPtr.ToInt64() + structSize * j);
+                    InspectorField field = (InspectorField)Marshal.PtrToStructure(data, typeof(InspectorField));
+                    _view.Rows.Add(field.FieldName, field.FieldValue);
+                }
+
+                SceneInterface.FreeMemory(fieldsPtr);
             }
+
+            SceneInterface.FreeMemory(fieldCountPtr);
+        }
+
+        public void ClearInspector()
+        {
+            _view.Rows.Clear();
         }
     }
 }

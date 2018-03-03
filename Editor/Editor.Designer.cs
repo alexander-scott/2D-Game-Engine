@@ -40,7 +40,8 @@
             this.menuLoadScene = new System.Windows.Forms.MenuItem();
             this.menuSaveScene = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
-            this.inspectorListBaox = new System.Windows.Forms.ListView();
+            this.dgvInspector = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInspector)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -83,7 +84,7 @@
             // 
             this.hierarchyListBox.Location = new System.Drawing.Point(12, 46);
             this.hierarchyListBox.Name = "hierarchyListBox";
-            this.hierarchyListBox.Size = new System.Drawing.Size(218, 295);
+            this.hierarchyListBox.Size = new System.Drawing.Size(229, 295);
             this.hierarchyListBox.TabIndex = 9;
             this.hierarchyListBox.UseCompatibleStateImageBehavior = false;
             // 
@@ -126,13 +127,15 @@
             this.menuItem2.Text = "Save as Scene";
             this.menuItem2.Click += new System.EventHandler(this.SaveAsSceneClicked);
             // 
-            // inspectorListBaox
+            // dgvInspector
             // 
-            this.inspectorListBaox.Location = new System.Drawing.Point(12, 392);
-            this.inspectorListBaox.Name = "inspectorListBaox";
-            this.inspectorListBaox.Size = new System.Drawing.Size(218, 295);
-            this.inspectorListBaox.TabIndex = 10;
-            this.inspectorListBaox.UseCompatibleStateImageBehavior = false;
+            this.dgvInspector.AllowUserToAddRows = false;
+            this.dgvInspector.AllowUserToDeleteRows = false;
+            this.dgvInspector.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInspector.Location = new System.Drawing.Point(12, 392);
+            this.dgvInspector.Name = "dgvInspector";
+            this.dgvInspector.Size = new System.Drawing.Size(229, 272);
+            this.dgvInspector.TabIndex = 11;
             // 
             // Editor
             // 
@@ -140,7 +143,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1184, 704);
-            this.Controls.Add(this.inspectorListBaox);
+            this.Controls.Add(this.dgvInspector);
             this.Controls.Add(this.hierarchyListBox);
             this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.lblPrefabs);
@@ -150,6 +153,7 @@
             this.Name = "Editor";
             this.Text = "Editor";
             this.Load += new System.EventHandler(this.EditorLoading);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInspector)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,7 +171,7 @@
         private System.Windows.Forms.MenuItem menuLoadScene;
         private System.Windows.Forms.MenuItem menuSaveScene;
         private System.Windows.Forms.MenuItem menuItem2;
-        private System.Windows.Forms.ListView inspectorListBaox;
+        private System.Windows.Forms.DataGridView dgvInspector;
     }
 }
 

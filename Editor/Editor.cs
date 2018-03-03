@@ -66,7 +66,7 @@ namespace GEPAA_Editor
             btnPlay.DisableSelect();
             btnPlay.MouseClick += PlayClicked;
 
-            _inspector = new EditorControls.Inspector(inspectorListBaox);
+            _inspector = new Inspector(dgvInspector);
             _hierarchy = new Hierachy(hierarchyListBox, _inspector, _resoucesPath);
         }
 

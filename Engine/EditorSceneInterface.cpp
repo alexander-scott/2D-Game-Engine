@@ -41,7 +41,7 @@ int* EditorSceneInterface::GetComponentFieldCounts(void* sceneManagerPtr, unsign
 {
 	auto gameObject = static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID);
 	auto components = gameObject->GetAllComponents();
-	int componentCount = components.size();
+	int componentCount = (int)components.size();
 
 	int* componentFieldCounts = new int[componentCount];
 	for (int i = 0; i < componentCount; i++)
@@ -56,7 +56,7 @@ InspectorField* EditorSceneInterface::PopulateInspector(void* sceneManagerPtr, u
 {
 	auto gameObject = static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID);
 	auto components = gameObject->GetAllComponents();
-	int componentCount = components.size();
+	int componentCount = (int)components.size();
 
 	auto componentFields = components[componentIndex]->ExtractComponent();
 	auto inspectorFields = new InspectorField[componentFields.size()];

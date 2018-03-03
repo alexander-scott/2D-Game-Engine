@@ -67,8 +67,15 @@ namespace GEPAA_Editor.EditorControls
 
         private void _listView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = _listView.SelectedIndices[0];
-            _inspector.GameObjectClicked(_sceneManager, hierarchyItems[index].GameObjectID, hierarchyItems[index].ComponentCount);
+            if (_listView.SelectedIndices.Count > 0)
+            {
+                int index = _listView.SelectedIndices[0];
+                _inspector.GameObjectClicked(_sceneManager, hierarchyItems[index].GameObjectID, hierarchyItems[index].ComponentCount);
+            }
+            else
+            {
+                _inspector.ClearInspector();
+            }
         }
 
         private void ItemDoubleClicked(object sender, MouseEventArgs e)
