@@ -11,6 +11,14 @@ struct SceneItem
 	int GameObjectID;
 	unsigned int GameObjectParentID;
 	char* GameObjectName;
+	int ComponentCount;
+};
+
+struct InspectorItem
+{
+	char* FieldName;
+	char* FieldValue;
+	int FieldType;
 };
 
 class SceneManager : public ISystem

@@ -12,6 +12,7 @@ namespace SimpleSampleEditor.EditorHierachy
     {
         public string GameObjectName;
         public int GameObjectID;
+        public int ComponentCount;
         public HItem HierarchyParent;
         public List<HItem> HierarchyChildren;
 
@@ -19,10 +20,11 @@ namespace SimpleSampleEditor.EditorHierachy
 
         public int ChildDepthLevel;
 
-        public HItem(string name,int gameObjectID)
+        public HItem(string name,int gameObjectID, int componentCount)
         {
             GameObjectName = name;
             GameObjectID = gameObjectID;
+            ComponentCount = componentCount;
             HierarchyChildren = new List<HItem>();
 
             Expanded = false;
@@ -136,7 +138,7 @@ namespace SimpleSampleEditor.EditorHierachy
                 SceneItem hItem = (SceneItem)Marshal.PtrToStructure(data, typeof(SceneItem));
 
                 // Create the item that will be stored in the hierarchy
-                HItem item = new HItem(hItem.GameObjectName, (int)hItem.GameObjectID);
+                HItem item = new HItem(hItem.GameObjectName, (int)hItem.GameObjectID, (int)hItem.ComponentCount);
 
                 // Check if the item has a parent
                 HItem itemParent = FindParent((int)hItem.GameObjectParentID);
@@ -177,7 +179,7 @@ namespace SimpleSampleEditor.EditorHierachy
                 }   
             }
 
-            SceneInterface.FreeHierarchyMemory(hierarchy);
+            SceneInterface.FreeMemory(hierarchy);
         }
 
         private HItem FindParent(int parentID)

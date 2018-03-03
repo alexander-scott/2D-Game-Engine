@@ -10,6 +10,7 @@ namespace SimpleSampleEditor.Engine
         public uint GameObjectParentID;
         [MarshalAsAttribute(UnmanagedType.LPStr)]
         public string GameObjectName;
+        public uint ComponentCount;
     };
 
     class SceneInterface
@@ -21,6 +22,6 @@ namespace SimpleSampleEditor.Engine
         public static extern IntPtr PopulateHierarchyItems(IntPtr window, int itemCount);
 
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void FreeHierarchyMemory(IntPtr hierarchy);
+        public static extern void FreeMemory(IntPtr ptr);
     }
 }

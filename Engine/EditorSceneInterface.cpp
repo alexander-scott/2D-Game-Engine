@@ -30,12 +30,28 @@ SceneItem* EditorSceneInterface::PopulateHierarchyItems(void* sceneManagerPtr, i
 		char* result = new char[gameObj->GetTag().length() + 1];
 		strcpy_s(result, gameObj->GetTag().length() + 1, gameObj->GetTag().c_str());
 		items[i].GameObjectName = result; // Set the GameObject's name
+
+		items[i].ComponentCount = (int)gameObj->GetAllComponents().size();
 	}
 
 	return items;
 }
 
-void EditorSceneInterface::FreeHierarchyMemory(void * hierarchy)
+InspectorItem* EditorSceneInterface::PopulateInspector(void* sceneManagerPtr, unsigned long gameObjectID)
 {
-	delete hierarchy;
+	auto gameObject = static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID);
+	auto components = gameObject->GetAllComponents();
+
+	InspectorItem* items = new InspectorItem[components.size()];
+	for (int i = 0; i < components.size(); i++)
+	{
+
+	}
+
+	return nullptr; //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+}
+
+void EditorSceneInterface::FreeMemory(void * ptr)
+{
+	delete ptr;
 }

@@ -101,6 +101,7 @@ namespace SimpleSampleEditor
             {
                 mPlaying = true;
                 btnPlay.Text = "STOP";
+                this.BackColor = Color.AliceBlue;
                 EngineInterface.PlayStarted(_editorSystem);
                 _hierarchy.CreateHierachyList(_sceneManagerSystem);
             }
@@ -108,6 +109,7 @@ namespace SimpleSampleEditor
             {
                 mPlaying = false;
                 btnPlay.Text = "PLAY";
+                this.BackColor = Color.WhiteSmoke;
                 EngineInterface.PlayStopped(_editorSystem);
                 _hierarchy.CreateHierachyList(_sceneManagerSystem);
             }

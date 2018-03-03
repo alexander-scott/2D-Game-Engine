@@ -10,5 +10,6 @@ namespace EditorSceneInterface
 
 	extern "C" { DllExport SceneItem* PopulateHierarchyItems(void* sceneManagerPtr, int itemCount); }
 
-	extern "C" { DllExport void FreeHierarchyMemory(void* hierarchy); }
-}
+	extern "C" { DllExport InspectorItem* PopulateInspector(void* sceneManagerPtr, unsigned long gameObjectID); }
+
+	extern "C" { DllExport void FreeMemory(void* ptr); }}
