@@ -30,7 +30,7 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 			InputKeyboardMessage& msg = static_cast<InputKeyboardMessage&>(message);
 			if (_keyboardCommands[msg.Key] != nullptr)
 			{
-				_keyboardCommands[msg.Key]->Execute();
+				SendMessageToScene(_keyboardCommands[msg.Key]->Execute());
 			}
 			break;
 		}

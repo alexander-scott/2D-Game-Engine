@@ -5,24 +5,24 @@
 class MoveUpCommand : public ICommand
 {
 public:
-	void Execute();
+	ISystemToGameObjectMessage Execute();
 };
 
 class MoveLeftCommand : public ICommand
 {
 public:
-	void Execute();
+	ISystemToGameObjectMessage Execute();
 };
 
 class MoveRightCommand : public ICommand
 {
 public:
-	void Execute();
+	ISystemToGameObjectMessage Execute();
 };
 
 class MoveDownCommand : public ICommand
 {
 public:
-	void Execute();
+	ISystemToGameObjectMessage Execute();
 };
 
