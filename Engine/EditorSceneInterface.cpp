@@ -37,39 +37,45 @@ SceneItem* EditorSceneInterface::PopulateHierarchyItems(void* sceneManagerPtr, i
 	return items;
 }
 
-Inspector* EditorSceneInterface::PopulateInspector(void* sceneManagerPtr, unsigned long gameObjectID)
+int* EditorSceneInterface::GetComponentFieldCounts(void* sceneManagerPtr, unsigned long gameObjectID)
 {
 	auto gameObject = static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID);
 	auto components = gameObject->GetAllComponents();
 	int componentCount = components.size();
 
-	Inspector* inspector = new Inspector;
-	inspector->ComponentCount = componentCount;
-	inspector->Components = new InspectorComponent[componentCount];
-
+	int* componentFieldCounts = new int[componentCount];
 	for (int i = 0; i < componentCount; i++)
 	{
-		auto componentFields = components[i]->ExtractComponent();
-		int componentFieldCount = componentFields.size();
-		inspector->Components[i].FieldCount = componentFieldCount;
-		inspector->Components[i].Fields = new InspectorField[componentFieldCount];
-
-		int fieldCount = 0;
-		for (auto field : componentFields)
-		{
-			char* name = new char[field.first.length() + 1];
-			strcpy_s(name, field.first.length() + 1, field.first.c_str());
-			inspector->Components[i].Fields[fieldCount].FieldName = name;
-
-			char* value = new char[field.second.length() + 1];
-			strcpy_s(value, field.second.length() + 1, field.second.c_str());
-			inspector->Components[i].Fields[fieldCount].FieldValue = value;
-
-			fieldCount++;
-		}
+		componentFieldCounts[i] = (int)components[i]->ExtractComponent().size();
 	}
 
-	return inspector; //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	return componentFieldCounts;
+}
+
+InspectorField* EditorSceneInterface::PopulateInspector(void* sceneManagerPtr, unsigned long gameObjectID, int componentIndex)
+{
+	auto gameObject = static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID);
+	auto components = gameObject->GetAllComponents();
+	int componentCount = components.size();
+
+	auto componentFields = components[componentIndex]->ExtractComponent();
+	auto inspectorFields = new InspectorField[componentFields.size()];
+
+	int fieldCount = 0;
+	for (auto field : componentFields)
+	{
+		char* name = new char[field.first.length() + 1];
+		strcpy_s(name, field.first.length() + 1, field.first.c_str());
+		inspectorFields[fieldCount].FieldName = name;
+
+		char* value = new char[field.second.length() + 1];
+		strcpy_s(value, field.second.length() + 1, field.second.c_str());
+		inspectorFields[fieldCount].FieldValue = value;
+
+		fieldCount++;
+	}
+
+	return inspectorFields;
 }
 
 void EditorSceneInterface::FreeMemory(void * ptr)

@@ -22,20 +22,6 @@ namespace GEPAA_Editor.Engine
         public string FieldValue;
     };
 
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct InspectorComponent
-    {
-        public InspectorField[] Fields;
-        public uint FieldCount;
-    };
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct Inspector
-    {
-        public InspectorComponent[] Components;
-        public uint ComponentCount;
-    };
-
     class SceneInterface
     {
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -45,7 +31,10 @@ namespace GEPAA_Editor.Engine
         public static extern IntPtr PopulateHierarchyItems(IntPtr sceneManagerPtr, int itemCount);
 
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr PopulateInspector(IntPtr sceneManagerPtr, ulong gameObjectID);
+        public static extern IntPtr GetComponentFieldCounts(IntPtr sceneManagerPtr, ulong gameObjectID);
+
+        [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr PopulateInspector(IntPtr sceneManagerPtr, ulong gameObjectID, int componentIndex);
 
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void FreeMemory(IntPtr ptr);

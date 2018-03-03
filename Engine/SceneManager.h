@@ -22,20 +22,6 @@ struct InspectorField
 	char* FieldValue;
 };
 
-// The InspectorComponent will display all the fields the component has
-struct InspectorComponent
-{
-	InspectorField* Fields;
-	int FieldCount;
-};
-
-// The Inspector will display all the components the GameObject has
-struct Inspector
-{
-	InspectorComponent* Components;
-	int ComponentCount;
-};
-
 class SceneManager : public ISystem
 {
 public:

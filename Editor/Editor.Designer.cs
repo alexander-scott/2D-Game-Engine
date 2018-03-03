@@ -40,7 +40,7 @@
             this.menuLoadScene = new System.Windows.Forms.MenuItem();
             this.menuSaveScene = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
-            this.inspectorListBox = new System.Windows.Forms.ListView();
+            this.inspectorListBaox = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // panel1
@@ -126,13 +126,13 @@
             this.menuItem2.Text = "Save as Scene";
             this.menuItem2.Click += new System.EventHandler(this.SaveAsSceneClicked);
             // 
-            // inspectorListBox
+            // inspectorListBaox
             // 
-            this.inspectorListBox.Location = new System.Drawing.Point(12, 392);
-            this.inspectorListBox.Name = "inspectorListBox";
-            this.inspectorListBox.Size = new System.Drawing.Size(218, 295);
-            this.inspectorListBox.TabIndex = 10;
-            this.inspectorListBox.UseCompatibleStateImageBehavior = false;
+            this.inspectorListBaox.Location = new System.Drawing.Point(12, 392);
+            this.inspectorListBaox.Name = "inspectorListBaox";
+            this.inspectorListBaox.Size = new System.Drawing.Size(218, 295);
+            this.inspectorListBaox.TabIndex = 10;
+            this.inspectorListBaox.UseCompatibleStateImageBehavior = false;
             // 
             // Editor
             // 
@@ -140,7 +140,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1184, 704);
-            this.Controls.Add(this.inspectorListBox);
+            this.Controls.Add(this.inspectorListBaox);
             this.Controls.Add(this.hierarchyListBox);
             this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.lblPrefabs);
@@ -167,7 +167,7 @@
         private System.Windows.Forms.MenuItem menuLoadScene;
         private System.Windows.Forms.MenuItem menuSaveScene;
         private System.Windows.Forms.MenuItem menuItem2;
-        private System.Windows.Forms.ListView inspectorListBox;
+        private System.Windows.Forms.ListView inspectorListBaox;
     }
 }
 

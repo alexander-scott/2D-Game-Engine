@@ -20,9 +20,10 @@ namespace GEPAA_Editor
 
         // Controls
         private Hierachy _hierarchy;
+        private EditorControls.Inspector _inspector;
 
         private bool mPlaying = false;
-        private string mResoucesPath;
+        private string _resoucesPath;
 
         #region Consts
 
@@ -36,7 +37,7 @@ namespace GEPAA_Editor
         {
             InitializeComponent();
 
-            mResoucesPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\Resources"));
+            _resoucesPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\Resources"));
 
             InitaliseCallbacks();
             InitaliseControls();
@@ -65,7 +66,8 @@ namespace GEPAA_Editor
             btnPlay.DisableSelect();
             btnPlay.MouseClick += PlayClicked;
 
-            _hierarchy = new Hierachy(hierarchyListBox, mResoucesPath);
+            _inspector = new EditorControls.Inspector(inspectorListBaox);
+            _hierarchy = new Hierachy(hierarchyListBox, _inspector, _resoucesPath);
         }
 
         #endregion
