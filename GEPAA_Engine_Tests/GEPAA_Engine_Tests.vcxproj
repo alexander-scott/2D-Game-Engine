@@ -99,6 +99,7 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
       <WholeProgramOptimization>false</WholeProgramOptimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -154,12 +155,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Engine\DirectXTK\Audio\DirectXTKAudio_Desktop_2013_Win8.vcxproj">
+      <Project>{4f150a30-cecb-49d1-8283-6a3f57438cf5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Engine\DirectXTK\DirectXTK_Desktop_2013.vcxproj">
+      <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
       <Project>{ffca512b-49fc-4fc8-8a73-c4f87d322ff2}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine\ComponentBuilder.cpp" />
+    <ClCompile Include="..\Engine\ComponentSaver.cpp" />
     <ClCompile Include="..\Engine\DXErr.cpp" />
     <ClCompile Include="..\Engine\Editor.cpp" />
     <ClCompile Include="..\Engine\Engine.cpp" />
@@ -171,6 +179,7 @@
     <ClCompile Include="..\Engine\Scene.cpp" />
     <ClCompile Include="..\Engine\SceneBuilder.cpp" />
     <ClCompile Include="..\Engine\SceneManager.cpp" />
+    <ClCompile Include="..\Engine\SceneSaver.cpp" />
     <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp" />
     <ClCompile Include="..\Engine\TestCommand.cpp" />
     <ClCompile Include="..\Engine\TestGraphics.cpp" />
@@ -183,6 +192,7 @@
     <ClInclude Include="..\Engine\BuildSceneMessage.h" />
     <ClInclude Include="..\Engine\ComponentBuilder.h" />
     <ClInclude Include="..\Engine\ComponentFactory.h" />
+    <ClInclude Include="..\Engine\ComponentSaver.h" />
     <ClInclude Include="..\Engine\Consts.h" />
     <ClInclude Include="..\Engine\CustomException.h" />
     <ClInclude Include="..\Engine\DrawSpriteMessage.h" />
@@ -218,6 +228,7 @@
     <ClInclude Include="..\Engine\Scene.h" />
     <ClInclude Include="..\Engine\SceneBuilder.h" />
     <ClInclude Include="..\Engine\SceneManager.h" />
+    <ClInclude Include="..\Engine\SceneSaver.h" />
     <ClInclude Include="..\Engine\SetParentTransformMessage.h" />
     <ClInclude Include="..\Engine\SystemMessageDispatcher.h" />
     <ClInclude Include="..\Engine\SystemMessageListener.h" />
