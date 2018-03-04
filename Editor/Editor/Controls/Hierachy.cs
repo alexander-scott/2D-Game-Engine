@@ -85,10 +85,35 @@ namespace GEPAA_Editor.EditorControls
 
             _listView.AfterLabelEdit += GameObjectRenamed;
 
+            _listView.DragDrop += _listView_DragDrop;
+            _listView.DragOver += _listView_DragOver;
+            _listView.ItemDrag += _listView_ItemDrag;
+
             _menu.Items[0].Click += NewGameObjectClicked;
             _menu.Items[1].Click += RenameClicked;
             _menu.Items[2].Click += DeleteClicked;
             _menu.MouseLeave += MenuLeft;
+        }
+
+        private void _listView_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            _listView.DoDragDrop(e.Item, DragDropEffects.All);
+        }
+
+        private void _listView_DragOver(object sender, DragEventArgs e)
+        {
+            if ((e.KeyState & 8) == 8)
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.Move;
+        }
+
+        private void _listView_DragDrop(object sender, DragEventArgs e)
+        {
+            if (_listView.SelectedItems.Count == 0) { return; }
+            Point p = _listView.PointToClient(new Point(e.X, e.Y));
+            ListViewItem item = _listView.GetItemAt(p.X, p.Y);
+            if (item == null) { return; }
         }
 
         private void DeleteClicked(object sender, EventArgs e)
@@ -103,8 +128,11 @@ namespace GEPAA_Editor.EditorControls
 
         private void GameObjectRenamed(object sender, LabelEditEventArgs e)
         {
-            _scene.HasChanged = true;
-            SceneInterface.RenameGameObject(_sceneManager, (ulong)hierarchyItems[_listView.FocusedItem.Index].GameObjectID, e.Label);
+            if (e.Label != null)
+            {
+                _scene.HasChanged = true;
+                SceneInterface.RenameGameObject(_sceneManager, (ulong)hierarchyItems[_listView.FocusedItem.Index].GameObjectID, e.Label);
+            }
         }
 
         private void RenameClicked(object sender, EventArgs e)

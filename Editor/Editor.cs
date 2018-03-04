@@ -175,6 +175,11 @@ namespace GEPAA_Editor
 
         #endregion
 
+        private void NewSceneClicked(object sender, EventArgs e)
+        {
+
+        }
+
         private void LoadSceneClicked(object sender, EventArgs e)
         {
             OpenFileDialog theDialog = new OpenFileDialog
@@ -197,11 +202,6 @@ namespace GEPAA_Editor
                 _hierarchy.SetScene(_scene);
                 _hierarchy.CreateHierachyList(_sceneManagerSystem);
             }
-        }
-
-        private void NewSceneClicked(object sender, EventArgs e)
-        {
-
         }
 
         private void SaveSceneClicked(object sender, EventArgs e)
