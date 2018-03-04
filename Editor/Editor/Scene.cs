@@ -1,6 +1,6 @@
 ﻿namespace GEPAA_Editor
 {
-    class Scene
+    public class Scene
     {
         public string Name;
         public string FilePath;

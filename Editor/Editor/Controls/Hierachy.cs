@@ -37,13 +37,30 @@ namespace GEPAA_Editor.EditorControls
         private List<int> displayedHierarchyIDs = new List<int>();
 
         private ListView _listView;
-        private Inspector _inspector;
-        private IntPtr _sceneManager;
+        private ContextMenuStrip _menu; 
 
-        public Hierachy(ListView lv, Inspector inspector, string resourcesPath)
+        private Inspector _inspector;
+
+        private Scene _scene;
+
+        private IntPtr _sceneManager;
+        private string _resourcesPath;
+
+        public Hierachy(Inspector inspector,string resourcesPath)
+        {
+            _inspector = inspector;
+            _resourcesPath = resourcesPath;
+        }
+
+        public void SetScene(Scene scene)
+        {
+            _scene = scene;
+        }
+
+        public void InitaliseControls(ListView lv, ContextMenuStrip menu)
         {
             _listView = lv;
-            _inspector = inspector;
+            _menu = menu;
 
             _listView.DisableSelect();
             _listView.Scrollable = true;
@@ -55,17 +72,53 @@ namespace GEPAA_Editor.EditorControls
                 Width = 100
             });
             ImageList list = new ImageList();
-            list.Images.Add("ClosedTriangle", Image.FromFile(@"" + resourcesPath + "\\Editor\\ClosedTriangle.bmp"));
-            list.Images.Add("OpenTriangle", Image.FromFile(@"" + resourcesPath + "\\Editor\\OpenTriangle.bmp"));
+            list.Images.Add("ClosedTriangle", Image.FromFile(@"" + _resourcesPath + "\\Editor\\ClosedTriangle.bmp"));
+            list.Images.Add("OpenTriangle", Image.FromFile(@"" + _resourcesPath + "\\Editor\\OpenTriangle.bmp"));
 
             _listView.SmallImageList = list;
             _listView.FullRowSelect = true;
+            _listView.HeaderStyle = ColumnHeaderStyle.None;
 
             _listView.MouseDoubleClick += ItemDoubleClicked;
-            _listView.SelectedIndexChanged += _listView_SelectedIndexChanged;
+            _listView.MouseDown += HierarchyClicked;
+            _listView.SelectedIndexChanged += HierarchyItemSelected;
+
+            _listView.AfterLabelEdit += GameObjectRenamed;
+
+            _menu.Items[0].Click += NewGameObjectClicked;
+            _menu.Items[1].Click += RenameClicked;
         }
 
-        private void _listView_SelectedIndexChanged(object sender, EventArgs e)
+        private void GameObjectRenamed(object sender, LabelEditEventArgs e)
+        {
+            _scene.HasChanged = true;
+            SceneInterface.RenameGameObject(_sceneManager, (ulong)hierarchyItems[_listView.SelectedIndices[0]].GameObjectID, e.Label);
+        }
+
+        private void RenameClicked(object sender, EventArgs e)
+        {
+            _listView.FocusedItem.BeginEdit();
+        }
+
+        private void NewGameObjectClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void HierarchyClicked(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (_listView.FocusedItem != null && _listView.FocusedItem.Bounds.Contains(e.Location) == true)
+                    _menu.Items[1].Enabled = true;
+                else
+                    _menu.Items[1].Enabled = false;
+
+                _menu.Show(Cursor.Position);
+            }
+        }
+
+        private void HierarchyItemSelected(object sender, EventArgs e)
         {
             if (_listView.SelectedIndices.Count > 0)
             {
@@ -193,6 +246,8 @@ namespace GEPAA_Editor.EditorControls
             }
 
             SceneInterface.FreeMemory(hierarchy);
+
+            _listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
         private HItem FindParent(int parentID)

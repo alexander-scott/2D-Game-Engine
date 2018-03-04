@@ -14,4 +14,6 @@ namespace EditorSceneInterface
 
 	extern "C" { DllExport InspectorField* PopulateInspector(void* sceneManagerPtr, unsigned long gameObjectID, int componentIndex); }
 
+	extern "C" { DllExport void RenameGameObject(void* sceneManagerPtr, unsigned long gameObjectID, const char* name); }
+
 	extern "C" { DllExport void FreeMemory(void* ptr); }}

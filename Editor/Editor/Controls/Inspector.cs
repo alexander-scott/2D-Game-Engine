@@ -15,6 +15,7 @@ namespace GEPAA_Editor.EditorControls
 
             _view.BackgroundColor = System.Drawing.Color.White;
             _view.RowHeadersVisible = false;
+            _view.ColumnHeadersVisible = false;
 
             _view.Columns.Clear();
             _view.Columns.Add("Name", "Name");
@@ -24,6 +25,8 @@ namespace GEPAA_Editor.EditorControls
 
         public void GameObjectClicked(IntPtr sceneManager, int id, int componentCount)
         {
+            ClearInspector();
+
             // First work out how many fields each component has
             IntPtr fieldCountPtr = SceneInterface.GetComponentFieldCounts(sceneManager, (ulong)id);
             int intSize = sizeof(int);

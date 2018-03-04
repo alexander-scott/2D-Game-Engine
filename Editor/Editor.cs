@@ -38,11 +38,11 @@ namespace GEPAA_Editor
             InitializeComponent();
 
             _resoucesPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\Resources"));
+            _scene = new Scene();
 
             InitaliseCallbacks();
             InitaliseControls();
 
-            _scene = new Scene();
             this.Text = EDITOR_TITLE_PREFIX + "Untilted";
         }
 
@@ -67,7 +67,10 @@ namespace GEPAA_Editor
             btnPlay.MouseClick += PlayClicked;
 
             _inspector = new Inspector(dgvInspector);
-            _hierarchy = new Hierachy(hierarchyListBox, _inspector, _resoucesPath);
+
+            _hierarchy = new Hierachy(_inspector, _resoucesPath);
+            _hierarchy.InitaliseControls(hierarchyListBox, contextMenuStrip1);
+            _hierarchy.SetScene(_scene);
         }
 
         #endregion
@@ -92,6 +95,20 @@ namespace GEPAA_Editor
 
         private void EditorClosing(object sender, FormClosingEventArgs e)
         {
+            if (_scene.HasChanged)
+            {
+                DialogResult dialogResult = MessageBox.Show("You have unsaved changes. Do you want to save your changes before exiting?", "WARNING", MessageBoxButtons.YesNoCancel);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    SaveSceneClicked(sender, null);
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
             EngineInterface.CleanD3D(_engine);
         }
 
@@ -177,6 +194,7 @@ namespace GEPAA_Editor
                     HasChanged = false,
                 };
                 this.Text = EDITOR_TITLE_PREFIX + _scene.Name;
+                _hierarchy.SetScene(_scene);
                 _hierarchy.CreateHierachyList(_sceneManagerSystem);
             }
         }

@@ -41,7 +41,11 @@
             this.menuSaveScene = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.dgvInspector = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.newGameObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInspector)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -82,6 +86,7 @@
             // 
             // hierarchyListBox
             // 
+            this.hierarchyListBox.LabelEdit = true;
             this.hierarchyListBox.Location = new System.Drawing.Point(12, 46);
             this.hierarchyListBox.Name = "hierarchyListBox";
             this.hierarchyListBox.Size = new System.Drawing.Size(229, 295);
@@ -137,6 +142,26 @@
             this.dgvInspector.Size = new System.Drawing.Size(229, 272);
             this.dgvInspector.TabIndex = 11;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newGameObjectToolStripMenuItem,
+            this.renameToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 48);
+            // 
+            // newGameObjectToolStripMenuItem
+            // 
+            this.newGameObjectToolStripMenuItem.Name = "newGameObjectToolStripMenuItem";
+            this.newGameObjectToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.newGameObjectToolStripMenuItem.Text = "New GameObject";
+            // 
+            // renameToolStripMenuItem
+            // 
+            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.renameToolStripMenuItem.Text = "Rename";
+            // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,6 +179,7 @@
             this.Text = "Editor";
             this.Load += new System.EventHandler(this.EditorLoading);
             ((System.ComponentModel.ISupportInitialize)(this.dgvInspector)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,6 +198,9 @@
         private System.Windows.Forms.MenuItem menuSaveScene;
         private System.Windows.Forms.MenuItem menuItem2;
         private System.Windows.Forms.DataGridView dgvInspector;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem newGameObjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
     }
 }
 

@@ -78,6 +78,11 @@ InspectorField* EditorSceneInterface::PopulateInspector(void* sceneManagerPtr, u
 	return inspectorFields;
 }
 
+void EditorSceneInterface::RenameGameObject(void* sceneManagerPtr, unsigned long gameObjectID, const char* name)
+{
+	static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID)->SetTag(string(name));
+}
+
 void EditorSceneInterface::FreeMemory(void * ptr)
 {
 	delete ptr;

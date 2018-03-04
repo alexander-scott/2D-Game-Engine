@@ -37,6 +37,9 @@ namespace GEPAA_Editor.Engine
         public static extern IntPtr PopulateInspector(IntPtr sceneManagerPtr, ulong gameObjectID, int componentIndex);
 
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RenameGameObject(IntPtr sceneManagerPtr, ulong gameObjectID, string name);
+
+        [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void FreeMemory(IntPtr ptr);
     }
 }
