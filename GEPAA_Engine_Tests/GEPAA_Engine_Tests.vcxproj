@@ -167,7 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine\ComponentBuilder.cpp" />
-    <ClCompile Include="..\Engine\ComponentSaver.cpp" />
     <ClCompile Include="..\Engine\DXErr.cpp" />
     <ClCompile Include="..\Engine\Editor.cpp" />
     <ClCompile Include="..\Engine\Engine.cpp" />
@@ -192,7 +191,6 @@
     <ClInclude Include="..\Engine\BuildSceneMessage.h" />
     <ClInclude Include="..\Engine\ComponentBuilder.h" />
     <ClInclude Include="..\Engine\ComponentFactory.h" />
-    <ClInclude Include="..\Engine\ComponentSaver.h" />
     <ClInclude Include="..\Engine\Consts.h" />
     <ClInclude Include="..\Engine\CustomException.h" />
     <ClInclude Include="..\Engine\DrawSpriteMessage.h" />

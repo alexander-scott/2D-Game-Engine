@@ -83,6 +83,26 @@ void EditorSceneInterface::RenameGameObject(void* sceneManagerPtr, unsigned long
 	static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID)->SetTag(string(name));
 }
 
+SceneItem* EditorSceneInterface::CreateGameObject(void* sceneManagerPtr)
+{
+	auto scene = static_cast<SceneManager*>(sceneManagerPtr)->GetScene();
+
+	auto gameObject = GameObject::MakeGameObject("New GameObject");
+	scene->AddGameObject(gameObject);
+
+	SceneItem* item = new SceneItem;
+	item->GameObjectID = gameObject->GetID().Data1; // Set GameObject ID
+	item->GameObjectParentID = NULL;
+
+	char* result = new char[gameObject->GetTag().length() + 1];
+	strcpy_s(result, gameObject->GetTag().length() + 1, gameObject->GetTag().c_str());
+	item->GameObjectName = result; // Set the GameObject's name
+
+	item->ComponentCount = 0;
+
+	return item;
+}
+
 void EditorSceneInterface::FreeMemory(void * ptr)
 {
 	delete ptr;

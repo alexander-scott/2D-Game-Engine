@@ -44,6 +44,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.newGameObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInspector)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -146,9 +147,10 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newGameObjectToolStripMenuItem,
-            this.renameToolStripMenuItem});
+            this.renameToolStripMenuItem,
+            this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 92);
             // 
             // newGameObjectToolStripMenuItem
             // 
@@ -162,6 +164,12 @@
             this.renameToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.renameToolStripMenuItem.Text = "Rename";
             // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,7 +182,6 @@
             this.Controls.Add(this.lblPrefabs);
             this.Controls.Add(this.lblHierachy);
             this.Controls.Add(this.panel1);
-            this.Menu = this.mainMenu1;
             this.Name = "Editor";
             this.Text = "Editor";
             this.Load += new System.EventHandler(this.EditorLoading);
@@ -201,6 +208,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem newGameObjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }
 

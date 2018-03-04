@@ -87,12 +87,24 @@ namespace GEPAA_Editor.EditorControls
 
             _menu.Items[0].Click += NewGameObjectClicked;
             _menu.Items[1].Click += RenameClicked;
+            _menu.Items[2].Click += DeleteClicked;
+            _menu.MouseLeave += MenuLeft;
+        }
+
+        private void DeleteClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void MenuLeft(object sender, EventArgs e)
+        {
+            _menu.Close();
         }
 
         private void GameObjectRenamed(object sender, LabelEditEventArgs e)
         {
             _scene.HasChanged = true;
-            SceneInterface.RenameGameObject(_sceneManager, (ulong)hierarchyItems[_listView.SelectedIndices[0]].GameObjectID, e.Label);
+            SceneInterface.RenameGameObject(_sceneManager, (ulong)hierarchyItems[_listView.FocusedItem.Index].GameObjectID, e.Label);
         }
 
         private void RenameClicked(object sender, EventArgs e)
@@ -102,7 +114,25 @@ namespace GEPAA_Editor.EditorControls
 
         private void NewGameObjectClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            IntPtr sceneItem = SceneInterface.CreateGameObject(_sceneManager);
+            IntPtr data = new IntPtr(sceneItem.ToInt64());
+            SceneItem hItem = (SceneItem)Marshal.PtrToStructure(data, typeof(SceneItem));
+
+            displayedHierarchyIDs.Add(hierarchyItems.Count);
+
+            HItem item = new HItem(hItem.GameObjectName, (int)hItem.GameObjectID, (int)hItem.ComponentCount);
+            item.ChildDepthLevel = 0;
+            hierarchyItems.Add(hierarchyItems.Count, item);
+
+            ListViewItem lvItem = new ListViewItem(hierarchyItems[displayedHierarchyIDs[hierarchyItems.Count - 1]].GameObjectName);
+            _listView.Items.Add(lvItem);
+            lvItem.Focused = true;
+
+            SceneInterface.FreeMemory(sceneItem);
+            _scene.HasChanged = true;
+
+            _listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            RenameClicked(null, null);
         }
 
         private void HierarchyClicked(object sender, MouseEventArgs e)
@@ -110,9 +140,15 @@ namespace GEPAA_Editor.EditorControls
             if (e.Button == MouseButtons.Right)
             {
                 if (_listView.FocusedItem != null && _listView.FocusedItem.Bounds.Contains(e.Location) == true)
+                {
                     _menu.Items[1].Enabled = true;
+                    _menu.Items[2].Enabled = true;
+                } 
                 else
+                {
                     _menu.Items[1].Enabled = false;
+                    _menu.Items[2].Enabled = false;
+                } 
 
                 _menu.Show(Cursor.Position);
             }
