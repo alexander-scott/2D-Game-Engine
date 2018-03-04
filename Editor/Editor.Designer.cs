@@ -1,4 +1,4 @@
-﻿namespace SimpleSampleEditor
+﻿namespace GEPAA_Editor
 {
     partial class Editor
     {
@@ -31,16 +31,23 @@
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblHierachy = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.lblPrefabs = new System.Windows.Forms.Label();
             this.btnPlay = new System.Windows.Forms.Button();
             this.hierarchyListBox = new System.Windows.Forms.ListView();
-            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.menuNewScene = new System.Windows.Forms.MenuItem();
-            this.menuLoadScene = new System.Windows.Forms.MenuItem();
-            this.menuSaveScene = new System.Windows.Forms.MenuItem();
-            this.menuItem2 = new System.Windows.Forms.MenuItem();
+            this.dgvInspector = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.newGameObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainMenu = new System.Windows.Forms.MenuStrip();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInspector)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
+            this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -60,22 +67,15 @@
             this.lblHierachy.TabIndex = 2;
             this.lblHierachy.Text = "Hierachy";
             // 
-            // panel3
-            // 
-            this.panel3.Location = new System.Drawing.Point(24, 392);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(206, 270);
-            this.panel3.TabIndex = 5;
-            // 
             // lblPrefabs
             // 
             this.lblPrefabs.AutoSize = true;
             this.lblPrefabs.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrefabs.Location = new System.Drawing.Point(72, 364);
             this.lblPrefabs.Name = "lblPrefabs";
-            this.lblPrefabs.Size = new System.Drawing.Size(86, 25);
+            this.lblPrefabs.Size = new System.Drawing.Size(100, 25);
             this.lblPrefabs.TabIndex = 4;
-            this.lblPrefabs.Text = "Prefabs";
+            this.lblPrefabs.Text = "Inspector";
             // 
             // btnPlay
             // 
@@ -88,66 +88,121 @@
             // 
             // hierarchyListBox
             // 
+            this.hierarchyListBox.AllowDrop = true;
+            this.hierarchyListBox.LabelEdit = true;
             this.hierarchyListBox.Location = new System.Drawing.Point(12, 46);
             this.hierarchyListBox.Name = "hierarchyListBox";
-            this.hierarchyListBox.Size = new System.Drawing.Size(218, 295);
+            this.hierarchyListBox.Size = new System.Drawing.Size(229, 295);
             this.hierarchyListBox.TabIndex = 9;
             this.hierarchyListBox.UseCompatibleStateImageBehavior = false;
             // 
-            // mainMenu1
+            // dgvInspector
             // 
-            this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem1});
+            this.dgvInspector.AllowUserToAddRows = false;
+            this.dgvInspector.AllowUserToDeleteRows = false;
+            this.dgvInspector.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInspector.Location = new System.Drawing.Point(12, 392);
+            this.dgvInspector.Name = "dgvInspector";
+            this.dgvInspector.Size = new System.Drawing.Size(229, 272);
+            this.dgvInspector.TabIndex = 11;
             // 
-            // menuItem1
+            // contextMenuStrip1
             // 
-            this.menuItem1.Index = 0;
-            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuNewScene,
-            this.menuLoadScene,
-            this.menuSaveScene,
-            this.menuItem2});
-            this.menuItem1.Text = "Scene";
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newGameObjectToolStripMenuItem,
+            this.renameToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 70);
             // 
-            // menuNewScene
+            // newGameObjectToolStripMenuItem
             // 
-            this.menuNewScene.Index = 0;
-            this.menuNewScene.Text = "New Scene";
-            this.menuNewScene.Click += new System.EventHandler(this.NewSceneClicked);
+            this.newGameObjectToolStripMenuItem.Name = "newGameObjectToolStripMenuItem";
+            this.newGameObjectToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.newGameObjectToolStripMenuItem.Text = "New GameObject";
             // 
-            // menuLoadScene
+            // renameToolStripMenuItem
             // 
-            this.menuLoadScene.Index = 1;
-            this.menuLoadScene.Text = "Load Scene";
-            this.menuLoadScene.Click += new System.EventHandler(this.LoadSceneClicked);
+            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.renameToolStripMenuItem.Text = "Rename";
             // 
-            // menuSaveScene
+            // deleteToolStripMenuItem
             // 
-            this.menuSaveScene.Index = 2;
-            this.menuSaveScene.Text = "Save Scene";
-            this.menuSaveScene.Click += new System.EventHandler(this.SaveSceneClicked);
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
             // 
-            // menuItem2
+            // mainMenu
             // 
-            this.menuItem2.Index = 3;
-            this.menuItem2.Text = "Save as Scene";
-            this.menuItem2.Click += new System.EventHandler(this.SaveAsSceneClicked);
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.testToolStripMenuItem});
+            this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.Name = "mainMenu";
+            this.mainMenu.Size = new System.Drawing.Size(1184, 24);
+            this.mainMenu.TabIndex = 12;
+            this.mainMenu.Text = "menuStrip1";
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newSceneToolStripMenuItem,
+            this.loadSceneToolStripMenuItem,
+            this.saveSceneToolStripMenuItem,
+            this.saveAsSceneToolStripMenuItem});
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.testToolStripMenuItem.Text = "Scene";
+            // 
+            // newSceneToolStripMenuItem
+            // 
+            this.newSceneToolStripMenuItem.Name = "newSceneToolStripMenuItem";
+            this.newSceneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newSceneToolStripMenuItem.Text = "New Scene";
+            this.newSceneToolStripMenuItem.Click += new System.EventHandler(this.NewSceneClicked);
+            // 
+            // loadSceneToolStripMenuItem
+            // 
+            this.loadSceneToolStripMenuItem.Name = "loadSceneToolStripMenuItem";
+            this.loadSceneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadSceneToolStripMenuItem.Text = "Load Scene";
+            this.loadSceneToolStripMenuItem.Click += new System.EventHandler(this.LoadSceneClicked);
+            // 
+            // saveSceneToolStripMenuItem
+            // 
+            this.saveSceneToolStripMenuItem.Name = "saveSceneToolStripMenuItem";
+            this.saveSceneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveSceneToolStripMenuItem.Text = "Save Scene";
+            this.saveSceneToolStripMenuItem.Click += new System.EventHandler(this.SaveSceneClicked);
+            // 
+            // saveAsSceneToolStripMenuItem
+            // 
+            this.saveAsSceneToolStripMenuItem.Name = "saveAsSceneToolStripMenuItem";
+            this.saveAsSceneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsSceneToolStripMenuItem.Text = "Save As Scene";
+            this.saveAsSceneToolStripMenuItem.Click += new System.EventHandler(this.SaveAsSceneClicked);
             // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1184, 704);
+            this.Controls.Add(this.mainMenu);
+            this.Controls.Add(this.dgvInspector);
             this.Controls.Add(this.hierarchyListBox);
             this.Controls.Add(this.btnPlay);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.lblPrefabs);
             this.Controls.Add(this.lblHierachy);
             this.Controls.Add(this.panel1);
-            this.Menu = this.mainMenu1;
+            this.MainMenuStrip = this.mainMenu;
             this.Name = "Editor";
             this.Text = "Editor";
             this.Load += new System.EventHandler(this.EditorLoading);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInspector)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
+            this.mainMenu.ResumeLayout(false);
+            this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,16 +211,20 @@
         #endregion
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblHierachy;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblPrefabs;
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.ListView hierarchyListBox;
-        private System.Windows.Forms.MainMenu mainMenu1;
-        private System.Windows.Forms.MenuItem menuItem1;
-        private System.Windows.Forms.MenuItem menuNewScene;
-        private System.Windows.Forms.MenuItem menuLoadScene;
-        private System.Windows.Forms.MenuItem menuSaveScene;
-        private System.Windows.Forms.MenuItem menuItem2;
+        private System.Windows.Forms.DataGridView dgvInspector;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem newGameObjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip mainMenu;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newSceneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadSceneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveSceneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsSceneToolStripMenuItem;
     }
 }
 

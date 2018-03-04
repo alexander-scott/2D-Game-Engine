@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <map>
 
 #include "Consts.h"
 
@@ -18,6 +19,8 @@ public:
 
 	void SetActive(bool active) { _active = active; }
 	bool GetActive() { return _active; }
+
+	virtual map<string, string> ExtractComponent() = 0;
 
 protected:
 	ComponentType	_type;

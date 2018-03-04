@@ -30,12 +30,80 @@ SceneItem* EditorSceneInterface::PopulateHierarchyItems(void* sceneManagerPtr, i
 		char* result = new char[gameObj->GetTag().length() + 1];
 		strcpy_s(result, gameObj->GetTag().length() + 1, gameObj->GetTag().c_str());
 		items[i].GameObjectName = result; // Set the GameObject's name
+
+		items[i].ComponentCount = (int)gameObj->GetAllComponents().size();
 	}
 
 	return items;
 }
 
-void EditorSceneInterface::FreeHierarchyMemory(void * hierarchy)
+int* EditorSceneInterface::GetComponentFieldCounts(void* sceneManagerPtr, unsigned long gameObjectID)
 {
-	delete hierarchy;
+	auto gameObject = static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID);
+	auto components = gameObject->GetAllComponents();
+	int componentCount = (int)components.size();
+
+	int* componentFieldCounts = new int[componentCount];
+	for (int i = 0; i < componentCount; i++)
+	{
+		componentFieldCounts[i] = (int)components[i]->ExtractComponent().size();
+	}
+
+	return componentFieldCounts;
+}
+
+InspectorField* EditorSceneInterface::PopulateInspector(void* sceneManagerPtr, unsigned long gameObjectID, int componentIndex)
+{
+	auto gameObject = static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID);
+	auto components = gameObject->GetAllComponents();
+	int componentCount = (int)components.size();
+
+	auto componentFields = components[componentIndex]->ExtractComponent();
+	auto inspectorFields = new InspectorField[componentFields.size()];
+
+	int fieldCount = 0;
+	for (auto field : componentFields)
+	{
+		char* name = new char[field.first.length() + 1];
+		strcpy_s(name, field.first.length() + 1, field.first.c_str());
+		inspectorFields[fieldCount].FieldName = name;
+
+		char* value = new char[field.second.length() + 1];
+		strcpy_s(value, field.second.length() + 1, field.second.c_str());
+		inspectorFields[fieldCount].FieldValue = value;
+
+		fieldCount++;
+	}
+
+	return inspectorFields;
+}
+
+void EditorSceneInterface::RenameGameObject(void* sceneManagerPtr, unsigned long gameObjectID, const char* name)
+{
+	static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID)->SetTag(string(name));
+}
+
+SceneItem* EditorSceneInterface::CreateGameObject(void* sceneManagerPtr)
+{
+	auto scene = static_cast<SceneManager*>(sceneManagerPtr)->GetScene();
+
+	auto gameObject = GameObject::MakeGameObject("New GameObject");
+	scene->AddGameObject(gameObject);
+
+	SceneItem* item = new SceneItem;
+	item->GameObjectID = gameObject->GetID().Data1; // Set GameObject ID
+	item->GameObjectParentID = NULL;
+
+	char* result = new char[gameObject->GetTag().length() + 1];
+	strcpy_s(result, gameObject->GetTag().length() + 1, gameObject->GetTag().c_str());
+	item->GameObjectName = result; // Set the GameObject's name
+
+	item->ComponentCount = 0;
+
+	return item;
+}
+
+void EditorSceneInterface::FreeMemory(void * ptr)
+{
+	delete ptr;
 }

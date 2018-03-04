@@ -132,15 +132,15 @@ TransformComponent * ComponentFactory::MakeTransformComponent(Vec2 position, flo
 	return transform;
 }
 
-map<string, string> ComponentFactory::ExtractTransformComponent(TransformComponent * component)
+map<string, string> TransformComponent::ExtractComponent()
 {
 	map<string, string> returnMap;
 	returnMap.insert(std::make_pair(string("type"), string("TransformComponent")));
 
-	returnMap.insert(std::make_pair(string("xpos"), to_string(component->GetLocalPosition().x)));
-	returnMap.insert(std::make_pair(string("ypos"), to_string(component->GetLocalPosition().y)));
-	returnMap.insert(std::make_pair(string("rotation"), to_string(component->GetLocalRotation())));
-	returnMap.insert(std::make_pair(string("scale"), to_string(component->GetLocalScale())));
+	returnMap.insert(std::make_pair(string("xpos"), to_string(GetLocalPosition().x)));
+	returnMap.insert(std::make_pair(string("ypos"), to_string(GetLocalPosition().y)));
+	returnMap.insert(std::make_pair(string("rotation"), to_string(GetLocalRotation())));
+	returnMap.insert(std::make_pair(string("scale"), to_string(GetLocalScale())));
 
 	return returnMap;
 }

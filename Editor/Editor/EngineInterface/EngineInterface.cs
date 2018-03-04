@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace SimpleSampleEditor.Engine
+namespace GEPAA_Editor.Engine
 {
     class EngineInterface
     {

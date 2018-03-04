@@ -75,9 +75,6 @@
     <ClCompile Include="..\Engine\Engine.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\ComponentSaver.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Engine\SceneSaver.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -219,9 +216,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\Engine.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Engine\ComponentSaver.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\SceneSaver.h">

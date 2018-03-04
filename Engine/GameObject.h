@@ -32,6 +32,7 @@ public:
 
 	GUID GetID() { return _ID; }
 	string GetTag() { return _tag; }
+	void SetTag(string tag) { _tag = tag; }
 
 	void SetParent(shared_ptr<GameObject> parent);
 	shared_ptr<GameObject> GetParent() { return _parent; }

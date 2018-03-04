@@ -22,3 +22,7 @@
 [2018-02-28 00:00:49.269] [GEPAA] [info] Starting main update loop
 [2018-02-28 00:00:50.996] [GEPAA] [info] Program shutting down
 [2018-02-28 00:00:50.997] [GEPAA] [info] ---------------------
+[2018-03-04 14:59:33.678] [GEPAA] [info] Initalising Systems
+[2018-03-04 14:59:33.900] [GEPAA] [info] Starting main update loop
+[2018-03-04 14:59:35.665] [GEPAA] [info] Program shutting down
+[2018-03-04 14:59:35.665] [GEPAA] [info] ---------------------

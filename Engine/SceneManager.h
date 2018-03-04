@@ -11,6 +11,15 @@ struct SceneItem
 	int GameObjectID;
 	unsigned int GameObjectParentID;
 	char* GameObjectName;
+	int ComponentCount;
+};
+
+// The InspectorField will display the field name and field value
+// TODO: Pass in field type too.
+struct InspectorField
+{
+	char* FieldName;
+	char* FieldValue;
 };
 
 class SceneManager : public ISystem

@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace SimpleSampleEditor.EditorComponents
+namespace GEPAA_Editor.EditorComponents
 {
     public static class Utils
     {

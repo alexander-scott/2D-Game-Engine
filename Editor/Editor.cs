@@ -1,14 +1,14 @@
-﻿using SimpleSampleEditor.Engine;
+﻿using GEPAA_Editor.Engine;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-using SimpleSampleEditor.EditorHierachy;
-using SimpleSampleEditor.EditorComponents;
+using GEPAA_Editor.EditorControls;
+using GEPAA_Editor.EditorComponents;
 using System.IO;
 using System.Reflection;
 
-namespace SimpleSampleEditor
+namespace GEPAA_Editor
 {
     public partial class Editor : Form
     {
@@ -20,9 +20,10 @@ namespace SimpleSampleEditor
 
         // Controls
         private Hierachy _hierarchy;
+        private EditorControls.Inspector _inspector;
 
         private bool mPlaying = false;
-        private string mResoucesPath;
+        private string _resoucesPath;
 
         #region Consts
 
@@ -36,12 +37,12 @@ namespace SimpleSampleEditor
         {
             InitializeComponent();
 
-            mResoucesPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\Resources"));
+            _resoucesPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\Resources"));
+            _scene = new Scene();
 
             InitaliseCallbacks();
             InitaliseControls();
 
-            _scene = new Scene();
             this.Text = EDITOR_TITLE_PREFIX + "Untilted";
         }
 
@@ -65,7 +66,11 @@ namespace SimpleSampleEditor
             btnPlay.DisableSelect();
             btnPlay.MouseClick += PlayClicked;
 
-            _hierarchy = new Hierachy(hierarchyListBox, mResoucesPath);
+            _inspector = new Inspector(dgvInspector);
+
+            _hierarchy = new Hierachy(_inspector, _resoucesPath);
+            _hierarchy.InitaliseControls(hierarchyListBox, contextMenuStrip1);
+            _hierarchy.SetScene(_scene);
         }
 
         #endregion
@@ -90,6 +95,20 @@ namespace SimpleSampleEditor
 
         private void EditorClosing(object sender, FormClosingEventArgs e)
         {
+            if (_scene.HasChanged)
+            {
+                DialogResult dialogResult = MessageBox.Show("You have unsaved changes. Do you want to save your changes before exiting?", "WARNING", MessageBoxButtons.YesNoCancel);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    SaveSceneClicked(sender, null);
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
             EngineInterface.CleanD3D(_engine);
         }
 
@@ -101,6 +120,7 @@ namespace SimpleSampleEditor
             {
                 mPlaying = true;
                 btnPlay.Text = "STOP";
+                this.BackColor = Color.AliceBlue;
                 EngineInterface.PlayStarted(_editorSystem);
                 _hierarchy.CreateHierachyList(_sceneManagerSystem);
             }
@@ -108,6 +128,7 @@ namespace SimpleSampleEditor
             {
                 mPlaying = false;
                 btnPlay.Text = "PLAY";
+                this.BackColor = Color.WhiteSmoke;
                 EngineInterface.PlayStopped(_editorSystem);
                 _hierarchy.CreateHierachyList(_sceneManagerSystem);
             }
@@ -154,6 +175,11 @@ namespace SimpleSampleEditor
 
         #endregion
 
+        private void NewSceneClicked(object sender, EventArgs e)
+        {
+
+        }
+
         private void LoadSceneClicked(object sender, EventArgs e)
         {
             OpenFileDialog theDialog = new OpenFileDialog
@@ -173,13 +199,9 @@ namespace SimpleSampleEditor
                     HasChanged = false,
                 };
                 this.Text = EDITOR_TITLE_PREFIX + _scene.Name;
+                _hierarchy.SetScene(_scene);
                 _hierarchy.CreateHierachyList(_sceneManagerSystem);
             }
-        }
-
-        private void NewSceneClicked(object sender, EventArgs e)
-        {
-
         }
 
         private void SaveSceneClicked(object sender, EventArgs e)

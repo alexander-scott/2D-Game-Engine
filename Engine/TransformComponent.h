@@ -28,6 +28,8 @@ public:
 
 	void SetParent(TransformComponent* parent) { _parent = parent; }
 
+	virtual map<string, string> ExtractComponent() override;
+
 private:
 	Vec2					_localPosition;
 	float					_localRotation; // RADIANS
@@ -41,5 +43,5 @@ private:
 namespace ComponentFactory
 {
 	TransformComponent * MakeTransformComponent(Vec2 position, float rotation, float scale);
-	map<string, string> ExtractTransformComponent(TransformComponent* component);
+	
 }
