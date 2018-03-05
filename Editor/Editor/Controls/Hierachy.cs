@@ -116,11 +116,6 @@ namespace GEPAA_Editor.EditorControls
             if (item == null) { return; }
         }
 
-        private void DeleteClicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void MenuLeft(object sender, EventArgs e)
         {
             _menu.Close();
@@ -132,12 +127,30 @@ namespace GEPAA_Editor.EditorControls
             {
                 _scene.HasChanged = true;
                 SceneInterface.RenameGameObject(_sceneManager, (ulong)hierarchyItems[_listView.FocusedItem.Index].GameObjectID, e.Label);
+                hierarchyItems[_listView.FocusedItem.Index].GameObjectName = e.Label;
+            }
+        }
+
+        private void DeleteClicked(object sender, EventArgs e)
+        {
+            if (_listView.FocusedItem != null)
+            {
+                _scene.HasChanged = true;
+                SceneInterface.DeleteGameObject(_sceneManager, (ulong)hierarchyItems[_listView.FocusedItem.Index].GameObjectID);
+
+                hierarchyItems.Remove(_listView.FocusedItem.Index);
+                displayedHierarchyIDs.Remove(_listView.FocusedItem.Index);
+
+                _listView.Items.RemoveAt(_listView.FocusedItem.Index);
             }
         }
 
         private void RenameClicked(object sender, EventArgs e)
         {
-            _listView.FocusedItem.BeginEdit();
+            if (_listView.FocusedItem != null)
+            {
+                _listView.FocusedItem.BeginEdit();
+            }
         }
 
         private void NewGameObjectClicked(object sender, EventArgs e)

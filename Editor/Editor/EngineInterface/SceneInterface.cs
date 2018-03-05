@@ -40,6 +40,9 @@ namespace GEPAA_Editor.Engine
         public static extern void RenameGameObject(IntPtr sceneManagerPtr, ulong gameObjectID, string name);
 
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void DeleteGameObject(IntPtr sceneManagerPtr, ulong gameObjectID);
+
+        [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr CreateGameObject(IntPtr sceneManagerPtr);
 
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]

@@ -103,6 +103,11 @@ SceneItem* EditorSceneInterface::CreateGameObject(void* sceneManagerPtr)
 	return item;
 }
 
+void EditorSceneInterface::DeleteGameObject(void * sceneManagerPtr, unsigned long gameObjectID)
+{
+	static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->DeleteGameObject(gameObjectID);
+}
+
 void EditorSceneInterface::FreeMemory(void * ptr)
 {
 	delete ptr;
