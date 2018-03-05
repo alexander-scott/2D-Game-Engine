@@ -205,8 +205,11 @@
     <ClInclude Include="Engine.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="TestGraphics.h">
+    <ClInclude Include="DxGraphics.h">
       <Filter>Engine\Systems\Graphics\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Engine\Systems\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -252,8 +255,11 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Engine\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="TestGraphics.cpp">
+    <ClCompile Include="DxGraphics.cpp">
       <Filter>Engine\Systems\Graphics\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Engine\Systems\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

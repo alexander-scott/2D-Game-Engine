@@ -2,7 +2,7 @@
 
 #include "SceneBuilder.h"
 #include "SceneManager.h"
-#include "TestGraphics.h"
+#include "DxGraphics.h"
 #include "InputHandler.h"
 
 #include "RequestBuildSceneMessage.h"
@@ -80,7 +80,7 @@ void Engine::InitaliseSystems(HINSTANCE hInst, wchar_t * pArgs)
 	_systems.insert(std::make_pair(sceneManager->SysType, sceneManager));
 
 	// Initalise Graphics system
-	auto graphics = make_shared<TestGraphics>(_messageDispatcher); // Create a test graphics instance for now
+	auto graphics = make_shared<DxGraphics>(_messageDispatcher); // Create a test graphics instance for now
 	_systems.insert(std::make_pair(graphics->SysType, graphics));
 
 	// Initalise Input Handler System

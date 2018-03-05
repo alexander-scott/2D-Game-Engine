@@ -1,4 +1,4 @@
-#include "TestGraphics.h"
+#include "DxGraphics.h"
 
 #include "MainWindow.h"
 #include "DXErr.h"
@@ -14,16 +14,16 @@ namespace FramebufferShaders
 
 #pragma comment( lib,"d3d11.lib" )
 
-#define GFX_EXCEPTION( hr,note ) TestGraphics::Exception( hr,note,_CRT_WIDE(__FILE__),__LINE__ )
+#define GFX_EXCEPTION( hr,note ) DxGraphics::Exception( hr,note,_CRT_WIDE(__FILE__),__LINE__ )
 
 using Microsoft::WRL::ComPtr;
 
-TestGraphics::TestGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher)
+DxGraphics::DxGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: IGraphics(dispatcher)
 {
 }
 
-void TestGraphics::Initalise(HWNDKey& key)
+void DxGraphics::Initalise(HWNDKey& key)
 {
 	assert(key.hWnd != nullptr);
 
@@ -210,7 +210,7 @@ void TestGraphics::Initalise(HWNDKey& key)
 	_primitiveBatch = std::make_unique<PrimitiveBatch<VertexPositionColor>>(_immediateContext.Get());
 }
 
-void TestGraphics::DrawComponent(IDrawableComponent * component)
+void DxGraphics::DrawComponent(IDrawableComponent * component)
 {
 	switch (component->Type)
 	{
@@ -225,25 +225,26 @@ void TestGraphics::DrawComponent(IDrawableComponent * component)
 	}
 }
 
-void TestGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
+void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
 {
 }
 
-void TestGraphics::DrawLine(Vec2 v1, Vec2 v2)
+void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
 {
 }
 
-void TestGraphics::DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset)
+void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset)
 {
+
 }
 
-void TestGraphics::Destroy()
+void DxGraphics::Destroy()
 {
 	// Clear the state of the device context before destruction
 	if (_immediateContext) _immediateContext->ClearState();
 }
 
-void TestGraphics::BeginFrame()
+void DxGraphics::BeginFrame()
 {
 	// Clear render target view
 	_immediateContext->ClearRenderTargetView(_renderTargetView.Get(), Colors::MidnightBlue);
@@ -251,7 +252,7 @@ void TestGraphics::BeginFrame()
 	_primitiveBatch->Begin();
 }
 
-void TestGraphics::EndFrame()
+void DxGraphics::EndFrame()
 {
 	HRESULT hr;
 
@@ -285,13 +286,13 @@ void TestGraphics::EndFrame()
 }
 
 // TestGraphics Exception
-TestGraphics::Exception::Exception(HRESULT hr, const std::wstring& note, const wchar_t* file, unsigned int line)
+DxGraphics::Exception::Exception(HRESULT hr, const std::wstring& note, const wchar_t* file, unsigned int line)
 	:
 	CustomException(file, line, note),
 	hr(hr)
 {}
 
-std::wstring TestGraphics::Exception::GetFullMessage() const
+std::wstring DxGraphics::Exception::GetFullMessage() const
 {
 	const std::wstring empty = L"";
 	const std::wstring errorName = GetErrorName();
@@ -308,19 +309,19 @@ std::wstring TestGraphics::Exception::GetFullMessage() const
 			: empty);
 }
 
-std::wstring TestGraphics::Exception::GetErrorName() const
+std::wstring DxGraphics::Exception::GetErrorName() const
 {
 	return DXGetErrorString(hr);
 }
 
-std::wstring TestGraphics::Exception::GetErrorDescription() const
+std::wstring DxGraphics::Exception::GetErrorDescription() const
 {
 	std::array<wchar_t, 512> wideDescription;
 	DXGetErrorDescription(hr, wideDescription.data(), wideDescription.size());
 	return wideDescription.data();
 }
 
-std::wstring TestGraphics::Exception::GetExceptionType() const
+std::wstring DxGraphics::Exception::GetExceptionType() const
 {
 	return L"TestGraphics Exception";
 }

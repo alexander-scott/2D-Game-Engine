@@ -16,10 +16,10 @@
 
 using namespace DirectX;
 
-class TestGraphics : public IGraphics
+class DxGraphics : public IGraphics
 {
 public:
-	TestGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher);
+	DxGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher);
 
 	virtual void Initalise(class HWNDKey& key) override;
 	virtual void Destroy() override;
