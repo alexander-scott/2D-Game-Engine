@@ -67,11 +67,6 @@ enum SystemMessageType
 	ePlayStopped
 };
 
-enum ComponentType
-{
-	eTransformComponent
-};
-
 enum ComponentMessageType
 {
 	eSetParentTransformMessage

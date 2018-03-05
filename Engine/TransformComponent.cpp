@@ -1,7 +1,7 @@
 #include "TransformComponent.h"
 
 TransformComponent::TransformComponent(Vec2 localPosition, float localRotation, float localScale)
-	: IComponent(ComponentType::eTransformComponent)
+	: IComponent("TransformComponent")
 {
 	_hasChanged = false;
 

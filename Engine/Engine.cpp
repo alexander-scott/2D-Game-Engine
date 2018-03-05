@@ -9,6 +9,7 @@
 #include "Editor.h"
 
 #include "RequestBuildSceneMessage.h"
+#include "RequestSaveSceneMessage.h"
 
 // Called from the editor
 Engine::Engine(HWND hWnd)
@@ -54,6 +55,10 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 
 	// Start playing
 	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::ePlayStarted));
+
+	// FOR TESTING
+	//RequestSaveSceneMessage msg("..\\Resources\\Scenes\\Scene1.xml");
+	//_messageDispatcher->SendMessageToListeners(msg);
 }
 
 Engine::~Engine()

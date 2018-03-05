@@ -235,6 +235,9 @@
     <ClInclude Include="RequestSaveSceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
     </ClInclude>
+    <ClInclude Include="ComponentSaver.h">
+      <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -295,6 +298,9 @@
       <Filter>Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="SceneSaver.cpp">
+      <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentSaver.cpp">
       <Filter>Engine\Systems\SceneSaving</Filter>
     </ClCompile>
   </ItemGroup>
