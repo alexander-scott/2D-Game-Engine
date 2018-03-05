@@ -20,6 +20,9 @@ struct InspectorField
 {
 	char* FieldName;
 	char* FieldValue;
+	int GameObjectID;
+	int ComponentIndex;
+	int FieldIndex;
 };
 
 class SceneManager : public ISystem

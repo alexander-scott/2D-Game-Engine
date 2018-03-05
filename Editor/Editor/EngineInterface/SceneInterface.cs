@@ -20,6 +20,9 @@ namespace GEPAA_Editor.Engine
         public string FieldName;
         [MarshalAsAttribute(UnmanagedType.LPStr)]
         public string FieldValue;
+        public uint GameObjectID;
+        public uint ComponentIndex;
+        public uint FieldIndex;
     };
 
     class SceneInterface

@@ -72,6 +72,10 @@ InspectorField* EditorSceneInterface::PopulateInspector(void* sceneManagerPtr, u
 		strcpy_s(value, field.second.length() + 1, field.second.c_str());
 		inspectorFields[fieldCount].FieldValue = value;
 
+		inspectorFields[fieldCount].GameObjectID = (int)gameObjectID;
+		inspectorFields[fieldCount].ComponentIndex = componentIndex;
+		inspectorFields[fieldCount].FieldIndex = fieldCount;
+
 		fieldCount++;
 	}
 
@@ -106,6 +110,11 @@ SceneItem* EditorSceneInterface::CreateGameObject(void* sceneManagerPtr)
 void EditorSceneInterface::DeleteGameObject(void * sceneManagerPtr, unsigned long gameObjectID)
 {
 	static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->DeleteGameObject(gameObjectID);
+}
+
+void EditorSceneInterface::ModifyGameObjectComponentField(void* sceneManagerPtr, unsigned long gameObjectID, int componentID, int fieldIndex)
+{
+	auto gameObject = static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID);
 }
 
 void EditorSceneInterface::FreeMemory(void * ptr)
