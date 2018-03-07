@@ -110,10 +110,26 @@ namespace GEPAA_Editor.EditorControls
 
         private void _listView_DragDrop(object sender, DragEventArgs e)
         {
-            if (_listView.SelectedItems.Count == 0) { return; }
+            if (_listView.FocusedItem == null) { return; }
             Point p = _listView.PointToClient(new Point(e.X, e.Y));
             ListViewItem item = _listView.GetItemAt(p.X, p.Y);
-            if (item == null) { return; }
+
+            //if (item == null) // If item null set parent of selected item to null
+            //{
+            //    HItem childItem = hierarchyItems[_listView.FocusedItem.Index];
+
+            //    SceneInterface.RemoveParent(_sceneManager, (ulong)childItem.GameObjectID);
+            //}
+            //else // If item is not null set parent of selected item to item
+            //{
+            //    HItem childItem = hierarchyItems[_listView.FocusedItem.Index];
+            //    HItem parentItem = hierarchyItems[item.Index];
+
+            //    SceneInterface.SetParent(_sceneManager, (ulong)childItem.GameObjectID, (ulong)parentItem.GameObjectID);
+            //}
+
+            //_scene.HasChanged = true;
+            //CreateHierachyList(_sceneManager);
         }
 
         private void MenuLeft(object sender, EventArgs e)

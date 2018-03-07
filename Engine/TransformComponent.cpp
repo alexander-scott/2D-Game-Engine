@@ -125,26 +125,6 @@ Vec2 TransformComponent::GetWorldPosition() const
 		return _localPosition;
 }
 
-TransformComponent * ComponentFactory::MakeTransformComponent(Vec2 position, float rotation, float scale)
-{
-	TransformComponent * transform = new TransformComponent(position, rotation, scale);
-
-	return transform;
-}
-
-xml_node<>* TransformComponent::SaveComponent(xml_document<>* doc)
-{
-	TransformComponent* transform = dynamic_cast<TransformComponent*>(this);
-	auto componentNode = doc->allocate_node(node_element, "Component");
-
-	componentNode->append_attribute(doc->allocate_attribute("xpos", doc->allocate_string(to_string(transform->GetLocalPosition().x).c_str())));
-	componentNode->append_attribute(doc->allocate_attribute("ypos", doc->allocate_string(to_string(transform->GetLocalPosition().y).c_str())));
-	componentNode->append_attribute(doc->allocate_attribute("rotation", doc->allocate_string(to_string(transform->GetLocalRotation()).c_str())));
-	componentNode->append_attribute(doc->allocate_attribute("scale", doc->allocate_string(to_string(transform->GetLocalScale()).c_str())));
-
-	return componentNode;
-}
-
 int TransformComponent::GetEditorFieldCount()
 {
 	return 4;
