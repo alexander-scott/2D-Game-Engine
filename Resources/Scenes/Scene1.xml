@@ -1,7 +1,7 @@
 <?xml?>
 <scene name="scene1">
 	<GameObject tag="TestGameObject" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
-		<Component type="TransformComponent" xpos="0.000000" ypos="0.000000" rotation="0.000000" scale="1.000000"/>
+		<Component xpos="1.000000" ypos="-0.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"/>
 	</GameObject>
 	<GameObject tag="TestGameObject2" guid="49e2262e-fef6-4400-aa5b-529843a7df53"/>
 </scene>

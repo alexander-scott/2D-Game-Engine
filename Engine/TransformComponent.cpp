@@ -132,29 +132,6 @@ TransformComponent * ComponentFactory::MakeTransformComponent(Vec2 position, flo
 	return transform;
 }
 
-map<string, string> TransformComponent::ExtractComponent()
-{
-	map<string, string> returnMap;
-	returnMap.insert(std::make_pair(string("type"), string("TransformComponent")));
-
-	returnMap.insert(std::make_pair(string("xpos"), to_string(GetLocalPosition().x)));
-	returnMap.insert(std::make_pair(string("ypos"), to_string(GetLocalPosition().y)));
-	returnMap.insert(std::make_pair(string("rotation"), to_string(GetLocalRotation())));
-	returnMap.insert(std::make_pair(string("scale"), to_string(GetLocalScale())));
-
-	return returnMap;
-}
-
-IComponent* TransformComponent::BuildComponent(xml_node<>* node)
-{
-	float xPos = (float)atof(node->first_attribute("xpos")->value());
-	float yPos = -(float)atof(node->first_attribute("ypos")->value());
-	float rot = (float)atof(node->first_attribute("rotation")->value());
-	float scale = (float)atof(node->first_attribute("scale")->value());
-
-	return ComponentFactory::MakeTransformComponent(Vec2(xPos, yPos), rot, scale);
-}
-
 xml_node<>* TransformComponent::SaveComponent(xml_document<>* doc)
 {
 	TransformComponent* transform = dynamic_cast<TransformComponent*>(this);
@@ -175,7 +152,7 @@ int TransformComponent::GetEditorFieldCount()
 
 InspectorField* TransformComponent::GetEditorFields()
 {
-	auto inspectorFields = new InspectorField[4];
+	auto inspectorFields = new InspectorField[GetEditorFieldCount()];
 
 	inspectorFields[0].FieldName = "XPos";
 	inspectorFields[0].FieldType = (int)EditorFieldTypes::eFloat;
@@ -202,4 +179,31 @@ InspectorField* TransformComponent::GetEditorFields()
 	inspectorFields[3].FieldValue = scaleValue;
 
 	return inspectorFields;
+}
+
+void TransformComponent::SetEditorFieldValue(int fieldIndex, const char* value)
+{
+	switch (fieldIndex)
+	{
+		case 0:
+		{
+			SetLocalPosition(Vec2((float)atof(value), GetLocalPosition().y));
+			break;
+		}
+		case 1:
+		{
+			SetLocalPosition(Vec2(GetLocalPosition().x, (float)atof(value)));
+			break;
+		}
+		case 2:
+		{
+			SetLocalRotation((float)atof(value));
+			break;
+		}
+		case 3:
+		{
+			SetLocalScale((float)atof(value));
+			break;
+		}
+	}
 }

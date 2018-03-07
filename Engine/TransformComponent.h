@@ -28,12 +28,10 @@ public:
 
 	void SetParent(TransformComponent* parent) { _parent = parent; }
 
-	virtual map<string, string> ExtractComponent() override;
-
-	virtual IComponent* BuildComponent(xml_node<>* node) override;
 	virtual xml_node<>* SaveComponent(xml_document<>* doc) override;
 	virtual int GetEditorFieldCount() override;
 	virtual InspectorField* GetEditorFields() override;
+	virtual void SetEditorFieldValue(int fieldIndex, const char* value) override;
 
 private:
 	Vec2					_localPosition;

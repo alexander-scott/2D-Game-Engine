@@ -18,7 +18,7 @@ namespace EditorSceneInterface
 
 	extern "C" { DllExport SceneItem* CreateGameObject(void* sceneManagerPtr); }
 
-	extern "C" { DllExport void ModifyGameObjectComponentField(void* sceneManagerPtr, unsigned long gameObjectID, int componentID, int fieldIndex); }
+	extern "C" { DllExport void ModifyGameObjectComponentField(void* sceneManagerPtr, unsigned long gameObjectID, int componentID, int fieldIndex, const char* value); }
 
 	extern "C" { DllExport void DeleteGameObject(void* sceneManagerPtr, unsigned long gameObjectID); }
 

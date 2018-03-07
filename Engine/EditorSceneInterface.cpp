@@ -46,7 +46,7 @@ int* EditorSceneInterface::GetComponentFieldCounts(void* sceneManagerPtr, unsign
 	int* componentFieldCounts = new int[componentCount];
 	for (int i = 0; i < componentCount; i++)
 	{
-		componentFieldCounts[i] = (int)components[i]->ExtractComponent().size();
+		componentFieldCounts[i] = (int)components[i]->GetEditorFieldCount();
 	}
 
 	return componentFieldCounts;
@@ -58,28 +58,16 @@ InspectorField* EditorSceneInterface::PopulateInspector(void* sceneManagerPtr, u
 	auto components = gameObject->GetAllComponents();
 	int componentCount = (int)components.size();
 
-	auto componentFields = components[componentIndex]->ExtractComponent();
-	auto inspectorFields = new InspectorField[componentFields.size()];
+	auto componentFields = components[componentIndex]->GetEditorFields();
 
-	int fieldCount = 0;
-	for (auto field : componentFields)
+	for (int i = 0; i < components[componentIndex]->GetEditorFieldCount(); i++)
 	{
-		char* name = new char[field.first.length() + 1];
-		strcpy_s(name, field.first.length() + 1, field.first.c_str());
-		inspectorFields[fieldCount].FieldName = name;
-
-		char* value = new char[field.second.length() + 1];
-		strcpy_s(value, field.second.length() + 1, field.second.c_str());
-		inspectorFields[fieldCount].FieldValue = value;
-
-		inspectorFields[fieldCount].GameObjectID = (int)gameObjectID;
-		inspectorFields[fieldCount].ComponentIndex = componentIndex;
-		inspectorFields[fieldCount].FieldIndex = fieldCount;
-
-		fieldCount++;
+		componentFields[i].GameObjectID = (int)gameObjectID;
+		componentFields[i].ComponentIndex = componentIndex;
+		componentFields[i].FieldIndex = i;
 	}
 
-	return inspectorFields;
+	return componentFields;
 }
 
 void EditorSceneInterface::RenameGameObject(void* sceneManagerPtr, unsigned long gameObjectID, const char* name)
@@ -112,9 +100,10 @@ void EditorSceneInterface::DeleteGameObject(void * sceneManagerPtr, unsigned lon
 	static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->DeleteGameObject(gameObjectID);
 }
 
-void EditorSceneInterface::ModifyGameObjectComponentField(void* sceneManagerPtr, unsigned long gameObjectID, int componentID, int fieldIndex)
+void EditorSceneInterface::ModifyGameObjectComponentField(void* sceneManagerPtr, unsigned long gameObjectID, int componentID, int fieldIndex, const char* value)
 {
-	auto gameObject = static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID);
+	auto components = static_cast<SceneManager*>(sceneManagerPtr)->GetScene()->GetGameObject(gameObjectID)->GetAllComponents();
+	components[componentID]->SetEditorFieldValue(fieldIndex, value);
 }
 
 void EditorSceneInterface::FreeMemory(void * ptr)

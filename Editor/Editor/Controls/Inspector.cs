@@ -15,6 +15,9 @@ namespace GEPAA_Editor.EditorControls
 
         private Dictionary<int, InspectorField> _cellToComponentMap;
 
+        private Scene _scene;
+        private IntPtr _sceneManager;
+
         public Inspector(DataGridView dgv)
         {
             _view = dgv;
@@ -33,14 +36,23 @@ namespace GEPAA_Editor.EditorControls
             _view.Columns.Add("Value", "Value");
         }
 
+        public void SetScene(Scene scene)
+        {
+            _scene = scene;
+        }
+
         private void _view_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            InspectorField fieldChanged = _cellToComponentMap[e.ColumnIndex - 1];
-
+            InspectorField fieldChanged = _cellToComponentMap[e.RowIndex];
+            SceneInterface.ModifyGameObjectComponentField(_sceneManager, fieldChanged.GameObjectID,
+                (int)fieldChanged.ComponentIndex, (int)fieldChanged.FieldIndex, _view[e.ColumnIndex, e.RowIndex].Value.ToString());
+            _scene.HasChanged = true;
         }
 
         public void GameObjectClicked(IntPtr sceneManager, int id, int componentCount)
         {
+            _sceneManager = sceneManager;
+
             ClearInspector();
 
             // First work out how many fields each component has
@@ -69,6 +81,9 @@ namespace GEPAA_Editor.EditorControls
 
                     _view.Rows.Add(field.FieldName, field.FieldValue);
                 }
+
+                if (i != componentCount - 1)
+                    _view.Rows.Add("", ""); // Add gap between components
 
                 SceneInterface.FreeMemory(fieldsPtr);
             }
