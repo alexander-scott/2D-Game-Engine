@@ -35,8 +35,7 @@ namespace GEPAA_Editor.EditorControls
 
         private void _view_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-
-            int f = 0;
+            InspectorField fieldChanged = _cellToComponentMap[e.ColumnIndex - 1];
 
         }
 

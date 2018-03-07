@@ -30,6 +30,11 @@ public:
 
 	virtual map<string, string> ExtractComponent() override;
 
+	virtual IComponent* BuildComponent(xml_node<>* node) override;
+	virtual xml_node<>* SaveComponent(xml_document<>* doc) override;
+	virtual int GetEditorFieldCount() override;
+	virtual InspectorField* GetEditorFields() override;
+
 private:
 	Vec2					_localPosition;
 	float					_localRotation; // RADIANS
@@ -43,5 +48,4 @@ private:
 namespace ComponentFactory
 {
 	TransformComponent * MakeTransformComponent(Vec2 position, float rotation, float scale);
-	
 }

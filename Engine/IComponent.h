@@ -4,8 +4,10 @@
 #include <map>
 
 #include "Consts.h"
+#include "rapidxml.hpp"
 
 using namespace std;
+using namespace rapidxml;
 
 class IComponent
 {
@@ -22,7 +24,12 @@ public:
 
 	virtual map<string, string> ExtractComponent() = 0;
 
+	virtual IComponent* BuildComponent(xml_node<>* node) = 0;
+	virtual xml_node<>* SaveComponent(xml_document<>* doc) = 0;
+	virtual int GetEditorFieldCount() = 0;
+	virtual InspectorField* GetEditorFields() = 0;
+
 protected:
-	string		_type;
+	string			_type;
 	bool			_active;
 };

@@ -144,3 +144,62 @@ map<string, string> TransformComponent::ExtractComponent()
 
 	return returnMap;
 }
+
+IComponent* TransformComponent::BuildComponent(xml_node<>* node)
+{
+	float xPos = (float)atof(node->first_attribute("xpos")->value());
+	float yPos = -(float)atof(node->first_attribute("ypos")->value());
+	float rot = (float)atof(node->first_attribute("rotation")->value());
+	float scale = (float)atof(node->first_attribute("scale")->value());
+
+	return ComponentFactory::MakeTransformComponent(Vec2(xPos, yPos), rot, scale);
+}
+
+xml_node<>* TransformComponent::SaveComponent(xml_document<>* doc)
+{
+	TransformComponent* transform = dynamic_cast<TransformComponent*>(this);
+	auto componentNode = doc->allocate_node(node_element, "Component");
+
+	componentNode->append_attribute(doc->allocate_attribute("xpos", doc->allocate_string(to_string(transform->GetLocalPosition().x).c_str())));
+	componentNode->append_attribute(doc->allocate_attribute("ypos", doc->allocate_string(to_string(transform->GetLocalPosition().y).c_str())));
+	componentNode->append_attribute(doc->allocate_attribute("rotation", doc->allocate_string(to_string(transform->GetLocalRotation()).c_str())));
+	componentNode->append_attribute(doc->allocate_attribute("scale", doc->allocate_string(to_string(transform->GetLocalScale()).c_str())));
+
+	return componentNode;
+}
+
+int TransformComponent::GetEditorFieldCount()
+{
+	return 4;
+}
+
+InspectorField* TransformComponent::GetEditorFields()
+{
+	auto inspectorFields = new InspectorField[4];
+
+	inspectorFields[0].FieldName = "XPos";
+	inspectorFields[0].FieldType = (int)EditorFieldTypes::eFloat;
+	char* xPosValue = new char[to_string(GetLocalPosition().x).length() + 1];
+	strcpy_s(xPosValue, to_string(GetLocalPosition().x).length() + 1, to_string(GetLocalPosition().x).c_str());
+	inspectorFields[0].FieldValue = xPosValue;
+
+	inspectorFields[1].FieldName = "YPos";
+	inspectorFields[1].FieldType = (int)EditorFieldTypes::eFloat;
+	char* yPosValue = new char[to_string(GetLocalPosition().y).length() + 1];
+	strcpy_s(yPosValue, to_string(GetLocalPosition().y).length() + 1, to_string(GetLocalPosition().y).c_str());
+	inspectorFields[1].FieldValue = yPosValue;
+
+	inspectorFields[2].FieldName = "Rotation";
+	inspectorFields[2].FieldType = (int)EditorFieldTypes::eFloat;
+	char* rotationValue = new char[to_string(GetLocalRotation()).length() + 1];
+	strcpy_s(rotationValue, to_string(GetLocalRotation()).length() + 1, to_string(GetLocalRotation()).c_str());
+	inspectorFields[2].FieldValue = rotationValue;
+
+	inspectorFields[3].FieldName = "Scale";
+	inspectorFields[3].FieldType = (int)EditorFieldTypes::eFloat;
+	char* scaleValue = new char[to_string(GetLocalScale()).length() + 1];
+	strcpy_s(scaleValue, to_string(GetLocalScale()).length() + 1, to_string(GetLocalScale()).c_str());
+	inspectorFields[3].FieldValue = scaleValue;
+
+	return inspectorFields;
+}
