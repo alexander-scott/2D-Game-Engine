@@ -9,6 +9,8 @@ class Camera
 {
 public:
 	Camera();
+	Camera(XMFLOAT3 position, XMFLOAT3 rightAxis, XMFLOAT3 upAxis, XMFLOAT3 lookAxis,
+		float nearPlane, float farPlane, float fieldOfView, float aspectRatio);
 	~Camera();
 
 private:
@@ -62,13 +64,18 @@ public:
 		//set moves
 		void Walk(float distance);
 		void RotateYAxis(float angle);
-		void Pitch(float angle);
 
+		void RotateX(float angle); //pitch - rotation around the right vector
+		void RotateY(float angle); //rotate camera's vector about world y axis
+		void TranslateX(float distance); // aka strafe : moves the camera right or left
+		void TranslateZ(float distance); //walk 
 		void UpdateViewMatrix();
 
 		//set camera space
 		void SetCameraSpace(const XMFLOAT3 & position, const XMFLOAT3 & lookAxis, const XMFLOAT3 & upAxis);
 		void SetCameraSpace(FXMVECTOR position, FXMVECTOR lookAxis, FXMVECTOR upAxis);
 			
+		void UpdateProjectionMatrix(float fieldOfView, float aspectRatio, float nearPlane, float farPlane);
+
 };
 
