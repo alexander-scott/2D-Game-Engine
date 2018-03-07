@@ -263,6 +263,7 @@
     <ClInclude Include="BuildSceneMessage.h" />
     <ClInclude Include="ComponentBuilder.h" />
     <ClInclude Include="ComponentFactory.h" />
+    <ClInclude Include="ComponentSaver.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="CustomException.h" />
     <ClInclude Include="DrawSceneMessage.h" />
@@ -277,6 +278,7 @@
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentMessage.h" />
     <ClInclude Include="IDrawableComponent.h" />
+    <ClInclude Include="IEditableComponent.h" />
     <ClInclude Include="IGraphics.h" />
     <ClInclude Include="IListener.h" />
     <ClInclude Include="IMessage.h" />
@@ -313,6 +315,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentBuilder.cpp" />
+    <ClCompile Include="ComponentFactory.cpp" />
+    <ClCompile Include="ComponentSaver.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorInputInterface.cpp" />
     <ClCompile Include="EditorEngineInterface.cpp" />

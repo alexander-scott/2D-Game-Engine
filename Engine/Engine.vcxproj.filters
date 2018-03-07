@@ -235,6 +235,12 @@
     <ClInclude Include="RequestSaveSceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
     </ClInclude>
+    <ClInclude Include="IEditableComponent.h">
+      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentSaver.h">
+      <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -296,6 +302,12 @@
     </ClCompile>
     <ClCompile Include="SceneSaver.cpp">
       <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentSaver.cpp">
+      <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentFactory.cpp">
+      <Filter>Engine\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

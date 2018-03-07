@@ -67,6 +67,7 @@ namespace GEPAA_Editor
             btnPlay.MouseClick += PlayClicked;
 
             _inspector = new Inspector(dgvInspector);
+            _inspector.SetScene(_scene);
 
             _hierarchy = new Hierachy(_inspector, _resoucesPath);
             _hierarchy.InitaliseControls(hierarchyListBox, contextMenuStrip1);
@@ -199,6 +200,7 @@ namespace GEPAA_Editor
                     HasChanged = false,
                 };
                 this.Text = EDITOR_TITLE_PREFIX + _scene.Name;
+                _inspector.SetScene(_scene);
                 _hierarchy.SetScene(_scene);
                 _hierarchy.CreateHierachyList(_sceneManagerSystem);
             }

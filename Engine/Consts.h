@@ -67,11 +67,6 @@ enum SystemMessageType
 	ePlayStopped
 };
 
-enum ComponentType
-{
-	eTransformComponent
-};
-
 enum ComponentMessageType
 {
 	eSetParentTransformMessage
@@ -98,6 +93,14 @@ enum MouseMessageType
 	eRightMouseReleased
 };
 
+enum EditorFieldTypes
+{
+	eInteger,
+	eFloat,
+	eDouble,
+	eString
+};
+
 #pragma endregion
 
 #pragma region Operators
@@ -107,5 +110,29 @@ inline bool operator<(const GUID & lhs, const GUID & rhs)
 {
 	return (memcmp(&lhs, &rhs, sizeof(GUID)) > 0 ? true : false);
 }
+
+#pragma endregion
+
+#pragma region Structs
+
+struct SceneItem
+{
+	int GameObjectID;
+	unsigned int GameObjectParentID;
+	char* GameObjectName;
+	int ComponentCount;
+};
+
+// The InspectorField will display the field name and field value
+// TODO: Pass in field type too.
+struct InspectorField
+{
+	char* FieldName;
+	char* FieldValue;
+	int GameObjectID;
+	int ComponentIndex;
+	int FieldIndex;
+	int FieldType;
+};
 
 #pragma endregion

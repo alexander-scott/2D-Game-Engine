@@ -2,7 +2,9 @@
 
 #include "IComponent.h"
 
-class TransformComponent : public IComponent
+#include "IEditableComponent.h"
+
+class TransformComponent : public IComponent, public IEditableComponent
 {
 public:
 	TransformComponent(Vec2 worldPosition, float worldRotation, float worldScale);
@@ -28,7 +30,10 @@ public:
 
 	void SetParent(TransformComponent* parent) { _parent = parent; }
 
-	virtual map<string, string> ExtractComponent() override;
+	// Editable Component
+	virtual int GetEditorFieldCount() override;
+	virtual InspectorField* GetEditorFields() override;
+	virtual void SetEditorFieldValue(int fieldIndex, const char* value) override;
 
 private:
 	Vec2					_localPosition;
@@ -39,9 +44,3 @@ private:
 
 	TransformComponent*		_parent;
 };
-
-namespace ComponentFactory
-{
-	TransformComponent * MakeTransformComponent(Vec2 position, float rotation, float scale);
-	
-}

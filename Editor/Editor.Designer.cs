@@ -52,16 +52,16 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(257, 35);
+            this.panel1.Location = new System.Drawing.Point(257, 66);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(869, 629);
+            this.panel1.Size = new System.Drawing.Size(915, 598);
             this.panel1.TabIndex = 1;
             // 
             // lblHierachy
             // 
             this.lblHierachy.AutoSize = true;
             this.lblHierachy.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHierachy.Location = new System.Drawing.Point(72, 18);
+            this.lblHierachy.Location = new System.Drawing.Point(72, 38);
             this.lblHierachy.Name = "lblHierachy";
             this.lblHierachy.Size = new System.Drawing.Size(97, 25);
             this.lblHierachy.TabIndex = 2;
@@ -79,7 +79,7 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(549, 6);
+            this.btnPlay.Location = new System.Drawing.Point(571, 37);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(75, 23);
             this.btnPlay.TabIndex = 8;
@@ -90,7 +90,7 @@
             // 
             this.hierarchyListBox.AllowDrop = true;
             this.hierarchyListBox.LabelEdit = true;
-            this.hierarchyListBox.Location = new System.Drawing.Point(12, 46);
+            this.hierarchyListBox.Location = new System.Drawing.Point(12, 66);
             this.hierarchyListBox.Name = "hierarchyListBox";
             this.hierarchyListBox.Size = new System.Drawing.Size(229, 295);
             this.hierarchyListBox.TabIndex = 9;
@@ -157,28 +157,28 @@
             // newSceneToolStripMenuItem
             // 
             this.newSceneToolStripMenuItem.Name = "newSceneToolStripMenuItem";
-            this.newSceneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newSceneToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.newSceneToolStripMenuItem.Text = "New Scene";
             this.newSceneToolStripMenuItem.Click += new System.EventHandler(this.NewSceneClicked);
             // 
             // loadSceneToolStripMenuItem
             // 
             this.loadSceneToolStripMenuItem.Name = "loadSceneToolStripMenuItem";
-            this.loadSceneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadSceneToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.loadSceneToolStripMenuItem.Text = "Load Scene";
             this.loadSceneToolStripMenuItem.Click += new System.EventHandler(this.LoadSceneClicked);
             // 
             // saveSceneToolStripMenuItem
             // 
             this.saveSceneToolStripMenuItem.Name = "saveSceneToolStripMenuItem";
-            this.saveSceneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveSceneToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.saveSceneToolStripMenuItem.Text = "Save Scene";
             this.saveSceneToolStripMenuItem.Click += new System.EventHandler(this.SaveSceneClicked);
             // 
             // saveAsSceneToolStripMenuItem
             // 
             this.saveAsSceneToolStripMenuItem.Name = "saveAsSceneToolStripMenuItem";
-            this.saveAsSceneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsSceneToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.saveAsSceneToolStripMenuItem.Text = "Save As Scene";
             this.saveAsSceneToolStripMenuItem.Click += new System.EventHandler(this.SaveAsSceneClicked);
             // 

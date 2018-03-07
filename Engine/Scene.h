@@ -16,6 +16,7 @@ public:
 
 	std::string GetSceneName() { return _sceneName; }
 	void AddGameObject(shared_ptr<GameObject> gameObject);
+	void DeleteGameObject(unsigned long id);
 
 	int GetNumberOfGameObjects() { return (int)_gameObjects.size(); }
 	vector<shared_ptr<GameObject>> GetAllGameObjects() { return _gameObjects; }

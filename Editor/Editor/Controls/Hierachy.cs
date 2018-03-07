@@ -110,15 +110,26 @@ namespace GEPAA_Editor.EditorControls
 
         private void _listView_DragDrop(object sender, DragEventArgs e)
         {
-            if (_listView.SelectedItems.Count == 0) { return; }
+            if (_listView.FocusedItem == null) { return; }
             Point p = _listView.PointToClient(new Point(e.X, e.Y));
             ListViewItem item = _listView.GetItemAt(p.X, p.Y);
-            if (item == null) { return; }
-        }
 
-        private void DeleteClicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
+            //if (item == null) // If item null set parent of selected item to null
+            //{
+            //    HItem childItem = hierarchyItems[_listView.FocusedItem.Index];
+
+            //    SceneInterface.RemoveParent(_sceneManager, (ulong)childItem.GameObjectID);
+            //}
+            //else // If item is not null set parent of selected item to item
+            //{
+            //    HItem childItem = hierarchyItems[_listView.FocusedItem.Index];
+            //    HItem parentItem = hierarchyItems[item.Index];
+
+            //    SceneInterface.SetParent(_sceneManager, (ulong)childItem.GameObjectID, (ulong)parentItem.GameObjectID);
+            //}
+
+            //_scene.HasChanged = true;
+            //CreateHierachyList(_sceneManager);
         }
 
         private void MenuLeft(object sender, EventArgs e)
@@ -132,12 +143,30 @@ namespace GEPAA_Editor.EditorControls
             {
                 _scene.HasChanged = true;
                 SceneInterface.RenameGameObject(_sceneManager, (ulong)hierarchyItems[_listView.FocusedItem.Index].GameObjectID, e.Label);
+                hierarchyItems[_listView.FocusedItem.Index].GameObjectName = e.Label;
+            }
+        }
+
+        private void DeleteClicked(object sender, EventArgs e)
+        {
+            if (_listView.FocusedItem != null)
+            {
+                _scene.HasChanged = true;
+                SceneInterface.DeleteGameObject(_sceneManager, (ulong)hierarchyItems[_listView.FocusedItem.Index].GameObjectID);
+
+                hierarchyItems.Remove(_listView.FocusedItem.Index);
+                displayedHierarchyIDs.Remove(_listView.FocusedItem.Index);
+
+                _listView.Items.RemoveAt(_listView.FocusedItem.Index);
             }
         }
 
         private void RenameClicked(object sender, EventArgs e)
         {
-            _listView.FocusedItem.BeginEdit();
+            if (_listView.FocusedItem != null)
+            {
+                _listView.FocusedItem.BeginEdit();
+            }
         }
 
         private void NewGameObjectClicked(object sender, EventArgs e)
