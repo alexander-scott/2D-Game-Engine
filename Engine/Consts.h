@@ -73,7 +73,9 @@ enum ComponentMessageType
 
 enum DrawableComponentType
 {
-	eTestDrawingType
+	eTestDrawingType,
+	eSprite,
+	eText
 };
 
 enum KeyboardMessageType

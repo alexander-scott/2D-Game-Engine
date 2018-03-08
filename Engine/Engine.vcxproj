@@ -286,6 +286,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="InputKeyboardMessage.h" />
     <ClInclude Include="InputMouseMessage.h" />
+    <ClInclude Include="IRenderableComponent.h" />
     <ClInclude Include="ISystemMessage.h" />
     <ClInclude Include="IMessenger.h" />
     <ClInclude Include="ISystem.h" />
@@ -304,6 +305,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="TestCommand.h" />
+    <ClInclude Include="TextRendererComponent.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="WinDefines.h" />
     <ClInclude Include="MainWindow.h" />
@@ -326,6 +328,7 @@
     <ClCompile Include="SceneBuilder.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="TestCommand.cpp" />
+    <ClCompile Include="TextRendererComponent.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>

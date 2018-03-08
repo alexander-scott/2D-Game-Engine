@@ -2,6 +2,8 @@
 
 #include "IGraphics.h"
 #include "Consts.h"
+#include "SpriteRendererComponent.h" 
+#include "TextRendererComponent.h"
 
 #include <cassert>
 #include <map>

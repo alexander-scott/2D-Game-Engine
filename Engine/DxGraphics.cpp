@@ -217,6 +217,20 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 		case DrawableComponentType::eTestDrawingType:
 			break;
 
+		case DrawableComponentType::eText:
+		{
+			TextRendererComponent * textComponent = dynamic_cast<TextRendererComponent*>(component);
+			DrawText(textComponent->GetText(), textComponent->GetPosition(), textComponent->GetRotation(),
+				textComponent->GetRbg(), textComponent->GetScale(), textComponent->GetOffset());
+			break;
+		}
+		case DrawableComponentType::eSprite:
+		{
+			SpriteRendererComponent * drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
+			DrawSprite(drawComponent->GetName(), drawComponent->GetPosition(), drawComponent->GetRect(),
+				drawComponent->GetRotation(), drawComponent->GetScale(), drawComponent->GetOffset());
+			break;
+		}
 		// Below is an example of what an implementation might look like
 		/*case DrawableComponentType::eSprite:
 			SpriteRendererComponent* drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
