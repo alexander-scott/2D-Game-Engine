@@ -233,6 +233,8 @@ void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, 
 	//CreateDDSTextureFromFile(_device.Get(), L"../Sprites/Test/spriteplayerwalk.dds", nullptr, &textureTest);
 	//_sprites.get()->Draw(textureTest, XMFLOAT2(pos.x, pos.y), rect, Colors::White);
 	//textureTest->Release();
+
+
 }
 
 void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
