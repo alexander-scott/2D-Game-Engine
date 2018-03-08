@@ -202,7 +202,7 @@ void DxGraphics::Initalise(HWNDKey& key)
 	}
 
 	std::string fontFile = "..\\Resources\\fonts\\italic.spritefont";
-	std::wstring widestr = std::wstring(fontFile.begin(), fontFile.end());
+	std::wstring widestr = std::wstring(fontFile.begin(), fontFile.end());	
 	const wchar_t* szFile = widestr.c_str();
 	_fonts.reset(new SpriteFont(_device.Get(), szFile));
 
@@ -227,10 +227,17 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 
 void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
 {
+	// TODO : delete - example of how to draw a dds file for 2D application but won't do the same here 
+	//_immediateContext->ClearDepthStencilView(_depthStencilViewD3D11_CLEAR_DEPTH, 1.0f, 0);
+	//ID3D11ShaderResourceView* textureTest = nullptr;
+	//CreateDDSTextureFromFile(_device.Get(), L"../Sprites/Test/spriteplayerwalk.dds", nullptr, &textureTest);
+	//_sprites.get()->Draw(textureTest, XMFLOAT2(pos.x, pos.y), rect, Colors::White);
+	//textureTest->Release();
 }
 
 void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
 {
+
 }
 
 void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset)
@@ -250,7 +257,13 @@ void DxGraphics::BeginFrame()
 	_immediateContext->ClearRenderTargetView(_renderTargetView.Get(), Colors::MidnightBlue);
 	_sprites->Begin(SpriteSortMode_Deferred);
 	_primitiveBatch->Begin();
-}
+
+	//TODO : delete - just a try that failed on DrawSprite method...
+	/*RECT *rect = new RECT();
+	rect->bottom = 54; rect->top = 0; rect->right = 0; rect->left = 45;
+	DrawSprite("test", Vec2(10.0f, 10.0f), rect, 0.0f, 1.0f, Vec2(0.0f, 0.0f));
+	*/
+	}
 
 void DxGraphics::EndFrame()
 {

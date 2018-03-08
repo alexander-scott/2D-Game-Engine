@@ -296,6 +296,7 @@
     <ClInclude Include="RequestBuildSceneMessage.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SetParentTransformMessage.h" />
+    <ClInclude Include="SpriteRendererComponent.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />
     <ClInclude Include="SystemMessageListener.h" />
     <ClInclude Include="SystemMessageMessenger.h" />
@@ -320,6 +321,7 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SpriteRendererComponent.cpp" />
     <ClCompile Include="SystemMessageDispatcher.cpp" />
     <ClCompile Include="SceneBuilder.cpp" />
     <ClCompile Include="Engine.cpp" />

@@ -15,6 +15,8 @@ public:
 
 	void RecieveMessage(ISystemMessage& message) override;
 
+	//TODO ?: Add method Draw that populates the DrawSceneMessage sent to the Graphics
+
 private:
 	shared_ptr<Scene>		_currentScene;
 	FrameTimer				_frameTimer;

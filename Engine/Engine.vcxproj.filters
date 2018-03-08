@@ -211,6 +211,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Engine\Systems\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteRendererComponent.h">
+      <Filter>Engine\GameObject\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -260,6 +263,9 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Engine\Systems\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRendererComponent.cpp">
+      <Filter>Engine\GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
