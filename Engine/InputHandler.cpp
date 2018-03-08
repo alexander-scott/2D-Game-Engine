@@ -16,10 +16,27 @@ void InputHandler::InitaliseListeners()
 	SubscribeToMessageType(SystemMessageType::eInputMouseMessage);
 	SubscribeToMessageType(SystemMessageType::eInputUpdateGamePad);
 
-	MoveUpCommand* move_up = new MoveUpCommand();
-	_keyboardCommands['Z'] = move_up;
+	TestKeyboardInitialCommands();
+	LoadKeyboardGameMapping();
 }
 
+void InputHandler::TestKeyboardInitialCommands() //to remove after I have a function to load commands list from a file at initialization
+{
+	MoveUpCommand* move_up = new MoveUpCommand();
+	MoveLeftCommand* move_left = new MoveLeftCommand();
+	MoveRightCommand* move_right = new MoveRightCommand();
+	MoveDownCommand* move_down = new MoveDownCommand();
+
+	_keyboardGameCommandMap['W'] = move_up;
+	_keyboardGameCommandMap['A'] = move_left;
+	_keyboardGameCommandMap['S'] = move_down;
+	_keyboardGameCommandMap['D'] = move_right;
+}
+
+void InputHandler::LoadKeyboardGameMapping()
+{
+	_keyboardCurrentCommandMap = _keyboardGameCommandMap;
+}
 void InputHandler::RecieveMessage(ISystemMessage & message)
 {
 	switch (message.Type)
@@ -28,9 +45,9 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 		{
 			//TODO Input: Write code to handle keyboard messages
 			InputKeyboardMessage& msg = static_cast<InputKeyboardMessage&>(message);
-			if (_keyboardCommands[msg.Key] != nullptr)
+			if (_keyboardCurrentCommandMap[msg.Key] != nullptr)
 			{
-				SendMessageToScene(_keyboardCommands[msg.Key]->Execute());
+				SendMessageToScene(_keyboardCurrentCommandMap[msg.Key]->Execute());
 			}
 			break;
 		}
