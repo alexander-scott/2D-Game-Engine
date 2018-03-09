@@ -20,6 +20,9 @@ static constexpr float PI = 3.141592741f;
 
 static constexpr int MAX_POLY_VERTEX_COUNT = 64;
 
+static float GRAVITY_SCALE = 20.0f; // Default is 20
+static Vec2 GRAVITY_VECTOR(0, 9.81f * GRAVITY_SCALE); // Default is 9.81 * SCALE
+
 #pragma endregion
 
 #pragma region Enums

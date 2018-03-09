@@ -262,6 +262,12 @@
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>Engine\GameObject\Components\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Engine\Systems\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectGrid.h">
+      <Filter>Engine\Systems\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -344,6 +350,12 @@
     </ClCompile>
     <ClCompile Include="RigidBodyComponent.cpp">
       <Filter>Engine\GameObject\Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Engine\Systems\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectGrid.cpp">
+      <Filter>Engine\Systems\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

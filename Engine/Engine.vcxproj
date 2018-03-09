@@ -264,6 +264,7 @@
     <ClInclude Include="BuildSceneMessage.h" />
     <ClInclude Include="CircleColliderComponent.h" />
     <ClInclude Include="ColliderComponent.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="ComponentBuilder.h" />
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="ComponentSaver.h" />
@@ -297,6 +298,7 @@
     <ClInclude Include="IUpdateableComponent.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="ObjectGrid.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="PolygonColliderComponent.h" />
     <ClInclude Include="RequestBuildSceneMessage.h" />
@@ -322,6 +324,7 @@
   <ItemGroup>
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="CircleColliderComponent.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ComponentBuilder.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="ComponentSaver.cpp" />
@@ -335,6 +338,7 @@
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="ObjectGrid.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="PolygonColliderComponent.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
