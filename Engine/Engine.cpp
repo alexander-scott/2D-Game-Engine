@@ -68,40 +68,45 @@ Engine::~Engine()
 
 void Engine::StartUpdateLoop()
 {
-	bool result = true;
 	do 
 	{
-		auto currentTime = std::chrono::steady_clock::now();
-		const std::chrono::duration<float> elapsedTime = currentTime - _lastTime;
-		_lastTime = currentTime;
-		_lag += elapsedTime.count();
-
-		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eInputUpdateGamePad));
-
-		// This while loop processes scene updates and physics at a fixed rate.
-		// Whilst allowing graphics to render as fast as possible.
-		while (_lag >= MS_PER_UPDATE)
-		{
-			// ProcessPhysics()
-
-			// Update the current scene in the SceneManager system
-			_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
-
-			_lag -= MS_PER_UPDATE;
-		}
-
-		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame)); // Tell the Graphics system to begin the frame
-
-		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene)); // Draw the current scene in the SceneManager system
-
-		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame)); // Tell the Graphics system to end the frame
-
-		if (_mainWindow != nullptr)
-			result = _mainWindow->ProcessMessage(); // Check if the user presses close on the window
-		else
-			result = true;
+		
 	} 
-	while (result);
+	while (UpdateLoop());
+}
+
+
+bool Engine::UpdateLoop()
+{
+	auto currentTime = std::chrono::steady_clock::now();
+	const std::chrono::duration<float> elapsedTime = currentTime - _lastTime;
+	_lastTime = currentTime;
+	_lag += elapsedTime.count();
+
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eInputUpdateGamePad));
+
+	// This while loop processes scene updates and physics at a fixed rate.
+	// Whilst allowing graphics to render as fast as possible.
+	while (_lag >= MS_PER_UPDATE)
+	{
+		// ProcessPhysics()
+
+		// Update the current scene in the SceneManager system
+		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
+
+		_lag -= MS_PER_UPDATE;
+	}
+
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame)); // Tell the Graphics system to begin the frame
+
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene)); // Draw the current scene in the SceneManager system
+
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame)); // Tell the Graphics system to end the frame
+
+	if (_mainWindow != nullptr)
+		return _mainWindow->ProcessMessage(); // Check if the user presses close on the window
+	else
+		return true;
 }
 
 void Engine::Initalise()
