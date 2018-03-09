@@ -9,6 +9,7 @@ class MainWindow;
 class Engine
 {
 public:
+	Engine();
 	Engine(HWND hWnd);
 	Engine(HINSTANCE hInst, wchar_t * pArgs);
 	~Engine();
@@ -18,6 +19,7 @@ public:
 	std::shared_ptr<ISystem> GetSystem(SystemType type);
 
 private:
+	void Initalise();
 	void InitaliseSystems();
 	void InitaliseListeners();
 	void SystemsInitalised();

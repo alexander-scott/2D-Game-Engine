@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="SystemTests">
-      <UniqueIdentifier>{de71e003-ec23-4a1e-a638-38c169484d6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemTests\SceneBuilder">
-      <UniqueIdentifier>{90ad5812-dfee-4241-b747-e0940dd8a65b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source">
       <UniqueIdentifier>{6c8cbbe5-799d-4751-b065-08f08354ad33}</UniqueIdentifier>
     </Filter>
@@ -15,6 +9,15 @@
     </Filter>
     <Filter Include="MessagingTests">
       <UniqueIdentifier>{e916b4f1-e469-45bb-a1a4-f16269df86b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineTests">
+      <UniqueIdentifier>{de71e003-ec23-4a1e-a638-38c169484d6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineTests\SceneBuilder">
+      <UniqueIdentifier>{90ad5812-dfee-4241-b747-e0940dd8a65b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineTests\Core">
+      <UniqueIdentifier>{43b89955-674b-4468-bf4f-d85767abf9d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,7 +52,7 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="SceneBuilderTests.cpp">
-      <Filter>SystemTests\SceneBuilder</Filter>
+      <Filter>EngineTests\SceneBuilder</Filter>
     </ClCompile>
     <ClCompile Include="GameObjectTests.cpp">
       <Filter>GameObjectTests</Filter>
@@ -83,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="..\Engine\ComponentFactory.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreEngineTests.cpp">
+      <Filter>EngineTests\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

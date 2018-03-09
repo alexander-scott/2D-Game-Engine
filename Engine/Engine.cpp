@@ -11,6 +11,14 @@
 #include "RequestBuildSceneMessage.h"
 #include "RequestSaveSceneMessage.h"
 
+// Engine without a main window
+Engine::Engine()
+{
+	_messageDispatcher = make_shared<SystemMessageDispatcher>();
+
+	Initalise();
+}
+
 // Called from the editor
 Engine::Engine(HWND hWnd)
 {
@@ -20,17 +28,11 @@ Engine::Engine(HWND hWnd)
 	_mainWindow = make_shared<MainWindow>(hWnd, _messageDispatcher);
 	_systems.insert(std::make_pair(_mainWindow->SysType,_mainWindow));
 
-	_lastTime = std::chrono::steady_clock::now();
-	_lag = 0;
-
-	InitaliseSystems();
-
 	// Initalise the Editor system
 	auto editorSystem = make_shared<Editor>(_messageDispatcher);
 	_systems.insert(std::make_pair(editorSystem->SysType, editorSystem));
 
-	InitaliseListeners();
-	SystemsInitalised();
+	Initalise();
 }
 
 // Called in the standalone engine
@@ -42,12 +44,7 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 	_mainWindow = make_shared<MainWindow>(hInst, pArgs, _messageDispatcher);
 	_systems.insert(std::make_pair(_mainWindow->SysType, _mainWindow));
 
-	_lastTime = std::chrono::steady_clock::now();
-	_lag = 0;
-
-	InitaliseSystems();
-	InitaliseListeners();
-	SystemsInitalised();
+	Initalise();
 
 	// Request a new scene be built by the SceneBuilder system
 	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
@@ -105,6 +102,16 @@ void Engine::StartUpdateLoop()
 			result = true;
 	} 
 	while (result);
+}
+
+void Engine::Initalise()
+{
+	_lastTime = std::chrono::steady_clock::now();
+	_lag = 0;
+
+	InitaliseSystems();
+	InitaliseListeners();
+	SystemsInitalised();
 }
 
 // Create an instance of every system. Can be initalised in any order. Inject instance of message dispatcher.
