@@ -16,6 +16,10 @@ static constexpr bool KEY_PRESS_AUTOREPEAT = false;
 
 static constexpr float MS_PER_UPDATE = 0.01f;
 
+static constexpr float PI = 3.141592741f;
+
+static constexpr int MAX_POLY_VERTEX_COUNT = 64;
+
 #pragma endregion
 
 #pragma region Enums
@@ -73,7 +77,8 @@ enum SystemMessageType
 
 enum ComponentMessageType
 {
-	eSetParentTransformMessage
+	eSetParentTransformMessage,
+	eAddForce
 };
 
 enum DrawableComponentType
@@ -103,6 +108,13 @@ enum EditorFieldTypes
 	eFloat,
 	eDouble,
 	eString
+};
+
+enum ColliderType
+{
+	eCircle,
+	ePolygon,
+	eColliderTypeCount
 };
 
 #pragma endregion
@@ -136,6 +148,59 @@ struct InspectorField
 	int ComponentIndex;
 	int FieldIndex;
 	int FieldType;
+};
+
+struct RigidBodyData
+{
+	Vec2 velocity;
+
+	float angularVelocity;
+	float torque;
+
+	Vec2 force;
+
+	Mat2 orientationMatrix;
+
+	// Set by rigidbody
+	float intertia;  // moment of inertia
+	float inverseInertia; // inverse inertia
+	float mass;  // _mass
+	float inverseMass; // inverse masee
+
+	float staticFriction;
+	float dynamicFriction;
+	float restitution;
+
+	RigidBodyData(Vec2 velocity, float angularVelocity, float torque, Vec2 force, float staticFriction, float dynamicFrication, float restituation)
+		: velocity(velocity), angularVelocity(angularVelocity), torque(torque), force(force),
+		staticFriction(staticFriction), dynamicFriction(dynamicFrication), restitution(restituation)
+	{
+
+	}
+};
+
+struct Bounds
+{
+public:
+	int xPos;
+	int yPos;
+	int width;
+	int height;
+
+	int colliderIndex;
+
+	Bounds() { }
+	Bounds(int x, int y, int wid, int hei, int colIndex = -1) : xPos(x), yPos(y), width(wid), height(hei), colliderIndex(colIndex) { }
+};
+
+struct Rect
+{
+public:
+	int LeftX;
+	int RightX;
+	int TopY;
+	int BotY;
+	Vec2 Centre;
 };
 
 #pragma endregion
