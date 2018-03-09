@@ -177,6 +177,7 @@
     <ClCompile Include="..\Engine\InputHandler.cpp" />
     <ClCompile Include="..\Engine\Main.cpp" />
     <ClCompile Include="..\Engine\MainWindow.cpp" />
+    <ClCompile Include="..\Engine\PhysicsSystem.cpp" />
     <ClCompile Include="..\Engine\Scene.cpp" />
     <ClCompile Include="..\Engine\SceneBuilder.cpp" />
     <ClCompile Include="..\Engine\SceneManager.cpp" />
@@ -221,6 +222,7 @@
     <ClInclude Include="..\Engine\IUpdateableComponent.h" />
     <ClInclude Include="..\Engine\MainWindow.h" />
     <ClInclude Include="..\Engine\Math.h" />
+    <ClInclude Include="..\Engine\PhysicsSystem.h" />
     <ClInclude Include="..\Engine\rapidxml.hpp" />
     <ClInclude Include="..\Engine\rapidxml_print.hpp" />
     <ClInclude Include="..\Engine\Rect.h" />

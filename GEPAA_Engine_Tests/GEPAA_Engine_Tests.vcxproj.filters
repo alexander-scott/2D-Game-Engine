@@ -84,6 +84,9 @@
     <ClCompile Include="..\Engine\ComponentFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\Engine\PhysicsSystem.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Engine\BuildSceneMessage.h">
@@ -228,6 +231,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\ComponentSaver.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\PhysicsSystem.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

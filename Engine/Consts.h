@@ -29,7 +29,8 @@ enum SystemType
 	eSceneBuilder,
 	eSceneSaver,
 	eGraphics,
-	eInputHandler
+	eInputHandler,
+	ePhysics
 };
 
 enum SystemMessageType
@@ -64,7 +65,10 @@ enum SystemMessageType
 
 	// Editor messages
 	ePlayStarted,
-	ePlayStopped
+	ePlayStopped,
+
+	// Physics messages
+	eUpdatePhysics
 };
 
 enum ComponentMessageType
@@ -124,7 +128,6 @@ struct SceneItem
 };
 
 // The InspectorField will display the field name and field value
-// TODO: Pass in field type too.
 struct InspectorField
 {
 	char* FieldName;

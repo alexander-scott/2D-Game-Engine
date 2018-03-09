@@ -71,9 +71,6 @@
     <Filter Include="Resource Files\Scenes">
       <UniqueIdentifier>{f3d69617-5a79-4f65-9709-f8d2afd2f651}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Systems\Logging">
-      <UniqueIdentifier>{8179bf38-109e-44b5-b23f-4f515c928087}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\EditorInterface">
       <UniqueIdentifier>{79a17cc0-d40b-4f62-baa1-4952dddb647c}</UniqueIdentifier>
     </Filter>
@@ -82,6 +79,9 @@
     </Filter>
     <Filter Include="Engine\Systems\SceneSaving">
       <UniqueIdentifier>{2eccfda8-6f7a-4ab5-b524-83434fe0e948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Physics">
+      <UniqueIdentifier>{38f46296-e2ff-4255-a34c-0efae76ec13f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -205,9 +205,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Engine\Systems\SceneManagement</Filter>
     </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>Engine\Systems\Logging</Filter>
-    </ClInclude>
     <ClInclude Include="ISystemToGameObjectMessage.h">
       <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
@@ -240,6 +237,12 @@
     </ClInclude>
     <ClInclude Include="ComponentSaver.h">
       <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>Engine\Systems\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Engine\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -308,6 +311,9 @@
     </ClCompile>
     <ClCompile Include="ComponentFactory.cpp">
       <Filter>Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>Engine\Systems\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

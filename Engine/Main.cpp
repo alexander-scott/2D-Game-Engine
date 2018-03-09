@@ -1,7 +1,6 @@
 #include "CustomException.h"
 
 #include "Engine.h"
-#include "Logger.h"
 
 int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 {
@@ -14,8 +13,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 		Logger::Instance().LogMessage("Starting main update loop", LogSeverity::eInfo);
 		engine.StartUpdateLoop(); 
 
-		Logger::Instance().LogMessage("Program shutting down", LogSeverity::eInfo);
-		Logger::Instance().LogMessage("---------------------", LogSeverity::eInfo);
+		Logger::Instance().LogMessage("Program shutting down as expected", LogSeverity::eInfo);
 	}
 	catch (const CustomException& e)
 	{

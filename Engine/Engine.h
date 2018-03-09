@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ISystem.h"
+#include "Logger.h"
 
 #include <chrono>
 
