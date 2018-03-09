@@ -1,8 +1,11 @@
 #pragma once
+
+#include "ISystemToGameObjectMessage.h"
+
 class ICommand
 {
 public:
 	virtual ~ICommand() {};
-	virtual void Execute(/*player instance? Message to game loop?*/) = 0;
+	virtual ISystemToGameObjectMessage Execute(/*player instance? Message to game loop?*/) = 0;
 };
 

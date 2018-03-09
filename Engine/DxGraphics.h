@@ -29,6 +29,8 @@ public:
 	virtual void EndFrame() override;
 	virtual void BeginFrame() override;
 
+	virtual void RecieveMessage(ISystemMessage& message) override;
+
 	virtual void DrawComponent(IDrawableComponent* component);
 
 	void DrawSprite(std::string name, Vec2 pos, RECT* rect, float rot, float scale, Vec2 offset);

@@ -31,16 +31,13 @@ void GameObject::SendMessageToComponent(IComponentMessage & message)
 {
 	for (int i = 0; i < _components.size(); i++)
 	{
-		if (_components[i]->GetType() == message.ComponentRecipient)
-		{
-			// Cast component to IMessageableComponent
-			IMessageableComponent * messageableComponent = dynamic_cast<IMessageableComponent *> (_components[i]);
+		// Cast component to IMessageableComponent
+		IMessageableComponent * messageableComponent = dynamic_cast<IMessageableComponent *> (_components[i]);
 
-			if (messageableComponent != nullptr)
-			{
-				// Is messageable
-				messageableComponent->RecieveMessage(message);
-			}
+		if (messageableComponent != nullptr)
+		{
+			// Is messageable
+			messageableComponent->RecieveMessage(message);
 		}
 	}
 }
@@ -63,15 +60,19 @@ void GameObject::SetParent(shared_ptr<GameObject> parent)
 	}
 
 	_parent = parent; // Set the new parent for THIS GAMEOBJECT
-
+		
 	// Set the parent transform in THIS GAMEOBJECT'S transform
 	// TODO: Remove this. This is bad. GameObject should not know about TransformComponent
 	TransformComponent * transformComponent = GetComponent<TransformComponent>();
-	transformComponent->SetParent(_parent->GetComponent<TransformComponent>());
-
+	
 	if (_parent != nullptr)
 	{
+		transformComponent->SetParent(_parent->GetComponent<TransformComponent>());
 		_parent->AddChild(GetSmartPointer()); // Set THIS GAMEOBJECT as a child for the new parent
+	}
+	else
+	{
+		transformComponent->SetParent(nullptr);
 	}
 }
 

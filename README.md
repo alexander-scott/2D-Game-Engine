@@ -15,9 +15,34 @@ Ideally run the solution in Visual Studio 2017. Make sure the build configuratio
 and the platform is any CPU or x64. If you want to run tests make sure the test processor architecture is
 set to x64.
 
-## Architecture Overview ##
-There are two main parts to the engine: Systems and Messaging; Scenes and GameObjects. 
-I will briefly go over each.
+### Scenes and GameObjects ###
+At any one time there is a single active scene, managed by the SceneManager system and built by the 
+SceneBuilder system. Scenes must inherit from IScene and are esentially used to store all GameObjects 
+and update/draw them. In the future multiple scene types will be added but for now there's no implementation
+of it. GameObjects stored in scenes are used to hold components. 
+
+Components are classes with custom functionality that is applied to the GameObject. Components must inherit 
+from IComponent and can optionally inherit IDrawableComponent, IUpdateableComponent, IMessageableComponent
+and IEditable. These additional interfaces are called at certain times and require the component to do certain things. 
+For example, IDrawableComponent components are required to send drawing information to the Graphics system. 
+IUpdateableComponent components have an Update function  that is called every frame. 
+IMessageableComponent components can recieve messages from other GameObjects/components. IEditableComponent
+components are fetched by the external editor and allow component values to be edited by it.
+
+When creating a component there are a few steps you must do. Firstly, create the class and
+include IComponent.h and inherit from it and in the constructor call IComponent's constructor
+and specify the name of the new component. This will allow this new class to be added to GameObjects.
+Secondly a few functions need to be implemented so that the component follows various design
+patterns exhibited in the engine. In the ComponentFactory namespace your new class must be included
+and a function that returns an instance of your class must be added. 
+
+In the ComponentSaver.cpp define an inline function and then map that function to your components
+name in the ComponentSaver constructor. In the actual function dynamically cast _component to your
+component and then allocate all variables you want to persist to the _componentNode.
+In the ComponentBuilder.cpp file you must define an inline function that returns an IComponent* which will point to an instance
+of your class. Then in the ComponentBuilder constructor map your components name to the inline function.
+And then in the function itself read the xml_node attributes and parse them into variables. Then,
+using the ComponentFactory, build an instance of your component and return it.
 
 ### Systems and Messaging ###
 Every significant part of the engine is classed as a system, and must inherit from ISystem. 
@@ -32,23 +57,6 @@ This is done by calling SubscribeToMessageType() in the overriden InitaliseListe
 Once doing this the SystemMessageDispatcher will deliver the messages to the system by calling the RecieveMessage() 
 method in ISystem (which needs to be overriden). From here, the recieved message can be statically cast 
 to any other message type and data can be extracted from it.
-
-### Scenes and GameObjects ###
-At any one time there is a single active scene, managed by the SceneManager system and built by the 
-SceneBuilder system. Scenes must inherit from IScene and are esentially used to store all GameObjects 
-and update/draw them. In the future multiple scene types will be added but for now there's no implementation
-of it. GameObjects stored in scenes are used to hold components. 
-
-Components are classes with custom functionality that is applied to the GameObject. Components must inherit 
-from IComponent and can optionally inherit IDrawableComponent, IUpdateableComponent and IMessageableComponent. 
-These additional interfaces are called at certain times and require the component to do certain things. 
-For example, IDrawableComponent components are required to send drawing information to the Graphics system. 
-IUpdateableComponent components have an Update function  that is called every frame. 
-IMessageableComponent components can recieve messages from other GameObjects/components. 
-
-Currently only one component has been implemented: TransformComponent. This is a special component as 
-every GameObject needs a transform. Component files should also contain a function in the 
-ComponentFactory namespace that builds and returns an instance of the component.
 
 ## Code Flow ##
 The application is initalised in Main.cpp. Here an instance of SystemManager is created. The purpose

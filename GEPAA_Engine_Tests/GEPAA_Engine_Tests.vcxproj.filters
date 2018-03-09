@@ -24,9 +24,6 @@
     <ClCompile Include="..\Engine\DXErr.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\Engine.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Engine\FrameTimer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -66,8 +63,25 @@
     <ClCompile Include="..\Engine\TestCommand.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\SceneManager.cpp" />
     <ClCompile Include="..\Engine\Scene.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Editor.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\SceneManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Engine.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\SceneSaver.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\ComponentSaver.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\ComponentFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -94,9 +108,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\DXErr.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Engine\Engine.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\FrameTimer.h">
@@ -201,8 +212,22 @@
     <ClInclude Include="..\Engine\TestCommand.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h" />
     <ClInclude Include="..\Engine\Scene.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Editor.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Engine.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\SceneSaver.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\ComponentSaver.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

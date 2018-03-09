@@ -267,17 +267,23 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ComponentBuilder.h" />
     <ClInclude Include="ComponentFactory.h" />
+    <ClInclude Include="ComponentSaver.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="CustomException.h" />
     <ClInclude Include="DrawSceneMessage.h" />
     <ClInclude Include="DxGraphics.h" />
     <ClInclude Include="DXErr.h" />
+    <ClInclude Include="Editor.h" />
+    <ClInclude Include="EditorEngineInterface.h" />
+    <ClInclude Include="EditorInputInterface.h" />
+    <ClInclude Include="EditorSceneInterface.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentMessage.h" />
     <ClInclude Include="IDrawableComponent.h" />
+    <ClInclude Include="IEditableComponent.h" />
     <ClInclude Include="IGraphics.h" />
     <ClInclude Include="IListener.h" />
     <ClInclude Include="IMessage.h" />
@@ -295,7 +301,10 @@
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="RequestBuildSceneMessage.h" />
+    <ClInclude Include="RequestSaveSceneMessage.h" />
+    <ClInclude Include="SaveSceneMessage.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneSaver.h" />
     <ClInclude Include="SetParentTransformMessage.h" />
     <ClInclude Include="SpriteRendererComponent.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />
@@ -314,8 +323,14 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ComponentBuilder.cpp" />
+    <ClCompile Include="ComponentFactory.cpp" />
+    <ClCompile Include="ComponentSaver.cpp" />
     <ClCompile Include="DxGraphics.cpp" />
     <ClCompile Include="DXErr.cpp" />
+    <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="EditorEngineInterface.cpp" />
+    <ClCompile Include="EditorInputInterface.cpp" />
+    <ClCompile Include="EditorSceneInterface.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -323,6 +338,7 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneSaver.cpp" />
     <ClCompile Include="SpriteRendererComponent.cpp" />
     <ClCompile Include="SystemMessageDispatcher.cpp" />
     <ClCompile Include="SceneBuilder.cpp" />

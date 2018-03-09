@@ -203,8 +203,6 @@ void DxGraphics::Initalise(HWNDKey& key)
 
 	std::string fontFile = "..\\Resources\\fonts\\italic.spritefont";
 	std::wstring widestr = std::wstring(fontFile.begin(), fontFile.end());	
-	const wchar_t* szFile = widestr.c_str();
-	_fonts.reset(new SpriteFont(_device.Get(), szFile));
 
 	_sprites.reset(new SpriteBatch(_immediateContext.Get()));
 	_primitiveBatch = std::make_unique<PrimitiveBatch<VertexPositionColor>>(_immediateContext.Get());
@@ -280,6 +278,10 @@ void DxGraphics::BeginFrame()
 	DrawSprite("test", Vec2(10.0f, 10.0f), rect, 0.0f, 1.0f, Vec2(0.0f, 0.0f));
 	*/
 	}
+
+void DxGraphics::RecieveMessage(ISystemMessage & message)
+{
+}
 
 void DxGraphics::EndFrame()
 {

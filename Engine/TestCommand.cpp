@@ -1,17 +1,27 @@
 #include "TestCommand.h"
 
-void MoveUpCommand::Execute()
+ISystemToGameObjectMessage MoveUpCommand::Execute()
 {
+	//there must be a more elegant way to do this
+	IComponentMessage * testComponent = new IComponentMessage(eSetParentTransformMessage);
+	ISystemToGameObjectMessage  * test = new ISystemToGameObjectMessage(*testComponent);
+	return *test;
 }
 
-void MoveLeftCommand::Execute()
+ISystemToGameObjectMessage MoveLeftCommand::Execute()
 {
+	//To set properly
+	return (ISystemToGameObjectMessage(IComponentMessage(eSetParentTransformMessage)));
 }
 
-void MoveRightCommand::Execute()
+ISystemToGameObjectMessage MoveRightCommand::Execute()
 {
+	//To set properly
+	return (ISystemToGameObjectMessage(IComponentMessage(eSetParentTransformMessage)));
 }
 
-void MoveDownCommand::Execute()
+ISystemToGameObjectMessage MoveDownCommand::Execute()
 {
+	//To set properly
+	return (ISystemToGameObjectMessage(IComponentMessage(eSetParentTransformMessage)));
 }

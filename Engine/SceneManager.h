@@ -17,7 +17,10 @@ public:
 
 	//TODO ?: Add method Draw that populates the DrawSceneMessage sent to the Graphics
 
+	shared_ptr<Scene> GetScene() { return _currentScene; }
+
 private:
 	shared_ptr<Scene>		_currentScene;
 	FrameTimer				_frameTimer;
+	bool					_isPlaying;
 };

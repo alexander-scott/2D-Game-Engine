@@ -220,6 +220,15 @@
     <ClInclude Include="TextRendererComponent.h">
       <Filter>Engine\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="ComponentSaver.h" />
+    <ClInclude Include="SaveSceneMessage.h" />
+    <ClInclude Include="RequestSaveSceneMessage.h" />
+    <ClInclude Include="SceneSaver.h" />
+    <ClInclude Include="IEditableComponent.h" />
+    <ClInclude Include="Editor.h" />
+    <ClInclude Include="EditorEngineInterface.h" />
+    <ClInclude Include="EditorInputInterface.h" />
+    <ClInclude Include="EditorSceneInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -276,6 +285,13 @@
     <ClCompile Include="TextRendererComponent.cpp">
       <Filter>Engine\GameObject\Components</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentFactory.cpp" />
+    <ClCompile Include="ComponentSaver.cpp" />
+    <ClCompile Include="SceneSaver.cpp" />
+    <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="EditorEngineInterface.cpp" />
+    <ClCompile Include="EditorInputInterface.cpp" />
+    <ClCompile Include="EditorSceneInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">

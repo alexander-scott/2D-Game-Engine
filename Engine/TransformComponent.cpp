@@ -1,7 +1,7 @@
 #include "TransformComponent.h"
 
 TransformComponent::TransformComponent(Vec2 localPosition, float localRotation, float localScale)
-	: IComponent(ComponentType::eTransformComponent)
+	: IComponent("TransformComponent")
 {
 	_hasChanged = false;
 
@@ -125,9 +125,65 @@ Vec2 TransformComponent::GetWorldPosition() const
 		return _localPosition;
 }
 
-TransformComponent * ComponentFactory::MakeTransformComponent(Vec2 position, float rotation, float scale)
+int TransformComponent::GetEditorFieldCount()
 {
-	TransformComponent * transform = new TransformComponent(position, rotation, scale);
+	return 4;
+}
 
-	return transform;
+InspectorField* TransformComponent::GetEditorFields()
+{
+	auto inspectorFields = new InspectorField[GetEditorFieldCount()];
+
+	inspectorFields[0].FieldName = "XPos";
+	inspectorFields[0].FieldType = (int)EditorFieldTypes::eFloat;
+	char* xPosValue = new char[to_string(GetLocalPosition().x).length() + 1];
+	strcpy_s(xPosValue, to_string(GetLocalPosition().x).length() + 1, to_string(GetLocalPosition().x).c_str());
+	inspectorFields[0].FieldValue = xPosValue;
+
+	inspectorFields[1].FieldName = "YPos";
+	inspectorFields[1].FieldType = (int)EditorFieldTypes::eFloat;
+	char* yPosValue = new char[to_string(GetLocalPosition().y).length() + 1];
+	strcpy_s(yPosValue, to_string(GetLocalPosition().y).length() + 1, to_string(GetLocalPosition().y).c_str());
+	inspectorFields[1].FieldValue = yPosValue;
+
+	inspectorFields[2].FieldName = "Rotation";
+	inspectorFields[2].FieldType = (int)EditorFieldTypes::eFloat;
+	char* rotationValue = new char[to_string(GetLocalRotation()).length() + 1];
+	strcpy_s(rotationValue, to_string(GetLocalRotation()).length() + 1, to_string(GetLocalRotation()).c_str());
+	inspectorFields[2].FieldValue = rotationValue;
+
+	inspectorFields[3].FieldName = "Scale";
+	inspectorFields[3].FieldType = (int)EditorFieldTypes::eFloat;
+	char* scaleValue = new char[to_string(GetLocalScale()).length() + 1];
+	strcpy_s(scaleValue, to_string(GetLocalScale()).length() + 1, to_string(GetLocalScale()).c_str());
+	inspectorFields[3].FieldValue = scaleValue;
+
+	return inspectorFields;
+}
+
+void TransformComponent::SetEditorFieldValue(int fieldIndex, const char* value)
+{
+	switch (fieldIndex)
+	{
+		case 0:
+		{
+			SetLocalPosition(Vec2((float)atof(value), GetLocalPosition().y));
+			break;
+		}
+		case 1:
+		{
+			SetLocalPosition(Vec2(GetLocalPosition().x, (float)atof(value)));
+			break;
+		}
+		case 2:
+		{
+			SetLocalRotation((float)atof(value));
+			break;
+		}
+		case 3:
+		{
+			SetLocalScale((float)atof(value));
+			break;
+		}
+	}
 }

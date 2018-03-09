@@ -4,7 +4,6 @@
 
 #include "ComponentFactory.h"
 
-#include <unordered_map>
 #include <typeindex>
 
 using namespace rapidxml;
