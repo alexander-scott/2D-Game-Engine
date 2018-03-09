@@ -364,10 +364,6 @@
   <ItemGroup>
     <Xml Include="..\Resources\Scenes\Scene1.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="FramebufferPS.shh" />
-    <None Include="FramebufferVS.shh" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

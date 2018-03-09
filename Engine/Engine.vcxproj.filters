@@ -74,8 +74,17 @@
     <Filter Include="Engine\Systems\Logging">
       <UniqueIdentifier>{8179bf38-109e-44b5-b23f-4f515c928087}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Systems\Graphics\Shaders">
-      <UniqueIdentifier>{6b9e01f6-0d15-4025-b02c-c60c84630a3f}</UniqueIdentifier>
+    <Filter Include="Engine\EditorInterface">
+      <UniqueIdentifier>{79a17cc0-d40b-4f62-baa1-4952dddb647c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Editor">
+      <UniqueIdentifier>{7aa82932-b61f-4bce-8d03-2b8ec4c9a855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\SceneSaving">
+      <UniqueIdentifier>{2eccfda8-6f7a-4ab5-b524-83434fe0e948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Components\Graphics">
+      <UniqueIdentifier>{558c11be-4d1a-4052-a0b5-7638fc498c9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -202,8 +211,35 @@
     <ClInclude Include="ISystemToGameObjectMessage.h">
       <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>Engine\Systems\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorInputInterface.h">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorEngineInterface.h">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorSceneInterface.h">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>Engine\Systems</Filter>
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneSaver.h">
+      <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveSceneMessage.h">
+      <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="RequestSaveSceneMessage.h">
+      <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="IEditableComponent.h">
+      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentSaver.h">
+      <Filter>Engine\Systems\SceneSaving</Filter>
     </ClInclude>
     <ClInclude Include="DxGraphics.h">
       <Filter>Engine\Systems\Graphics\APIs</Filter>
@@ -212,23 +248,14 @@
       <Filter>Engine\Systems\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRendererComponent.h">
-      <Filter>Engine\GameObject\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="IRenderableComponent.h">
-      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
+      <Filter>Engine\GameObject\Components\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="TextRendererComponent.h">
-      <Filter>Engine\GameObject\Components</Filter>
+      <Filter>Engine\GameObject\Components\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentSaver.h" />
-    <ClInclude Include="SaveSceneMessage.h" />
-    <ClInclude Include="RequestSaveSceneMessage.h" />
-    <ClInclude Include="SceneSaver.h" />
-    <ClInclude Include="IEditableComponent.h" />
-    <ClInclude Include="Editor.h" />
-    <ClInclude Include="EditorEngineInterface.h" />
-    <ClInclude Include="EditorInputInterface.h" />
-    <ClInclude Include="EditorSceneInterface.h" />
+    <ClInclude Include="IRenderableComponent.h">
+      <Filter>Engine\GameObject\Components\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -270,8 +297,29 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Engine\Systems\SceneManagement</Filter>
     </ClCompile>
+    <ClCompile Include="Editor.cpp">
+      <Filter>Engine\Systems\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorInputInterface.cpp">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorEngineInterface.cpp">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSceneInterface.cpp">
+      <Filter>Engine\EditorInterface</Filter>
+    </ClCompile>
     <ClCompile Include="Engine.cpp">
-      <Filter>Engine\Systems</Filter>
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneSaver.cpp">
+      <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentSaver.cpp">
+      <Filter>Engine\Systems\SceneSaving</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentFactory.cpp">
+      <Filter>Engine\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="DxGraphics.cpp">
       <Filter>Engine\Systems\Graphics\APIs</Filter>
@@ -280,18 +328,11 @@
       <Filter>Engine\Systems\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRendererComponent.cpp">
-      <Filter>Engine\GameObject\Components</Filter>
+      <Filter>Engine\GameObject\Components\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="TextRendererComponent.cpp">
-      <Filter>Engine\GameObject\Components</Filter>
+      <Filter>Engine\GameObject\Components\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="ComponentFactory.cpp" />
-    <ClCompile Include="ComponentSaver.cpp" />
-    <ClCompile Include="SceneSaver.cpp" />
-    <ClCompile Include="Editor.cpp" />
-    <ClCompile Include="EditorEngineInterface.cpp" />
-    <ClCompile Include="EditorInputInterface.cpp" />
-    <ClCompile Include="EditorSceneInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -307,13 +348,5 @@
     <Xml Include="..\Resources\Scenes\Scene1.xml">
       <Filter>Resource Files\Scenes</Filter>
     </Xml>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="FramebufferPS.shh">
-      <Filter>Engine\Systems\Graphics\Shaders</Filter>
-    </None>
-    <None Include="FramebufferVS.shh">
-      <Filter>Engine\Systems\Graphics\Shaders</Filter>
-    </None>
   </ItemGroup>
 </Project>
