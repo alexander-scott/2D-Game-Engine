@@ -5,6 +5,7 @@
 
 #include "RequestSaveSceneMessage.h"
 #include "SaveSceneMessage.h"
+#include "SceneSelectedToPlayMessage.h"
 
 #include "ISystemToGameObjectMessage.h"
 
@@ -71,6 +72,9 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 		case SystemMessageType::ePlayStarted:
 		{
 			_isPlaying = true;
+
+			SceneSelectedToPlayMessage msg(_currentScene);
+			SendMessageToDispatcher(msg);
 			break;
 		}
 

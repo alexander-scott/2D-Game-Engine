@@ -307,6 +307,7 @@
     <ClInclude Include="SaveSceneMessage.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneSaver.h" />
+    <ClInclude Include="SceneSelectedToPlayMessage.h" />
     <ClInclude Include="SetParentTransformMessage.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />
     <ClInclude Include="SystemMessageListener.h" />

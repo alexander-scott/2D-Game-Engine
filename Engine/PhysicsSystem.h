@@ -10,5 +10,6 @@ public:
 
 	void InitaliseListeners() override;
 	void RecieveMessage(ISystemMessage& message) override;
-};
 
+
+};

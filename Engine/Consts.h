@@ -43,15 +43,16 @@ enum SystemType
 enum SystemMessageType
 {
 	// Scene messages
-	eDrawScene,
-	eUpdateScene,
-	eSendMessageToGameObjects,
+	eDrawScene, // SENT BY: Engine - RECIEVED BY: SceneManager - WHEN: Central Update Loop
+	eUpdateScene, // SENT BY: Engine - RECIEVED BY: SceneManager - WHEN: Central Update Loop
+	eSceneSelectedToPlay, // SENT BY: SceneManager - RECIEVED BY: Physics - WHEN: Immediately when scene is selected to play. Used to cache relevant components.
+	eSendMessageToGameObjects, // SENT BY: ######### - RECIEVED BY: SceneManager - WHEN: When a system wants to message GameObjects in a scene
 
 	// Scene build/save messages
-	eRequestBuildSceneMessage,
-	eRequestSaveSceneMessage,
-	eBuildSceneMessage,
-	eSaveSceneMessage,
+	eRequestBuildSceneMessage, // SENT BY: Engine/Editor - RECIEVED BY: SceneBuilder - WHEN: When a scene is selected to be built
+	eRequestSaveSceneMessage, // SENT BY: Editor - RECIEVED BY: SceneManager - WHEN: When the editor requests the scene be saved
+	eBuildSceneMessage, // SENT BY: SceneBuilder - RECIEVED BY: SceneManager - WHEN: When scene has finished being built
+	eSaveSceneMessage, // SENT BY: SceneManager - RECIEVED BY: SceneSaver - WHEN: When scene is about to be saved to a specific filepath
 
 	// Graphics messages
 	eGraphicsInitalise,
@@ -71,11 +72,11 @@ enum SystemMessageType
 	eWindowLostFocus,
 
 	// Editor messages
-	ePlayStarted,
-	ePlayStopped,
+	ePlayStarted, // SENT BY: Engine/Editor - RECIEVED BY: SceneManager - WHEN: When the scene should be played. Tells the scene to start updating
+	ePlayStopped, // SENT BY: Editor - RECIEVED BY: SceneManager/SceneBuilder - WHEN: When the scene should stop playing. Tells the scene to stop updating and for the scene to be rebuilt.
 
 	// Physics messages
-	eUpdatePhysics
+	eUpdatePhysics, // SENT BY: Engine - RECIEVED BY: Physics - WHEN: Central Update Loop
 };
 
 enum ComponentMessageType
