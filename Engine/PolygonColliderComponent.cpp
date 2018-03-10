@@ -2,8 +2,8 @@
 
 
 
-PolygonColliderComponent::PolygonColliderComponent(TransformComponent* trans, RigidBodyComponent* rb)
-	: ColliderComponent("PolygonCollider")
+PolygonColliderComponent::PolygonColliderComponent(TransformComponent* trans, RigidBodyComponent* rb, string componentType)
+	: ColliderComponent(componentType)
 {
 	_transformComponent = trans;
 	_rigidyBodyComponent = rb;

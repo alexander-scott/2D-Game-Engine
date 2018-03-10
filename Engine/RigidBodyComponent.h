@@ -6,7 +6,7 @@
 class RigidBodyComponent : public IComponent, public IMessageableComponent
 {
 public:
-	RigidBodyComponent(float staticF, float dynamicF, float rest);
+	RigidBodyComponent(float staticF, float dynamicF, float rest, float density);
 	~RigidBodyComponent();
 
 	virtual void RecieveMessage(IComponentMessage& message) override;
@@ -55,7 +55,10 @@ public:
 	float GetRestitution() { return _restitution; }
 	void SetRestitution(float rest) { _restitution = rest; }
 
+	float GetDensity() { return _density; }
+
 	bool RotationLocked() {	return _rotationLocked;	}
+	bool IsStatic() { return _isStatic; }
 
 #pragma endregion
 
@@ -77,7 +80,9 @@ private:
 	float				_staticFriction;
 	float				_dynamicFriction;
 	float				_restitution;
+	float				_density;
 
 	bool				_rotationLocked;
+	bool				_isStatic;
 };
 

@@ -1,8 +1,12 @@
 #include "BoxColliderComponent.h"
 
-BoxColliderComponent::BoxColliderComponent(TransformComponent* trans, RigidBodyComponent* rb) 
-	: PolygonColliderComponent(trans, rb)
+BoxColliderComponent::BoxColliderComponent(TransformComponent* trans, RigidBodyComponent* rb, float width, float height)
+	: PolygonColliderComponent(trans, rb, "BoxColliderComponent")
 {
+	_width = width;
+	_height = height;
+
+	SetBox((width / 2) * GetTransformComponent()->GetWorldScale(), (height / 2) * GetTransformComponent()->GetWorldScale());
 }
 
 BoxColliderComponent::~BoxColliderComponent()

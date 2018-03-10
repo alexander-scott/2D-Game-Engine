@@ -1,7 +1,7 @@
 #include "RigidBodyComponent.h"
 
 
-RigidBodyComponent::RigidBodyComponent(float staticF, float dynamicF, float rest)
+RigidBodyComponent::RigidBodyComponent(float staticF, float dynamicF, float rest, float density)
 	: IComponent("RigidbodyComponent")
 {
 	_velocity.Set(0, 0);
@@ -12,6 +12,7 @@ RigidBodyComponent::RigidBodyComponent(float staticF, float dynamicF, float rest
 	_staticFriction = staticF;
 	_dynamicFriction = dynamicF;
 	_restitution = rest;
+	_density = density;
 
 	_rotationLocked = false;
 }
@@ -48,4 +49,6 @@ void RigidBodyComponent::SetStatic()
 	_inverseInertia = 0.0f;
 	_mass = 0.0f;
 	_inverseMass = 0.0f;
+
+	_isStatic = true;
 }
