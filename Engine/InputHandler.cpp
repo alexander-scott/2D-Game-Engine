@@ -32,7 +32,7 @@ void InputHandler::TestKeyboardInitialCommands() //to remove after I have a func
 	_keyboardGameCommandMap['A'] = move_left;
 	_keyboardGameCommandMap['S'] = move_down;
 	_keyboardGameCommandMap['D'] = move_right;
-	_keyboardGameCommandMap[' '] = swap;//shift to swap commands
+	_keyboardGameCommandMap[' '] = swap;//spacebar to swap commands
 
 	_bKeyboardSwapCommands = false;
 }
@@ -52,7 +52,7 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 			InputKeyboardMessage& msg = static_cast<InputKeyboardMessage&>(message);
 			if (_keyboardCurrentCommandMap[msg.Key] != nullptr)
 			{
-				if (_bKeyboardSwapCommands)
+				if (_bKeyboardSwapCommands && msg.MessageType == KeyboardMessageType::eKeyDown)
 				{
 					//get keys to swap.
 					_rebindKeyboardQueue.push_back(msg.Key);
@@ -64,10 +64,13 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 					{
 						SwapCommands(_rebindKeyboardQueue);
 					}
-				}
-				//suppress this when communication with game logic is implement
-				else if (msg.Key == '\x10' && (_debugSwap))
+				}	
+				//suppress this when communication with game logic is implemented
+				else if (msg.Key == ' ' && msg.MessageType == KeyboardMessageType::eKeyDown && (_debugSwap))
+				{
 					_bKeyboardSwapCommands = true;
+					Logger::Instance().LogMessage("Keyboard Swap Commands activated.", LogSeverity::eInfo);
+				}
 				else //execute regular command binded to key
 				{
 					SendMessageToScene(_keyboardCurrentCommandMap[msg.Key]->Execute());
@@ -95,9 +98,15 @@ void InputHandler::SwapCommands(std::vector<unsigned char>& rebindQueue)
 	_keyboardGameCommandMap[rebindQueue[0]] = _keyboardGameCommandMap[rebindQueue[1]];
 	_keyboardGameCommandMap[rebindQueue[1]] = tempCommand;
 
-	rebindQueue.clear();
+	std::string log = "The following buttons have been swapped: ";
+	log += rebindQueue[0];
+	log += " and ";
+	log += rebindQueue[1];
+
 	LoadKeyboardGameMapping();
+	Logger::Instance().LogMessage(log, LogSeverity::eInfo);
 	_bKeyboardSwapCommands = false;
+	rebindQueue.clear();
 }
 
 // ISystemToGameObjectMessage must be initalised with an instance of IComponentMessage.

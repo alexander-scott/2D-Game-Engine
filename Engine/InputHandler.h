@@ -3,6 +3,7 @@
 #include "ISystem.h"
 #include "TestCommand.h"
 #include "DirectXTK\Inc\GamePad.h"
+#include "Logger.h"
 
 class ISystemToGameObjectMessage;
 
