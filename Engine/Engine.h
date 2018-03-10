@@ -28,6 +28,6 @@ private:
 	std::shared_ptr<MainWindow>							_mainWindow;
 	std::map<SystemType,std::shared_ptr<ISystem>>		_systems;
 
-	float												_lag;
+	float												_deltaTime;
 	std::chrono::steady_clock::time_point				_lastTime;
 };

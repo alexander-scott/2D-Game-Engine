@@ -6,6 +6,7 @@
 #include "RequestSaveSceneMessage.h"
 #include "SaveSceneMessage.h"
 #include "SceneSelectedToPlayMessage.h"
+#include "UpdateSystemMessage.h"
 
 #include "ISystemToGameObjectMessage.h"
 
@@ -64,7 +65,8 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 		{
 			if (_currentScene != nullptr && _isPlaying) // Only update scene if were are in play mode
 			{
-				_currentScene->Update(_frameTimer.Mark());
+				UpdateSystemMessage& msg = static_cast<UpdateSystemMessage&>(message);
+				_currentScene->Update(msg.DeltaTime);
 			}
 			break;
 		}

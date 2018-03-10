@@ -142,9 +142,6 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Engine\Systems\SceneManagement</Filter>
     </ClInclude>
-    <ClInclude Include="FrameTimer.h">
-      <Filter>Engine\Systems\SceneManagement</Filter>
-    </ClInclude>
     <ClInclude Include="IComponentMessage.h">
       <Filter>Engine\Messaging\Messages</Filter>
     </ClInclude>
@@ -271,6 +268,9 @@
     <ClInclude Include="SceneSelectedToPlayMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
     </ClInclude>
+    <ClInclude Include="UpdateSystemMessage.h">
+      <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -290,9 +290,6 @@
     </ClCompile>
     <ClCompile Include="SceneBuilder.cpp">
       <Filter>Engine\Systems\SceneBuilding</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameTimer.cpp">
-      <Filter>Engine\Systems\SceneManagement</Filter>
     </ClCompile>
     <ClCompile Include="MainWindow.cpp">
       <Filter>Engine\Systems\MainWindow</Filter>

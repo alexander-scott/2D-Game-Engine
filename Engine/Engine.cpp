@@ -12,6 +12,8 @@
 #include "RequestBuildSceneMessage.h"
 #include "RequestSaveSceneMessage.h"
 
+#include "UpdateSystemMessage.h"
+
 // Called from the editor
 Engine::Engine(HWND hWnd)
 {
@@ -22,7 +24,7 @@ Engine::Engine(HWND hWnd)
 	_systems.insert(std::make_pair(_mainWindow->SysType,_mainWindow));
 
 	_lastTime = std::chrono::steady_clock::now();
-	_lag = 0;
+	_deltaTime = 0;
 
 	InitaliseSystems();
 
@@ -44,7 +46,7 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 	_systems.insert(std::make_pair(_mainWindow->SysType, _mainWindow));
 
 	_lastTime = std::chrono::steady_clock::now();
-	_lag = 0;
+	_deltaTime = 0;
 
 	InitaliseSystems();
 	InitaliseListeners();
@@ -78,20 +80,21 @@ void Engine::StartUpdateLoop()
 		auto currentTime = std::chrono::steady_clock::now();
 		const std::chrono::duration<float> elapsedTime = currentTime - _lastTime;
 		_lastTime = currentTime;
-		_lag += elapsedTime.count();
+		_deltaTime += elapsedTime.count();
 
 		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eInputUpdateGamePad));
 
 		// This while loop processes scene updates and physics at a fixed rate.
 		// Whilst allowing graphics to render as fast as possible.
-		while (_lag >= MS_PER_UPDATE)
+		while (_deltaTime >= MS_PER_UPDATE)
 		{
 			// ProcessPhysics()
+			_messageDispatcher->SendMessageToListeners(UpdateSystemMessage(SystemMessageType::eUpdatePhysics, _deltaTime));
 
 			// Update the current scene in the SceneManager system
-			_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
+			_messageDispatcher->SendMessageToListeners(UpdateSystemMessage(SystemMessageType::eUpdateScene, _deltaTime));
 
-			_lag -= MS_PER_UPDATE;
+			_deltaTime -= MS_PER_UPDATE;
 		}
 
 		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame)); // Tell the Graphics system to begin the frame

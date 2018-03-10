@@ -276,7 +276,6 @@
     <ClInclude Include="EditorInputInterface.h" />
     <ClInclude Include="EditorEngineInterface.h" />
     <ClInclude Include="EditorSceneInterface.h" />
-    <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="IComponent.h" />
@@ -318,6 +317,7 @@
     <ClInclude Include="TestCommand.h" />
     <ClInclude Include="TestGraphics.h" />
     <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="UpdateSystemMessage.h" />
     <ClInclude Include="WinDefines.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Resource.h" />
@@ -334,7 +334,6 @@
     <ClCompile Include="EditorEngineInterface.cpp" />
     <ClCompile Include="EditorSceneInterface.cpp" />
     <ClCompile Include="DXErr.cpp" />
-    <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Main.cpp" />
