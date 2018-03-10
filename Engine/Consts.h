@@ -80,7 +80,8 @@ enum SystemMessageType
 enum ComponentMessageType
 {
 	eSetParentTransformMessage,
-	eAddForce
+	eAddForce,
+	eActivateRebindingKeyboardCommands
 };
 
 enum DrawableComponentType
