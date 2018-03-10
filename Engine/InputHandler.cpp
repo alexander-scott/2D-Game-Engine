@@ -26,17 +26,22 @@ void InputHandler::TestKeyboardInitialCommands() //to remove after I have a func
 	MoveLeftCommand* move_left = new MoveLeftCommand();
 	MoveRightCommand* move_right = new MoveRightCommand();
 	MoveDownCommand* move_down = new MoveDownCommand();
+	RebindSwapCommand* swap = new RebindSwapCommand();
 
 	_keyboardGameCommandMap['W'] = move_up;
 	_keyboardGameCommandMap['A'] = move_left;
 	_keyboardGameCommandMap['S'] = move_down;
 	_keyboardGameCommandMap['D'] = move_right;
+	_keyboardGameCommandMap[' '] = swap;//spacebar to swap commands
+
+	_bKeyboardSwapCommands = false;
 }
 
 void InputHandler::LoadKeyboardGameMapping()
 {
 	_keyboardCurrentCommandMap = _keyboardGameCommandMap;
 }
+
 void InputHandler::RecieveMessage(ISystemMessage & message)
 {
 	switch (message.Type)
@@ -47,7 +52,29 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 			InputKeyboardMessage& msg = static_cast<InputKeyboardMessage&>(message);
 			if (_keyboardCurrentCommandMap[msg.Key] != nullptr)
 			{
-				SendMessageToScene(_keyboardCurrentCommandMap[msg.Key]->Execute());
+				if (_bKeyboardSwapCommands && msg.MessageType == KeyboardMessageType::eKeyDown)
+				{
+					//get keys to swap.
+					_rebindKeyboardQueue.push_back(msg.Key);
+					if (_rebindKeyboardQueue.size() == 1)
+					{
+						//send a message on screen to tell the user to press the second key
+					}
+					if (_rebindKeyboardQueue.size() == 2)
+					{
+						SwapCommands(_rebindKeyboardQueue);
+					}
+				}	
+				//suppress this when communication with game logic is implemented
+				else if (msg.Key == ' ' && msg.MessageType == KeyboardMessageType::eKeyDown && (_debugSwap))
+				{
+					_bKeyboardSwapCommands = true;
+					Logger::Instance().LogMessage("Keyboard Swap Commands activated.", LogSeverity::eInfo);
+				}
+				else //execute regular command binded to key
+				{
+					SendMessageToScene(_keyboardCurrentCommandMap[msg.Key]->Execute());
+				}
 			}
 			break;
 		}
@@ -55,12 +82,31 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 		{
 			//TODO Input: Write code to handle mouse messages
 			InputMouseMessage& msg = static_cast<InputMouseMessage&>(message);
+			break;
 		}
 		case SystemMessageType::eInputUpdateGamePad:
 		{
 			_stateGamePadP1 = _gamePadP1->GetState(0);
+			break;
 		}
 	}
+}
+
+void InputHandler::SwapCommands(std::vector<unsigned char>& rebindQueue)
+{
+	ICommand * tempCommand = _keyboardGameCommandMap[rebindQueue[0]];
+	_keyboardGameCommandMap[rebindQueue[0]] = _keyboardGameCommandMap[rebindQueue[1]];
+	_keyboardGameCommandMap[rebindQueue[1]] = tempCommand;
+
+	std::string log = "The following buttons have been swapped: ";
+	log += rebindQueue[0];
+	log += " and ";
+	log += rebindQueue[1];
+
+	LoadKeyboardGameMapping();
+	Logger::Instance().LogMessage(log, LogSeverity::eInfo);
+	_bKeyboardSwapCommands = false;
+	rebindQueue.clear();
 }
 
 // ISystemToGameObjectMessage must be initalised with an instance of IComponentMessage.

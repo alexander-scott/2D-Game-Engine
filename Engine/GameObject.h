@@ -7,8 +7,6 @@
 #include "IDrawableComponent.h"
 #include "IMessageableComponent.h"
 
-#include "DrawSceneMessage.h"
-
 #include <objbase.h>
 
 using namespace std;

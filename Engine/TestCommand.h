@@ -26,3 +26,8 @@ public:
 	ISystemToGameObjectMessage Execute();
 };
 
+class RebindSwapCommand: public ICommand
+{
+	ISystemToGameObjectMessage Execute();
+};
+

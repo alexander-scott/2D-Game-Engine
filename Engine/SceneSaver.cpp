@@ -48,6 +48,12 @@ void SceneSaver::SaveScene(shared_ptr<Scene> scene, string filePath)
 		gameObject->append_attribute(doc.allocate_attribute("tag", doc.allocate_string(scene->GetGameObject(i)->GetTag().c_str())));
 		gameObject->append_attribute(doc.allocate_attribute("guid", doc.allocate_string(GUIDToString(&scene->GetGameObject(i)->GetID()).c_str())));
 
+		auto parentGO = scene->GetGameObject(i)->GetParent();
+		if (parentGO != nullptr)
+		{
+			gameObject->append_attribute(doc.allocate_attribute("parent", doc.allocate_string(GUIDToString(&parentGO->GetID()).c_str())));
+		}
+
 		// For every component the gameobject has
 		auto components = scene->GetGameObject(i)->GetAllComponents();
 		for (int j = 0; j < components.size(); j++)

@@ -11,6 +11,8 @@ using namespace rapidxml;
 // every function pointer will be stored as this type
 typedef void(*voidFunctionType)(void);
 
+class Scene;
+
 class ComponentBuilder
 {
 public:
@@ -42,10 +44,10 @@ public:
 		}
 	};
 
-	ComponentBuilder();
+	ComponentBuilder(shared_ptr<Scene> scene);
 
 	IComponent * BuildComponent(xml_node<>* node);
 
 private:
-	FunctionMapper functionMapper;
+	FunctionMapper _functionMapper;
 };

@@ -100,6 +100,12 @@ perform logic based on what it recieves. The MainWindow system can also be impro
 more message types and then also send those to the SystemMessageDispatcher instance, such as Xbox conntroller 
 inputs or distinction between input methods (to allow for multiplayer).
 
+Currently, the InputHandler class can recieve the raw inputs from a keyboard, a mouse or Xbox controller. It also holds the commands map. 
+Each command needs to inherit from the ICommand class, and needs to return an ISystemToGameObjectsMessage inside the Execute function, so
+that it can properly communicate with the game objects.
+Commands can be swaped by pressing spacebar and by pressing two binded keys successively. This feature needs to be activated with the debugSwap
+variable inside InputHandler.h, as it is a WIP and unrelieable feature for the moment.
+
 ### Graphics ###
 The Graphics system can be extended to implement different graphics APIs such as DirectX or OpenGL. These new
 APIs would need to inherit from IGraphics and implement all the required virtual functions. And in SystemsManager

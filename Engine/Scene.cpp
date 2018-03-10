@@ -26,8 +26,6 @@ void Scene::SendMessageToGameObjects(IComponentMessage & message)
 	}
 }
 
-// In this function you can dissassemble GameObjects and add them to various structures.
-// Only called at scene initalisation so doesn't have to be performant
 void Scene::AddGameObject(shared_ptr<GameObject> gameObject)
 {
 	_gameObjects.push_back(gameObject);

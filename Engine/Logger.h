@@ -19,7 +19,7 @@ public:
 
 	Logger()
 	{
-		_logger = spdlog::basic_logger_mt("GEPAA", filePath);
+		_logger = spdlog::basic_logger_mt("GEPAA", filePath, true);
 	}
 
 	void LogMessage(std::string msg, LogSeverity logSeverity)

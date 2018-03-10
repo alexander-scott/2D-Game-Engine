@@ -1,10 +1,11 @@
 #include "SceneManager.h"
 
 #include "BuildSceneMessage.h"
-#include "DrawSceneMessage.h"
 
 #include "RequestSaveSceneMessage.h"
 #include "SaveSceneMessage.h"
+#include "SceneMessage.h"
+#include "UpdateSystemMessage.h"
 
 #include "ISystemToGameObjectMessage.h"
 
@@ -53,8 +54,8 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 			if (_currentScene != nullptr)
 			{
 				// Pass a pointer to the current scene to the Graphics system to be drawn
-				DrawSceneMessage message(_currentScene);
-				SendMessageToDispatcher(message);
+				SceneMessage msg(SystemMessageType::eGraphicsDrawScene, _currentScene);
+				SendMessageToDispatcher(msg);
 			}		
 			break;
 		}
@@ -63,7 +64,8 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 		{
 			if (_currentScene != nullptr && _isPlaying) // Only update scene if were are in play mode
 			{
-				_currentScene->Update(_frameTimer.Mark());
+				UpdateSystemMessage& msg = static_cast<UpdateSystemMessage&>(message);
+				_currentScene->Update(msg.DeltaTime);
 			}
 			break;
 		}
@@ -71,6 +73,9 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 		case SystemMessageType::ePlayStarted:
 		{
 			_isPlaying = true;
+
+			SceneMessage msg(SystemMessageType::eSceneSelectedToPlay, _currentScene);
+			SendMessageToDispatcher(msg);
 			break;
 		}
 

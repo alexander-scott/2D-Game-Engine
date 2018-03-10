@@ -47,5 +47,5 @@ public:
 	xml_node<>* SaveComponent(IComponent* component);
 
 private:
-	FunctionMapper functionMapper;
+	FunctionMapper _functionMapper;
 };

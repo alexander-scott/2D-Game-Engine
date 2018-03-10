@@ -88,7 +88,6 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 	xml_node<>* root = doc.first_node();
 
 	auto scene = make_shared<Scene>(string(root->first_attribute("name")->value()));
-	ComponentBuilder componentBuilder;
 
 	// Build the gameobjects
 	xml_node<>* gameObjectNode = root->first_node("GameObject");
@@ -97,7 +96,18 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 		string tag = gameObjectNode->first_attribute("tag")->value();
 		GUID guid = StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
 
-		auto gameObject = GameObject::MakeGameObject(tag, guid);
+		scene->AddGameObject(GameObject::MakeGameObject(tag, guid));
+		gameObjectNode = gameObjectNode->next_sibling("GameObject");
+	}
+
+	ComponentBuilder componentBuilder(scene);
+
+	// Add the components to the gameobjects
+	gameObjectNode = root->first_node("GameObject");
+	while (gameObjectNode)
+	{
+		GUID guid = StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
+		auto gameObject = scene->GetGameObject(guid);
 
 		// Create this gameobjects components
 		xml_node<>* component = gameObjectNode->first_node("Component");
@@ -109,7 +119,23 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 			component = component->next_sibling("Component");
 		}
 
-		scene->AddGameObject(gameObject);
+		gameObjectNode = gameObjectNode->next_sibling("GameObject");
+	}
+
+	// Add parents to the gameobjects
+	gameObjectNode = root->first_node("GameObject");
+	while (gameObjectNode)
+	{
+		GUID guid = StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
+		auto gameObject = scene->GetGameObject(guid);
+
+		// Check if the GameObject has a parent
+		if (gameObjectNode->first_attribute("parent"))
+		{
+			GUID parentGuid = StringToGUID(string(gameObjectNode->first_attribute("parent")->value()));
+			auto parentGO = scene->GetGameObject(parentGuid);
+			gameObject->SetParent(parentGO);
+		}
 
 		gameObjectNode = gameObjectNode->next_sibling("GameObject");
 	}

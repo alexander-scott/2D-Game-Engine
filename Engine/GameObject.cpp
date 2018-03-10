@@ -23,6 +23,7 @@ void GameObject::AddComponent(IComponent * component)
 {
 	if (component != nullptr)
 	{
+		component->SetGameObjectID(_ID);
 		_components.push_back(component);
 	}
 }
