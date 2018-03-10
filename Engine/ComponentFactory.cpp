@@ -6,3 +6,13 @@ TransformComponent * ComponentFactory::MakeTransformComponent(Vec2 position, flo
 
 	return transform;
 }
+SpriteRendererComponent * ComponentFactory::MakeSpriteRendererComponent(Vec2 position, float rotation, float scale, RECT* rect, Vec2 offset, string name) {
+	SpriteRendererComponent * sprite = new SpriteRendererComponent(position, rotation, scale, rect, offset, name);
+	return sprite;
+}
+
+TextRendererComponent * ComponentFactory::MakeTextRendererComponent(Vec2 position, float rotation, float scale, RECT * rect, Vec2 offset, std::string text, float * rgb)
+{
+	TextRendererComponent * textComponent = new TextRendererComponent(position, rotation, scale, rect, offset, text, rgb);
+	return textComponent;
+}

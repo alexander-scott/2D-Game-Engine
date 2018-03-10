@@ -1,0 +1,3 @@
+COmponent builder.cpp : faire pareil pour sprite & text (voir example transformcomponent)
+Componentfactory.h
+irenderable component.h

@@ -2,8 +2,17 @@
 
 
 
-TextRendererComponent::TextRendererComponent()
+TextRendererComponent::TextRendererComponent(Vec2 position, float rotation, float scale, RECT *rect, Vec2 offset, std::string text, float* rgb)
 {
+	SetPosition(position);
+	SetRotation(rotation);
+	SetScale(scale);
+	SetRect(rect);
+	SetOffset(offset);
+	_text = text;
+	_rgb = rgb;
+
+
 }
 
 
@@ -29,4 +38,9 @@ void TextRendererComponent::SetRgb(float * rgb)
 float * TextRendererComponent::GetRbg()
 {
 	return _rgb;
+}
+
+void TextRendererComponent::Draw(float deltaTime)
+{
+	//TODO
 }

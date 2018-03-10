@@ -251,7 +251,7 @@ void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, 
 
 void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
 {
-
+		
 }
 
 void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset)
@@ -281,6 +281,9 @@ void DxGraphics::BeginFrame()
 
 void DxGraphics::RecieveMessage(ISystemMessage & message)
 {
+	/*switch (message.Type) {
+		//case System
+	}*/
 }
 
 void DxGraphics::EndFrame()
