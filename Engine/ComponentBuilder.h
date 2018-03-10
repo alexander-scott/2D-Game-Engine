@@ -49,6 +49,5 @@ public:
 	IComponent * BuildComponent(xml_node<>* node);
 
 private:
-	GUID StringToGUID(const std::string& guid);
 	FunctionMapper _functionMapper;
 };

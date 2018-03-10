@@ -47,6 +47,5 @@ public:
 	xml_node<>* SaveComponent(IComponent* component);
 
 private:
-	std::string GUIDToString(GUID *guid);
 	FunctionMapper _functionMapper;
 };

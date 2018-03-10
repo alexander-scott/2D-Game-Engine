@@ -260,19 +260,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="BuildSceneMessage.h" />
+    <ClInclude Include="CircleColliderComponent.h" />
+    <ClInclude Include="ColliderComponent.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="ComponentBuilder.h" />
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="ComponentSaver.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="CustomException.h" />
-    <ClInclude Include="DrawSceneMessage.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorInputInterface.h" />
     <ClInclude Include="EditorEngineInterface.h" />
     <ClInclude Include="EditorSceneInterface.h" />
-    <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="IComponent.h" />
@@ -294,11 +296,16 @@
     <ClInclude Include="IUpdateableComponent.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="ObjectGrid.h" />
+    <ClInclude Include="PhysicsSystem.h" />
+    <ClInclude Include="PolygonColliderComponent.h" />
     <ClInclude Include="RequestBuildSceneMessage.h" />
     <ClInclude Include="RequestSaveSceneMessage.h" />
+    <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="SaveSceneMessage.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneSaver.h" />
+    <ClInclude Include="SceneMessage.h" />
     <ClInclude Include="SetParentTransformMessage.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />
     <ClInclude Include="SystemMessageListener.h" />
@@ -309,11 +316,15 @@
     <ClInclude Include="TestCommand.h" />
     <ClInclude Include="TestGraphics.h" />
     <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="UpdateSystemMessage.h" />
     <ClInclude Include="WinDefines.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoxColliderComponent.cpp" />
+    <ClCompile Include="CircleColliderComponent.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ComponentBuilder.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="ComponentSaver.cpp" />
@@ -322,11 +333,14 @@
     <ClCompile Include="EditorEngineInterface.cpp" />
     <ClCompile Include="EditorSceneInterface.cpp" />
     <ClCompile Include="DXErr.cpp" />
-    <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="ObjectGrid.cpp" />
+    <ClCompile Include="PhysicsSystem.cpp" />
+    <ClCompile Include="PolygonColliderComponent.cpp" />
+    <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneSaver.cpp" />
