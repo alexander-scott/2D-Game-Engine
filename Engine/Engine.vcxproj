@@ -270,7 +270,6 @@
     <ClInclude Include="ComponentSaver.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="CustomException.h" />
-    <ClInclude Include="DrawSceneMessage.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorInputInterface.h" />
@@ -306,7 +305,7 @@
     <ClInclude Include="SaveSceneMessage.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneSaver.h" />
-    <ClInclude Include="SceneSelectedToPlayMessage.h" />
+    <ClInclude Include="SceneMessage.h" />
     <ClInclude Include="SetParentTransformMessage.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />
     <ClInclude Include="SystemMessageListener.h" />

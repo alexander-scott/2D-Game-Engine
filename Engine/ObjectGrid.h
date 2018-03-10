@@ -27,13 +27,13 @@ private:
 	void InsertNode(int& cell, int element); // Inserts a node with the specified element to the specified cell.
 	void EraseNode(int& cell, int element); // Removes the node with the specified element from the specified cell.
 
-	std::vector<int>				mCells;
-	std::vector<GridNode>			mNodes;
+	std::vector<int>				_cells;
+	std::vector<GridNode>			_nodes;
 
-	int								mGridWidth;
-	int								mGridHeight;
-	int								mCellWidth;
-	int								mCellHeight;
+	int								_gridWidth;
+	int								_gridHeight;
+	int								_cellWidth;
+	int								_cellHeight;
 
-	int								mFreeList; // Stores an index to the first free (unused) node.
+	int								_freeList; // Stores an index to the first free (unused) node.
 };

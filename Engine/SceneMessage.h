@@ -4,11 +4,10 @@
 
 class Scene;
 
-class DrawSceneMessage : public ISystemMessage
+class SceneMessage : public ISystemMessage
 {
 public:
-	DrawSceneMessage(std::shared_ptr<Scene> scene) 
-		: ISystemMessage(SystemMessageType::eGraphicsDrawScene) 
+	SceneMessage(SystemMessageType type, std::shared_ptr<Scene> scene) : ISystemMessage(type)
 	{
 		_scene = scene;
 	}

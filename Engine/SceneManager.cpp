@@ -1,11 +1,10 @@
 #include "SceneManager.h"
 
 #include "BuildSceneMessage.h"
-#include "DrawSceneMessage.h"
 
 #include "RequestSaveSceneMessage.h"
 #include "SaveSceneMessage.h"
-#include "SceneSelectedToPlayMessage.h"
+#include "SceneMessage.h"
 #include "UpdateSystemMessage.h"
 
 #include "ISystemToGameObjectMessage.h"
@@ -55,7 +54,7 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 			if (_currentScene != nullptr)
 			{
 				// Pass a pointer to the current scene to the Graphics system to be drawn
-				DrawSceneMessage message(_currentScene);
+				SceneMessage msg(SystemMessageType::eGraphicsDrawScene, _currentScene);
 				SendMessageToDispatcher(message);
 			}		
 			break;
@@ -75,7 +74,7 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 		{
 			_isPlaying = true;
 
-			SceneSelectedToPlayMessage msg(_currentScene);
+			SceneMessage msg(SystemMessageType::eSceneSelectedToPlay, _currentScene);
 			SendMessageToDispatcher(msg);
 			break;
 		}

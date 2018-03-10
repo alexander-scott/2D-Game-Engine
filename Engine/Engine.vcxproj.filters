@@ -190,9 +190,6 @@
     <ClInclude Include="ISystem.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="DrawSceneMessage.h">
-      <Filter>Engine\Messaging\Messages\GraphicsSystemMessages</Filter>
-    </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Engine\Systems\Input</Filter>
     </ClInclude>
@@ -265,10 +262,10 @@
     <ClInclude Include="ObjectGrid.h">
       <Filter>Engine\Systems\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="SceneSelectedToPlayMessage.h">
+    <ClInclude Include="UpdateSystemMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
     </ClInclude>
-    <ClInclude Include="UpdateSystemMessage.h">
+    <ClInclude Include="SceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
     </ClInclude>
   </ItemGroup>

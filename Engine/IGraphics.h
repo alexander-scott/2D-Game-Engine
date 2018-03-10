@@ -6,7 +6,7 @@
 #include "ISystem.h"
 
 #include "InitaliseGraphicsMessage.h"
-#include "DrawSceneMessage.h"
+#include "SceneMessage.h"
 
 #include "Scene.h"
 
@@ -74,7 +74,7 @@ public:
 
 			case SystemMessageType::eGraphicsDrawScene:
 			{
-				DrawSceneMessage & msg = static_cast<DrawSceneMessage&>(message);
+				SceneMessage & msg = static_cast<SceneMessage&>(message);
 				auto gameObjects = msg.GetScene()->GetAllGameObjects();
 
 				// Create render layers
