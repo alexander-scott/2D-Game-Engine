@@ -1,7 +1,7 @@
 #pragma once
 #include "IRenderableComponent.h"
 
-class TextRendererComponent : public IRenderableComponent
+class TextRendererComponent : public IRenderableComponent, public IComponent
 {
 public:
 	TextRendererComponent();

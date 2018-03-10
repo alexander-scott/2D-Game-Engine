@@ -1,7 +1,7 @@
 #pragma once
 #include "IRenderableComponent.h"
 
-class SpriteRendererComponent : public IRenderableComponent
+class SpriteRendererComponent : public IRenderableComponent, public IComponent
 {
 public:
 	SpriteRendererComponent();

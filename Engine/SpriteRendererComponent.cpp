@@ -2,11 +2,11 @@
 
 
 
-SpriteRendererComponent::SpriteRendererComponent()
+SpriteRendererComponent::SpriteRendererComponent() : IComponent("SpriteRendererComponent")
 {
 }
 
-SpriteRendererComponent::SpriteRendererComponent(Vec2 position, float rotation, float scale, RECT *rect, Vec2 offset, string name)
+SpriteRendererComponent::SpriteRendererComponent(Vec2 position, float rotation, float scale, RECT *rect, Vec2 offset, string name) : IComponent("SpriteRendererComponent")
 {
 	SetPosition(position);
 	SetRotation(rotation);

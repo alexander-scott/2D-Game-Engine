@@ -1,3 +1,9 @@
 COmponent builder.cpp : faire pareil pour sprite & text (voir example transformcomponent)
 Componentfactory.h
 irenderable component.h
+
+SCENES Would need to specify the type of the component we want to draw :
+Sprite or text.
+Also : need to know :
+->for text : string text, float* rgb;
+-> for sprite : string name (path)
