@@ -55,7 +55,7 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 			{
 				// Pass a pointer to the current scene to the Graphics system to be drawn
 				SceneMessage msg(SystemMessageType::eGraphicsDrawScene, _currentScene);
-				SendMessageToDispatcher(message);
+				SendMessageToDispatcher(msg);
 			}		
 			break;
 		}

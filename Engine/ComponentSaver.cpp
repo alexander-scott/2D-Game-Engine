@@ -17,6 +17,8 @@ ComponentSaver::ComponentSaver(xml_document<>* doc)
 	// Insert defined functions into the map
 	_functionMapper.Insert("TransformComponent", SaveTransformComponent);
 	_functionMapper.Insert("RigidbodyComponent", SaveRigidbodyComponent);
+	_functionMapper.Insert("CircleColliderComponent", SaveCircleColliderComponent);
+	_functionMapper.Insert("BoxColliderComponent", SaveBoxColliderComponent);
 }
 
 xml_node<>* ComponentSaver::SaveComponent(IComponent * component)
