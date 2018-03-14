@@ -18,45 +18,26 @@ RigidBodyComponent * ComponentFactory::MakeRigidbodyComponent(float staticF, flo
 	return rigidBody;
 }
 
-CircleColliderComponent * ComponentFactory::MakeCircleColliderComponent(float radius, TransformComponent * transform, RigidBodyComponent * rigidbody)
+CircleColliderComponent * ComponentFactory::MakeCircleColliderComponent(float radius)
 {
-	if (transform == nullptr)
-		throw std::exception("This object requires a transform component.");
-	if (rigidbody == nullptr)
-		throw std::exception("This object requires a rigidbody component.");
-
-	CircleColliderComponent * circleCollider = new CircleColliderComponent(transform, rigidbody);
-	circleCollider->SetRadius(radius * transform->GetWorldScale());
-	circleCollider->ComputeMass(rigidbody->GetDensity());
+	CircleColliderComponent * circleCollider = new CircleColliderComponent();
 
 	return circleCollider;
 }
 
-PolygonColliderComponent * ComponentFactory::MakePolygonCollider(Vec2 * verticies, int vertexCount, TransformComponent * transform, RigidBodyComponent * rigidbody)
+PolygonColliderComponent * ComponentFactory::MakePolygonCollider(Vec2 * verticies, int vertexCount)
 {
-	if (transform == nullptr)
-		throw std::exception("This object requires a transform component.");
-	if (rigidbody == nullptr)
-		throw std::exception("This object requires a rigidbody component.");
-
-	PolygonColliderComponent * polygonCollider = new PolygonColliderComponent(transform, rigidbody);
+	PolygonColliderComponent * polygonCollider = new PolygonColliderComponent();
 	polygonCollider->SetVerticies(verticies, vertexCount);
-	polygonCollider->ComputeMass(rigidbody->GetDensity());
 
 	delete verticies; // Clear memory
 
 	return polygonCollider;
 }
 
-BoxColliderComponent * ComponentFactory::MakeBoxCollider(float width, float height, TransformComponent * transform, RigidBodyComponent * rigidBody)
+BoxColliderComponent * ComponentFactory::MakeBoxCollider(float width, float height)
 {
-	if (transform == nullptr)
-		throw std::exception("This object requires a transform component.");
-	if (rigidBody == nullptr)
-		throw std::exception("This object requires a rigidbody component.");
-
-	BoxColliderComponent * boxCollider = new BoxColliderComponent(transform, rigidBody, width, height);
-	boxCollider->ComputeMass(rigidBody->GetDensity());
+	BoxColliderComponent * boxCollider = new BoxColliderComponent(width, height);
 
 	return boxCollider;
 }

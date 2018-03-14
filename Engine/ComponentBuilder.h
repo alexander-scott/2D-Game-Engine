@@ -47,7 +47,9 @@ public:
 	ComponentBuilder(shared_ptr<Scene> scene);
 
 	IComponent * BuildComponent(xml_node<>* node);
+	void BuildComponentDependecies(IComponent* component, map<string, GUID>* dependecies);
 
 private:
-	FunctionMapper _functionMapper;
+	FunctionMapper _buildMapper;
+	FunctionMapper _dependencyBuildMapper;
 };

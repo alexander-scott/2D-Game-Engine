@@ -76,6 +76,8 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 
 			SceneMessage msg(SystemMessageType::eSceneSelectedToPlay, _currentScene);
 			SendMessageToDispatcher(msg);
+
+			_currentScene->Start();
 			break;
 		}
 

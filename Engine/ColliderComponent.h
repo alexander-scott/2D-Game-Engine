@@ -1,15 +1,20 @@
 #pragma once
 
 #include "IComponent.h"
+#include "IStartableComponent.h"
 
 #include "Consts.h"
 #include "TransformComponent.h"
 #include "RigidBodyComponent.h"
 
-class ColliderComponent : public IComponent
+class ColliderComponent : public IComponent, public IStartableComponent
 {
 public:
 	ColliderComponent(std::string type) : IComponent(type) { }
+
+	virtual void Start() override { }
+
+	void SetDependencies(TransformComponent* transform, RigidBodyComponent* rb) { _transformComponent = transform; _rigidyBodyComponent = rb; }
 
 	RigidBodyComponent* GetRigidbodyComponent() { return _rigidyBodyComponent; }
 	TransformComponent* GetTransformComponent() { return _transformComponent; }

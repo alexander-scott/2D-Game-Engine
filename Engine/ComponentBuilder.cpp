@@ -4,28 +4,32 @@
 xml_node<>* _node;
 shared_ptr<Scene> _scene;
 
-// Define component functions here
+// Define component build functions here
 inline IComponent * BuildTransformComponent();
 inline IComponent * BuildRigidbodyComponent();
 inline IComponent * BuildCircleColliderComponent();
 inline IComponent * BuildBoxColliderComponent();
 
-// List component functions against string types found in the XML files
+map<string, GUID>* depdendecies;
+IComponent * dependencyComponent;
+
+// Define fetch dependency functions here
+inline void FetchCircleColliderDependencies();
+inline void FetchBoxColliderDependencies();
+
 ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 {
 	_scene = scene;
-	_functionMapper.Insert("TransformComponent", BuildTransformComponent);
-	_functionMapper.Insert("RigidbodyComponent", BuildRigidbodyComponent);
-	_functionMapper.Insert("CircleColliderComponent", BuildCircleColliderComponent);
-	_functionMapper.Insert("BoxColliderComponent", BuildBoxColliderComponent);
-}
 
-IComponent * ComponentBuilder::BuildComponent(xml_node<>* node)
-{
-	_node = node;
+	// Insert build functions here
+	_buildMapper.Insert("TransformComponent", BuildTransformComponent);
+	_buildMapper.Insert("RigidbodyComponent", BuildRigidbodyComponent);
+	_buildMapper.Insert("CircleColliderComponent", BuildCircleColliderComponent);
+	_buildMapper.Insert("BoxColliderComponent", BuildBoxColliderComponent);
 
-	// Call the function listed in the function mapper
-	return _functionMapper.CallFunction<IComponent*>(string(node->first_attribute("type")->value()));
+	// Insert fetch dependency functions here
+	_dependencyBuildMapper.Insert("CircleColliderComponent", FetchCircleColliderDependencies);
+	_dependencyBuildMapper.Insert("BoxColliderComponent", FetchBoxColliderDependencies);
 }
 
 GUID StringToGUID(const std::string& guid) {
@@ -52,6 +56,16 @@ GUID StringToGUID(const std::string& guid) {
 	output.Data4[6] = p9;
 	output.Data4[7] = p10;
 	return output;
+}
+
+#pragma region Build functions
+
+IComponent * ComponentBuilder::BuildComponent(xml_node<>* node)
+{
+	_node = node;
+
+	// Call the function listed in the function mapper
+	return _buildMapper.CallFunction<IComponent*>(string(node->first_attribute("type")->value()));
 }
 
 IComponent * BuildTransformComponent()
@@ -82,29 +96,78 @@ IComponent * BuildRigidbodyComponent()
 	return ComponentFactory::MakeRigidbodyComponent(staticF, dynamicF, restitution, density, isStatic, lockRotation);
 }
 
-inline IComponent * BuildCircleColliderComponent()
+IComponent * BuildCircleColliderComponent()
 {
 	float radius = (float)atof(_node->first_attribute("radius")->value());
 
-	GUID transGameObjID = StringToGUID(string(_node->first_attribute("transformcomponent")->value()));
-	TransformComponent* trans = _scene->GetGameObject(transGameObjID)->GetComponent<TransformComponent>();
-
-	GUID rbGameObjID = StringToGUID(string(_node->first_attribute("rigidbodycomponent")->value()));
-	RigidBodyComponent* rigidbody = _scene->GetGameObject(rbGameObjID)->GetComponent<RigidBodyComponent>();
-
-	return ComponentFactory::MakeCircleColliderComponent(radius, trans, rigidbody);
+	return ComponentFactory::MakeCircleColliderComponent(radius);
 }
 
-inline IComponent * BuildBoxColliderComponent()
+IComponent * BuildBoxColliderComponent()
 {
 	float width = (float)atof(_node->first_attribute("width")->value());
 	float height = (float)atof(_node->first_attribute("height")->value());
 
-	GUID transGameObjID = StringToGUID(string(_node->first_attribute("transformcomponent")->value()));
-	TransformComponent* trans = _scene->GetGameObject(transGameObjID)->GetComponent<TransformComponent>();
-
-	GUID rbGameObjID = StringToGUID(string(_node->first_attribute("rigidbodycomponent")->value()));
-	RigidBodyComponent* rigidbody = _scene->GetGameObject(rbGameObjID)->GetComponent<RigidBodyComponent>();
-
-	return ComponentFactory::MakeBoxCollider(width, height, trans, rigidbody);
+	return ComponentFactory::MakeBoxCollider(width, height);
 }
+
+#pragma endregion
+
+#pragma region Fetch dependency functions
+
+void ComponentBuilder::BuildComponentDependecies(IComponent * component, map<string, GUID>* dependecies)
+{
+	depdendecies = dependecies;
+	dependencyComponent = component;
+
+	// Call the function listed in the function mapper
+	_dependencyBuildMapper.CallFunction<void>(component->GetType());
+}
+
+void FetchCircleColliderDependencies()
+{
+	CircleColliderComponent* collider = static_cast<CircleColliderComponent*>(dependencyComponent);
+
+	TransformComponent* transform;
+	RigidBodyComponent* rigidbody;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+		}
+		else if (it->first == "rigidbodycomponent")
+		{
+			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
+		}
+	}
+
+	collider->SetDependencies(transform, rigidbody);
+}
+
+void FetchBoxColliderDependencies()
+{
+	BoxColliderComponent* collider = static_cast<BoxColliderComponent*>(dependencyComponent);
+
+	TransformComponent* transform;
+	RigidBodyComponent* rigidbody;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+		}
+		else if (it->first == "rigidbodycomponent")
+		{
+			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
+		}
+	}
+
+	collider->SetDependencies(transform, rigidbody);
+}
+
+#pragma endregion

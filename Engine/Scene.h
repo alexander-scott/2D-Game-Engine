@@ -10,6 +10,8 @@ public:
 	Scene(std::string sceneName);
 	~Scene();
 
+	void Start();
+
 	void Update(float deltaTime);
 
 	void SendMessageToGameObjects(IComponentMessage& message);

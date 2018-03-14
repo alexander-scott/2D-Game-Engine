@@ -5,8 +5,10 @@
 class PolygonColliderComponent : public ColliderComponent
 {
 public:
-	PolygonColliderComponent(TransformComponent* trans, RigidBodyComponent* rb, string componentType = "PolygonColliderComponent");
+	PolygonColliderComponent(string componentType = "PolygonColliderComponent");
 	~PolygonColliderComponent();
+
+	virtual void Start() override;
 
 	virtual ColliderType GetType(void) const override { return ColliderType::ePolygon; }
 	virtual void ComputeMass(float density) override;

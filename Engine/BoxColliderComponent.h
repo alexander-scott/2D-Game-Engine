@@ -5,8 +5,10 @@
 class BoxColliderComponent : public PolygonColliderComponent
 {
 public:
-	BoxColliderComponent(TransformComponent* trans, RigidBodyComponent* rb, float width, float height);
+	BoxColliderComponent(float width, float height);
 	~BoxColliderComponent();
+
+	virtual void Start() override;
 
 	float GetWidth() { return _width; }
 	float GetHeight() { return _height; }
