@@ -26,6 +26,6 @@ private:
 	RECT * _rect;
 	Vec2 _offset;
 
-	TransformComponent *_transformComponent;
+	TransformComponent *_transformComponent = nullptr;
 
 };
