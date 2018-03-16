@@ -2,8 +2,9 @@
 
 #include "IComponent.h"
 #include "IMessageableComponent.h"
+#include "IEditableComponent.h"
 
-class RigidBodyComponent : public IComponent, public IMessageableComponent
+class RigidBodyComponent : public IComponent, public IMessageableComponent, public IEditableComponent
 {
 public:
 	RigidBodyComponent(float staticF, float dynamicF, float rest, float density);
@@ -16,8 +17,6 @@ public:
 
 	void SetStatic();
 	void LockRotation() { _rotationLocked = true; }
-
-#pragma region Getters and Setters
 
 	Mat2 GetOrientationMatrix() { return _orientationMatrix; }
 	void SetOrientationMatrix(Mat2 mat) { _orientationMatrix = mat; }
@@ -56,11 +55,15 @@ public:
 	void SetRestitution(float rest) { _restitution = rest; }
 
 	float GetDensity() { return _density; }
+	void SetDensity(float density) { _density = density; }
 
 	bool RotationLocked() {	return _rotationLocked;	}
 	bool IsStatic() { return _isStatic; }
 
-#pragma endregion
+	// Editable Component
+	virtual int GetEditorFieldCount() override;
+	virtual InspectorField* GetEditorFields() override;
+	virtual void SetEditorFieldValue(int fieldIndex, const char* value) override;
 
 private:
 	Vec2				_velocity;

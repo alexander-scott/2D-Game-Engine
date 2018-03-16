@@ -15,12 +15,17 @@ namespace GEPAA_Engine_Tests
 		SceneManagerFixture(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 			: SceneManager(dispatcher)
 		{
+			InitaliseListeners();
+		}
 
+		void InitaliseListeners() override
+		{
+			SubscribeToMessageType(SystemMessageType::eDrawScene);
+			SubscribeToMessageType(SystemMessageType::eUpdateScene);
 		}
 
 		void RecieveMessage(ISystemMessage& message) override
 		{
-			SceneManager::RecieveMessage(message);
 			switch (message.Type)
 			{
 			case SystemMessageType::eDrawScene:
@@ -37,12 +42,20 @@ namespace GEPAA_Engine_Tests
 		int UpdateCount = 0;
 	};
 
-	class EngineFixture : public Engine
+	class EngineFixture1 : public Engine
 	{
 	public:
-		EngineFixture()
+		EngineFixture1()
 		{
-			_messageDispatcher = make_shared<SystemMessageDispatcher>();
+			InitaliseSystems();
+		}
+	};
+
+	class EngineFixture2 : public Engine
+	{
+	public:
+		EngineFixture2()
+		{
 			auto sceneManager = make_shared<SceneManagerFixture>(_messageDispatcher);
 			_systems.insert(std::make_pair(sceneManager->SysType, sceneManager));
 		}
@@ -58,14 +71,14 @@ namespace GEPAA_Engine_Tests
 	public:
 		TEST_METHOD(CoreEngineBuildEnigne)
 		{
-			Engine engine;
+			EngineFixture1 engine;
 			// Test that engine gets created without any crashes
 		}
 
 		TEST_METHOD(CoreEngineUpdateLoop)
 		{
 			// Create engine
-			EngineFixture engine = EngineFixture();
+			EngineFixture2 engine;
 
 			auto scene = make_shared<Scene>(string("TEST SCENE")); // Create scene
 			auto gameObject = GameObject::MakeGameObject("TEST GAME OBJECT"); // Create test GO
@@ -75,8 +88,6 @@ namespace GEPAA_Engine_Tests
 
 			// Get scene manager and set current scene
 			auto sceneManager = dynamic_pointer_cast<SceneManagerFixture>(engine.GetSystem(SystemType::eSceneManager));
-			BuildSceneMessage msg(scene);
-			sceneManager->RecieveMessage(msg);
 
 			int loopCount = 0;
 			while (loopCount < 1000)

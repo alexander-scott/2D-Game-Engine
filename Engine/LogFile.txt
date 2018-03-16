@@ -1,0 +1,12 @@
+[2018-03-16 15:10:05.305] [GEPAA] [info] Initalising Systems
+[2018-03-16 15:10:05.335] [GEPAA] [info] Initalising the MainWindow system with a HINSTANCE
+[2018-03-16 15:10:05.420] [GEPAA] [info] Initalising SceneBuilder system
+[2018-03-16 15:10:05.420] [GEPAA] [info] Initalising SceneManager system
+[2018-03-16 15:10:05.420] [GEPAA] [info] Initalising Graphics system
+[2018-03-16 15:10:05.420] [GEPAA] [info] Initalising InputHandler system
+[2018-03-16 15:10:05.420] [GEPAA] [info] Initalising SceneSaver system
+[2018-03-16 15:10:05.420] [GEPAA] [info] Initalising Physics system
+[2018-03-16 15:10:05.529] [GEPAA] [info] Requesting a new scene be built by the SceneBuilder system
+[2018-03-16 15:10:05.541] [GEPAA] [info] Play mode starting
+[2018-03-16 15:10:05.541] [GEPAA] [info] Starting main update loop
+[2018-03-16 15:10:13.813] [GEPAA] [info] Program shutting down as expected

@@ -62,4 +62,3 @@ void Scene::DeleteGameObject(unsigned long id)
 	it = _gameObjectIDs.find(guidToDelete);
 	_gameObjectIDs.erase(it);
 }
-

@@ -7,7 +7,7 @@ using namespace std;
 class Scene
 {
 public:
-	Scene(std::string sceneName);
+	Scene(string sceneName);
 	~Scene();
 
 	void Start();
@@ -16,7 +16,7 @@ public:
 
 	void SendMessageToGameObjects(IComponentMessage& message);
 
-	std::string GetSceneName() { return _sceneName; }
+	string GetSceneName() { return _sceneName; }
 	void AddGameObject(shared_ptr<GameObject> gameObject);
 	void DeleteGameObject(unsigned long id);
 

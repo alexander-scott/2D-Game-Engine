@@ -17,8 +17,6 @@
 Engine::Engine()
 {
 	_messageDispatcher = make_shared<SystemMessageDispatcher>();
-
-	Initalise();
 }
 
 // Called from the editor

@@ -22,11 +22,11 @@ public:
 protected:
 	void Initalise();
 
-	virtual void InitaliseSystems(); // Virtual to override in unit tests
+	void InitaliseSystems();
 	void InitaliseListeners();
 	void SystemsInitalised();
 
-	virtual bool UpdateLoop(); // Virtual to access in unit tests
+	bool UpdateLoop();
 
 	std::shared_ptr<SystemMessageDispatcher>			_messageDispatcher;
 
