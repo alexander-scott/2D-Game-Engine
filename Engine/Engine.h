@@ -10,6 +10,7 @@ class MainWindow;
 class Engine
 {
 public:
+	Engine();
 	Engine(HWND hWnd);
 	Engine(HINSTANCE hInst, wchar_t * pArgs);
 	~Engine();
@@ -18,10 +19,14 @@ public:
 
 	std::shared_ptr<ISystem> GetSystem(SystemType type);
 
-private:
-	void InitaliseSystems();
+protected:
+	void Initalise();
+
+	virtual void InitaliseSystems(); // Virtual to override in unit tests
 	void InitaliseListeners();
 	void SystemsInitalised();
+
+	virtual bool UpdateLoop(); // Virtual to access in unit tests
 
 	std::shared_ptr<SystemMessageDispatcher>			_messageDispatcher;
 

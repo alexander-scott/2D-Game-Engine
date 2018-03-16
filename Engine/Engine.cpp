@@ -11,8 +11,15 @@
 
 #include "RequestBuildSceneMessage.h"
 #include "RequestSaveSceneMessage.h"
-
 #include "UpdateSystemMessage.h"
+
+// Engine without a main window
+Engine::Engine()
+{
+	_messageDispatcher = make_shared<SystemMessageDispatcher>();
+
+	Initalise();
+}
 
 // Called from the editor
 Engine::Engine(HWND hWnd)
@@ -23,17 +30,11 @@ Engine::Engine(HWND hWnd)
 	_mainWindow = make_shared<MainWindow>(hWnd, _messageDispatcher);
 	_systems.insert(std::make_pair(_mainWindow->SysType,_mainWindow));
 
-	_lastTime = std::chrono::steady_clock::now();
-	_deltaTime = 0;
-
-	InitaliseSystems();
-
 	Logger::Instance().LogMessage("Initalising the Editor system", LogSeverity::eInfo);
 	auto editorSystem = make_shared<Editor>(_messageDispatcher);
 	_systems.insert(std::make_pair(editorSystem->SysType, editorSystem));
 
-	InitaliseListeners();
-	SystemsInitalised();
+	Initalise();
 }
 
 // Called in the standalone engine
@@ -45,12 +46,7 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 	_mainWindow = make_shared<MainWindow>(hInst, pArgs, _messageDispatcher);
 	_systems.insert(std::make_pair(_mainWindow->SysType, _mainWindow));
 
-	_lastTime = std::chrono::steady_clock::now();
-	_deltaTime = 0;
-
-	InitaliseSystems();
-	InitaliseListeners();
-	SystemsInitalised();
+	Initalise();
 
 	Logger::Instance().LogMessage("Requesting a new scene be built by the SceneBuilder system", LogSeverity::eInfo);
 	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
@@ -74,41 +70,55 @@ Engine::~Engine()
 
 void Engine::StartUpdateLoop()
 {
-	bool result = true;
 	do 
 	{
-		auto currentTime = std::chrono::steady_clock::now();
-		const std::chrono::duration<float> elapsedTime = currentTime - _lastTime;
-		_lastTime = currentTime;
-		_deltaTime += elapsedTime.count();
-
-		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eInputUpdateGamePad));
-
-		// This while loop processes scene updates and physics at a fixed rate.
-		// Whilst allowing graphics to render as fast as possible.
-		while (_deltaTime >= MS_PER_UPDATE)
-		{
-			// ProcessPhysics()
-			_messageDispatcher->SendMessageToListeners(UpdateSystemMessage(SystemMessageType::eUpdatePhysics, _deltaTime));
-
-			// Update the current scene in the SceneManager system
-			_messageDispatcher->SendMessageToListeners(UpdateSystemMessage(SystemMessageType::eUpdateScene, _deltaTime));
-
-			_deltaTime -= MS_PER_UPDATE;
-		}
-
-		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame)); // Tell the Graphics system to begin the frame
-
-		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene)); // Draw the current scene in the SceneManager system
-
-		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame)); // Tell the Graphics system to end the frame
-
-		if (_mainWindow != nullptr)
-			result = _mainWindow->ProcessMessage(); // Check if the user presses close on the window
-		else
-			result = true;
+		
 	} 
-	while (result);
+	while (UpdateLoop());
+}
+
+bool Engine::UpdateLoop()
+{
+	auto currentTime = std::chrono::steady_clock::now();
+	const std::chrono::duration<float> elapsedTime = currentTime - _lastTime;
+	_lastTime = currentTime;
+	_deltaTime += elapsedTime.count();
+
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eInputUpdateGamePad));
+
+	// This while loop processes scene updates and physics at a fixed rate.
+	// Whilst allowing graphics to render as fast as possible.
+	while (_deltaTime >= MS_PER_UPDATE)
+	{
+		// ProcessPhysics()
+		_messageDispatcher->SendMessageToListeners(UpdateSystemMessage(SystemMessageType::eUpdatePhysics, _deltaTime));
+
+		// Update the current scene in the SceneManager system
+		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
+
+		_deltaTime -= MS_PER_UPDATE;
+	}
+
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsStartFrame)); // Tell the Graphics system to begin the frame
+
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eDrawScene)); // Draw the current scene in the SceneManager system
+
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eGraphicsEndFrame)); // Tell the Graphics system to end the frame
+
+	if (_mainWindow != nullptr)
+		return _mainWindow->ProcessMessage(); // Check if the user presses close on the window
+	else
+		return true;
+}
+
+void Engine::Initalise()
+{
+	_lastTime = std::chrono::steady_clock::now();
+	_deltaTime = 0;
+
+	InitaliseSystems();
+	InitaliseListeners();
+	SystemsInitalised();
 }
 
 // Create an instance of every system. Can be initalised in any order. Inject instance of message dispatcher.
