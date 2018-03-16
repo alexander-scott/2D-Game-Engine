@@ -42,9 +42,19 @@ IComponent * BuildSpriteRendererComponent()
 	float yPos = -(float)atof(_node->first_attribute("ypos")->value());
 	float rot = (float)atof(_node->first_attribute("rotation")->value());
 	float scale = (float)atof(_node->first_attribute("scale")->value());
-	RECT *rect = new RECT(); rect->top = 0; rect->left = 0; rect->right = 1; rect->bottom = 1; //TODO : change when possible (see xml scenes)
-	Vec2 offset = Vec2(0.0f, 0.0f); //TODO : change when possible (see xml scenes)
-	std::string name = "boop!"; //TODO : change
+
+	LONG rectTop = (LONG)atof(_node->first_attribute("rectTop")->value());
+	LONG rectBottom = (LONG)atof(_node->first_attribute("rectBottom")->value());
+	LONG rectLeft = (LONG)atof(_node->first_attribute("rectLeft")->value());
+	LONG rectRight = (LONG)atof(_node->first_attribute("rectRight")->value());
+
+	float offset1 = (float)atof(_node->first_attribute("offset1")->value());
+	float offset2 = (float)atof(_node->first_attribute("offset2")->value());
+
+	RECT *rect = new RECT(); rect->top = rectTop; rect->left = rectLeft; rect->right = rectRight; rect->bottom = rectBottom;
+	Vec2 offset = Vec2(offset1, offset2);
+	std::string name = (std::string)(_node->first_attribute("text")->value()); //path to "file"
+	
 
 	return ComponentFactory::MakeSpriteRendererComponent(Vec2(xPos, yPos), rot, scale, rect, offset,name);
 }
@@ -65,8 +75,8 @@ IComponent * BuildTextRendererComponent()
 	float offset2 = (float)atof(_node->first_attribute("offset2")->value());
 
 	std::string text = (std::string)(_node->first_attribute("text")->value());
-	RECT *rect = new RECT(); rect->top = rectTop; rect->left = rectLeft; rect->right = rectRight; rect->bottom = rectBottom; //TODO : change when possible (see xml scenes)
-	Vec2 offset = Vec2(offset1, offset2); //TODO : change when possible (see xml scenes)
+	RECT *rect = new RECT(); rect->top = rectTop; rect->left = rectLeft; rect->right = rectRight; rect->bottom = rectBottom; 
+	Vec2 offset = Vec2(offset1, offset2); 
 	//std::string text = "text";
 	float * rgb = new float(1.0f); //todo : add rgb values to xmlFile
 

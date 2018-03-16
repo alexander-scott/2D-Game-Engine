@@ -212,8 +212,12 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 {
 	switch (component->Type)
 	{
-		case DrawableComponentType::eTestDrawingType:
+	
+		
+		case DrawableComponentType::eTestDrawingType: 
+		{
 			break;
+		}
 
 		case DrawableComponentType::eText:
 		{
@@ -222,7 +226,7 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 				textComponent->GetRbg(), textComponent->GetScale(), textComponent->GetOffset());
 			break;
 		}
-		case DrawableComponentType::eSprite:
+		case DrawableComponentType::eSprite: //doesn't seem to go in so far...
 		{
 			SpriteRendererComponent * drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
 			DrawSprite(drawComponent->GetName(), drawComponent->GetPosition(), drawComponent->GetRect(),
@@ -247,6 +251,7 @@ void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, 
 	//CreateDDSTextureFromFile(_device.Get(), L"../Sprites/Test/spriteplayerwalk.dds", nullptr, &textureTest);
 	//_sprites.get()->Draw(textureTest, XMFLOAT2(pos.x, pos.y), rect, Colors::White);
 	//textureTest->Release();
+	int i = 0; 
 
 
 }

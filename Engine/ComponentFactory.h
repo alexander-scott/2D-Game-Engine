@@ -12,6 +12,4 @@ namespace ComponentFactory
 	SpriteRendererComponent * MakeSpriteRendererComponent(Vec2 position, float rotation, float scale, RECT* rect, Vec2 offset, string name);
 	TextRendererComponent * MakeTextRendererComponent(Vec2 position, float rotation, float scale, RECT *rect, Vec2 offset, std::string text, float* rgb);
 
-	
-	//TODO : Add sprite & text renderable components + method to create it  (DONE) - TODO : delete comment
 }

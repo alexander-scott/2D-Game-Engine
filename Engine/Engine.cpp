@@ -51,7 +51,8 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 
 	// Request a new scene be built by the SceneBuilder system
 	//RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
-	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene2.xml"); // Still hardcoded
+	//RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene2.xml"); // Still hardcoded
+	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene3-spriteTest.xml"); // Still hardcoded
 	
 	_messageDispatcher->SendMessageToListeners(message);
 
