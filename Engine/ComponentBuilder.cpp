@@ -12,8 +12,8 @@ inline IComponent * BuildTextRendererComponent();
 ComponentBuilder::ComponentBuilder()
 {
 	functionMapper.Insert("TransformComponent", BuildTransformComponent);
-	//functionMapper.Insert("TextRendererComponent", BuildTextRendererComponent);
-	//functionMapper.Insert("SpriteRendererComponent", BuildSpriteRendererComponent);
+	functionMapper.Insert("TextRendererComponent", BuildTextRendererComponent);
+	functionMapper.Insert("SpriteRendererComponent", BuildSpriteRendererComponent);
 }
 
 IComponent * ComponentBuilder::BuildComponent(xml_node<>* node)

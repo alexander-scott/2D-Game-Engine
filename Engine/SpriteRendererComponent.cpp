@@ -8,9 +8,10 @@ SpriteRendererComponent::SpriteRendererComponent() : IComponent("SpriteRendererC
 
 SpriteRendererComponent::SpriteRendererComponent(Vec2 position, float rotation, float scale, RECT *rect, Vec2 offset, string name) : IComponent("SpriteRendererComponent")
 {
-	SetPosition(position);
-	SetRotation(rotation);
-	SetScale(scale);
+	_transformComponent = new TransformComponent(position, rotation, scale);
+	//SetPosition(position);
+	//SetRotation(rotation);
+	//SetScale(scale);
 	SetRect(rect);
 	SetOffset(offset);
 	_name = name;

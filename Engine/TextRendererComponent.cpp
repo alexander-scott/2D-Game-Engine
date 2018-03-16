@@ -8,10 +8,10 @@ TextRendererComponent::TextRendererComponent() : IComponent("TextRendererCompone
 
 TextRendererComponent::TextRendererComponent(Vec2 position, float rotation, float scale, RECT *rect, Vec2 offset, std::string text, float* rgb) : IComponent("TextRendererComponent")
 {
-	
-	SetPosition(position);
-	SetRotation(rotation);
-	SetScale(scale);
+	_transformComponent = new TransformComponent(position, rotation, scale);
+//	SetPosition(position);
+//	SetRotation(rotation);
+//	SetScale(scale);
 	SetRect(rect);
 	SetOffset(offset);
 	_text = text;

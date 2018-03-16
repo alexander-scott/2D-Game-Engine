@@ -23,13 +23,14 @@ class DxGraphics : public IGraphics
 public:
 	DxGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher);
 
+
 	virtual void Initalise(class HWNDKey& key) override;
 	virtual void Destroy() override;
 
 	virtual void EndFrame() override;
 	virtual void BeginFrame() override;
 
-	virtual void RecieveMessage(ISystemMessage& message) override;
+	//virtual void RecieveMessage(ISystemMessage& message) override; //this was the source of the error... 
 
 	virtual void DrawComponent(IDrawableComponent* component);
 

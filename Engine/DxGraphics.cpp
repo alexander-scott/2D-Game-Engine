@@ -229,6 +229,8 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 				drawComponent->GetRotation(), drawComponent->GetScale(), drawComponent->GetOffset());
 			break;
 		}
+		default:
+			break;
 		// Below is an example of what an implementation might look like
 		/*case DrawableComponentType::eSprite:
 			SpriteRendererComponent* drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
@@ -279,12 +281,12 @@ void DxGraphics::BeginFrame()
 	*/
 	}
 
-void DxGraphics::RecieveMessage(ISystemMessage & message)
+/*void DxGraphics::RecieveMessage(ISystemMessage & message)
 {
 	/*switch (message.Type) {
 		//case System
-	}*/
-}
+	}
+}*/
 
 void DxGraphics::EndFrame()
 {

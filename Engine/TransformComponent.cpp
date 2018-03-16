@@ -14,7 +14,7 @@ TransformComponent::TransformComponent(Vec2 localPosition, float localRotation, 
 
 void TransformComponent::SetLocalPosition(Vec2 position)
 {
-	assert(this); //todo : delete after error fixed 
+	//assert(this); //todo : delete after error fixed -can be deleted
 	if (position.x != _localPosition.x || position.y != _localPosition.y) //todo : fix error 
 	{
 		_hasChanged = true;

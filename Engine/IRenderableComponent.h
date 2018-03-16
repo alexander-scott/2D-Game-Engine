@@ -19,6 +19,7 @@ public:
 	virtual void SetScale(float scale) { _transformComponent->SetLocalScale(scale); }
 	virtual void SetRotation(float rotation) { _transformComponent->SetLocalRotation(rotation); }
 
+	TransformComponent *_transformComponent = nullptr; //to do : set it as private
 private:
 	//informations needed to draw the component from the scene file
 	//Would shared_ptr be better for these attributes?
@@ -26,6 +27,5 @@ private:
 	RECT * _rect;
 	Vec2 _offset;
 
-	TransformComponent *_transformComponent = nullptr;
 
 };
