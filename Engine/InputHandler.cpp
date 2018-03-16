@@ -4,6 +4,8 @@
 #include "InputMouseMessage.h"
 #include "ISystemToGameObjectMessage.h"
 
+#include <fstream>
+
 InputHandler::InputHandler(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	:ISystem(SystemType::eInputHandler, dispatcher)
 { 
@@ -35,6 +37,8 @@ void InputHandler::TestKeyboardInitialCommands() //to remove after I have a func
 	_keyboardGameCommandMap[' '] = swap;//spacebar to swap commands
 
 	_bKeyboardSwapCommands = false;
+
+	SaveMapInput();
 }
 
 void InputHandler::LoadKeyboardGameMapping()
@@ -107,6 +111,40 @@ void InputHandler::SwapCommands(std::vector<unsigned char>& rebindQueue)
 	Logger::Instance().LogMessage(log, LogSeverity::eInfo);
 	_bKeyboardSwapCommands = false;
 	rebindQueue.clear();
+}
+
+void InputHandler::SaveMapInput()
+{
+	std::ofstream file("InputMap.xml");
+	xml_document<> doc;
+	xml_node<>* decl = doc.allocate_node(node_declaration);
+	doc.append_node(decl);
+
+	xml_node<>* root = doc.allocate_node(node_element, "PlayerInputMap");
+	root->append_attribute(doc.allocate_attribute("number", "1"));
+	doc.append_node(root);
+
+	xml_node<>* peripheral = doc.allocate_node(node_element, "Peripheral");
+	peripheral->append_attribute(doc.allocate_attribute("name", "keyboard"));
+	root->append_node(peripheral);
+	xml_node<>* map = doc.allocate_node(node_element, "Map");
+	map->append_attribute(doc.allocate_attribute("context", "main"));
+	peripheral->append_node(map);
+
+	for (auto& it : _keyboardGameCommandMap)
+	{
+		xml_node<>* command = doc.allocate_node(node_element, "Command");
+		const unsigned char * pKey = &(it.first);
+		const char* pCharKey = (reinterpret_cast<const char*>(pKey));
+		//read only the first char of pCharKey, because useless characters after
+		command->append_attribute(doc.allocate_attribute("bind", pCharKey,0,1));
+		command->append_attribute(doc.allocate_attribute("name", doc.allocate_string(it.second->GetName().c_str())));
+		map->append_node(command);
+	}
+
+	file << doc;
+	file.close();
+	doc.clear();
 }
 
 // ISystemToGameObjectMessage must be initalised with an instance of IComponentMessage.

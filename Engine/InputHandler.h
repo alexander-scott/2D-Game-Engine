@@ -4,6 +4,10 @@
 #include "TestCommand.h"
 #include "DirectXTK\Inc\GamePad.h"
 #include "Logger.h"
+#include "rapidxml_print.hpp"
+#include "rapidxml.hpp"
+
+using namespace rapidxml;
 
 class ISystemToGameObjectMessage;
 
@@ -18,6 +22,7 @@ public:
 	void RecieveMessage(ISystemMessage& message) override;
 
 	void SwapCommands(std::vector<unsigned char>& rebindQueue);
+	void SaveMapInput();
 
 	void SendMessageToScene(ISystemToGameObjectMessage& message);
 private:
