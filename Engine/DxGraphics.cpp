@@ -206,6 +206,9 @@ void DxGraphics::Initalise(HWNDKey& key)
 
 	_sprites.reset(new SpriteBatch(_immediateContext.Get()));
 	_primitiveBatch = std::make_unique<PrimitiveBatch<VertexPositionColor>>(_immediateContext.Get());
+
+	//Create font 
+	_fonts.reset(new SpriteFont(_device.Get(), L"..\\Resources\\fonts\\italic.spritefont"));
 }
 
 void DxGraphics::DrawComponent(IDrawableComponent * component)
@@ -263,6 +266,10 @@ void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
 
 void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset)
 {
+	//TODO : apply rotation, scale, use offset on pos, use rgb chosen.
+	std::wstring wstrText = std::wstring(text.begin(), text.end());
+	const wchar_t *txtToDraw = wstrText.c_str();
+	_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), Colors::DeepPink);
 
 }
 
@@ -275,23 +282,16 @@ void DxGraphics::Destroy()
 void DxGraphics::BeginFrame()
 {
 	// Clear render target view
-	_immediateContext->ClearRenderTargetView(_renderTargetView.Get(), Colors::MidnightBlue);
+	_immediateContext->ClearRenderTargetView(_renderTargetView.Get(), Colors::LightPink);
 	_sprites->Begin(SpriteSortMode_Deferred);
 	_primitiveBatch->Begin();
-
+	//_immediateContext->Draw //TODO : finish
 	//TODO : delete - just a try that failed on DrawSprite method...
 	/*RECT *rect = new RECT();
 	rect->bottom = 54; rect->top = 0; rect->right = 0; rect->left = 45;
 	DrawSprite("test", Vec2(10.0f, 10.0f), rect, 0.0f, 1.0f, Vec2(0.0f, 0.0f));
 	*/
 	}
-
-/*void DxGraphics::RecieveMessage(ISystemMessage & message)
-{
-	/*switch (message.Type) {
-		//case System
-	}
-}*/
 
 void DxGraphics::EndFrame()
 {
