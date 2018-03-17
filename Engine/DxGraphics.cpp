@@ -238,24 +238,25 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 		}
 		default:
 			break;
-		// Below is an example of what an implementation might look like
-		/*case DrawableComponentType::eSprite:
-			SpriteRendererComponent* drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
-			DrawSprite(drawComponent.Name, drawComponent.Pos, drawComponent.Rect, drawComponent.Rot, drawComponent.Scale, drawComponent.Offset);
-			break;*/
 	}
 }
 
 void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
 {
-	// TODO : delete - example of how to draw a dds file for 2D application but won't do the same here 
-	//_immediateContext->ClearDepthStencilView(_depthStencilViewD3D11_CLEAR_DEPTH, 1.0f, 0);
-	//ID3D11ShaderResourceView* textureTest = nullptr;
-	//CreateDDSTextureFromFile(_device.Get(), L"../Sprites/Test/spriteplayerwalk.dds", nullptr, &textureTest);
-	//_sprites.get()->Draw(textureTest, XMFLOAT2(pos.x, pos.y), rect, Colors::White);
-	//textureTest->Release();
-	int i = 0; 
+	//converting name into adress of texture file
+	std::wstring wstrName = std::wstring(name.begin(), name.end());
+	const wchar_t *textureToDraw = wstrName.c_str();
 
+	HRESULT hr = CreateDDSTextureFromFile(_device.Get(), textureToDraw, nullptr, &_sysBufferTextureView);
+	if (FAILED(hr)) {
+		MessageBox(0, L"Nope", 0, 0);
+	}
+	_sprites->Draw(_sysBufferTextureView.Get(), XMFLOAT2(pos.x, pos.y), nullptr, Colors::White);
+	
+	//TODO : 
+	//Fix problem of 2 image displays
+	//Do a texture manager so that we don't have to load the texture each time
+	//apply rotation, scale, offset...
 
 }
 
