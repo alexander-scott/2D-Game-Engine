@@ -18,10 +18,13 @@ void InputHandler::InitaliseListeners()
 	SubscribeToMessageType(SystemMessageType::eInputMouseMessage);
 	SubscribeToMessageType(SystemMessageType::eInputUpdateGamePad);
 
-	TestKeyboardInitialCommands();
-	LoadKeyboardGameMapping();
+	AddMapToVectorOfCommands();
+	LoadMapFromXMLFile("InputMapTest2.xml");
+	AddMapToVectorOfCommands();
+	//TestKeyboardInitialCommands();
+	//LoadKeyboardGameMapping();
 }
-
+/*
 void InputHandler::TestKeyboardInitialCommands() //to remove after I have a function to load commands list from a file at initialization
 {
 	MoveUpCommand* move_up = new MoveUpCommand();
@@ -45,9 +48,10 @@ void InputHandler::LoadKeyboardGameMapping()
 {
 	_keyboardCurrentCommandMap = _keyboardGameCommandMap;
 }
-
+*/
 void InputHandler::RecieveMessage(ISystemMessage & message)
 {
+	/*
 	switch (message.Type)
 	{
 		case SystemMessageType::eInputKeyboardMessage:
@@ -93,9 +97,15 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 			_stateGamePadP1 = _gamePadP1->GetState(0);
 			break;
 		}
+		//case add a map context (mode) to vector just pushback
+
+		//case change context, inputhandler will recieve a message from game logic to change to a defined id.
+		//Inputhandler doesn't need to know which context correspond to which id
 	}
+	*/
 }
 
+/*
 void InputHandler::SwapCommands(std::vector<unsigned char>& rebindQueue)
 {
 	ICommand * tempCommand = _keyboardGameCommandMap[rebindQueue[0]];
@@ -145,6 +155,75 @@ void InputHandler::SaveMapInput()
 	file << doc;
 	file.close();
 	doc.clear();
+}
+*/
+
+void InputHandler::AddMapToVectorOfCommands()
+{
+	//test purposes code, not final
+	_keyboardListOfCommandMap.push_back(std::map<unsigned char, sCommand>());
+}
+
+void InputHandler::LoadMapFromXMLFile(std::string fileName)//not final, only works for one player and a keyboard
+{
+	ifstream inFile(fileName);
+
+	if (!inFile)
+	{
+		Logger::Instance().LogMessage("Could not load XML file!", "INPUT_HANDLER", LogSeverity::eError);
+		throw std::exception("Could not load XML file!");
+	}
+
+	//Dump contents of file into a string
+	string xmlContents;
+
+	//Blocked out of preference
+	{
+		string line;
+		while (getline(inFile, line))
+			xmlContents += line;
+	}
+
+	//Convert string to rapidxml readable char*
+	vector<char> mXmlData = vector<char>(xmlContents.begin(), xmlContents.end());
+	mXmlData.push_back('\0');
+
+	//Create a parsed document with &xmlData[0] which is the char*
+	xml_document<> doc;
+	doc.parse<parse_no_data_nodes>(&mXmlData[0]);
+
+	//Get the root node
+	xml_node<>* root = doc.first_node();
+	try
+	{
+		xml_node<>* peripheralNode = root->first_node("Peripheral");
+		int peripheralCount = 0;
+		while (peripheralNode)
+		{
+			string peripheralName = peripheralNode->first_attribute("name")->value();
+			xml_node<>* mapNode = peripheralNode->first_node("Map");
+			xml_node<>* commandNode = mapNode->first_node("Command");
+			if (peripheralName == "keyboard")
+			{
+				map<unsigned char, sCommand>& entryPointVector = _keyboardListOfCommandMap[peripheralCount];
+				sCommand dataRetrieved;
+				while (commandNode)
+				{
+					dataRetrieved._name = commandNode->first_attribute("name")->value();
+					dataRetrieved._ID = atoi(commandNode->first_attribute("ID")->value());
+					const unsigned char* pKey = (reinterpret_cast<const unsigned char*>(commandNode->first_attribute("key")->value()));
+					entryPointVector[*pKey] = dataRetrieved;
+					commandNode = commandNode->next_sibling("Command");
+				}
+			}
+			peripheralNode = peripheralNode->next_sibling("Peripheral");
+		}
+		
+	}
+	catch (exception& e)
+	{
+		Logger::Instance().LogMessage(e.what(),"INPUT_HANDLER", LogSeverity::eError);
+	}
 }
 
 // ISystemToGameObjectMessage must be initalised with an instance of IComponentMessage.
