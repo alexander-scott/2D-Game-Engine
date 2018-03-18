@@ -38,6 +38,10 @@ public:
 
 	void DrawLine(Vec2 v1, Vec2 v2);
 
+	HRESULT LoadTexture(std::string path);
+	HRESULT RetrieveTexture(std::string path, ID3D11ShaderResourceView* texture); //TODO : delete
+	ID3D11ShaderResourceView* GetTexture(std::string path);
+
 private:
 	// vertex format for the framebuffer fullscreen textured quad
 	struct FSQVertex
@@ -62,4 +66,5 @@ private:
 	std::unique_ptr<SpriteFont>								_fonts;
 	std::unique_ptr<PrimitiveBatch<VertexPositionColor>>	_primitiveBatch;
 	std::map<std::string, ID3D11ShaderResourceView*>		_textures;
+
 };

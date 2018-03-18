@@ -243,26 +243,76 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 
 void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
 {
-	//converting name into adress of texture file
-	std::wstring wstrName = std::wstring(name.begin(), name.end());
-	const wchar_t *textureToDraw = wstrName.c_str();
-
-	HRESULT hr = CreateDDSTextureFromFile(_device.Get(), textureToDraw, nullptr, &_sysBufferTextureView);
-	if (FAILED(hr)) {
-		MessageBox(0, L"Nope", 0, 0);
-	}
-	_sprites->Draw(_sysBufferTextureView.Get(), XMFLOAT2(pos.x, pos.y), nullptr, Colors::White);
+	ID3D11ShaderResourceView* text = nullptr;
 	
-	//TODO : 
-	//Fix problem of 2 image displays
-	//Do a texture manager so that we don't have to load the texture each time
-	//apply rotation, scale, offset...
+	if (GetTexture(name)==nullptr) { //Texture has not been loaded yet
+		if (FAILED(LoadTexture(name)))
+			MessageBox(0, L"Problem loading texture", 0, 0);
+	}
+	if (GetTexture(name) != nullptr) { //texture successfully loaded and now we retrieve it
+		text = GetTexture(name);
+	}
+
+	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), nullptr, Colors::White);
 
 }
 
 void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
 {
 		
+}
+
+HRESULT DxGraphics::LoadTexture(std::string path)
+{
+	//converting name into adress of texture file
+	std::wstring wstrName = std::wstring(path.begin(), path.end());
+	const wchar_t *textureToDraw = wstrName.c_str();
+	ID3D11ShaderResourceView* text = nullptr;
+
+
+	HRESULT hr = CreateDDSTextureFromFile(_device.Get(), textureToDraw, nullptr, &text);
+	if (FAILED(hr)) {
+		MessageBox(0, L"Problem loading texture", 0, 0);
+		return hr;
+	}
+	
+	_textures[path] = text;
+	//_textures.insert(std::pair<std::string, ID3D11ShaderResourceView*>(path, text));
+
+	return S_OK;
+}
+
+//TODO : delete
+HRESULT DxGraphics::RetrieveTexture(std::string path, ID3D11ShaderResourceView * texture)
+{
+	texture = nullptr;
+	/*if (_textures.find(path)->second) {
+		texture = _textures.find(path)->second;
+		return S_OK;
+	}
+	else
+		return E_FAIL;*/
+	//TODO : fix error
+	/*if(_textures.empty())
+		return E_FAIL;*/
+	if(_textures[path]){
+		texture = _textures.at(path);
+ 		//texture = _textures.find(path)->second;
+		return S_OK;
+	}
+	else
+		return E_FAIL;
+}
+
+ID3D11ShaderResourceView * DxGraphics::GetTexture(std::string path)
+{
+
+	std::map<std::string, ID3D11ShaderResourceView*>::iterator it = _textures.find(path);
+	if (it != _textures.end()) { //texture found
+		return it->second;
+	}
+	else
+		return nullptr; //Texture not found/loaded yet 
 }
 
 void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset)

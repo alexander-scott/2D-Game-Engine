@@ -315,6 +315,7 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="TestCommand.h" />
     <ClInclude Include="TextRendererComponent.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="WinDefines.h" />
     <ClInclude Include="MainWindow.h" />
@@ -345,6 +346,7 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="TestCommand.cpp" />
     <ClCompile Include="TextRendererComponent.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
