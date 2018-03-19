@@ -40,11 +40,12 @@ private:
 	DirectX::GamePad::State _stateGamePadP1;
 
 	bool _bKeyboardSwapCommands;
-	bool _debugSwap = false; //to delete for final release
+	bool _debugSwap = true; //to delete for final release
 	//std::map <unsigned char, ICommand*> _keyboardCurrentCommandMap;
 	//std::map <unsigned char, ICommand*> _keyboardGameCommandMap;
 	map <unsigned char, sCommand> _keyboardCurrentCommandMap;
 	vector< std::map <unsigned char, sCommand> > _keyboardListOfCommandMap;
+	int _keyboardCurrentActivatedMap; //holds which map in the _keyboardListOfCommandMap vector is active
 
 	vector<unsigned char> _rebindKeyboardQueue;
 };
