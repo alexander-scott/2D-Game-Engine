@@ -12,12 +12,6 @@ using namespace std;
 
 class ISystemToGameObjectMessage;
 
-struct sCommand
-{
-	std::string _name;
-	int _ID;
-};
-
 class InputHandler : public ISystem
 {
 public:

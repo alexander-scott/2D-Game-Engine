@@ -3,6 +3,7 @@
 #include "InputKeyboardMessage.h"
 #include "InputMouseMessage.h"
 #include "ISystemToGameObjectMessage.h"
+#include "InputHandlerToGameObjectMessage.h"
 
 #include <fstream>
 
@@ -81,16 +82,25 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 				}
 				else //execute regular command binded to key
 				{
-					IComponentMessage componentMessage(eSetParentTransformMessage);
-					ISystemToGameObjectMessage systemMessage(componentMessage);
-					SendMessageToScene(systemMessage);
+					sCommand keyMessage = _keyboardCurrentCommandMap[msg.Key];
+					if (msg.MessageType == KeyboardMessageType::eKeyDown)
+					{
+						InputHandlerToGameObjectMessage message(InputGenericStateMessageType::eKeyPressed, 
+							keyMessage,-1.0f);
+						SendMessageToDispatcher(message);
+					}
+					else if (msg.MessageType == KeyboardMessageType::eKeyUp)
+					{
+						InputHandlerToGameObjectMessage message(InputGenericStateMessageType::eKeyReleased,
+							keyMessage,-1.0f);
+						SendMessageToDispatcher(message);
+					}
 				}
 			}
 			break;
 		}
 		case SystemMessageType::eInputMouseMessage:
 		{
-			//TODO Input: Write code to handle mouse messages
 			InputMouseMessage& msg = static_cast<InputMouseMessage&>(message);
 			break;
 		}

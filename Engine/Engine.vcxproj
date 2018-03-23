@@ -287,6 +287,7 @@
     <ClInclude Include="IMessageableComponent.h" />
     <ClInclude Include="InitaliseGraphicsMessage.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="InputHandlerToGameObjectMessage.h" />
     <ClInclude Include="InputKeyboardMessage.h" />
     <ClInclude Include="InputMouseMessage.h" />
     <ClInclude Include="ISystemMessage.h" />
