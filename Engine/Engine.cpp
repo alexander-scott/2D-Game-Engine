@@ -92,7 +92,7 @@ bool Engine::UpdateLoop()
 		_messageDispatcher->SendMessageToListeners(UpdateSystemMessage(SystemMessageType::eUpdatePhysics, _deltaTime));
 
 		// Update the current scene in the SceneManager system
-		_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateScene));
+		_messageDispatcher->SendMessageToListeners(UpdateSystemMessage(SystemMessageType::eUpdateScene, _deltaTime));
 
 		_deltaTime -= MS_PER_UPDATE;
 	}

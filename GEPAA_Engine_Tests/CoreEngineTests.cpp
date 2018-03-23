@@ -90,10 +90,9 @@ namespace GEPAA_Engine_Tests
 			auto sceneManager = dynamic_pointer_cast<SceneManagerFixture>(engine.GetSystem(SystemType::eSceneManager));
 
 			int loopCount = 0;
-			while (loopCount < 1000)
+			while (loopCount < 10)
 			{
 				engine.Update();
-				Sleep(1);
 				loopCount++;
 			}
 
