@@ -300,3 +300,5 @@ __pycache__/
 *.xsd.cs
 Engine/StandaloneDebug/
 Engine/InputMap.xml
+Engine/InputMapTest2.xml
+Engine/InputMapTestSave.xml

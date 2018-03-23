@@ -268,8 +268,8 @@
     <ClInclude Include="SceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
     </ClInclude>
-    <ClInclude Include="IStartableComponent.h">
-      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
+    <ClInclude Include="InputHandlerToGameObjectMessage.h">
+      <Filter>Engine\Messaging\Messages\InputMessages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
