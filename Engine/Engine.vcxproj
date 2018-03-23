@@ -260,6 +260,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AudioSoundFileManager.h" />
+    <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="BuildSceneMessage.h" />
     <ClInclude Include="CircleColliderComponent.h" />
@@ -299,6 +301,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="ObjectGrid.h" />
     <ClInclude Include="PhysicsSystem.h" />
+    <ClInclude Include="PlayAudioMessage.h" />
     <ClInclude Include="PolygonColliderComponent.h" />
     <ClInclude Include="RequestBuildSceneMessage.h" />
     <ClInclude Include="RequestSaveSceneMessage.h" />
@@ -323,6 +326,8 @@
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioSoundFileManager.cpp" />
+    <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="CircleColliderComponent.cpp" />
     <ClCompile Include="Collision.cpp" />

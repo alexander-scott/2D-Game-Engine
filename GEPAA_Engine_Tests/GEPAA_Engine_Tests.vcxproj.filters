@@ -108,6 +108,12 @@
     <ClCompile Include="..\Engine\RigidBodyComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\Engine\AudioSoundFileManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\AudioSystem.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Engine\BuildSceneMessage.h">
@@ -273,6 +279,15 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\RigidBodyComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\AudioSoundFileManager.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\AudioSystem.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\PlayAudioMessage.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
