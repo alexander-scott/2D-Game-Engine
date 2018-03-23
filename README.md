@@ -100,11 +100,18 @@ perform logic based on what it recieves. The MainWindow system can also be impro
 more message types and then also send those to the SystemMessageDispatcher instance, such as Xbox conntroller 
 inputs or distinction between input methods (to allow for multiplayer).
 
-Currently, the InputHandler class can recieve the raw inputs from a keyboard, a mouse or Xbox controller. It also holds the commands map. 
-Each command needs to inherit from the ICommand class, and needs to return an ISystemToGameObjectsMessage inside the Execute function, so
-that it can properly communicate with the game objects.
-Commands can be swaped by pressing spacebar and by pressing two binded keys successively. This feature needs to be activated with the debugSwap
-variable inside InputHandler.h, as it is a WIP and unrelieable feature for the moment.
+Currently, the InputHandler class can recieve the raw inputs from a keyboard, a mouse or Xbox controller. 
+It also holds the inputs map. A key can be binded with a sCommand which hold an ID integer. 
+This sCommand structure serves as a communication message between the InputHandler class and the game logic classes: 
+the game logic will trigger a certain command depending on which ID it recieves. The game logic will need to react 
+differently depending if the command is an single action (ex: selecting something in the main menu) or a state 
+(ex: moving in a certain direction). If it's an single action, the command must be executed on keydown 
+and deactivated provisionnaly to avoid this action to be repeated multiple times. It will be reactivated on keyup.
+A state will be executed on keydown, and will continue to be executed until keyup is sent (ie, the key binded 
+to this command state is not held anymore). Ranges commands which take an analog stick or an analog trigger as an input 
+will also send how much they're pushed in the message to the game logic. 
+Commands can be swaped by pressing spacebar and by pressing two binded keys successively.
+The inputs maps are saved and loaded via a xml file.
 
 ### Graphics ###
 The Graphics system can be extended to implement different graphics APIs such as DirectX or OpenGL. These new
