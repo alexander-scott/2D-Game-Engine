@@ -19,6 +19,21 @@ GameObject::~GameObject()
 	}
 }
 
+void GameObject::Start()
+{
+	for (int i = 0; i < _components.size(); i++)
+	{
+		// Cast component to IStartableComponent
+		IStartableComponent * startable = dynamic_cast<IStartableComponent *> (_components[i]);
+
+		if (startable != nullptr)
+		{
+			// Is startable
+			startable->Start();
+		}
+	}
+}
+
 void GameObject::AddComponent(IComponent * component)
 {
 	if (component != nullptr)

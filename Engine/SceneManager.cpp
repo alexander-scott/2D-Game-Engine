@@ -33,7 +33,7 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 		case SystemMessageType::eBuildSceneMessage:
 		{
 			BuildSceneMessage & msg = static_cast<BuildSceneMessage&>(message);
-			_currentScene = nullptr;
+			_currentScene = nullptr; // Delete current scene if there is one
 			_currentScene = msg.GetScene();
 			break;
 		}
@@ -76,6 +76,8 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 
 			SceneMessage msg(SystemMessageType::eSceneSelectedToPlay, _currentScene);
 			SendMessageToDispatcher(msg);
+
+			_currentScene->Start();
 			break;
 		}
 

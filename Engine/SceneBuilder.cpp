@@ -110,13 +110,46 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 		auto gameObject = scene->GetGameObject(guid);
 
 		// Create this gameobjects components
-		xml_node<>* component = gameObjectNode->first_node("Component");
-		while (component)
+		xml_node<>* componentNode = gameObjectNode->first_node("Component");
+		while (componentNode)
 		{
-			IComponent* newComponent = componentBuilder.BuildComponent(component);
+			IComponent* newComponent = componentBuilder.BuildComponent(componentNode);
 			gameObject->AddComponent(newComponent);
 
-			component = component->next_sibling("Component");
+			componentNode = componentNode->next_sibling("Component");
+		}
+
+		gameObjectNode = gameObjectNode->next_sibling("GameObject");
+	}
+
+	// Fetch all componentNode dependencies
+	gameObjectNode = root->first_node("GameObject");
+	while (gameObjectNode)
+	{
+		GUID guid = StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
+		auto gameObject = scene->GetGameObject(guid);
+
+		xml_node<>* componentNode = gameObjectNode->first_node("Component");
+		int index = 0;
+		while (componentNode)
+		{
+			IComponent* component = gameObject->GetComponentAtIndex(index);
+
+			xml_node<>* dependencyNode = componentNode->first_node("Dependency");
+			if (dependencyNode) // If this component has dependencies
+			{
+				map<string, GUID> dependecies; // Gather all dependencies
+				for (const xml_attribute<>* attribute = dependencyNode->first_attribute(); attribute; attribute = attribute->next_attribute()) 
+				{
+					dependecies.insert(make_pair(attribute->name(), StringToGUID(string(attribute->value()))));
+				}
+
+				// Build the dependencies
+				componentBuilder.BuildComponentDependecies(component, &dependecies); 
+			}
+
+			componentNode = componentNode->next_sibling("Component");
+			index++;
 		}
 
 		gameObjectNode = gameObjectNode->next_sibling("GameObject");

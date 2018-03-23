@@ -1,14 +1,14 @@
 #include "CircleColliderComponent.h"
 
-CircleColliderComponent::CircleColliderComponent(TransformComponent* trans, RigidBodyComponent* rb)
+CircleColliderComponent::CircleColliderComponent()
 	: ColliderComponent("CircleColliderComponent")
 {
-	_transformComponent = trans;
-	_rigidyBodyComponent = rb;
 }
 
-CircleColliderComponent::~CircleColliderComponent()
+void CircleColliderComponent::Start()
 {
+	ComputeMass(GetRigidbodyComponent()->GetDensity());
+	_radius = _baseRadius * GetTransformComponent()->GetWorldScale();
 }
 
 void CircleColliderComponent::ComputeMass(float density)

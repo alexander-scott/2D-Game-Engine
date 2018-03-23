@@ -10,6 +10,14 @@ Scene::~Scene()
 	}
 }
 
+void Scene::Start()
+{
+	for (auto go : _gameObjects)
+	{
+		go->Start();
+	}
+}
+
 void Scene::Update(float deltaTime)
 {
 	for (auto go : _gameObjects)
@@ -54,4 +62,3 @@ void Scene::DeleteGameObject(unsigned long id)
 	it = _gameObjectIDs.find(guidToDelete);
 	_gameObjectIDs.erase(it);
 }
-

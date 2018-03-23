@@ -7,11 +7,11 @@ class SystemMessageListener : public IListener
 {
 public:
 	SystemMessageListener(std::shared_ptr<SystemMessageDispatcher> dispatcher)
-		: SMDispatcher(dispatcher) { }
+		: _systemMessageDispatcher(dispatcher) { }
 
 	void SubscribeToMessageType(SystemMessageType messageType)
 	{
-		SMDispatcher->AddListener(this, messageType);
+		_systemMessageDispatcher->AddListener(this, messageType);
 	}
 
 	virtual void RecieveMessage(ISystemMessage& message) = 0;
@@ -22,5 +22,5 @@ public:
 	}
 
 private:
-	std::shared_ptr<SystemMessageDispatcher> SMDispatcher;
+	std::shared_ptr<SystemMessageDispatcher> _systemMessageDispatcher;
 };

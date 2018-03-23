@@ -5,13 +5,14 @@
 class PolygonColliderComponent : public ColliderComponent
 {
 public:
-	PolygonColliderComponent(TransformComponent* trans, RigidBodyComponent* rb, string componentType = "PolygonColliderComponent");
+	PolygonColliderComponent(string componentType = "PolygonColliderComponent");
 	~PolygonColliderComponent();
+
+	virtual void Start() override;
 
 	virtual ColliderType GetType(void) const override { return ColliderType::ePolygon; }
 	virtual void ComputeMass(float density) override;
 	virtual Rect GetRect() override;
-
 	virtual Vec2 GetCentre() override { return Vec2(_transformComponent->GetWorldPosition().x + _halfWidth, _transformComponent->GetWorldPosition().y + _halfHeight); }
 
 	void SetVerticies(Vec2 *vertices, int count);

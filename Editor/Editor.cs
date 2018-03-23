@@ -20,9 +20,9 @@ namespace GEPAA_Editor
 
         // Controls
         private Hierachy _hierarchy;
-        private EditorControls.Inspector _inspector;
+        private Inspector _inspector;
 
-        private bool mPlaying = false;
+        private bool _playing = false;
         private string _resoucesPath;
 
         #region Consts
@@ -117,24 +117,36 @@ namespace GEPAA_Editor
 
         private void PlayClicked(object sender, MouseEventArgs e)
         {
-            if (!mPlaying)
+            if (!_playing)
             {
-                mPlaying = true;
-                btnPlay.Text = "STOP";
-                this.BackColor = Color.AliceBlue;
-                EngineInterface.PlayStarted(_editorSystem);
-                _hierarchy.CreateHierachyList(_sceneManagerSystem);
+                if (_scene.HasChanged)
+                {
+                    DialogResult dialogResult = MessageBox.Show("You must save your changes before playing the scene. " +
+                        "Do you want to save your changes now?", "WARNING", MessageBoxButtons.YesNoCancel);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        SaveSceneClicked(sender, null);
+                        _playing = true;
+                        btnPlay.Text = "STOP";
+                        this.BackColor = Color.AliceBlue;
+                        EngineInterface.PlayStarted(_editorSystem);
+                        _hierarchy.CreateHierachyList(_sceneManagerSystem);
+                    }
+                    else if (dialogResult == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                }
             }
             else
             {
-                mPlaying = false;
+                _playing = false;
                 btnPlay.Text = "PLAY";
                 this.BackColor = Color.WhiteSmoke;
                 EngineInterface.PlayStopped(_editorSystem);
                 _hierarchy.CreateHierachyList(_sceneManagerSystem);
             }
         }
-
 
         #region Basic Input
 

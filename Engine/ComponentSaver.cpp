@@ -74,8 +74,12 @@ inline void SaveCircleColliderComponent()
 	CircleColliderComponent* collider = dynamic_cast<CircleColliderComponent*>(_component);
 
 	_componentNode->append_attribute(_doc->allocate_attribute("radius", _doc->allocate_string(to_string(collider->GetRadius()).c_str())));
-	_componentNode->append_attribute(_doc->allocate_attribute("transformcomponent", _doc->allocate_string(GUIDToString(&collider->GetGameObjectID()).c_str())));
-	_componentNode->append_attribute(_doc->allocate_attribute("rigidbodycomponent", _doc->allocate_string(GUIDToString(&collider->GetGameObjectID()).c_str())));
+
+	auto dependencyNode = _doc->allocate_node(node_element, "Dependency");
+	dependencyNode->append_attribute(_doc->allocate_attribute("transformcomponent", _doc->allocate_string(GUIDToString(&collider->GetGameObjectID()).c_str())));
+	dependencyNode->append_attribute(_doc->allocate_attribute("rigidbodycomponent", _doc->allocate_string(GUIDToString(&collider->GetGameObjectID()).c_str())));
+
+	_componentNode->append_node(dependencyNode);
 }
 
 inline void SaveBoxColliderComponent()
@@ -84,6 +88,10 @@ inline void SaveBoxColliderComponent()
 
 	_componentNode->append_attribute(_doc->allocate_attribute("width", _doc->allocate_string(to_string(collider->GetWidth()).c_str())));
 	_componentNode->append_attribute(_doc->allocate_attribute("height", _doc->allocate_string(to_string(collider->GetHeight()).c_str())));
-	_componentNode->append_attribute(_doc->allocate_attribute("transformcomponent", _doc->allocate_string(GUIDToString(&collider->GetGameObjectID()).c_str())));
-	_componentNode->append_attribute(_doc->allocate_attribute("rigidbodycomponent", _doc->allocate_string(GUIDToString(&collider->GetGameObjectID()).c_str())));
+
+	auto dependencyNode = _doc->allocate_node(node_element, "Dependency");
+	dependencyNode->append_attribute(_doc->allocate_attribute("transformcomponent", _doc->allocate_string(GUIDToString(&collider->GetGameObjectID()).c_str())));
+	dependencyNode->append_attribute(_doc->allocate_attribute("rigidbodycomponent", _doc->allocate_string(GUIDToString(&collider->GetGameObjectID()).c_str())));
+
+	_componentNode->append_node(dependencyNode);
 }

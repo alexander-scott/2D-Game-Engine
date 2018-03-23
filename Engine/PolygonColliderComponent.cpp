@@ -2,15 +2,18 @@
 
 
 
-PolygonColliderComponent::PolygonColliderComponent(TransformComponent* trans, RigidBodyComponent* rb, string componentType)
+PolygonColliderComponent::PolygonColliderComponent(string componentType)
 	: ColliderComponent(componentType)
 {
-	_transformComponent = trans;
-	_rigidyBodyComponent = rb;
 }
 
 PolygonColliderComponent::~PolygonColliderComponent()
 {
+}
+
+void PolygonColliderComponent::Start()
+{
+	ComputeMass(GetRigidbodyComponent()->GetDensity());
 }
 
 void PolygonColliderComponent::ComputeMass(float density)
