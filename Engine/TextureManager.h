@@ -2,6 +2,7 @@
 #include "Consts.h"
 #include <d3d11.h>
 #include "DirectXTK\Inc\SpriteBatch.h"
+//#include "DirectXTK\Inc\DDSTextureLoader.h"
 #include "DirectXTK\Inc\DDSTextureLoader.h"
 
 class TextureManager
@@ -14,6 +15,7 @@ public:
 	~TextureManager();
 	
 	HRESULT RetrieveTexture(std::string name, ID3D11ShaderResourceView* textureOut);
+	ID3D11ShaderResourceView * GetTexture(std::string path);
 	HRESULT LoadTexture(std::string path);
 
 };

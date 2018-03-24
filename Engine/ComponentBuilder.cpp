@@ -77,9 +77,13 @@ IComponent * BuildTextRendererComponent()
 	std::string text = (std::string)(_node->first_attribute("text")->value());
 	RECT *rect = new RECT(); rect->top = rectTop; rect->left = rectLeft; rect->right = rectRight; rect->bottom = rectBottom; 
 	Vec2 offset = Vec2(offset1, offset2); 
-	//std::string text = "text";
-	float * rgb = new float(1.0f); //todo : add rgb values to xmlFile
+	
+	float rgb1 = (float)atof(_node->first_attribute("rgb1")->value());
+	float rgb2 = (float)atof(_node->first_attribute("rgb2")->value());
+	float rgb3 = (float)atof(_node->first_attribute("rgb3")->value());
+	float rgb4 = (float)atof(_node->first_attribute("rgb4")->value());
 
+	float4 *_rgb3 = new float4(rgb1, rgb2, rgb3, rgb4);
 
-	return ComponentFactory::MakeTextRendererComponent(Vec2(xPos, yPos), rot, scale, rect, offset, text, rgb);
+	return ComponentFactory::MakeTextRendererComponent(Vec2(xPos, yPos), rot, scale, rect, offset, text, _rgb3);
 }

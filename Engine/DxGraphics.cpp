@@ -215,8 +215,6 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 {
 	switch (component->Type)
 	{
-	
-		
 		case DrawableComponentType::eTestDrawingType: 
 		{
 			break;
@@ -226,10 +224,10 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 		{
 			TextRendererComponent * textComponent = dynamic_cast<TextRendererComponent*>(component);
 			DrawText(textComponent->GetText(), textComponent->GetPosition(), textComponent->GetRotation(),
-				textComponent->GetRbg(), textComponent->GetScale(), textComponent->GetOffset());
+				textComponent->GetRbg3(), textComponent->GetScale(), textComponent->GetOffset());
 			break;
 		}
-		case DrawableComponentType::eSprite: //doesn't seem to go in so far...
+		case DrawableComponentType::eSprite: 
 		{
 			SpriteRendererComponent * drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
 			DrawSprite(drawComponent->GetName(), drawComponent->GetPosition(), drawComponent->GetRect(),
@@ -252,8 +250,12 @@ void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, 
 	if (GetTexture(name) != nullptr) { //texture successfully loaded and now we retrieve it
 		text = GetTexture(name);
 	}
+		//offset has been set manually in the scene object (xml file). For the test sprite used here it is set on the center
+		//ie : x = rect.width/2 = 54 / 2 = 27
+		//y = rect.height/2 = 45 / 2 = 22.5
+		//wouldn't it be better to calculate the offset in code? else we'd have to do it for each sprite we want to draw 
 
-	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), nullptr, Colors::White);
+	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
 
 }
 
@@ -269,7 +271,6 @@ HRESULT DxGraphics::LoadTexture(std::string path)
 	const wchar_t *textureToDraw = wstrName.c_str();
 	ID3D11ShaderResourceView* text = nullptr;
 
-
 	HRESULT hr = CreateDDSTextureFromFile(_device.Get(), textureToDraw, nullptr, &text);
 	if (FAILED(hr)) {
 		MessageBox(0, L"Problem loading texture", 0, 0);
@@ -277,32 +278,10 @@ HRESULT DxGraphics::LoadTexture(std::string path)
 	}
 	
 	_textures[path] = text;
-	//_textures.insert(std::pair<std::string, ID3D11ShaderResourceView*>(path, text));
 
 	return S_OK;
 }
 
-//TODO : delete
-HRESULT DxGraphics::RetrieveTexture(std::string path, ID3D11ShaderResourceView * texture)
-{
-	texture = nullptr;
-	/*if (_textures.find(path)->second) {
-		texture = _textures.find(path)->second;
-		return S_OK;
-	}
-	else
-		return E_FAIL;*/
-	//TODO : fix error
-	/*if(_textures.empty())
-		return E_FAIL;*/
-	if(_textures[path]){
-		texture = _textures.at(path);
- 		//texture = _textures.find(path)->second;
-		return S_OK;
-	}
-	else
-		return E_FAIL;
-}
 
 ID3D11ShaderResourceView * DxGraphics::GetTexture(std::string path)
 {
@@ -315,13 +294,19 @@ ID3D11ShaderResourceView * DxGraphics::GetTexture(std::string path)
 		return nullptr; //Texture not found/loaded yet 
 }
 
-void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset)
+
+void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float4* rgb3, float scale, Vec2 offset)
 {
 	//TODO : apply rotation, scale, use offset on pos, use rgb chosen.
 	std::wstring wstrText = std::wstring(text.begin(), text.end());
 	const wchar_t *txtToDraw = wstrText.c_str();
-	_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), Colors::DeepPink);
 
+	XMVECTORF32 textColor = { { { rgb3->x , rgb3->y, rgb3->z, rgb3->w} } };
+	
+	//TODO : use method that adds rotation parameter...
+	_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor);
+	//_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), XMFLOAT4(rgb3->x, rgb3->y, rgb3->z, rgb3->w), rot, XMFLOAT2(1.0f, 1.0f), 1.0f, SpriteEffects_None, 1.0f); //nope
+	//_fonts->DrawString(text, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //nope
 }
 
 void DxGraphics::Destroy()
@@ -336,13 +321,8 @@ void DxGraphics::BeginFrame()
 	_immediateContext->ClearRenderTargetView(_renderTargetView.Get(), Colors::LightPink);
 	_sprites->Begin(SpriteSortMode_Deferred);
 	_primitiveBatch->Begin();
-	//_immediateContext->Draw //TODO : finish
-	//TODO : delete - just a try that failed on DrawSprite method...
-	/*RECT *rect = new RECT();
-	rect->bottom = 54; rect->top = 0; rect->right = 0; rect->left = 45;
-	DrawSprite("test", Vec2(10.0f, 10.0f), rect, 0.0f, 1.0f, Vec2(0.0f, 0.0f));
-	*/
-	}
+
+}
 
 void DxGraphics::EndFrame()
 {

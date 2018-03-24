@@ -1,7 +1,7 @@
 <?xml?>
 <scene name="scene3">
 	<GameObject tag="TestSpriteDaw" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
-		<Component xpos="2.000000" ypos="0.000000" rotation="0.000000" scale="1.000000" rectTop ="0" rectBottom="15" rectLeft="0" rectRight="50" offset1="0.000000" offset2="0.000000" text ="../Resources/Sprites/Test/spriteplayerwalk.dds" type="SpriteRendererComponent"/>
+		<Component xpos="150.000000" ypos="-150.000000" rotation="2.000000" scale="3.000000" rectTop ="0" rectBottom="54" rectLeft="0" rectRight="45" offset1="27.000000" offset2="22.500000" text ="../Resources/Sprites/Test/spriteplayerwalk.dds" type="SpriteRendererComponent"/>
 	</GameObject>
 </scene>
 
