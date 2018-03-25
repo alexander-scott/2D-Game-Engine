@@ -303,10 +303,14 @@ void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float4* rgb3, f
 
 	XMVECTORF32 textColor = { { { rgb3->x , rgb3->y, rgb3->z, rgb3->w} } };
 	
-	//TODO : use method that adds rotation parameter...
-	_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor);
-	//_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), XMFLOAT4(rgb3->x, rgb3->y, rgb3->z, rgb3->w), rot, XMFLOAT2(1.0f, 1.0f), 1.0f, SpriteEffects_None, 1.0f); //nope
-	//_fonts->DrawString(text, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //nope
+	XMVECTOR textRect = _fonts->MeasureString(txtToDraw);
+	float widthText = textRect.m128_f32[0];
+	float heightText = textRect.m128_f32[1];
+	
+	//_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor); //without rotation
+	_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor, rot, XMFLOAT2(offset.x, offset.y), scale); //offset is set at 0.0f, 0.0f in the xml file so far
+	//_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor, 0.3f, XMFLOAT2(widthText/2, heightText/2), scale); //here we calculate the offset so that it is at the center of the text rect. doesn't seem to be exactlyat the center though...
+	
 }
 
 void DxGraphics::Destroy()
