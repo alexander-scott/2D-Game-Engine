@@ -18,6 +18,8 @@ IComponent * dependencyComponent;
 // Define fetch dependency functions here
 inline void FetchCircleColliderDependencies();
 inline void FetchBoxColliderDependencies();
+inline void FetchSpriteRendererDependencies();
+inline void FetchTextRendererDependencies();
 
 ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 {
@@ -25,9 +27,8 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 
 	// Insert build functions here
 	_buildMapper.Insert("TransformComponent", BuildTransformComponent);
-	_buildMapper.Insert("TextRendererComponent", BuildTextRendererComponent);
 	_buildMapper.Insert("SpriteRendererComponent", BuildSpriteRendererComponent);
-	_buildMapper.Insert("TransformComponent", BuildTransformComponent);
+	_buildMapper.Insert("TextRendererComponent", BuildTextRendererComponent);
 	_buildMapper.Insert("RigidbodyComponent", BuildRigidbodyComponent);
 	_buildMapper.Insert("CircleColliderComponent", BuildCircleColliderComponent);
 	_buildMapper.Insert("BoxColliderComponent", BuildBoxColliderComponent);
@@ -35,6 +36,8 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 	// Insert fetch dependency functions here
 	_dependencyBuildMapper.Insert("CircleColliderComponent", FetchCircleColliderDependencies);
 	_dependencyBuildMapper.Insert("BoxColliderComponent", FetchBoxColliderDependencies);
+	_dependencyBuildMapper.Insert("SpriteRendererComponent", FetchSpriteRendererDependencies);
+	_dependencyBuildMapper.Insert("TextRendererComponent", FetchTextRendererDependencies);
 }
 
 GUID StringToGUID(const std::string& guid) {
@@ -86,11 +89,6 @@ IComponent * BuildTransformComponent()
 
 IComponent * BuildSpriteRendererComponent()
 {
-	float xPos = (float)atof(_node->first_attribute("xpos")->value());
-	float yPos = -(float)atof(_node->first_attribute("ypos")->value());
-	float rot = (float)atof(_node->first_attribute("rotation")->value());
-	float scale = (float)atof(_node->first_attribute("scale")->value());
-
 	LONG rectTop = (LONG)atof(_node->first_attribute("rectTop")->value());
 	LONG rectBottom = (LONG)atof(_node->first_attribute("rectBottom")->value());
 	LONG rectLeft = (LONG)atof(_node->first_attribute("rectLeft")->value());
@@ -103,17 +101,11 @@ IComponent * BuildSpriteRendererComponent()
 	Vec2 offset = Vec2(offset1, offset2);
 	std::string name = (std::string)(_node->first_attribute("text")->value()); //path to "file"
 	
-
-	return ComponentFactory::MakeSpriteRendererComponent(Vec2(xPos, yPos), rot, scale, rect, offset,name);
+	return ComponentFactory::MakeSpriteRendererComponent(rect, offset,name);
 }
 
 IComponent * BuildTextRendererComponent()
 {
-	float xPos = (float)atof(_node->first_attribute("xpos")->value());
-	float yPos = -(float)atof(_node->first_attribute("ypos")->value());
-	float rot = (float)atof(_node->first_attribute("rotation")->value());
-	float scale = (float)atof(_node->first_attribute("scale")->value());
-
 	LONG rectTop = (LONG)atof(_node->first_attribute("rectTop")->value());
 	LONG rectBottom = (LONG)atof(_node->first_attribute("rectBottom")->value());
 	LONG rectLeft = (LONG)atof(_node->first_attribute("rectLeft")->value());
@@ -133,7 +125,7 @@ IComponent * BuildTextRendererComponent()
 
 	float4 *_rgb3 = new float4(rgb1, rgb2, rgb3, rgb4);
 
-	return ComponentFactory::MakeTextRendererComponent(Vec2(xPos, yPos), rot, scale, rect, offset, text, _rgb3);
+	return ComponentFactory::MakeTextRendererComponent(rect, offset, text, _rgb3);
 }
 
 IComponent * BuildRigidbodyComponent()
@@ -226,6 +218,42 @@ void FetchBoxColliderDependencies()
 	}
 
 	collider->SetDependencies(transform, rigidbody);
+}
+
+void FetchSpriteRendererDependencies()
+{
+	SpriteRendererComponent* renderer = static_cast<SpriteRendererComponent*>(dependencyComponent);
+	TransformComponent* transform;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+			break;
+		}
+	}
+
+	renderer->SetDependencies(transform);
+}
+
+inline void FetchTextRendererDependencies()
+{
+	TextRendererComponent* renderer = static_cast<TextRendererComponent*>(dependencyComponent);
+	TransformComponent* transform;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+			break;
+		}
+	}
+
+	renderer->SetDependencies(transform);
 }
 
 #pragma endregion

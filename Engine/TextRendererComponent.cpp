@@ -7,33 +7,33 @@
 
 }*/
 
-TextRendererComponent::TextRendererComponent(Vec2 position, float rotation, float scale, RECT *rect, Vec2 offset, std::string text, float* rgb) : IComponent("TextRendererComponent")
+TextRendererComponent::TextRendererComponent(RECT *rect, Vec2 offset, std::string text, float* rgb) : IComponent("TextRendererComponent")
 {
-	_transformComponent = new TransformComponent(position, rotation, scale);
 	Type = eText;
 	SetRect(rect);
 	SetOffset(offset);
 	_text = text;
 	//_rgb = rgb;
 	SetRgb(rgb);
-	
-
 }
 
-TextRendererComponent::TextRendererComponent(Vec2 position, float rotation, float scale, RECT * rect, Vec2 offset, std::string text, float4 * rgb3) : IComponent("TextRendererComponent")
+TextRendererComponent::TextRendererComponent(RECT * rect, Vec2 offset, std::string text, float4 * rgb3) : IComponent("TextRendererComponent")
 {
-	_transformComponent = new TransformComponent(position, rotation, scale);
 	Type = eText;
 	SetRect(rect);
 	SetOffset(offset);
 	_text = text;
 	_rgb3 = rgb3;
-
 }
 
 
 TextRendererComponent::~TextRendererComponent()
 {
+}
+
+void TextRendererComponent::SetDependencies(TransformComponent * transform)
+{
+	_transformComponent = transform;
 }
 
 void TextRendererComponent::SetText(std::string text)

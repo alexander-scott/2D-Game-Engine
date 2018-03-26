@@ -47,7 +47,7 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 	Initalise();
 
 	Logger::Instance().LogMessage("Requesting a new scene be built by the SceneBuilder system", LogSeverity::eInfo);
-	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
+	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene3-spriteTest.xml"); // Hardcoded for now
 	_messageDispatcher->SendMessageToListeners(message);
 
 	Logger::Instance().LogMessage("Play mode starting", LogSeverity::eInfo);

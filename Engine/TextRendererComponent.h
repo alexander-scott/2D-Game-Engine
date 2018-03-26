@@ -7,9 +7,11 @@ class TextRendererComponent : public IRenderableComponent, public IComponent
 {
 public:
 	//TextRendererComponent();
-	TextRendererComponent(Vec2 position, float rotation, float scale, RECT *rect, Vec2 offset, std::string text, float* rgb);
-	TextRendererComponent(Vec2 position, float rotation, float scale, RECT *rect, Vec2 offset, std::string text, float4* rgb);
+	TextRendererComponent(RECT *rect, Vec2 offset, std::string text, float* rgb);
+	TextRendererComponent(RECT *rect, Vec2 offset, std::string text, float4* rgb);
 	~TextRendererComponent();
+
+	void SetDependencies(TransformComponent* transform);
 
 	void SetText(std::string text);
 	std::string GetText();
