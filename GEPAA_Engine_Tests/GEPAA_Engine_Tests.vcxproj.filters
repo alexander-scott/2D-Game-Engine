@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="SystemTests">
-      <UniqueIdentifier>{de71e003-ec23-4a1e-a638-38c169484d6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemTests\SceneBuilder">
-      <UniqueIdentifier>{90ad5812-dfee-4241-b747-e0940dd8a65b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source">
       <UniqueIdentifier>{6c8cbbe5-799d-4751-b065-08f08354ad33}</UniqueIdentifier>
     </Filter>
@@ -16,15 +10,21 @@
     <Filter Include="MessagingTests">
       <UniqueIdentifier>{e916b4f1-e469-45bb-a1a4-f16269df86b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EngineTests">
+      <UniqueIdentifier>{de71e003-ec23-4a1e-a638-38c169484d6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineTests\SceneBuilder">
+      <UniqueIdentifier>{90ad5812-dfee-4241-b747-e0940dd8a65b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineTests\Core">
+      <UniqueIdentifier>{43b89955-674b-4468-bf4f-d85767abf9d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine\ComponentBuilder.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine\DXErr.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Engine\FrameTimer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine\GameObject.cpp">
@@ -46,7 +46,7 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="SceneBuilderTests.cpp">
-      <Filter>SystemTests\SceneBuilder</Filter>
+      <Filter>EngineTests\SceneBuilder</Filter>
     </ClCompile>
     <ClCompile Include="GameObjectTests.cpp">
       <Filter>GameObjectTests</Filter>
@@ -81,6 +81,7 @@
     <ClCompile Include="..\Engine\ComponentFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\Engine\DxGraphics.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -88,6 +89,30 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine\TextRendererComponent.cpp">
+=======
+    <ClCompile Include="CoreEngineTests.cpp">
+      <Filter>EngineTests\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\PhysicsSystem.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\BoxColliderComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\CircleColliderComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Collision.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\ObjectGrid.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\PolygonColliderComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\RigidBodyComponent.cpp">
+>>>>>>> master
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -114,9 +139,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\DXErr.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Engine\FrameTimer.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\GameObject.h">
@@ -176,9 +198,6 @@
     <ClInclude Include="..\Engine\rapidxml_print.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\Rect.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\Engine\RequestBuildSceneMessage.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -233,6 +252,7 @@
     <ClInclude Include="..\Engine\ComponentSaver.h">
       <Filter>Source</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\Engine\DxGraphics.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -243,6 +263,33 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\TextRendererComponent.h">
+=======
+    <ClInclude Include="..\Engine\PhysicsSystem.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\BoxColliderComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\CircleColliderComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\ColliderComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Collision.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\ObjectGrid.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\PolygonColliderComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\SaveSceneMessage.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\RigidBodyComponent.h">
+>>>>>>> master
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

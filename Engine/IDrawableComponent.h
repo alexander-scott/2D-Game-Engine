@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DrawSceneMessage.h"
+#include "Consts.h"
 
 class IDrawableComponent
 {

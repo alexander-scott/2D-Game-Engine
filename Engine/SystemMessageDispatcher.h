@@ -28,4 +28,3 @@ protected:
 	// Holds a map of MessageTypes, with each message type having numerous Listeners listening for a message being sent of that type
 	std::map<SystemMessageType, std::vector<IListener*>>	_listeners;
 };
-

@@ -126,6 +126,8 @@ Vec2 TransformComponent::GetWorldPosition() const
 		return _localPosition;
 }
 
+#pragma region Editor Functions
+
 int TransformComponent::GetEditorFieldCount()
 {
 	return 4;
@@ -188,3 +190,5 @@ void TransformComponent::SetEditorFieldValue(int fieldIndex, const char* value)
 		}
 	}
 }
+
+#pragma endregion

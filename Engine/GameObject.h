@@ -3,11 +3,10 @@
 #include "Consts.h"
 
 #include "IComponent.h"
+#include "IStartableComponent.h"
 #include "IUpdateableComponent.h"
 #include "IDrawableComponent.h"
 #include "IMessageableComponent.h"
-
-#include "DrawSceneMessage.h"
 
 #include <objbase.h>
 
@@ -19,11 +18,14 @@ public:
 	GameObject(string tag, GUID id);
 	~GameObject();
 
+	void Start();
+
 	void Update(float deltaTime);
 
 	void AddComponent(IComponent* component);
 
 	vector<IComponent*> GetAllComponents() { return _components; }
+	IComponent* GetComponentAtIndex(int index) { return _components[index]; }
 	void GetDrawableComponents(map<int, vector<IDrawableComponent*>>& message);
 	void SendMessageToComponent(IComponentMessage& message);
 

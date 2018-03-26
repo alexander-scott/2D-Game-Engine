@@ -10,6 +10,14 @@ Scene::~Scene()
 	}
 }
 
+void Scene::Start()
+{
+	for (auto go : _gameObjects)
+	{
+		go->Start();
+	}
+}
+
 void Scene::Update(float deltaTime)
 {
 	for (auto go : _gameObjects)
@@ -26,8 +34,6 @@ void Scene::SendMessageToGameObjects(IComponentMessage & message)
 	}
 }
 
-// In this function you can dissassemble GameObjects and add them to various structures.
-// Only called at scene initalisation so doesn't have to be performant
 void Scene::AddGameObject(shared_ptr<GameObject> gameObject)
 {
 	_gameObjects.push_back(gameObject);
@@ -56,4 +62,3 @@ void Scene::DeleteGameObject(unsigned long id)
 	it = _gameObjectIDs.find(guidToDelete);
 	_gameObjectIDs.erase(it);
 }
-

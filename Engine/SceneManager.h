@@ -1,7 +1,5 @@
 #pragma once
 
-#include "FrameTimer.h"
-
 #include "Scene.h"
 
 #include "ISystem.h"
@@ -21,6 +19,5 @@ public:
 
 private:
 	shared_ptr<Scene>		_currentScene;
-	FrameTimer				_frameTimer;
 	bool					_isPlaying;
 };

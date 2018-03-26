@@ -3,18 +3,17 @@
 #include "IMessenger.h"
 #include "SystemMessageDispatcher.h"
 
-// BROKEN
 class SystemMessageMessenger : public IMessenger
 {
 public:
 	SystemMessageMessenger(std::shared_ptr<SystemMessageDispatcher> dispatcher) 
-		: SMDispatcher(dispatcher) { }
+		: _systemMessageDispatcher(dispatcher) { }
 
 	void SendMessageToDispatcher(ISystemMessage& message)
 	{
-		SMDispatcher->SendMessageToListeners(message);
+		_systemMessageDispatcher->SendMessageToListeners(message);
 	}
 
 private:
-	std::shared_ptr<SystemMessageDispatcher> SMDispatcher;
+	std::shared_ptr<SystemMessageDispatcher> _systemMessageDispatcher;
 };
