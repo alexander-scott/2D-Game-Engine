@@ -21,6 +21,7 @@ using Microsoft::WRL::ComPtr;
 DxGraphics::DxGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: IGraphics(dispatcher)
 {
+	
 }
 
 void DxGraphics::Initalise(HWNDKey& key)
@@ -267,7 +268,7 @@ void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
 HRESULT DxGraphics::LoadTexture(std::string path)
 {
 	//converting name into adress of texture file
-	std::wstring wstrName = std::wstring(path.begin(), path.end());
+	/*std::wstring wstrName = std::wstring(path.begin(), path.end());
 	const wchar_t *textureToDraw = wstrName.c_str();
 	ID3D11ShaderResourceView* text = nullptr;
 
@@ -279,19 +280,21 @@ HRESULT DxGraphics::LoadTexture(std::string path)
 	
 	_textures[path] = text;
 
-	return S_OK;
+	return S_OK;*/
+	return TextureManager::GetInstance()->LoadTexture(*this, path);
 }
 
 
 ID3D11ShaderResourceView * DxGraphics::GetTexture(std::string path)
 {
 
-	std::map<std::string, ID3D11ShaderResourceView*>::iterator it = _textures.find(path);
+	/*std::map<std::string, ID3D11ShaderResourceView*>::iterator it = _textures.find(path);
 	if (it != _textures.end()) { //texture found
 		return it->second;
 	}
 	else
-		return nullptr; //Texture not found/loaded yet 
+		return nullptr; //Texture not found/loaded yet */
+	return TextureManager::GetInstance()->GetTexture(*this, path);
 }
 
 
@@ -307,7 +310,6 @@ void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float4* rgb3, f
 	float widthText = textRect.m128_f32[0];
 	float heightText = textRect.m128_f32[1];
 	
-	//_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor); //without rotation
 	_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor, rot, XMFLOAT2(offset.x, offset.y), scale); //offset is set at 0.0f, 0.0f in the xml file so far
 	//_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor, 0.3f, XMFLOAT2(widthText/2, heightText/2), scale); //here we calculate the offset so that it is at the center of the text rect. doesn't seem to be exactlyat the center though...
 	
@@ -401,3 +403,48 @@ std::wstring DxGraphics::Exception::GetExceptionType() const
 {
 	return L"TestGraphics Exception";
 }
+
+
+TextureManager* TextureManager::_instance = 0;
+
+TextureManager::TextureManager() {
+
+}
+
+TextureManager* TextureManager::GetInstance() {
+
+	if (_instance == 0) {
+		_instance = new TextureManager();
+	}
+
+	return _instance;
+}
+
+ID3D11ShaderResourceView * TextureManager::GetTexture(DxGraphics &dxGraphics, std::string path)
+{
+	std::map<std::string, ID3D11ShaderResourceView*>::iterator it = dxGraphics._textures.find(path);
+	if (it != dxGraphics._textures.end()) { //texture found
+		return it->second;
+	}
+	else
+		return nullptr; //Texture not found/loaded yet 
+}
+
+HRESULT TextureManager::LoadTexture(DxGraphics &dxGraphics, std::string path)
+{
+	//converting name into adress of texture file
+	std::wstring wstrName = std::wstring(path.begin(), path.end());
+	const wchar_t *textureToDraw = wstrName.c_str();
+	ID3D11ShaderResourceView* text = nullptr;
+
+	HRESULT hr = CreateDDSTextureFromFile(dxGraphics._device.Get(), textureToDraw, nullptr, &text);
+	if (FAILED(hr)) {
+		MessageBox(0, L"Problem loading texture", 0, 0);
+		return hr;
+	}
+
+	dxGraphics._textures[path] = text;
+
+	return S_OK;
+}
+
