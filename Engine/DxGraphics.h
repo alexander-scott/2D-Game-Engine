@@ -4,6 +4,7 @@
 #include "Consts.h"
 #include "SpriteRendererComponent.h" 
 #include "TextRendererComponent.h"
+#include "Animation.h"
 //#include "TextureManager.h"
 
 #include <cassert>
@@ -72,6 +73,7 @@ private:
 	std::unique_ptr<PrimitiveBatch<VertexPositionColor>>	_primitiveBatch;
 	/*static*/ std::map<std::string, ID3D11ShaderResourceView*>		_textures;
 	TextureManager * _textureManager;
+	Animation _animation;
 };
 
 class TextureManager

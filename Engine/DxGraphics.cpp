@@ -26,6 +26,11 @@ DxGraphics::DxGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 
 void DxGraphics::Initalise(HWNDKey& key)
 {
+	//todo:delete
+	this->_animation.LoadXml("toChange");
+
+		
+	//end todo
 	assert(key.hWnd != nullptr);
 
 	// Create device and swap chain

@@ -263,6 +263,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="BuildSceneMessage.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ComponentBuilder.h" />
@@ -322,6 +323,7 @@
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ComponentBuilder.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />

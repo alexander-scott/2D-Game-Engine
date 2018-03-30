@@ -259,6 +259,9 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Engine\Systems\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Engine\Systems\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -337,6 +340,9 @@
       <Filter>Engine\GameObject\Components\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
+      <Filter>Engine\Systems\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
       <Filter>Engine\Systems\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
