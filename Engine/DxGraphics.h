@@ -36,8 +36,6 @@ public:
 
 	void DrawSprite(std::string name, Vec2 pos, RECT* rect, float rot, float scale, Vec2 offset);
 
-	//void DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset);
-
 	void DrawText(std::string text, Vec2 pos, float rot, float4 * rgb3, float scale, Vec2 offset);
 
 	void DrawLine(Vec2 v1, Vec2 v2);
@@ -45,9 +43,12 @@ public:
 	HRESULT LoadTexture(std::string path);
 	ID3D11ShaderResourceView* GetTexture(std::string path);
 
-	//friend ID3D11ShaderResourceView * TextureManager::GetTexture(DxGraphics &dxGraphics, std::string path);
-	//friend HRESULT TextureManager::LoadTexture(DxGraphics &dxGraphics, std::string path);
 	friend class TextureManager;
+	void LoadAnimationNames();
+	void LoadAnimations();
+	Animation *RetrieveAnimationFromMap(std::string animationName);
+
+
 private:
 	// vertex format for the framebuffer fullscreen textured quad
 	struct FSQVertex
@@ -73,18 +74,17 @@ private:
 	std::unique_ptr<PrimitiveBatch<VertexPositionColor>>	_primitiveBatch;
 	/*static*/ std::map<std::string, ID3D11ShaderResourceView*>		_textures;
 	TextureManager * _textureManager;
-	std::map<std::string, std::vector<Animation>>_animations; //TODO : load all animations according to the texture path
+	std::vector<std::string>_animationNames;
+	std::map<std::string, Animation*> _nameAndAnimations; //TODO : load all animations according to the texture path
+	
 	Animation _animation;
 };
 
 class TextureManager
 {
 public:
-	//static std::map<std::string, ID3D11ShaderResourceView*> _texturesMap;
-	//static std::map<std::string name, std::string path> _namePath;
 	static TextureManager* GetInstance();
 
-	//HRESULT RetrieveTexture(std::map<std::string, ID3D11ShaderResourceView*> textures, std::string name, ID3D11ShaderResourceView* textureOut);
 	ID3D11ShaderResourceView * GetTexture(DxGraphics &dxGraphics, std::string path);
 	HRESULT LoadTexture(DxGraphics &dxGraphics, std::string path);
 

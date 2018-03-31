@@ -1,5 +1,5 @@
 <?xml?>
-<Animations>
-	<Anim name = "PlayerGreenCrawl.xml"/> 
+<Animations>	
 	<Anim name = "PlayerGreenWalk.xml"/>
+	<Anim name = "PlayerGreenCrawl2.xml"/> 
 </Animations>

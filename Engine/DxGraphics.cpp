@@ -27,8 +27,9 @@ DxGraphics::DxGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 void DxGraphics::Initalise(HWNDKey& key)
 {
 	//todo:delete
-	this->_animation.LoadXml("..\\Resources\\Animations\\animationPlayerGreen1.xml");
-
+	//this->_animation.LoadXml("..\\Resources\\Animations\\animationPlayerGreen1.xml");
+	LoadAnimationNames();
+	LoadAnimations();
 		
 	//end todo
 	assert(key.hWnd != nullptr);
@@ -247,6 +248,10 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 
 void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
 {
+	//TODO : Add name object+action in parameters to pick the correct animation from the name/animation map. 
+	//TODO : Also, do that in scene object to draw
+	//TODO : ALso, add action we want the object to do ( ex : "GreenPlayerWalk" ) in scene object to draw (xml file)
+	
 	ID3D11ShaderResourceView* text = nullptr;
 	
 	if (GetTexture(name)==nullptr) { //Texture has not been loaded yet
@@ -260,18 +265,13 @@ void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, 
 		//ie : x = rect.width/2 = 54 / 2 = 27
 		//y = rect.height/2 = 45 / 2 = 22.5
 		//wouldn't it be better to calculate the offset in code? else we'd have to do it for each sprite we want to draw 
-	//TODO : delete
-	//Animation anim;
-	//anim.LoadXml("bla");
-	_animation.AdvanceRect();
-	
-	RECT *r2 = new RECT();
-	r2->bottom = 54; r2->top = 0; r2->right = 90; r2->left = 45;
+
+	//Animation *test = RetrieveAnimationFromMap("PlayerGreenCrawl2.xml");
+	Animation *test = RetrieveAnimationFromMap("PlayerGreenWalk.xml");
+	test->UpdateRect(0.0f); //TODO : fix - Use FrameTimer?
 	
 //	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
-	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), _animation.GetRect(), Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
-	//_sprites->Draw(text, XMFLOAT2(250.0f, 250.0f), rect, Colors::White, 0.0f, XMFLOAT2(offset.x, offset.y), 1.0f);
-	//_sprites->Draw(text, XMFLOAT2(300, 250.0f), r2, Colors::White, 0.0f, XMFLOAT2(offset.x, offset.y), 1.0f);
+	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), test->GetRect(), Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
 }
 
 void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
@@ -289,6 +289,8 @@ ID3D11ShaderResourceView * DxGraphics::GetTexture(std::string path)
 {
 	return TextureManager::GetInstance()->GetTexture(*this, path);
 }
+
+
 
 
 void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float4* rgb3, float scale, Vec2 offset)
@@ -398,10 +400,55 @@ std::wstring DxGraphics::Exception::GetExceptionType() const
 }
 
 
+void DxGraphics::LoadAnimationNames() //Retrieves xml file that has all path strings to animations 
+//and loads them into std::map<std::string, Animation> _nameAndAnimations; 
+{
+	xml_document<> doc;
+	xml_node<>* node;
+
+	std::ifstream file("..\\Resources\\Animations\\Animations.xml");
+	std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	buffer.push_back('\0');
+
+
+	doc.parse<0>(&buffer[0]);
+	
+
+	//retrieve root node
+	node = doc.first_node("Animations");
+	for (xml_node<>* nodeAnimation = node->first_node("Anim"); nodeAnimation; nodeAnimation = nodeAnimation->next_sibling()) {
+		Animation a;
+		string animName = nodeAnimation->first_attribute("name")->value();
+		string animPath = "..\\Resources\\Animations\\" + animName;
+
+		_animationNames.push_back(animName);
+		
+	}
+	
+}
+void DxGraphics::LoadAnimations() {
+	for each (std::string  name in _animationNames)
+	{
+		Animation *a = new Animation(); 
+		a->LoadXml("..\\Resources\\Animations\\" + name);
+		_nameAndAnimations[name] = a;
+	}
+}
+
+Animation *DxGraphics::RetrieveAnimationFromMap(std::string animationName)
+{
+	std::map<std::string, Animation*>::iterator it = _nameAndAnimations.find(animationName);
+	return it->second;
+}
+
 TextureManager* TextureManager::_instance = 0;
 
 TextureManager::TextureManager() {
 
+}
+
+TextureManager::~TextureManager()
+{
 }
 
 TextureManager* TextureManager::GetInstance() {

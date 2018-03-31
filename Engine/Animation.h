@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include <d3d11.h>
+//#define RAPIDXML_NO_EXCEPTIONS 
 #include "rapidxml.hpp"
 #include <fstream>
 #include <iostream>
@@ -22,6 +23,7 @@ class Animation
 {
 public:
 	Animation();
+	Animation(std::string path);
 	~Animation();
 	void AddFrame(RECT rect);
 	void GenerateRects(); //TODO : delete
@@ -42,15 +44,15 @@ private:
 	StartPosition _startPosition;
 	int _width;
 	int _height;
-	std::string _type; //ex : ping pong, linear... Not used now but should be
+	std::string _type; //ex : ping pong, linear... Not used yet now but should be
 	
 	RECT *_rect = nullptr; //actual rect to display
 
 	std::vector<int> _sequence; //sequence of the ids of the rectangles we want to display for the animation
 	std::vector<RECT> _rects;  //not really useful anymore...?
-	//std::map<int, std::vector<RECT>>_idRect; //Map that saves the rectangles of the animation according to an id.
 	std::map<int, RECT*>_idRect;
 	std::map<std::string, Animation>_nameAnimations;
+
 	
 
 };

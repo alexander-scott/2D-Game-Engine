@@ -6,6 +6,11 @@ Animation::Animation()
 {
 }
 
+Animation::Animation(std::string path)
+{
+	LoadXml(path);
+}
+
 
 Animation::~Animation()
 {
@@ -30,10 +35,16 @@ void Animation::GenerateRects()
 
 void Animation::UpdateRect(float dt)
 {
-	//while( currentTime + dt >= holdTime ){ //add time element IN animation? Or retrieve it from engine?
+	//float fakeTimer = 150.0f;//TODO : use REAL time value. But should use system's time..?
+	//float t = 0.0f;
+	//while (t < fakeTimer)
+	////while( currentTime + dt >= holdTime ){ //add time element IN animation? Or retrieve it from engine?
+	//{
 		AdvanceRect();
-		//currentTime -= holdTime;
+	//	t += 0.001f;
+	//	//currentTime -= holdTime;
 	//}
+	////}
 
 }
 
@@ -138,10 +149,29 @@ void Animation::LoadXml(std::string pathToFile)
 	std::ifstream file(pathToFile);
 	std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 	buffer.push_back('\0');
+	
 
 
-	doc.parse<0>(&buffer[0]);
-
+	try {
+		doc.parse<0>(&buffer[0]);
+	}
+	catch (const std::runtime_error& e)
+	{
+		std::cerr << "Runtime error was: " << e.what() << std::endl;
+	}
+	catch (const rapidxml::parse_error& e)
+	{
+		std::string er = e.what();
+			std::cerr << "Parse error was: " << e.what() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "Error was: " << e.what() << std::endl;
+	}
+	catch (...)
+	{
+		std::cerr << "An unknown error occurred." << std::endl;
+	}
 
 	//retrieve root node
 	node = doc.first_node("Animation");
