@@ -1,5 +1,5 @@
 <?xml?>
-<Animation name="animation1">
+<Animation name="walk">
 	<StartPosition xpos="0" ypos="0"/>
 	<Dimensions width="45" height = "54"/>
 	<Type name = "pingpong"/>
@@ -14,3 +14,18 @@
 
 </Animation>
 
+
+<Animation name="jump">
+	<StartPosition xpos="0" ypos="0"/>
+	<Dimensions width="45" height = "54"/>
+	<Type name = "pingpong"/>
+	
+	<Rectangles>
+		<Rect id = "0" top = "0" right = "45" bottom = "54" left = "0"/>
+		<Rect id = "1" top = "0" right = "90" bottom = "54" left = "45"/>
+		<Rect id = "2" top = "0" right = "135" bottom = "54" left = "90"/>
+	</Rectangles>	
+	
+	<Sequence seq="0" seq = "1" seq = "2" seq = "1" />
+
+</Animation>

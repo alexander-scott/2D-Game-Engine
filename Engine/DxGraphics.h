@@ -73,6 +73,7 @@ private:
 	std::unique_ptr<PrimitiveBatch<VertexPositionColor>>	_primitiveBatch;
 	/*static*/ std::map<std::string, ID3D11ShaderResourceView*>		_textures;
 	TextureManager * _textureManager;
+	std::map<std::string, std::vector<Animation>>_animations; //TODO : load all animations according to the texture path
 	Animation _animation;
 };
 

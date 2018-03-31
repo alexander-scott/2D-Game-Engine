@@ -1,0 +1,4 @@
+Fix error RGB text - ok
+texture manager class + xml file saving textures ids, paths, etc.
+complex animations
+offset rotation - ok

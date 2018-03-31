@@ -27,7 +27,7 @@ DxGraphics::DxGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 void DxGraphics::Initalise(HWNDKey& key)
 {
 	//todo:delete
-	this->_animation.LoadXml("toChange");
+	this->_animation.LoadXml("..\\Resources\\Animations\\animationPlayerGreen1.xml");
 
 		
 	//end todo
@@ -260,9 +260,18 @@ void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, 
 		//ie : x = rect.width/2 = 54 / 2 = 27
 		//y = rect.height/2 = 45 / 2 = 22.5
 		//wouldn't it be better to calculate the offset in code? else we'd have to do it for each sprite we want to draw 
-
-	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
-
+	//TODO : delete
+	//Animation anim;
+	//anim.LoadXml("bla");
+	_animation.AdvanceRect();
+	
+	RECT *r2 = new RECT();
+	r2->bottom = 54; r2->top = 0; r2->right = 90; r2->left = 45;
+	
+//	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
+	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), _animation.GetRect(), Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
+	//_sprites->Draw(text, XMFLOAT2(250.0f, 250.0f), rect, Colors::White, 0.0f, XMFLOAT2(offset.x, offset.y), 1.0f);
+	//_sprites->Draw(text, XMFLOAT2(300, 250.0f), r2, Colors::White, 0.0f, XMFLOAT2(offset.x, offset.y), 1.0f);
 }
 
 void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
@@ -272,33 +281,12 @@ void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
 
 HRESULT DxGraphics::LoadTexture(std::string path)
 {
-	//converting name into adress of texture file
-	/*std::wstring wstrName = std::wstring(path.begin(), path.end());
-	const wchar_t *textureToDraw = wstrName.c_str();
-	ID3D11ShaderResourceView* text = nullptr;
-
-	HRESULT hr = CreateDDSTextureFromFile(_device.Get(), textureToDraw, nullptr, &text);
-	if (FAILED(hr)) {
-		MessageBox(0, L"Problem loading texture", 0, 0);
-		return hr;
-	}
-	
-	_textures[path] = text;
-
-	return S_OK;*/
 	return TextureManager::GetInstance()->LoadTexture(*this, path);
 }
 
 
 ID3D11ShaderResourceView * DxGraphics::GetTexture(std::string path)
 {
-
-	/*std::map<std::string, ID3D11ShaderResourceView*>::iterator it = _textures.find(path);
-	if (it != _textures.end()) { //texture found
-		return it->second;
-	}
-	else
-		return nullptr; //Texture not found/loaded yet */
 	return TextureManager::GetInstance()->GetTexture(*this, path);
 }
 

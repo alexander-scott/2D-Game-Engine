@@ -24,24 +24,33 @@ public:
 	Animation();
 	~Animation();
 	void AddFrame(RECT rect);
-	void GenerateRects();
-	void UpdateRect();
+	void GenerateRects(); //TODO : delete
+	void UpdateRect(float dt);
+	void AdvanceRect();
 	void LoadXml(std::string pathToFile);
-	void SetValuesFromXml(int xPos, int yPos, int width, int height, std::string type, std::vector<int> sequence);
+	void LoadXml2(std::string pathToFile);
+	void SetValuesFromXml(int xPos, int yPos, int width, int height, std::string type, std::vector<int> sequence, std::map<int, RECT*> idRect);
+
+	RECT* GetRect();
+	std::string GetType();
+
+	Animation CreateAnimationFromXml(int xPos, int yPos, int width, int height, std::string type, std::vector<int> sequence, std::map<int, RECT*> idRect);
+	Animation RetrieveAnimationFromType(std::string type); //returns corresponding animation from _nameAnimation
 
 private:
+	int _iterator = 0;
 	StartPosition _startPosition;
 	int _width;
 	int _height;
-	std::string _type;
+	std::string _type; //ex : ping pong, linear... Not used now but should be
 	
-	RECT _rect;
+	RECT *_rect = nullptr; //actual rect to display
 
-	std::vector<int> _sequence;
-	std::vector<RECT> _rects; 
-	std::map<int, std::vector<RECT>(id,)
-
-
+	std::vector<int> _sequence; //sequence of the ids of the rectangles we want to display for the animation
+	std::vector<RECT> _rects;  //not really useful anymore...?
+	//std::map<int, std::vector<RECT>>_idRect; //Map that saves the rectangles of the animation according to an id.
+	std::map<int, RECT*>_idRect;
+	std::map<std::string, Animation>_nameAnimations;
 	
 
 };
