@@ -89,6 +89,12 @@
     <Filter Include="Engine\GameObject\Components\Physics">
       <UniqueIdentifier>{c1006ffe-8b5b-4d40-bd0e-6f9ac9cb0992}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems\Audio">
+      <UniqueIdentifier>{1448700f-60db-4552-ac47-4c3d35453c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Messaging\Messages\AudioSystemMessages">
+      <UniqueIdentifier>{085d6e00-b681-498a-a36e-20790d74999c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -289,8 +295,19 @@
     <ClInclude Include="InputHandlerToGameObjectMessage.h">
       <Filter>Engine\Messaging\Messages\InputMessages</Filter>
     </ClInclude>
-    <ClInclude Include="DrawSceneMessage.h" />
-    <ClInclude Include="IStartableComponent.h" />
+    <ClInclude Include="AudioSystem.h">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSoundFileManager.h">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayAudioMessage.h">
+      <Filter>Engine\Messaging\Messages\AudioSystemMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="IStartableComponent.h">
+      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="DXErr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -301,9 +318,6 @@
     </ClCompile>
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Engine\GameObject\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="DXErr.cpp">
-      <Filter>Engine\Systems\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="SceneBuilder.cpp">
       <Filter>Engine\Systems\SceneBuilding</Filter>
@@ -389,7 +403,16 @@
     <ClCompile Include="ObjectGrid.cpp">
       <Filter>Engine\Systems\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="AudioSystem.cpp">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSoundFileManager.cpp">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClCompile>
     <ClCompile Include="DXErr.cpp" />
+    <ClCompile Include="DXErr.cpp">
+      <Filter>Engine\Systems\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">

@@ -8,6 +8,7 @@
 #include "MainWindow.h"
 #include "Editor.h"
 #include "PhysicsSystem.h"
+#include "AudioSystem.h"
 
 #include "RequestBuildSceneMessage.h"
 #include "RequestSaveSceneMessage.h"
@@ -145,6 +146,10 @@ void Engine::InitaliseSystems()
 	Logger::Instance().LogMessage("Initalising Physics system", LogSeverity::eInfo);
 	auto physicsSystem = make_shared<PhysicsSystem>(_messageDispatcher);
 	_systems.insert(std::make_pair(physicsSystem->SysType, physicsSystem));
+
+	Logger::Instance().LogMessage("Initalising Audio system", LogSeverity::eInfo);
+	auto audioSystem = make_shared<AudioSystem>(_messageDispatcher);
+	_systems.insert(std::make_pair(audioSystem->SysType, audioSystem));
 }
 
 // If any of the systems are listening for message this function sets it up. Called after system initalisation.

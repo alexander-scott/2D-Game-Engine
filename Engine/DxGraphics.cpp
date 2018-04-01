@@ -394,7 +394,7 @@ std::wstring DxGraphics::Exception::GetErrorDescription() const
 {
 	std::array<wchar_t, 512> wideDescription;
 	DXGetErrorDescription(hr, wideDescription.data(), wideDescription.size());
-	return wideDescription.data();
+	return nullptr;
 }
 
 std::wstring DxGraphics::Exception::GetExceptionType() const
