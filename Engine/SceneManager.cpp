@@ -75,10 +75,10 @@ void SceneManager::RecieveMessage(ISystemMessage & message)
 		{
 			_isPlaying = true;
 
+			_currentScene->Start();
+
 			SceneMessage msg(SystemMessageType::eSceneSelectedToPlay, _currentScene);
 			SendMessageToDispatcher(msg);
-
-			_currentScene->Start();
 			break;
 		}
 

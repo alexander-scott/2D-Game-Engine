@@ -133,9 +133,6 @@
     <ClInclude Include="IGraphics.h">
       <Filter>Engine\Systems\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="DXErr.h">
-      <Filter>Engine\Systems\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="ISystemMessage.h">
       <Filter>Engine\Messaging\Messages</Filter>
     </ClInclude>
@@ -295,9 +292,6 @@
     <ClInclude Include="InputHandlerToGameObjectMessage.h">
       <Filter>Engine\Messaging\Messages\InputMessages</Filter>
     </ClInclude>
-    <ClInclude Include="AudioSystem.h">
-      <Filter>Engine\Systems\Audio</Filter>
-    </ClInclude>
     <ClInclude Include="AudioSoundFileManager.h">
       <Filter>Engine\Systems\Audio</Filter>
     </ClInclude>
@@ -308,6 +302,12 @@
       <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
     </ClInclude>
     <ClInclude Include="DXErr.h" />
+    <ClInclude Include="DXErr.h">
+      <Filter>Engine\Systems\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSystem.h">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
