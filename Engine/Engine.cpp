@@ -2,8 +2,8 @@
 
 #include "SceneBuilder.h"
 #include "SceneManager.h"
+#include "DxGraphics.h"
 #include "SceneSaver.h"
-#include "TestGraphics.h"
 #include "InputHandler.h"
 #include "MainWindow.h"
 #include "Editor.h"
@@ -48,7 +48,7 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 	Initalise();
 
 	Logger::Instance().LogMessage("Requesting a new scene be built by the SceneBuilder system", LogSeverity::eInfo);
-	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene1.xml"); // Hardcoded for now
+	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene3-spriteTest.xml"); // Hardcoded for now
 	_messageDispatcher->SendMessageToListeners(message);
 
 	Logger::Instance().LogMessage("Play mode starting", LogSeverity::eInfo);
@@ -131,8 +131,8 @@ void Engine::InitaliseSystems()
 	auto sceneManager = make_shared<SceneManager>(_messageDispatcher);
 	_systems.insert(std::make_pair(sceneManager->SysType, sceneManager));
 
-	Logger::Instance().LogMessage("Initalising Graphics system", LogSeverity::eInfo);
-	auto graphics = make_shared<TestGraphics>(_messageDispatcher); // Create a test graphics instance for now
+	// Initalise Graphics system
+	auto graphics = make_shared<DxGraphics>(_messageDispatcher); // Create a test graphics instance for now
 	_systems.insert(std::make_pair(graphics->SysType, graphics));
 
 	Logger::Instance().LogMessage("Initalising InputHandler system", LogSeverity::eInfo);

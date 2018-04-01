@@ -264,6 +264,7 @@
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="BuildSceneMessage.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="CircleColliderComponent.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Collision.h" />
@@ -272,10 +273,11 @@
     <ClInclude Include="ComponentSaver.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="CustomException.h" />
+    <ClInclude Include="DxGraphics.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="Editor.h" />
-    <ClInclude Include="EditorInputInterface.h" />
     <ClInclude Include="EditorEngineInterface.h" />
+    <ClInclude Include="EditorInputInterface.h" />
     <ClInclude Include="EditorSceneInterface.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ICommand.h" />
@@ -289,8 +291,10 @@
     <ClInclude Include="IMessageableComponent.h" />
     <ClInclude Include="InitaliseGraphicsMessage.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="InputHandlerToGameObjectMessage.h" />
     <ClInclude Include="InputKeyboardMessage.h" />
     <ClInclude Include="InputMouseMessage.h" />
+    <ClInclude Include="IRenderableComponent.h" />
     <ClInclude Include="IStartableComponent.h" />
     <ClInclude Include="ISystemMessage.h" />
     <ClInclude Include="IMessenger.h" />
@@ -311,6 +315,7 @@
     <ClInclude Include="SceneSaver.h" />
     <ClInclude Include="SceneMessage.h" />
     <ClInclude Include="SetParentTransformMessage.h" />
+    <ClInclude Include="SpriteRendererComponent.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />
     <ClInclude Include="SystemMessageListener.h" />
     <ClInclude Include="SystemMessageMessenger.h" />
@@ -318,7 +323,8 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="TestCommand.h" />
-    <ClInclude Include="TestGraphics.h" />
+    <ClInclude Include="TextRendererComponent.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="UpdateSystemMessage.h" />
     <ClInclude Include="WinDefines.h" />
@@ -328,17 +334,20 @@
   <ItemGroup>
     <ClCompile Include="AudioSoundFileManager.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="CircleColliderComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ComponentBuilder.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="ComponentSaver.cpp" />
-    <ClCompile Include="Editor.cpp" />
-    <ClCompile Include="EditorInputInterface.cpp" />
-    <ClCompile Include="EditorEngineInterface.cpp" />
-    <ClCompile Include="EditorSceneInterface.cpp" />
     <ClCompile Include="DXErr.cpp" />
+    <ClCompile Include="DxGraphics.cpp" />
+    <ClInclude Include="DXErr.h" />
+    <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="EditorEngineInterface.cpp" />
+    <ClCompile Include="EditorInputInterface.cpp" />
+    <ClCompile Include="EditorSceneInterface.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -350,11 +359,13 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneSaver.cpp" />
+    <ClCompile Include="SpriteRendererComponent.cpp" />
     <ClCompile Include="SystemMessageDispatcher.cpp" />
     <ClCompile Include="SceneBuilder.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="TestCommand.cpp" />
-    <ClCompile Include="TestGraphics.cpp" />
+    <ClCompile Include="TextRendererComponent.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>

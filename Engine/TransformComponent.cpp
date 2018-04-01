@@ -14,7 +14,8 @@ TransformComponent::TransformComponent(Vec2 localPosition, float localRotation, 
 
 void TransformComponent::SetLocalPosition(Vec2 position)
 {
-	if (position.x != _localPosition.x || position.y != _localPosition.y)
+	//assert(this); //todo : delete after error fixed -can be deleted
+	if (position.x != _localPosition.x || position.y != _localPosition.y) //todo : fix error 
 	{
 		_hasChanged = true;
 	}

@@ -42,9 +42,6 @@
     <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\TestGraphics.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Engine\TransformComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -84,6 +81,12 @@
     <ClCompile Include="..\Engine\ComponentFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\Engine\DxGraphics.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\SpriteRendererComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
     <ClCompile Include="CoreEngineTests.cpp">
       <Filter>EngineTests\Core</Filter>
     </ClCompile>
@@ -112,6 +115,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine\AudioSystem.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\TextRendererComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -221,9 +227,6 @@
     <ClInclude Include="..\Engine\SystemMessageMessenger.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\TestGraphics.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\Engine\TransformComponent.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -252,6 +255,15 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\ComponentSaver.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\DxGraphics.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\IRenderableComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\SpriteRendererComponent.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\PhysicsSystem.h">
@@ -288,6 +300,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\PlayAudioMessage.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\TextRendererComponent.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

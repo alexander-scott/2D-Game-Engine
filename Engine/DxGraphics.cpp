@@ -1,4 +1,4 @@
-#include "TestGraphics.h"
+#include "DxGraphics.h"
 
 #include "MainWindow.h"
 #include "DXErr.h"
@@ -14,16 +14,16 @@ namespace FramebufferShaders
 
 #pragma comment( lib,"d3d11.lib" )
 
-#define GFX_EXCEPTION( hr,note ) TestGraphics::Exception( hr,note,_CRT_WIDE(__FILE__),__LINE__ )
+#define GFX_EXCEPTION( hr,note ) DxGraphics::Exception( hr,note,_CRT_WIDE(__FILE__),__LINE__ )
 
 using Microsoft::WRL::ComPtr;
 
-TestGraphics::TestGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher)
+DxGraphics::DxGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: IGraphics(dispatcher)
 {
 }
 
-void TestGraphics::Initalise(HWNDKey& key)
+void DxGraphics::Initalise(HWNDKey& key)
 {
 	assert(key.hWnd != nullptr);
 
@@ -201,58 +201,134 @@ void TestGraphics::Initalise(HWNDKey& key)
 		throw GFX_EXCEPTION(hr, L"Creating sampler state");
 	}
 
-	// Temporarily removed font initalisation @@@@@@@@@@@@@@@@@@@@@
-	/*std::string fontFile = "..\\..\\..\\..\\Resources\\fonts\\italic.spritefont";
-	std::wstring widestr = std::wstring(fontFile.begin(), fontFile.end());
-	const wchar_t* szFile = widestr.c_str();
-	_fonts.reset(new SpriteFont(_device.Get(), szFile));*/
+	std::string fontFile = "..\\Resources\\fonts\\italic.spritefont";
+	std::wstring widestr = std::wstring(fontFile.begin(), fontFile.end());	
 
 	_sprites.reset(new SpriteBatch(_immediateContext.Get()));
 	_primitiveBatch = std::make_unique<PrimitiveBatch<VertexPositionColor>>(_immediateContext.Get());
+
+	//Create font 
+	_fonts.reset(new SpriteFont(_device.Get(), L"..\\Resources\\fonts\\italic.spritefont"));
 }
 
-void TestGraphics::DrawComponent(IDrawableComponent * component)
+void DxGraphics::DrawComponent(IDrawableComponent * component)
 {
 	switch (component->Type)
 	{
-		case DrawableComponentType::eTestDrawingType:
+		case DrawableComponentType::eTestDrawingType: 
+		{
 			break;
+		}
 
-		// Below is an example of what an implementation might look like
-		/*case DrawableComponentType::eSprite:
-			SpriteRendererComponent* drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
-			DrawSprite(drawComponent.Name, drawComponent.Pos, drawComponent.Rect, drawComponent.Rot, drawComponent.Scale, drawComponent.Offset);
-			break;*/
+		case DrawableComponentType::eText:
+		{
+			TextRendererComponent * textComponent = dynamic_cast<TextRendererComponent*>(component);
+			DrawText(textComponent->GetText(), textComponent->GetPosition(), textComponent->GetRotation(),
+				textComponent->GetRbg3(), textComponent->GetScale(), textComponent->GetOffset());
+			break;
+		}
+		case DrawableComponentType::eSprite: 
+		{
+			SpriteRendererComponent * drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
+			DrawSprite(drawComponent->GetName(), drawComponent->GetPosition(), drawComponent->GetRect(),
+				drawComponent->GetRotation(), drawComponent->GetScale(), drawComponent->GetOffset());
+			break;
+		}
+		default:
+			break;
 	}
 }
 
-void TestGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
+void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
 {
+	ID3D11ShaderResourceView* text = nullptr;
+	
+	if (GetTexture(name)==nullptr) { //Texture has not been loaded yet
+		if (FAILED(LoadTexture(name)))
+			MessageBox(0, L"Problem loading texture", 0, 0);
+	}
+	if (GetTexture(name) != nullptr) { //texture successfully loaded and now we retrieve it
+		text = GetTexture(name);
+	}
+		//offset has been set manually in the scene object (xml file). For the test sprite used here it is set on the center
+		//ie : x = rect.width/2 = 54 / 2 = 27
+		//y = rect.height/2 = 45 / 2 = 22.5
+		//wouldn't it be better to calculate the offset in code? else we'd have to do it for each sprite we want to draw 
+
+	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
+
 }
 
-void TestGraphics::DrawLine(Vec2 v1, Vec2 v2)
+void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
 {
+		
 }
 
-void TestGraphics::DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset)
+HRESULT DxGraphics::LoadTexture(std::string path)
 {
+	//converting name into adress of texture file
+	std::wstring wstrName = std::wstring(path.begin(), path.end());
+	const wchar_t *textureToDraw = wstrName.c_str();
+	ID3D11ShaderResourceView* text = nullptr;
+
+	HRESULT hr = CreateDDSTextureFromFile(_device.Get(), textureToDraw, nullptr, &text);
+	if (FAILED(hr)) {
+		MessageBox(0, L"Problem loading texture", 0, 0);
+		return hr;
+	}
+	
+	_textures[path] = text;
+
+	return S_OK;
 }
 
-void TestGraphics::Destroy()
+
+ID3D11ShaderResourceView * DxGraphics::GetTexture(std::string path)
+{
+
+	std::map<std::string, ID3D11ShaderResourceView*>::iterator it = _textures.find(path);
+	if (it != _textures.end()) { //texture found
+		return it->second;
+	}
+	else
+		return nullptr; //Texture not found/loaded yet 
+}
+
+
+void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float4* rgb3, float scale, Vec2 offset)
+{
+	//TODO : apply rotation, scale, use offset on pos, use rgb chosen.
+	std::wstring wstrText = std::wstring(text.begin(), text.end());
+	const wchar_t *txtToDraw = wstrText.c_str();
+
+	XMVECTORF32 textColor = { { { rgb3->x , rgb3->y, rgb3->z, rgb3->w} } };
+	
+	XMVECTOR textRect = _fonts->MeasureString(txtToDraw);
+	float widthText = textRect.m128_f32[0];
+	float heightText = textRect.m128_f32[1];
+	
+	//_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor); //without rotation
+	_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor, rot, XMFLOAT2(offset.x, offset.y), scale); //offset is set at 0.0f, 0.0f in the xml file so far
+	//_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor, 0.3f, XMFLOAT2(widthText/2, heightText/2), scale); //here we calculate the offset so that it is at the center of the text rect. doesn't seem to be exactlyat the center though...
+	
+}
+
+void DxGraphics::Destroy()
 {
 	// Clear the state of the device context before destruction
 	if (_immediateContext) _immediateContext->ClearState();
 }
 
-void TestGraphics::BeginFrame()
+void DxGraphics::BeginFrame()
 {
 	// Clear render target view
-	_immediateContext->ClearRenderTargetView(_renderTargetView.Get(), Colors::MidnightBlue);
+	_immediateContext->ClearRenderTargetView(_renderTargetView.Get(), Colors::LightPink);
 	_sprites->Begin(SpriteSortMode_Deferred);
 	_primitiveBatch->Begin();
+
 }
 
-void TestGraphics::EndFrame()
+void DxGraphics::EndFrame()
 {
 	HRESULT hr;
 
@@ -286,13 +362,13 @@ void TestGraphics::EndFrame()
 }
 
 // TestGraphics Exception
-TestGraphics::Exception::Exception(HRESULT hr, const std::wstring& note, const wchar_t* file, unsigned int line)
+DxGraphics::Exception::Exception(HRESULT hr, const std::wstring& note, const wchar_t* file, unsigned int line)
 	:
 	CustomException(file, line, note),
 	hr(hr)
 {}
 
-std::wstring TestGraphics::Exception::GetFullMessage() const
+std::wstring DxGraphics::Exception::GetFullMessage() const
 {
 	const std::wstring empty = L"";
 	const std::wstring errorName = GetErrorName();
@@ -309,19 +385,19 @@ std::wstring TestGraphics::Exception::GetFullMessage() const
 			: empty);
 }
 
-std::wstring TestGraphics::Exception::GetErrorName() const
+std::wstring DxGraphics::Exception::GetErrorName() const
 {
 	return DXGetErrorString(hr);
 }
 
-std::wstring TestGraphics::Exception::GetErrorDescription() const
+std::wstring DxGraphics::Exception::GetErrorDescription() const
 {
 	std::array<wchar_t, 512> wideDescription;
 	DXGetErrorDescription(hr, wideDescription.data(), wideDescription.size());
-	return wideDescription.data();
+	return nullptr;
 }
 
-std::wstring TestGraphics::Exception::GetExceptionType() const
+std::wstring DxGraphics::Exception::GetExceptionType() const
 {
 	return L"TestGraphics Exception";
 }

@@ -76,8 +76,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>.\$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -106,6 +106,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -175,6 +176,7 @@
     <ClCompile Include="..\Engine\ComponentFactory.cpp" />
     <ClCompile Include="..\Engine\ComponentSaver.cpp" />
     <ClCompile Include="..\Engine\DXErr.cpp" />
+    <ClCompile Include="..\Engine\DxGraphics.cpp" />
     <ClCompile Include="..\Engine\Editor.cpp" />
     <ClCompile Include="..\Engine\Engine.cpp" />
     <ClCompile Include="..\Engine\GameObject.cpp" />
@@ -189,9 +191,10 @@
     <ClCompile Include="..\Engine\SceneBuilder.cpp" />
     <ClCompile Include="..\Engine\SceneManager.cpp" />
     <ClCompile Include="..\Engine\SceneSaver.cpp" />
+    <ClCompile Include="..\Engine\SpriteRendererComponent.cpp" />
     <ClCompile Include="..\Engine\SystemMessageDispatcher.cpp" />
     <ClCompile Include="..\Engine\TestCommand.cpp" />
-    <ClCompile Include="..\Engine\TestGraphics.cpp" />
+    <ClCompile Include="..\Engine\TextRendererComponent.cpp" />
     <ClCompile Include="..\Engine\TransformComponent.cpp" />
     <ClCompile Include="CoreEngineTests.cpp" />
     <ClCompile Include="GameObjectTests.cpp" />
@@ -214,6 +217,7 @@
     <ClInclude Include="..\Engine\DrawSpriteMessage.h" />
     <ClInclude Include="..\Engine\DrawTextMessage.h" />
     <ClInclude Include="..\Engine\DXErr.h" />
+    <ClInclude Include="..\Engine\DxGraphics.h" />
     <ClInclude Include="..\Engine\Editor.h" />
     <ClInclude Include="..\Engine\Engine.h" />
     <ClInclude Include="..\Engine\GameObject.h" />
@@ -229,6 +233,7 @@
     <ClInclude Include="..\Engine\InputHandler.h" />
     <ClInclude Include="..\Engine\InputKeyboardMessage.h" />
     <ClInclude Include="..\Engine\InputMouseMessage.h" />
+    <ClInclude Include="..\Engine\IRenderableComponent.h" />
     <ClInclude Include="..\Engine\ISystem.h" />
     <ClInclude Include="..\Engine\ISystemMessage.h" />
     <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h" />
@@ -250,11 +255,12 @@
     <ClInclude Include="..\Engine\SceneManager.h" />
     <ClInclude Include="..\Engine\SceneSaver.h" />
     <ClInclude Include="..\Engine\SetParentTransformMessage.h" />
+    <ClInclude Include="..\Engine\SpriteRendererComponent.h" />
     <ClInclude Include="..\Engine\SystemMessageDispatcher.h" />
     <ClInclude Include="..\Engine\SystemMessageListener.h" />
     <ClInclude Include="..\Engine\SystemMessageMessenger.h" />
     <ClInclude Include="..\Engine\TestCommand.h" />
-    <ClInclude Include="..\Engine\TestGraphics.h" />
+    <ClInclude Include="..\Engine\TextRendererComponent.h" />
     <ClInclude Include="..\Engine\TransformComponent.h" />
     <ClInclude Include="..\Engine\WinDefines.h" />
   </ItemGroup>

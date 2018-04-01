@@ -2,6 +2,8 @@
 
 #include "IGraphics.h"
 #include "Consts.h"
+#include "SpriteRendererComponent.h" 
+#include "TextRendererComponent.h"
 
 #include <cassert>
 #include <map>
@@ -16,10 +18,11 @@
 
 using namespace DirectX;
 
-class TestGraphics : public IGraphics
+class DxGraphics : public IGraphics
 {
 public:
-	TestGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher);
+	DxGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher);
+
 
 	virtual void Initalise(class HWNDKey& key) override;
 	virtual void Destroy() override;
@@ -31,9 +34,14 @@ public:
 
 	void DrawSprite(std::string name, Vec2 pos, RECT* rect, float rot, float scale, Vec2 offset);
 
-	void DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset);
+	//void DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset);
+
+	void DrawText(std::string text, Vec2 pos, float rot, float4 * rgb3, float scale, Vec2 offset);
 
 	void DrawLine(Vec2 v1, Vec2 v2);
+
+	HRESULT LoadTexture(std::string path);
+	ID3D11ShaderResourceView* GetTexture(std::string path);
 
 private:
 	// vertex format for the framebuffer fullscreen textured quad
@@ -59,4 +67,5 @@ private:
 	std::unique_ptr<SpriteFont>								_fonts;
 	std::unique_ptr<PrimitiveBatch<VertexPositionColor>>	_primitiveBatch;
 	std::map<std::string, ID3D11ShaderResourceView*>		_textures;
+
 };

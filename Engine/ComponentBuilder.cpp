@@ -6,6 +6,8 @@ shared_ptr<Scene> _scene;
 
 // Define component build functions here
 inline IComponent * BuildTransformComponent();
+inline IComponent * BuildSpriteRendererComponent();
+inline IComponent * BuildTextRendererComponent();
 inline IComponent * BuildRigidbodyComponent();
 inline IComponent * BuildCircleColliderComponent();
 inline IComponent * BuildBoxColliderComponent();
@@ -16,6 +18,8 @@ IComponent * dependencyComponent;
 // Define fetch dependency functions here
 inline void FetchCircleColliderDependencies();
 inline void FetchBoxColliderDependencies();
+inline void FetchSpriteRendererDependencies();
+inline void FetchTextRendererDependencies();
 
 ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 {
@@ -23,6 +27,8 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 
 	// Insert build functions here
 	_buildMapper.Insert("TransformComponent", BuildTransformComponent);
+	_buildMapper.Insert("SpriteRendererComponent", BuildSpriteRendererComponent);
+	_buildMapper.Insert("TextRendererComponent", BuildTextRendererComponent);
 	_buildMapper.Insert("RigidbodyComponent", BuildRigidbodyComponent);
 	_buildMapper.Insert("CircleColliderComponent", BuildCircleColliderComponent);
 	_buildMapper.Insert("BoxColliderComponent", BuildBoxColliderComponent);
@@ -30,6 +36,8 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 	// Insert fetch dependency functions here
 	_dependencyBuildMapper.Insert("CircleColliderComponent", FetchCircleColliderDependencies);
 	_dependencyBuildMapper.Insert("BoxColliderComponent", FetchBoxColliderDependencies);
+	_dependencyBuildMapper.Insert("SpriteRendererComponent", FetchSpriteRendererDependencies);
+	_dependencyBuildMapper.Insert("TextRendererComponent", FetchTextRendererDependencies);
 }
 
 GUID StringToGUID(const std::string& guid) {
@@ -68,6 +76,7 @@ IComponent * ComponentBuilder::BuildComponent(xml_node<>* node)
 	return _buildMapper.CallFunction<IComponent*>(string(node->first_attribute("type")->value()));
 }
 
+//TODO : delete when sure that we don't use it anymore - we should only be using TextRendererComponent or SpriteRendererComponent
 IComponent * BuildTransformComponent()
 {
 	float xPos = (float)atof(_node->first_attribute("xpos")->value());
@@ -76,6 +85,47 @@ IComponent * BuildTransformComponent()
 	float scale = (float)atof(_node->first_attribute("scale")->value());
 
 	return ComponentFactory::MakeTransformComponent(Vec2(xPos, yPos), rot, scale);
+}
+
+IComponent * BuildSpriteRendererComponent()
+{
+	LONG rectTop = (LONG)atof(_node->first_attribute("rectTop")->value());
+	LONG rectBottom = (LONG)atof(_node->first_attribute("rectBottom")->value());
+	LONG rectLeft = (LONG)atof(_node->first_attribute("rectLeft")->value());
+	LONG rectRight = (LONG)atof(_node->first_attribute("rectRight")->value());
+
+	float offset1 = (float)atof(_node->first_attribute("offset1")->value());
+	float offset2 = (float)atof(_node->first_attribute("offset2")->value());
+
+	RECT *rect = new RECT(); rect->top = rectTop; rect->left = rectLeft; rect->right = rectRight; rect->bottom = rectBottom;
+	Vec2 offset = Vec2(offset1, offset2);
+	std::string name = (std::string)(_node->first_attribute("text")->value()); //path to "file"
+	
+	return ComponentFactory::MakeSpriteRendererComponent(rect, offset,name);
+}
+
+IComponent * BuildTextRendererComponent()
+{
+	LONG rectTop = (LONG)atof(_node->first_attribute("rectTop")->value());
+	LONG rectBottom = (LONG)atof(_node->first_attribute("rectBottom")->value());
+	LONG rectLeft = (LONG)atof(_node->first_attribute("rectLeft")->value());
+	LONG rectRight = (LONG)atof(_node->first_attribute("rectRight")->value());
+	
+	float offset1 = (float)atof(_node->first_attribute("offset1")->value());
+	float offset2 = (float)atof(_node->first_attribute("offset2")->value());
+
+	std::string text = (std::string)(_node->first_attribute("text")->value());
+	RECT *rect = new RECT(); rect->top = rectTop; rect->left = rectLeft; rect->right = rectRight; rect->bottom = rectBottom; 
+	Vec2 offset = Vec2(offset1, offset2); 
+	
+	float rgb1 = (float)atof(_node->first_attribute("rgb1")->value());
+	float rgb2 = (float)atof(_node->first_attribute("rgb2")->value());
+	float rgb3 = (float)atof(_node->first_attribute("rgb3")->value());
+	float rgb4 = (float)atof(_node->first_attribute("rgb4")->value());
+
+	float4 *_rgb3 = new float4(rgb1, rgb2, rgb3, rgb4);
+
+	return ComponentFactory::MakeTextRendererComponent(rect, offset, text, _rgb3);
 }
 
 IComponent * BuildRigidbodyComponent()
@@ -168,6 +218,42 @@ void FetchBoxColliderDependencies()
 	}
 
 	collider->SetDependencies(transform, rigidbody);
+}
+
+void FetchSpriteRendererDependencies()
+{
+	SpriteRendererComponent* renderer = static_cast<SpriteRendererComponent*>(dependencyComponent);
+	TransformComponent* transform;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+			break;
+		}
+	}
+
+	renderer->SetDependencies(transform);
+}
+
+inline void FetchTextRendererDependencies()
+{
+	TextRendererComponent* renderer = static_cast<TextRendererComponent*>(dependencyComponent);
+	TransformComponent* transform;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+			break;
+		}
+	}
+
+	renderer->SetDependencies(transform);
 }
 
 #pragma endregion

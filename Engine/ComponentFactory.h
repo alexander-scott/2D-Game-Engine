@@ -1,6 +1,8 @@
 #pragma once
 
 #include "TransformComponent.h"
+#include "SpriteRendererComponent.h"
+#include "TextRendererComponent.h"
 
 #include "RigidBodyComponent.h"
 #include "CircleColliderComponent.h"
@@ -12,6 +14,10 @@ namespace ComponentFactory
 	// Core
 	TransformComponent * MakeTransformComponent(Vec2 position, float rotation, float scale);
 
+	// Graphics
+	SpriteRendererComponent * MakeSpriteRendererComponent(RECT* rect, Vec2 offset, string name);
+	TextRendererComponent * MakeTextRendererComponent(RECT *rect, Vec2 offset, std::string text, float4* rgb);
+	
 	// Physics
 	RigidBodyComponent * MakeRigidbodyComponent(float staticF, float dynamicF, float rest, float density, bool isStatic, bool lockRotation);
 	CircleColliderComponent * MakeCircleColliderComponent(float radius);

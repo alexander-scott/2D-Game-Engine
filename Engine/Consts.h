@@ -66,6 +66,7 @@ enum SystemMessageType
 	eInputKeyboardMessage,
 	eInputMouseMessage,
 	eInputUpdateGamePad,
+	eInputHandlerToGameObjectMessage,
 
 	// Windows messages
 	eWindowLostFocus,
@@ -92,7 +93,15 @@ enum ComponentMessageType
 
 enum DrawableComponentType
 {
-	eTestDrawingType
+	eTestDrawingType,
+	eSprite,
+	eText
+};
+
+enum InputGenericStateMessageType
+{
+	eKeyReleased,
+	eKeyPressed
 };
 
 enum KeyboardMessageType
@@ -109,6 +118,12 @@ enum MouseMessageType
 	eLeftMouseReleased,
 	eRightMouseClicked,
 	eRightMouseReleased
+};
+
+struct sCommand
+{
+	std::string _name;
+	int _ID;
 };
 
 enum EditorFieldTypes

@@ -9,6 +9,7 @@
 
 #include "ISystemToGameObjectMessage.h"
 
+
 SceneManager::SceneManager(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: ISystem(SystemType::eSceneManager, dispatcher) 
 { 

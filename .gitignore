@@ -299,4 +299,3 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 Engine/StandaloneDebug/
-Engine/InputMap.xml
