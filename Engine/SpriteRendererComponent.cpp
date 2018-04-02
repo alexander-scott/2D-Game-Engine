@@ -6,7 +6,7 @@ SpriteRendererComponent::SpriteRendererComponent() : IComponent("SpriteRendererC
 {
 }
 
-SpriteRendererComponent::SpriteRendererComponent(Vec2 position, float rotation, float scale, RECT *rect, Vec2 offset, string name) : IComponent("SpriteRendererComponent")
+SpriteRendererComponent::SpriteRendererComponent(Vec2 position, float rotation, float scale, RECT *rect, Vec2 offset, string text, string name, string animation) : IComponent("SpriteRendererComponent")
 {
 	_transformComponent = new TransformComponent(position, rotation, scale);
 	Type = eSprite;
@@ -17,6 +17,8 @@ SpriteRendererComponent::SpriteRendererComponent(Vec2 position, float rotation, 
 	SetRect(rect);
 	SetOffset(offset);
 	_name = name;
+	_text = text;
+	_animation = animation;
 }
 
 
@@ -39,4 +41,14 @@ void SpriteRendererComponent::SetName(std::string name)
 std::string SpriteRendererComponent::GetName()
 {
 	return _name;
+}
+
+std::string SpriteRendererComponent::GetText()
+{
+	return _text;
+}
+
+std::string SpriteRendererComponent::GetAnimation()
+{
+	return _animation;
 }

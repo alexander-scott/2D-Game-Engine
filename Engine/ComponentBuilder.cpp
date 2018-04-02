@@ -53,10 +53,12 @@ IComponent * BuildSpriteRendererComponent()
 
 	RECT *rect = new RECT(); rect->top = rectTop; rect->left = rectLeft; rect->right = rectRight; rect->bottom = rectBottom;
 	Vec2 offset = Vec2(offset1, offset2);
-	std::string name = (std::string)(_node->first_attribute("text")->value()); //path to "file"
 	
+	std::string text = (std::string)(_node->first_attribute("text")->value()); //path to texture "file"
+	std::string name = (std::string)(_node->first_attribute("name")->value()); //name of the object (ex : PlayerGreen,etc.)
+	std::string animation = (std::string)(_node->first_attribute("animation")->value()); //name of animation (ex : walk, crawl, etc)
 
-	return ComponentFactory::MakeSpriteRendererComponent(Vec2(xPos, yPos), rot, scale, rect, offset,name);
+	return ComponentFactory::MakeSpriteRendererComponent(Vec2(xPos, yPos), rot, scale, rect, offset, text, name, animation);
 }
 
 IComponent * BuildTextRendererComponent()

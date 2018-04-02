@@ -237,8 +237,8 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 		case DrawableComponentType::eSprite: 
 		{
 			SpriteRendererComponent * drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
-			DrawSprite(drawComponent->GetName(), drawComponent->GetPosition(), drawComponent->GetRect(),
-				drawComponent->GetRotation(), drawComponent->GetScale(), drawComponent->GetOffset());
+			DrawSprite(drawComponent->GetText(), drawComponent->GetPosition(), drawComponent->GetRect(),
+				drawComponent->GetRotation(), drawComponent->GetScale(), drawComponent->GetOffset(), drawComponent->GetName(), drawComponent->GetAnimation());
 			break;
 		}
 		default:
@@ -246,20 +246,20 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 	}
 }
 
-void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
+void DxGraphics::DrawSprite(std::string text, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset, std::string name, std::string animation)
 {
 	//TODO : Add name object+action in parameters to pick the correct animation from the name/animation map. 
 	//TODO : Also, do that in scene object to draw
 	//TODO : ALso, add action we want the object to do ( ex : "GreenPlayerWalk" ) in scene object to draw (xml file)
 	
-	ID3D11ShaderResourceView* text = nullptr;
+	ID3D11ShaderResourceView* texture = nullptr;
 	
-	if (GetTexture(name)==nullptr) { //Texture has not been loaded yet
-		if (FAILED(LoadTexture(name)))
+	if (GetTexture(text)==nullptr) { //Texture has not been loaded yet
+		if (FAILED(LoadTexture(text)))
 			MessageBox(0, L"Problem loading texture", 0, 0);
 	}
-	if (GetTexture(name) != nullptr) { //texture successfully loaded and now we retrieve it
-		text = GetTexture(name);
+	if (GetTexture(text) != nullptr) { //texture successfully loaded and now we retrieve it
+		texture = GetTexture(text);
 	}
 		//offset has been set manually in the scene object (xml file). For the test sprite used here it is set on the center
 		//ie : x = rect.width/2 = 54 / 2 = 27
@@ -267,11 +267,12 @@ void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, 
 		//wouldn't it be better to calculate the offset in code? else we'd have to do it for each sprite we want to draw 
 
 	//Animation *test = RetrieveAnimationFromMap("PlayerGreenCrawl2.xml");
-	Animation *test = RetrieveAnimationFromMap("PlayerGreenWalk.xml");
+//	Animation *test = RetrieveAnimationFromMap("PlayerGreenWalk.xml");
+	Animation *test = RetrieveAnimationFromMap(name + animation + ".xml");
 	test->UpdateRect(0.0f); //TODO : fix - Use FrameTimer?
 	
 //	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
-	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), test->GetRect(), Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
+	_sprites->Draw(texture, XMFLOAT2(pos.x, pos.y), test->GetRect(), Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
 }
 
 void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)

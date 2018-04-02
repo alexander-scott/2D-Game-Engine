@@ -7,8 +7,8 @@ TransformComponent * ComponentFactory::MakeTransformComponent(Vec2 position, flo
 	return transform;
 }
 
-SpriteRendererComponent * ComponentFactory::MakeSpriteRendererComponent(Vec2 position, float rotation, float scale, RECT* rect, Vec2 offset, string name) {
-	SpriteRendererComponent * sprite = new SpriteRendererComponent(position, rotation, scale, rect, offset, name);
+SpriteRendererComponent * ComponentFactory::MakeSpriteRendererComponent(Vec2 position, float rotation, float scale, RECT* rect, Vec2 offset, string text, string name, string animation) {
+	SpriteRendererComponent * sprite = new SpriteRendererComponent(position, rotation, scale, rect, offset, text, name, animation);
 	return sprite;
 }
 
