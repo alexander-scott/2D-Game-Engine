@@ -21,10 +21,17 @@ using Microsoft::WRL::ComPtr;
 DxGraphics::DxGraphics(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: IGraphics(dispatcher)
 {
+	
 }
 
 void DxGraphics::Initalise(HWNDKey& key)
 {
+	//todo:delete
+	//this->_animation.LoadXml("..\\Resources\\Animations\\animationPlayerGreen1.xml");
+	LoadAnimationNames();
+	LoadAnimations();
+		
+	//end todo
 	assert(key.hWnd != nullptr);
 
 	// Create device and swap chain
@@ -230,8 +237,8 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 		case DrawableComponentType::eSprite: 
 		{
 			SpriteRendererComponent * drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
-			DrawSprite(drawComponent->GetName(), drawComponent->GetPosition(), drawComponent->GetRect(),
-				drawComponent->GetRotation(), drawComponent->GetScale(), drawComponent->GetOffset());
+			DrawSprite(drawComponent->GetText(), drawComponent->GetPosition(), drawComponent->GetRect(),
+				drawComponent->GetRotation(), drawComponent->GetScale(), drawComponent->GetOffset(), drawComponent->GetName(), drawComponent->GetAnimation());
 			break;
 		}
 		default:
@@ -239,24 +246,33 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 	}
 }
 
-void DxGraphics::DrawSprite(std::string name, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset)
+void DxGraphics::DrawSprite(std::string text, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset, std::string name, std::string animation)
 {
-	ID3D11ShaderResourceView* text = nullptr;
+	//TODO : Add name object+action in parameters to pick the correct animation from the name/animation map. 
+	//TODO : Also, do that in scene object to draw
+	//TODO : ALso, add action we want the object to do ( ex : "GreenPlayerWalk" ) in scene object to draw (xml file)
 	
-	if (GetTexture(name)==nullptr) { //Texture has not been loaded yet
-		if (FAILED(LoadTexture(name)))
+	ID3D11ShaderResourceView* texture = nullptr;
+	
+	if (GetTexture(text)==nullptr) { //Texture has not been loaded yet
+		if (FAILED(LoadTexture(text)))
 			MessageBox(0, L"Problem loading texture", 0, 0);
 	}
-	if (GetTexture(name) != nullptr) { //texture successfully loaded and now we retrieve it
-		text = GetTexture(name);
+	if (GetTexture(text) != nullptr) { //texture successfully loaded and now we retrieve it
+		texture = GetTexture(text);
 	}
 		//offset has been set manually in the scene object (xml file). For the test sprite used here it is set on the center
 		//ie : x = rect.width/2 = 54 / 2 = 27
 		//y = rect.height/2 = 45 / 2 = 22.5
 		//wouldn't it be better to calculate the offset in code? else we'd have to do it for each sprite we want to draw 
 
-	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
-
+	//Animation *test = RetrieveAnimationFromMap("PlayerGreenCrawl2.xml");
+//	Animation *test = RetrieveAnimationFromMap("PlayerGreenWalk.xml");
+	Animation *test = RetrieveAnimationFromMap(name + animation + ".xml");
+	test->UpdateRect(0.0f); //TODO : fix - Use FrameTimer?
+	
+//	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
+	_sprites->Draw(texture, XMFLOAT2(pos.x, pos.y), test->GetRect(), Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
 }
 
 void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
@@ -266,33 +282,16 @@ void DxGraphics::DrawLine(Vec2 v1, Vec2 v2)
 
 HRESULT DxGraphics::LoadTexture(std::string path)
 {
-	//converting name into adress of texture file
-	std::wstring wstrName = std::wstring(path.begin(), path.end());
-	const wchar_t *textureToDraw = wstrName.c_str();
-	ID3D11ShaderResourceView* text = nullptr;
-
-	HRESULT hr = CreateDDSTextureFromFile(_device.Get(), textureToDraw, nullptr, &text);
-	if (FAILED(hr)) {
-		MessageBox(0, L"Problem loading texture", 0, 0);
-		return hr;
-	}
-	
-	_textures[path] = text;
-
-	return S_OK;
+	return TextureManager::GetInstance()->LoadTexture(*this, path);
 }
 
 
 ID3D11ShaderResourceView * DxGraphics::GetTexture(std::string path)
 {
-
-	std::map<std::string, ID3D11ShaderResourceView*>::iterator it = _textures.find(path);
-	if (it != _textures.end()) { //texture found
-		return it->second;
-	}
-	else
-		return nullptr; //Texture not found/loaded yet 
+	return TextureManager::GetInstance()->GetTexture(*this, path);
 }
+
+
 
 
 void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float4* rgb3, float scale, Vec2 offset)
@@ -307,7 +306,6 @@ void DxGraphics::DrawText(std::string text, Vec2 pos, float rot, float4* rgb3, f
 	float widthText = textRect.m128_f32[0];
 	float heightText = textRect.m128_f32[1];
 	
-	//_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor); //without rotation
 	_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor, rot, XMFLOAT2(offset.x, offset.y), scale); //offset is set at 0.0f, 0.0f in the xml file so far
 	//_fonts->DrawString(_sprites.get(), txtToDraw, XMFLOAT2(pos.x, pos.y), textColor, 0.3f, XMFLOAT2(widthText/2, heightText/2), scale); //here we calculate the offset so that it is at the center of the text rect. doesn't seem to be exactlyat the center though...
 	
@@ -401,3 +399,93 @@ std::wstring DxGraphics::Exception::GetExceptionType() const
 {
 	return L"TestGraphics Exception";
 }
+
+
+void DxGraphics::LoadAnimationNames() //Retrieves xml file that has all path strings to animations 
+//and loads them into std::map<std::string, Animation> _nameAndAnimations; 
+{
+	xml_document<> doc;
+	xml_node<>* node;
+
+	std::ifstream file("..\\Resources\\Animations\\Animations.xml");
+	std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	buffer.push_back('\0');
+
+
+	doc.parse<0>(&buffer[0]);
+	
+
+	//retrieve root node
+	node = doc.first_node("Animations");
+	for (xml_node<>* nodeAnimation = node->first_node("Anim"); nodeAnimation; nodeAnimation = nodeAnimation->next_sibling()) {
+		Animation a;
+		string animName = nodeAnimation->first_attribute("name")->value();
+		string animPath = "..\\Resources\\Animations\\" + animName;
+
+		_animationNames.push_back(animName);
+		
+	}
+	
+}
+void DxGraphics::LoadAnimations() {
+	for each (std::string  name in _animationNames)
+	{
+		Animation *a = new Animation(); 
+		a->LoadXml("..\\Resources\\Animations\\" + name);
+		_nameAndAnimations[name] = a;
+	}
+}
+
+Animation *DxGraphics::RetrieveAnimationFromMap(std::string animationName)
+{
+	std::map<std::string, Animation*>::iterator it = _nameAndAnimations.find(animationName);
+	return it->second;
+}
+
+TextureManager* TextureManager::_instance = 0;
+
+TextureManager::TextureManager() {
+
+}
+
+TextureManager::~TextureManager()
+{
+}
+
+TextureManager* TextureManager::GetInstance() {
+
+	if (_instance == 0) {
+		_instance = new TextureManager();
+	}
+
+	return _instance;
+}
+
+ID3D11ShaderResourceView * TextureManager::GetTexture(DxGraphics &dxGraphics, std::string path)
+{
+	std::map<std::string, ID3D11ShaderResourceView*>::iterator it = dxGraphics._textures.find(path);
+	if (it != dxGraphics._textures.end()) { //texture found
+		return it->second;
+	}
+	else
+		return nullptr; //Texture not found/loaded yet 
+}
+
+HRESULT TextureManager::LoadTexture(DxGraphics &dxGraphics, std::string path)
+{
+	//converting name into adress of texture file
+	std::wstring wstrName = std::wstring(path.begin(), path.end());
+	const wchar_t *textureToDraw = wstrName.c_str();
+	ID3D11ShaderResourceView* text = nullptr;
+
+	HRESULT hr = CreateDDSTextureFromFile(dxGraphics._device.Get(), textureToDraw, nullptr, &text);
+	if (FAILED(hr)) {
+		MessageBox(0, L"Problem loading texture", 0, 0);
+		return hr;
+	}
+
+	dxGraphics._textures[path] = text;
+
+	return S_OK;
+}
+

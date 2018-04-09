@@ -127,9 +127,6 @@
     <ClInclude Include="IGraphics.h">
       <Filter>Engine\Systems\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="DXErr.h">
-      <Filter>Engine\Systems\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="ISystemMessage.h">
       <Filter>Engine\Messaging\Messages</Filter>
     </ClInclude>
@@ -289,8 +286,15 @@
     <ClInclude Include="InputHandlerToGameObjectMessage.h">
       <Filter>Engine\Messaging\Messages\InputMessages</Filter>
     </ClInclude>
-    <ClInclude Include="DrawSceneMessage.h" />
-    <ClInclude Include="IStartableComponent.h" />
+    <ClInclude Include="Animation.h">
+      <Filter>Engine\Systems\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="DXErr.h">
+      <Filter>Engine\Systems\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="IStartableComponent.h">
+      <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -390,6 +394,9 @@
       <Filter>Engine\Systems\Physics</Filter>
     </ClCompile>
     <ClCompile Include="DXErr.cpp" />
+    <ClCompile Include="Animation.cpp">
+      <Filter>Engine\Systems\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">

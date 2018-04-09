@@ -264,6 +264,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BoxColliderComponent.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="BuildSceneMessage.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CircleColliderComponent.h" />
@@ -274,7 +275,6 @@
     <ClInclude Include="ComponentSaver.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="CustomException.h" />
-    <ClInclude Include="DrawSceneMessage.h" />
     <ClInclude Include="DxGraphics.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="Editor.h" />
@@ -333,6 +333,7 @@
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="CircleColliderComponent.cpp" />
@@ -340,13 +341,12 @@
     <ClCompile Include="ComponentBuilder.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="ComponentSaver.cpp" />
-    <ClCompile Include="DxGraphics.cpp" />
     <ClCompile Include="DXErr.cpp" />
+    <ClCompile Include="DxGraphics.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorEngineInterface.cpp" />
     <ClCompile Include="EditorInputInterface.cpp" />
     <ClCompile Include="EditorSceneInterface.cpp" />
-    <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Main.cpp" />

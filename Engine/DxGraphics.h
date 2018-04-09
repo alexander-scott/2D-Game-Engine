@@ -4,6 +4,8 @@
 #include "Consts.h"
 #include "SpriteRendererComponent.h" 
 #include "TextRendererComponent.h"
+#include "Animation.h"
+//#include "TextureManager.h"
 
 #include <cassert>
 #include <map>
@@ -17,7 +19,7 @@
 #include "directxtk\Inc\VertexTypes.h"
 
 using namespace DirectX;
-
+class TextureManager;
 class DxGraphics : public IGraphics
 {
 public:
@@ -32,9 +34,7 @@ public:
 
 	virtual void DrawComponent(IDrawableComponent* component);
 
-	void DrawSprite(std::string name, Vec2 pos, RECT* rect, float rot, float scale, Vec2 offset);
-
-	//void DrawText(std::string text, Vec2 pos, float rot, float* rgb, float scale, Vec2 offset);
+	void DrawSprite(std::string text, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset, std::string name, std::string animation);
 
 	void DrawText(std::string text, Vec2 pos, float rot, float4 * rgb3, float scale, Vec2 offset);
 
@@ -42,6 +42,12 @@ public:
 
 	HRESULT LoadTexture(std::string path);
 	ID3D11ShaderResourceView* GetTexture(std::string path);
+
+	friend class TextureManager;
+	void LoadAnimationNames();
+	void LoadAnimations();
+	Animation *RetrieveAnimationFromMap(std::string animationName);
+
 
 private:
 	// vertex format for the framebuffer fullscreen textured quad
@@ -66,6 +72,25 @@ private:
 	std::unique_ptr<SpriteBatch>							_sprites;
 	std::unique_ptr<SpriteFont>								_fonts;
 	std::unique_ptr<PrimitiveBatch<VertexPositionColor>>	_primitiveBatch;
-	std::map<std::string, ID3D11ShaderResourceView*>		_textures;
-
+	/*static*/ std::map<std::string, ID3D11ShaderResourceView*>		_textures;
+	TextureManager * _textureManager;
+	std::vector<std::string>_animationNames;
+	std::map<std::string, Animation*> _nameAndAnimations; //TODO : load all animations according to the texture path
+	
+	Animation _animation;
 };
+
+class TextureManager
+{
+public:
+	static TextureManager* GetInstance();
+
+	ID3D11ShaderResourceView * GetTexture(DxGraphics &dxGraphics, std::string path);
+	HRESULT LoadTexture(DxGraphics &dxGraphics, std::string path);
+
+private:
+	TextureManager();
+	~TextureManager();
+	static TextureManager* _instance;
+};
+

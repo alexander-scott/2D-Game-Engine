@@ -7,9 +7,10 @@ TransformComponent * ComponentFactory::MakeTransformComponent(Vec2 position, flo
 	return transform;
 }
 
-SpriteRendererComponent * ComponentFactory::MakeSpriteRendererComponent(RECT* rect, Vec2 offset, string name) 
+SpriteRendererComponent * ComponentFactory::MakeSpriteRendererComponent(RECT* rect, Vec2 offset, string text, string name, string animation)
 {
-	SpriteRendererComponent * sprite = new SpriteRendererComponent(rect, offset, name);
+	SpriteRendererComponent * sprite = new SpriteRendererComponent(rect, offset, text, name, animation);
+
 	return sprite;
 }
 

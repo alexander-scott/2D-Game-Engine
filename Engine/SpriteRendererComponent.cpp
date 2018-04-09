@@ -5,7 +5,7 @@ SpriteRendererComponent::SpriteRendererComponent() : IComponent("SpriteRendererC
 {
 }
 
-SpriteRendererComponent::SpriteRendererComponent(RECT *rect, Vec2 offset, string name) : IComponent("SpriteRendererComponent")
+SpriteRendererComponent::SpriteRendererComponent(RECT *rect, Vec2 offset, string text, string name, string animation) : IComponent("SpriteRendererComponent")
 {
 	Type = eSprite;
 	//SetPosition(position);
@@ -15,6 +15,8 @@ SpriteRendererComponent::SpriteRendererComponent(RECT *rect, Vec2 offset, string
 	SetRect(rect);
 	SetOffset(offset);
 	_name = name;
+	_text = text;
+	_animation = animation;
 }
 
 SpriteRendererComponent::~SpriteRendererComponent()
@@ -40,4 +42,14 @@ void SpriteRendererComponent::SetName(std::string name)
 std::string SpriteRendererComponent::GetName()
 {
 	return _name;
+}
+
+std::string SpriteRendererComponent::GetText()
+{
+	return _text;
+}
+
+std::string SpriteRendererComponent::GetAnimation()
+{
+	return _animation;
 }
