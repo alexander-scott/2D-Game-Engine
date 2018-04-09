@@ -37,7 +37,8 @@ enum SystemType
 	eSceneSaver,
 	eGraphics,
 	eInputHandler,
-	ePhysics
+	ePhysics,
+	eAudio
 };
 
 enum SystemMessageType
@@ -76,6 +77,11 @@ enum SystemMessageType
 
 	// Physics messages
 	eUpdatePhysics, // SENT BY: Engine - RECIEVED BY: Physics - WHEN: Central Update Loop
+
+	// Audio messages
+	ePlaySound,
+	eSuspendAudio,
+	eResumeAudio,
 };
 
 enum ComponentMessageType

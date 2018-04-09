@@ -167,6 +167,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Engine\AudioSoundFileManager.cpp" />
+    <ClCompile Include="..\Engine\AudioSystem.cpp" />
     <ClCompile Include="..\Engine\BoxColliderComponent.cpp" />
     <ClCompile Include="..\Engine\CircleColliderComponent.cpp" />
     <ClCompile Include="..\Engine\Collision.cpp" />
@@ -200,6 +202,8 @@
     <ClCompile Include="SceneBuilderTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Engine\AudioSoundFileManager.h" />
+    <ClInclude Include="..\Engine\AudioSystem.h" />
     <ClInclude Include="..\Engine\BoxColliderComponent.h" />
     <ClInclude Include="..\Engine\BuildSceneMessage.h" />
     <ClInclude Include="..\Engine\CircleColliderComponent.h" />
@@ -238,6 +242,7 @@
     <ClInclude Include="..\Engine\Math.h" />
     <ClInclude Include="..\Engine\ObjectGrid.h" />
     <ClInclude Include="..\Engine\PhysicsSystem.h" />
+    <ClInclude Include="..\Engine\PlayAudioMessage.h" />
     <ClInclude Include="..\Engine\PolygonColliderComponent.h" />
     <ClInclude Include="..\Engine\rapidxml.hpp" />
     <ClInclude Include="..\Engine\rapidxml_print.hpp" />
