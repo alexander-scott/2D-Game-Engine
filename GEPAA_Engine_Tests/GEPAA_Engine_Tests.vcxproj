@@ -167,6 +167,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Engine\Animation.cpp" />
     <ClCompile Include="..\Engine\AudioSoundFileManager.cpp" />
     <ClCompile Include="..\Engine\AudioSystem.cpp" />
     <ClCompile Include="..\Engine\BoxColliderComponent.cpp" />
@@ -202,6 +203,7 @@
     <ClCompile Include="SceneBuilderTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Engine\Animation.h" />
     <ClInclude Include="..\Engine\AudioSoundFileManager.h" />
     <ClInclude Include="..\Engine\AudioSystem.h" />
     <ClInclude Include="..\Engine\BoxColliderComponent.h" />

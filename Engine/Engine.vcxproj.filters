@@ -306,9 +306,6 @@
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Engine\GameObject\Components</Filter>
     </ClCompile>
-    <ClCompile Include="DXErr.cpp">
-      <Filter>Engine\Systems\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="SceneBuilder.cpp">
       <Filter>Engine\Systems\SceneBuilding</Filter>
     </ClCompile>
@@ -395,6 +392,9 @@
     </ClCompile>
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="Animation.cpp">
+      <Filter>Engine\Systems\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="DXErr.cpp">
       <Filter>Engine\Systems\Graphics</Filter>
     </ClCompile>
   </ItemGroup>

@@ -139,11 +139,11 @@ IComponent * BuildRigidbodyComponent()
 	float density = (float)atof(_node->first_attribute("density")->value());
 
 	bool isStatic = false;
-	if (bool(_node->first_attribute("static")->value()))
+	if (bool(atoi(_node->first_attribute("static")->value())))
 		isStatic = true;
 
 	bool lockRotation = false;
-	if (bool(_node->first_attribute("lockrotation")->value()))
+	if (bool(atoi(_node->first_attribute("lockrotation")->value())))
 		lockRotation = true;
 
 	return ComponentFactory::MakeRigidbodyComponent(staticF, dynamicF, restitution, density, isStatic, lockRotation);
