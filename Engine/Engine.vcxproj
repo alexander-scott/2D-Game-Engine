@@ -263,6 +263,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AddForceMessage.h" />
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BuildSceneMessage.h" />

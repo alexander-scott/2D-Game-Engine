@@ -1,6 +1,7 @@
 #include "PlayerControllerComponent.h"
 
 #include "InputHandlerToGameObjectMessage.h"
+#include "AddForceMessage.h"
 
 PlayerControllerComponent::PlayerControllerComponent() : IComponent("PlayerControllerComponent")
 {
@@ -32,27 +33,34 @@ void PlayerControllerComponent::ProcessCommand(sCommand command, float range)
 	<Command key="S" name="move_down" ID="2"/>
 	<Command key="W" name="move_up" ID="1"/>
 	*/
+
+	Vec2 force = Vec2(0.0f, 0.0f);
+
 	switch (command._ID)
 	{
 		case 1: // UP
 		{
-			float f = 0;
 			break;
 		}
 		case 2: // DOWN
 		{
-			float f = 0;
 			break;
 		}
 		case 3: // LEFT
 		{
-			float f = 0;
+			force.x -= 1;
 			break;
 		}
 		case 4: // RIGHT
 		{
-			float f = 0;
+			force.x += 1;
 			break;
 		}
+	}
+
+	if (force.x != 0 || force.y != 0)
+	{
+		AddForceMessage addForceMsg(force, 100000000);
+		_rigidbody->RecieveMessage(addForceMsg);
 	}
 }

@@ -307,6 +307,9 @@
     <ClInclude Include="PlayerControllerComponent.h">
       <Filter>Game\Alex</Filter>
     </ClInclude>
+    <ClInclude Include="AddForceMessage.h">
+      <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

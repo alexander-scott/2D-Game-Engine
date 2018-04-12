@@ -133,6 +133,40 @@ the Graphics system to be drawn.
 The Graphics system would need to be extended to recieve this message and then add the sprite to the 
 graphic API's draw list (sprite batch in DX11). This would be done in the DrawSprite() and DrawText2D() functions.
 
+## Building a game running on the engine ##
+
+To build a game that runs on the engine you need to do a few things. Firstly create a scene XML file and put it
+in the resources/scenes folder and name it appropiately. In this file add a scene name, done by adding the following:
+<scene name="AlexGame"></scene>. In the Engine class in the engine, edit the RequestBuildSceneMessage contents so
+that it has the relative path to the new scene XML file. The engine should now run your game.
+
+###Creating custom components/scripts
+
+To create and register a new component that only serves a purpose in your game you will need to do a few things. 
+Firstly, within the Game/YourGame filter, create a new class called YourGameComponentFactory. This component factory
+is an extension of the default component factory and will be used to create your custom components. In here you can
+create functions that instantiate and return your custom components. Next you will need to register the component
+within the ComponentBuilder system so that it can be built from the scene XML file. In ComponentBuilder.h, make sure
+you are #including YourGameComponentFactory. Then at the top of ComponentBuilder.cpp define the build functions for
+your custom component, making sure it returns a IComponent*. In the ComponentBuilder constructors, insert into 
+_buildMapper the string name of your component and a pointer to the build function. In the actual build function,
+parse the XML node to extract any attributes your component needs. Then call the relevant function in
+YourGameComponentFactory to actual have the component instanstiated. These steps will parse, build and then add
+an instance of your component defined in XML to a GameObject.
+
+###Fetching component dependencies
+
+If your component requires a pointer to another component, either on the same GameObject or different object, you will
+need to use the dependency fetching feature. To do this you must configure your custom component in XML. Before the closing
+tag of the component, add a <Dependency></Dependency> tag. Add as attributes to this tag, the ID of the GameObject that
+has the component you require. The second step needs to be done in ComponentBuilder.cpp. At the top define function
+that will fetch the dependency and then in the ComponentBuilder constructor link that function to the component's name.
+In the actual fetch function, iterate through the 'dependencies' global variable. At each iteration, fetch the GameObject
+with the listed ID from the scene by using the following: _scene->GetGameObject(it->second). From here you can then
+use GetComponent<> to fetch a certain type of component from this GameObject. To pass it to the component with the dependency,
+statically cast the 'dependencyComponent' global variable into the component type and then pass it to it through a custom function,
+such as SetDependencies().
+
 ## Troubleshooting ##
 
 ###Adding new file to project and referencing it in a test

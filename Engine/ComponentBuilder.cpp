@@ -269,6 +269,7 @@ void FetchPlayerControllerDependencies()
 {
 	PlayerControllerComponent* playerController = static_cast<PlayerControllerComponent*>(dependencyComponent);
 	TransformComponent* transform;
+	RigidBodyComponent* rigidbody;
 
 	map<string, GUID>::iterator it;
 	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
@@ -276,11 +277,14 @@ void FetchPlayerControllerDependencies()
 		if (it->first == "transformcomponent")
 		{
 			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
-			break;
+		}
+		else if (it->first == "rigidbodycomponent")
+		{
+			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
 		}
 	}
 
-	playerController->SetDependencies(transform);
+	playerController->SetDependencies(transform, rigidbody);
 }
 
 #pragma endregion
