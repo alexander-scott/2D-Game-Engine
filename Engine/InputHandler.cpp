@@ -11,6 +11,7 @@ InputHandler::InputHandler(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	:ISystem(SystemType::eInputHandler, dispatcher)
 { 
 	_gamePadP1 = std::make_unique<DirectX::GamePad>();
+	_bKeyboardSwapCommands = false;
 }
 
 void InputHandler::InitaliseListeners()
@@ -87,13 +88,13 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 					{
 						InputHandlerToGameObjectMessage message(InputGenericStateMessageType::eKeyPressed, 
 							keyMessage,-1.0f);
-						SendMessageToDispatcher(message);
+						SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 					}
 					else if (msg.MessageType == KeyboardMessageType::eKeyUp)
 					{
 						InputHandlerToGameObjectMessage message(InputGenericStateMessageType::eKeyReleased,
 							keyMessage,-1.0f);
-						SendMessageToDispatcher(message);
+						SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 					}
 				}
 			}

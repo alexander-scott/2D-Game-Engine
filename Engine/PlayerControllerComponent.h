@@ -5,17 +5,19 @@
 
 #include "TransformComponent.h"
 
-class PlayerController : public IComponent, public IMessageableComponent
+class PlayerControllerComponent : public IComponent, public IMessageableComponent
 {
 public:
-	PlayerController();
-	~PlayerController();
+	PlayerControllerComponent();
+	~PlayerControllerComponent();
 
 	void SetDependencies(TransformComponent* transform) { _transform = transform; }
 
 	virtual void RecieveMessage(IComponentMessage& message) override;
 
 private:
+	void ProcessCommand(sCommand command, float range);
+
 	TransformComponent * _transform;
 };
 

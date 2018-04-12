@@ -301,10 +301,10 @@
     <ClInclude Include="IStartableComponent.h">
       <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerController.h">
+    <ClInclude Include="GameComponentFactory.h">
       <Filter>Game\Alex</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponentFactory.h">
+    <ClInclude Include="PlayerControllerComponent.h">
       <Filter>Game\Alex</Filter>
     </ClInclude>
   </ItemGroup>
@@ -409,10 +409,10 @@
     <ClCompile Include="DXErr.cpp">
       <Filter>Engine\Systems\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
+    <ClCompile Include="GameComponentFactory.cpp">
       <Filter>Game\Alex</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponentFactory.cpp">
+    <ClCompile Include="PlayerControllerComponent.cpp">
       <Filter>Game\Alex</Filter>
     </ClCompile>
   </ItemGroup>

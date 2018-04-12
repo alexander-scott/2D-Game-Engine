@@ -1,6 +1,6 @@
 #include "GameComponentFactory.h"
 
-PlayerController* ComponentFactory::MakePlayerComponent()
+PlayerControllerComponent* ComponentFactory::MakePlayerComponent()
 {
-	return new PlayerController();
+	return new PlayerControllerComponent();
 }

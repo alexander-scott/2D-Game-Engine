@@ -308,7 +308,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="ObjectGrid.h" />
     <ClInclude Include="PhysicsSystem.h" />
-    <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="PlayerControllerComponent.h" />
     <ClInclude Include="PolygonColliderComponent.h" />
     <ClInclude Include="RequestBuildSceneMessage.h" />
     <ClInclude Include="RequestSaveSceneMessage.h" />
@@ -356,7 +356,7 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="ObjectGrid.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
-    <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="PlayerControllerComponent.cpp" />
     <ClCompile Include="PolygonColliderComponent.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />

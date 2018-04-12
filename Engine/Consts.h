@@ -66,7 +66,6 @@ enum SystemMessageType
 	eInputKeyboardMessage,
 	eInputMouseMessage,
 	eInputUpdateGamePad,
-	eInputHandlerToGameObjectMessage,
 
 	// Windows messages
 	eWindowLostFocus,
@@ -88,7 +87,8 @@ enum ComponentMessageType
 {
 	eSetParentTransformMessage,
 	eAddForce,
-	eActivateRebindingKeyboardCommands
+	eActivateRebindingKeyboardCommands,
+	eInputHandlerToGameObjectMessage
 };
 
 enum DrawableComponentType

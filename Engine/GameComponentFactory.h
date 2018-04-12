@@ -2,9 +2,9 @@
 
 #include "ComponentFactory.h"
 
-#include "PlayerController.h"
+#include "PlayerControllerComponent.h"
 
 namespace ComponentFactory
 {
-	PlayerController * MakePlayerComponent();
+	PlayerControllerComponent * MakePlayerComponent();
 }

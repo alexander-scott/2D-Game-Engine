@@ -60,8 +60,8 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 
 #pragma region AlexGame component function mapping
 
-	_buildMapper.Insert("PlayerController", BuildPlayerController);
-	_dependencyBuildMapper.Insert("PlayerController", FetchPlayerControllerDependencies);
+	_buildMapper.Insert("PlayerControllerComponent", BuildPlayerController);
+	_dependencyBuildMapper.Insert("PlayerControllerComponent", FetchPlayerControllerDependencies);
 
 #pragma endregion	
 
@@ -267,7 +267,7 @@ IComponent * BuildPlayerController()
 
 void FetchPlayerControllerDependencies()
 {
-	PlayerController* playerController = static_cast<PlayerController*>(dependencyComponent);
+	PlayerControllerComponent* playerController = static_cast<PlayerControllerComponent*>(dependencyComponent);
 	TransformComponent* transform;
 
 	map<string, GUID>::iterator it;
