@@ -4,69 +4,70 @@
 xml_node<>* _node;
 shared_ptr<Scene> _scene;
 
-// Define component build functions here
-inline IComponent * BuildTransformComponent();
-inline IComponent * BuildSpriteRendererComponent();
-inline IComponent * BuildTextRendererComponent();
-inline IComponent * BuildRigidbodyComponent();
-inline IComponent * BuildCircleColliderComponent();
-inline IComponent * BuildBoxColliderComponent();
-
 map<string, GUID>* depdendecies;
 IComponent * dependencyComponent;
 
-// Define fetch dependency functions here
-inline void FetchCircleColliderDependencies();
-inline void FetchBoxColliderDependencies();
+#pragma region Core component function declarations
+
+inline IComponent * BuildTransformComponent();
+
+inline IComponent * BuildSpriteRendererComponent();
 inline void FetchSpriteRendererDependencies();
+
+inline IComponent * BuildTextRendererComponent();
 inline void FetchTextRendererDependencies();
+
+inline IComponent * BuildRigidbodyComponent();
+
+inline IComponent * BuildCircleColliderComponent();
+inline void FetchCircleColliderDependencies();
+
+inline IComponent * BuildBoxColliderComponent();
+inline void FetchBoxColliderDependencies();
+
+#pragma endregion
+
+#pragma region AlexGame component function declarations
+
+inline IComponent * BuildPlayerController();
+inline void FetchPlayerControllerDependencies();
+
+#pragma endregion
 
 ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 {
 	_scene = scene;
 
-	// Insert build functions here
+#pragma region Core component function mapping
+
 	_buildMapper.Insert("TransformComponent", BuildTransformComponent);
+
 	_buildMapper.Insert("SpriteRendererComponent", BuildSpriteRendererComponent);
-	_buildMapper.Insert("TextRendererComponent", BuildTextRendererComponent);
-	_buildMapper.Insert("RigidbodyComponent", BuildRigidbodyComponent);
-	_buildMapper.Insert("CircleColliderComponent", BuildCircleColliderComponent);
-	_buildMapper.Insert("BoxColliderComponent", BuildBoxColliderComponent);
-
-	// Insert fetch dependency functions here
-	_dependencyBuildMapper.Insert("CircleColliderComponent", FetchCircleColliderDependencies);
-	_dependencyBuildMapper.Insert("BoxColliderComponent", FetchBoxColliderDependencies);
 	_dependencyBuildMapper.Insert("SpriteRendererComponent", FetchSpriteRendererDependencies);
+
+	_buildMapper.Insert("TextRendererComponent", BuildTextRendererComponent);
 	_dependencyBuildMapper.Insert("TextRendererComponent", FetchTextRendererDependencies);
+
+	_buildMapper.Insert("RigidbodyComponent", BuildRigidbodyComponent);
+
+	_buildMapper.Insert("CircleColliderComponent", BuildCircleColliderComponent);
+	_dependencyBuildMapper.Insert("CircleColliderComponent", FetchCircleColliderDependencies);
+
+	_buildMapper.Insert("BoxColliderComponent", BuildBoxColliderComponent);
+	_dependencyBuildMapper.Insert("BoxColliderComponent", FetchBoxColliderDependencies);
+
+#pragma endregion
+
+#pragma region AlexGame component function mapping
+
+	_buildMapper.Insert("PlayerController", BuildPlayerController);
+	_dependencyBuildMapper.Insert("PlayerController", FetchPlayerControllerDependencies);
+
+#pragma endregion	
+
 }
 
-GUID StringToGUID(const std::string& guid) {
-	GUID output;
-	unsigned long p0;
-	int p1, p2, p3, p4, p5, p6, p7, p8, p9, p10;
-
-	int err = sscanf_s(guid.c_str(), "%08lX-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
-		&p0, &p1, &p2, &p3, &p4, &p5, &p6, &p7, &p8, &p9, &p10);
-
-	if (err != 11)
-		throw std::logic_error("Invalid GUID, format should be {00000000-0000-0000-0000-000000000000}");
-
-	// Set the data like this to avoid corrupting the stack
-	output.Data1 = p0;
-	output.Data2 = p1;
-	output.Data3 = p2;
-	output.Data4[0] = p3;
-	output.Data4[1] = p4;
-	output.Data4[2] = p5;
-	output.Data4[3] = p6;
-	output.Data4[4] = p7;
-	output.Data4[5] = p8;
-	output.Data4[6] = p9;
-	output.Data4[7] = p10;
-	return output;
-}
-
-#pragma region Build functions
+#pragma region Core component functions
 
 IComponent * ComponentBuilder::BuildComponent(xml_node<>* node)
 {
@@ -164,10 +165,6 @@ IComponent * BuildBoxColliderComponent()
 	return ComponentFactory::MakeBoxCollider(width, height);
 }
 
-#pragma endregion
-
-#pragma region Fetch dependency functions
-
 void ComponentBuilder::BuildComponentDependecies(IComponent * component, map<string, GUID>* dependecies)
 {
 	depdendecies = dependecies;
@@ -257,6 +254,33 @@ inline void FetchTextRendererDependencies()
 	}
 
 	renderer->SetDependencies(transform);
+}
+
+#pragma endregion
+
+#pragma region AlexGame component functions
+
+IComponent * BuildPlayerController()
+{
+	return ComponentFactory::MakePlayerComponent();
+}
+
+void FetchPlayerControllerDependencies()
+{
+	PlayerController* playerController = static_cast<PlayerController*>(dependencyComponent);
+	TransformComponent* transform;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+			break;
+		}
+	}
+
+	playerController->SetDependencies(transform);
 }
 
 #pragma endregion

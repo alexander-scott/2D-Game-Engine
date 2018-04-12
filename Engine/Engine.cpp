@@ -47,7 +47,7 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 	Initalise();
 
 	Logger::Instance().LogMessage("Requesting a new scene be built by the SceneBuilder system", LogSeverity::eInfo);
-	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene3-spriteTest.xml"); // Still hardcoded
+	RequestBuildSceneMessage message("..\\Resources\\Scenes\\AlexGame.xml"); // Still hardcoded
 
 	_messageDispatcher->SendMessageToListeners(message);
 

@@ -89,6 +89,12 @@
     <Filter Include="Engine\GameObject\Components\Physics">
       <UniqueIdentifier>{c1006ffe-8b5b-4d40-bd0e-6f9ac9cb0992}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{c1c38dd6-b903-453e-a643-7cea8deebd61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Alex">
+      <UniqueIdentifier>{34df43a6-740e-4c87-b1dc-15541d7e57a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -295,6 +301,12 @@
     <ClInclude Include="IStartableComponent.h">
       <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Game\Alex</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponentFactory.h">
+      <Filter>Game\Alex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -396,6 +408,12 @@
     </ClCompile>
     <ClCompile Include="DXErr.cpp">
       <Filter>Engine\Systems\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Game\Alex</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponentFactory.cpp">
+      <Filter>Game\Alex</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
