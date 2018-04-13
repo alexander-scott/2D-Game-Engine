@@ -95,6 +95,9 @@
     <Filter Include="Game\Alex">
       <UniqueIdentifier>{34df43a6-740e-4c87-b1dc-15541d7e57a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems\Audio">
+      <UniqueIdentifier>{68560b5e-dd0a-4e75-b712-16578cb612ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -310,6 +313,15 @@
     <ClInclude Include="AddForceMessage.h">
       <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
+    <ClInclude Include="AudioSoundFileManager.h">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSystem.h">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalVariables.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -417,6 +429,12 @@
     </ClCompile>
     <ClCompile Include="PlayerControllerComponent.cpp">
       <Filter>Game\Alex</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSoundFileManager.cpp">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSystem.cpp">
+      <Filter>Engine\Systems\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

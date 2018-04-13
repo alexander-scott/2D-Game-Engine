@@ -264,6 +264,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AddForceMessage.h" />
+    <ClInclude Include="AudioSoundFileManager.h" />
+    <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BuildSceneMessage.h" />
@@ -284,6 +286,7 @@
     <ClInclude Include="EditorSceneInterface.h" />
     <ClInclude Include="GameComponentFactory.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GlobalVariables.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentMessage.h" />
@@ -337,6 +340,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AudioSoundFileManager.cpp" />
+    <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="CircleColliderComponent.cpp" />

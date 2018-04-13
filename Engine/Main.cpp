@@ -7,7 +7,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR pArgs, INT)
 	try
 	{
 		Logger::Instance().LogMessage("Initalising Systems", LogSeverity::eInfo);
-		Engine engine(hInst, pArgs);
+		Engine engine(hInst, pArgs, "..\\Resources");
 
 		// Update the systems until the user presses esc or closes the window
 		Logger::Instance().LogMessage("Starting main update loop", LogSeverity::eInfo);

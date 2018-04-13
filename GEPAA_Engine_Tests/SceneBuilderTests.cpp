@@ -13,13 +13,21 @@ namespace GEPAA_Engine_Tests
 	// as they are built.
 	#define TEST_CASE_DIRECTORY GetDirectoryName(__FILE__)
 
-	string GetDirectoryName(string path) 
+	string GetDirectoryName(string path)
 	{
-		const size_t last_slash_idx = path.rfind('\\');
+		size_t last_slash_idx = path.rfind("\\");
 		if (std::string::npos != last_slash_idx)
 		{
-			return path.substr(0, last_slash_idx + 1);
+			path = path.substr(0, last_slash_idx); // Remove the file name
 		}
+
+		last_slash_idx = path.rfind("\\");
+		if (std::string::npos != last_slash_idx)
+		{
+			path = path.substr(0, last_slash_idx + 1); // Remove the GEPAA_Engine_Tests folder
+			return path;
+		}
+
 		return "";
 	}
 
@@ -44,7 +52,7 @@ namespace GEPAA_Engine_Tests
 			auto dispatcher = make_shared<SystemMessageDispatcher>();
 			SceneBuilderFixture sceneBuilder(dispatcher);
 			auto scene = sceneBuilder.TestBuildScene(std::string(GetDirectoryName(TEST_CASE_DIRECTORY)) 
-				+ std::string("\\TestResources\\TestScene.xml"));
+				+ std::string("Resources\\Scenes\\TestScene.xml"));
 		
 			// Test scene is not null and scene name is correct
 			Assert::AreEqual(scene->GetSceneName(), std::string("testscene"));

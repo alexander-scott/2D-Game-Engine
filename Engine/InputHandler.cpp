@@ -5,6 +5,8 @@
 #include "ISystemToGameObjectMessage.h"
 #include "InputHandlerToGameObjectMessage.h"
 
+#include "GlobalVariables.h"
+
 #include <fstream>
 
 InputHandler::InputHandler(std::shared_ptr<SystemMessageDispatcher> dispatcher)
@@ -21,7 +23,7 @@ void InputHandler::InitaliseListeners()
 	SubscribeToMessageType(SystemMessageType::eInputUpdateGamePad);
 
 	AddMapToVectorOfCommands();
-	LoadMapFromXMLFile("InputMapTest2.xml");
+	LoadMapFromXMLFile(GlobalVariables::Instance().ResourcesFilePath + "//InputMaps//InputMapTest2.xml");
 	AddMapToVectorOfCommands();
 	LoadKeyboardGameMapping();
 	SaveMapInput();

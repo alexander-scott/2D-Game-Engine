@@ -1,10 +1,12 @@
 #include "AudioSoundFileManager.h"
 
+#include "GlobalVariables.h"
+
 AudioSoundFileManager::AudioSoundFileManager(std::shared_ptr<DirectX::AudioEngine> audioEngine)
 {
 	for (auto s : AudioFilePaths)
 	{
-		std::string filePath = s.second;
+		std::string filePath = std::string(GlobalVariables::Instance().ResourcesFilePath + s.second);
 
 		std::wstring widestr = std::wstring(filePath.begin(), filePath.end());
 		const wchar_t* szName = widestr.c_str();

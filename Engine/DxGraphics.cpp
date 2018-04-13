@@ -1,6 +1,7 @@
 #include "DxGraphics.h"
 
 #include "MainWindow.h"
+#include "GlobalVariables.h"
 #include "DXErr.h"
 #include <assert.h>
 #include <string>
@@ -208,14 +209,14 @@ void DxGraphics::Initalise(HWNDKey& key)
 		throw GFX_EXCEPTION(hr, L"Creating sampler state");
 	}
 
-	std::string fontFile = "..\\Resources\\fonts\\italic.spritefont";
+	std::string fontFile = std::string(GlobalVariables::Instance().ResourcesFilePath + "\\fonts\\italic.spritefont");
 	std::wstring widestr = std::wstring(fontFile.begin(), fontFile.end());	
 
 	_sprites.reset(new SpriteBatch(_immediateContext.Get()));
 	_primitiveBatch = std::make_unique<PrimitiveBatch<VertexPositionColor>>(_immediateContext.Get());
 
 	//Create font 
-	_fonts.reset(new SpriteFont(_device.Get(), L"..\\Resources\\fonts\\italic.spritefont"));
+	_fonts.reset(new SpriteFont(_device.Get(), widestr.c_str()));
 }
 
 void DxGraphics::DrawComponent(IDrawableComponent * component)
@@ -407,7 +408,7 @@ void DxGraphics::LoadAnimationNames() //Retrieves xml file that has all path str
 	xml_document<> doc;
 	xml_node<>* node;
 
-	std::ifstream file("..\\Resources\\Animations\\Animations.xml");
+	std::ifstream file(std::string(GlobalVariables::Instance().ResourcesFilePath + "\\Animations\\Animations.xml"));
 	std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 	buffer.push_back('\0');
 
@@ -420,7 +421,7 @@ void DxGraphics::LoadAnimationNames() //Retrieves xml file that has all path str
 	for (xml_node<>* nodeAnimation = node->first_node("Anim"); nodeAnimation; nodeAnimation = nodeAnimation->next_sibling()) {
 		Animation a;
 		string animName = nodeAnimation->first_attribute("name")->value();
-		string animPath = "..\\Resources\\Animations\\" + animName;
+		string animPath = GlobalVariables::Instance().ResourcesFilePath + "\\Animations\\" + animName;
 
 		_animationNames.push_back(animName);
 		
