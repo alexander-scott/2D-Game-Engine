@@ -254,13 +254,15 @@ void DxGraphics::DrawSprite(std::string text, Vec2 pos, RECT * rect, float rot, 
 	//TODO : ALso, add action we want the object to do ( ex : "GreenPlayerWalk" ) in scene object to draw (xml file)
 	
 	ID3D11ShaderResourceView* texture = nullptr;
+
+	std::string pathToTexture = GlobalVariables::Instance().ResourcesFilePath + text;
 	
-	if (GetTexture(text)==nullptr) { //Texture has not been loaded yet
-		if (FAILED(LoadTexture(text)))
+	if (GetTexture(pathToTexture)==nullptr) { //Texture has not been loaded yet
+		if (FAILED(LoadTexture(pathToTexture)))
 			MessageBox(0, L"Problem loading texture", 0, 0);
 	}
-	if (GetTexture(text) != nullptr) { //texture successfully loaded and now we retrieve it
-		texture = GetTexture(text);
+	if (GetTexture(pathToTexture) != nullptr) { //texture successfully loaded and now we retrieve it
+		texture = GetTexture(pathToTexture);
 	}
 		//offset has been set manually in the scene object (xml file). For the test sprite used here it is set on the center
 		//ie : x = rect.width/2 = 54 / 2 = 27
@@ -432,7 +434,7 @@ void DxGraphics::LoadAnimations() {
 	for each (std::string  name in _animationNames)
 	{
 		Animation *a = new Animation(); 
-		a->LoadXml("..\\Resources\\Animations\\" + name);
+		a->LoadXml(GlobalVariables::Instance().ResourcesFilePath + "\\Animations\\" + name);
 		_nameAndAnimations[name] = a;
 	}
 }

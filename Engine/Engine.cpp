@@ -142,12 +142,13 @@ void Engine::InitaliseSystems()
 	_systems.insert(std::make_pair(sceneManager->SysType, sceneManager));
 
 	// Initalise Graphics system
+	Logger::Instance().LogMessage("Initalising Graphics system", LogSeverity::eInfo);
 	auto graphics = make_shared<DxGraphics>(_messageDispatcher); // Create a test graphics instance for now
 	_systems.insert(std::make_pair(graphics->SysType, graphics));
 
-	Logger::Instance().LogMessage("Initalising InputHandler system", LogSeverity::eInfo);
+	/*Logger::Instance().LogMessage("Initalising InputHandler system", LogSeverity::eInfo);
 	auto inputHandler = make_shared<InputHandler>(_messageDispatcher);
-	_systems.insert(std::make_pair(inputHandler->SysType, inputHandler));
+	_systems.insert(std::make_pair(inputHandler->SysType, inputHandler));*/
 
 	Logger::Instance().LogMessage("Initalising SceneSaver system", LogSeverity::eInfo);
 	auto sceneSaverSystem = make_shared<SceneSaver>(_messageDispatcher);
