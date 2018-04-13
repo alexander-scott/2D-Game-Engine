@@ -5,12 +5,15 @@
 #include "ISystemToGameObjectMessage.h"
 #include "InputHandlerToGameObjectMessage.h"
 
+#include "GlobalVariables.h"
+
 #include <fstream>
 
 InputHandler::InputHandler(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	:ISystem(SystemType::eInputHandler, dispatcher)
 { 
 	_gamePadP1 = std::make_unique<DirectX::GamePad>();
+	_bKeyboardSwapCommands = false;
 }
 
 void InputHandler::InitaliseListeners()
@@ -20,7 +23,7 @@ void InputHandler::InitaliseListeners()
 	SubscribeToMessageType(SystemMessageType::eInputUpdateGamePad);
 
 	AddMapToVectorOfCommands();
-	LoadMapFromXMLFile("InputMapTest2.xml");
+	LoadMapFromXMLFile(GlobalVariables::Instance().ResourcesFilePath + "//InputMaps//InputMapTest2.xml");
 	AddMapToVectorOfCommands();
 	LoadKeyboardGameMapping();
 	SaveMapInput();
@@ -87,13 +90,13 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 					{
 						InputHandlerToGameObjectMessage message(InputGenericStateMessageType::eKeyPressed, 
 							keyMessage,-1.0f);
-						SendMessageToDispatcher(message);
+						SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 					}
 					else if (msg.MessageType == KeyboardMessageType::eKeyUp)
 					{
 						InputHandlerToGameObjectMessage message(InputGenericStateMessageType::eKeyReleased,
 							keyMessage,-1.0f);
-						SendMessageToDispatcher(message);
+						SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 					}
 				}
 			}

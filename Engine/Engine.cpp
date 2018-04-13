@@ -1,5 +1,7 @@
 #include "Engine.h"
 
+#include "GlobalVariables.h"
+
 #include "SceneBuilder.h"
 #include "SceneManager.h"
 #include "DxGraphics.h"
@@ -8,21 +10,26 @@
 #include "MainWindow.h"
 #include "Editor.h"
 #include "PhysicsSystem.h"
+#include "AudioSystem.h"
 
 #include "RequestBuildSceneMessage.h"
 #include "RequestSaveSceneMessage.h"
 #include "UpdateSystemMessage.h"
 
 // Engine without a main window
-Engine::Engine()
+Engine::Engine(std::string resourcesFilePath)
 {
 	_messageDispatcher = make_shared<SystemMessageDispatcher>();
+
+	GlobalVariables::Instance().ResourcesFilePath = resourcesFilePath;
 }
 
 // Called from the editor
-Engine::Engine(HWND hWnd)
+Engine::Engine(HWND hWnd, std::string resourcesFilePath)
 {
 	_messageDispatcher = make_shared<SystemMessageDispatcher>();
+
+	GlobalVariables::Instance().ResourcesFilePath = resourcesFilePath;
 
 	Logger::Instance().LogMessage("Initalising the MainWindow system with a HWND", LogSeverity::eInfo);
 	_mainWindow = make_shared<MainWindow>(hWnd, _messageDispatcher);
@@ -36,9 +43,11 @@ Engine::Engine(HWND hWnd)
 }
 
 // Called in the standalone engine
-Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
+Engine::Engine(HINSTANCE hInst, wchar_t * pArgs, std::string resourcesFilePath)
 {
 	_messageDispatcher = make_shared<SystemMessageDispatcher>();
+
+	GlobalVariables::Instance().ResourcesFilePath = resourcesFilePath;
 
 	Logger::Instance().LogMessage("Initalising the MainWindow system with a HINSTANCE", LogSeverity::eInfo);
 	_mainWindow = make_shared<MainWindow>(hInst, pArgs, _messageDispatcher);
@@ -47,7 +56,8 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 	Initalise();
 
 	Logger::Instance().LogMessage("Requesting a new scene be built by the SceneBuilder system", LogSeverity::eInfo);
-	RequestBuildSceneMessage message("..\\Resources\\Scenes\\Scene3-spriteTest.xml"); // Still hardcoded
+	string sceneToBuild = string(GlobalVariables::Instance().ResourcesFilePath + "\\Scenes\\AlexGame.xml");
+	RequestBuildSceneMessage message(sceneToBuild); // Still hardcoded
 
 	_messageDispatcher->SendMessageToListeners(message);
 
@@ -55,7 +65,7 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs)
 	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::ePlayStarted));
 
 	// FOR TESTING
-	//RequestSaveSceneMessage msg("..\\Resources\\Scenes\\Scene1.xml");
+	//RequestSaveSceneMessage msg(string(GlobalVariables::Instance().ResourcesFilePath + "\\Scenes\\Scene1.xml"));
 	//_messageDispatcher->SendMessageToListeners(msg);
 }
 
@@ -132,12 +142,13 @@ void Engine::InitaliseSystems()
 	_systems.insert(std::make_pair(sceneManager->SysType, sceneManager));
 
 	// Initalise Graphics system
+	Logger::Instance().LogMessage("Initalising Graphics system", LogSeverity::eInfo);
 	auto graphics = make_shared<DxGraphics>(_messageDispatcher); // Create a test graphics instance for now
 	_systems.insert(std::make_pair(graphics->SysType, graphics));
 
-	Logger::Instance().LogMessage("Initalising InputHandler system", LogSeverity::eInfo);
+	/*Logger::Instance().LogMessage("Initalising InputHandler system", LogSeverity::eInfo);
 	auto inputHandler = make_shared<InputHandler>(_messageDispatcher);
-	_systems.insert(std::make_pair(inputHandler->SysType, inputHandler));
+	_systems.insert(std::make_pair(inputHandler->SysType, inputHandler));*/
 
 	Logger::Instance().LogMessage("Initalising SceneSaver system", LogSeverity::eInfo);
 	auto sceneSaverSystem = make_shared<SceneSaver>(_messageDispatcher);
@@ -146,6 +157,10 @@ void Engine::InitaliseSystems()
 	Logger::Instance().LogMessage("Initalising Physics system", LogSeverity::eInfo);
 	auto physicsSystem = make_shared<PhysicsSystem>(_messageDispatcher);
 	_systems.insert(std::make_pair(physicsSystem->SysType, physicsSystem));
+
+	Logger::Instance().LogMessage("Initalising Audio system", LogSeverity::eInfo);
+	auto audioSystem = make_shared<AudioSystem>(_messageDispatcher);
+	_systems.insert(std::make_pair(audioSystem->SysType, audioSystem));
 }
 
 // If any of the systems are listening for message this function sets it up. Called after system initalisation.

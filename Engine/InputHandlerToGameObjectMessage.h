@@ -1,12 +1,12 @@
 #pragma once
 
-#include "ISystemMessage.h"
+#include "IComponentMessage.h"
 
-class InputHandlerToGameObjectMessage : public ISystemMessage
+class InputHandlerToGameObjectMessage : public IComponentMessage
 {
 public:
 	InputHandlerToGameObjectMessage(InputGenericStateMessageType messageType, sCommand command, float range)
-		: ISystemMessage(SystemMessageType::eInputHandlerToGameObjectMessage)
+		: IComponentMessage(ComponentMessageType::eInputHandlerToGameObjectMessage)
 	{
 		MessageType = messageType;
 		Command = command;

@@ -12,7 +12,7 @@ public:
 
 	virtual void RecieveMessage(IComponentMessage& message) override;
 
-	void ApplyForce(const Vec2& f);
+	void ApplyForce(const Vec2& f, float power);
 	void ApplyImpulse(const Vec2& impulse, const Vec2& contactVector);
 
 	void SetStatic();

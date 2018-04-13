@@ -9,7 +9,7 @@
 
 namespace EditorEngineInterface
 {
-	extern "C" { DllExport void* InitaliseEngine(HWND hWnd); }
+	extern "C" { DllExport void* InitaliseEngine(HWND hWnd, const char * filePath); }
 	extern "C" { DllExport void* GetEditorSystem(void* enginePtr); }
 	extern "C" { DllExport void* GetSceneManagerSystem(void* enginePtr); }
 

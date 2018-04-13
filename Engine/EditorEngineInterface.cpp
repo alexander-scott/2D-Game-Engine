@@ -5,13 +5,13 @@
 
 #include "Editor.h"
 
-void * EditorEngineInterface::InitaliseEngine(HWND hWnd)
+void * EditorEngineInterface::InitaliseEngine(HWND hWnd, const char * filePath)
 {
 	try
 	{
 		Logger::Instance().LogMessage("Initalising Systems", LogSeverity::eInfo);
 
-		return new Engine(hWnd);
+		return new Engine(hWnd, filePath);
 	}
 	catch (const CustomException& e)
 	{

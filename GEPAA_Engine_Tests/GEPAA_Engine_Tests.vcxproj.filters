@@ -123,6 +123,12 @@
     <ClCompile Include="..\Engine\Animation.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\Engine\AlexComponentFactory.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\AlexControllerComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Engine\BuildSceneMessage.h">
@@ -309,6 +315,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\Animation.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\AlexComponentFactory.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\AlexControllerComponent.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

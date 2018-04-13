@@ -6,7 +6,7 @@ namespace GEPAA_Editor.Engine
     class EngineInterface
     {
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr InitaliseEngine(IntPtr window);
+        public static extern IntPtr InitaliseEngine(IntPtr window, string resourcesPath);
 
         [DllImport("GEPAA_Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr GetEditorSystem(IntPtr systemsPtr);

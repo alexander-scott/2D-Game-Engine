@@ -10,9 +10,9 @@ class MainWindow;
 class Engine
 {
 public:
-	Engine();
-	Engine(HWND hWnd);
-	Engine(HINSTANCE hInst, wchar_t * pArgs);
+	Engine(std::string resourcesFilePath);
+	Engine(HWND hWnd, std::string resourcesFilePath);
+	Engine(HINSTANCE hInst, wchar_t * pArgs, std::string resourcesFilePath);
 	~Engine();
 
 	void StartUpdateLoop();
