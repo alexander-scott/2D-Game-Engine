@@ -29,8 +29,8 @@ inline void FetchBoxColliderDependencies();
 
 #pragma region AlexGame component function declarations
 
-inline IComponent * BuildPlayerController();
-inline void FetchPlayerControllerDependencies();
+inline IComponent * BuildAlexController();
+inline void FetchAlexControllerDependencies();
 
 #pragma endregion
 
@@ -60,8 +60,8 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 
 #pragma region AlexGame component function mapping
 
-	_buildMapper.Insert("PlayerControllerComponent", BuildPlayerController);
-	_dependencyBuildMapper.Insert("PlayerControllerComponent", FetchPlayerControllerDependencies);
+	_buildMapper.Insert("AlexControllerComponent", BuildAlexController);
+	_dependencyBuildMapper.Insert("AlexControllerComponent", FetchAlexControllerDependencies);
 
 #pragma endregion	
 
@@ -260,14 +260,14 @@ inline void FetchTextRendererDependencies()
 
 #pragma region AlexGame component functions
 
-IComponent * BuildPlayerController()
+IComponent * BuildAlexController()
 {
-	return ComponentFactory::MakePlayerComponent();
+	return ComponentFactory::MakeAlexControllerComponent();
 }
 
-void FetchPlayerControllerDependencies()
+void FetchAlexControllerDependencies()
 {
-	PlayerControllerComponent* playerController = static_cast<PlayerControllerComponent*>(dependencyComponent);
+	AlexControllerComponent* alexController = static_cast<AlexControllerComponent*>(dependencyComponent);
 	TransformComponent* transform;
 	RigidBodyComponent* rigidbody;
 
@@ -284,7 +284,7 @@ void FetchPlayerControllerDependencies()
 		}
 	}
 
-	playerController->SetDependencies(transform, rigidbody);
+	alexController->SetDependencies(transform, rigidbody);
 }
 
 #pragma endregion

@@ -284,7 +284,7 @@
     <ClInclude Include="EditorEngineInterface.h" />
     <ClInclude Include="EditorInputInterface.h" />
     <ClInclude Include="EditorSceneInterface.h" />
-    <ClInclude Include="GameComponentFactory.h" />
+    <ClInclude Include="AlexComponentFactory.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GlobalVariables.h" />
     <ClInclude Include="ICommand.h" />
@@ -312,7 +312,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="ObjectGrid.h" />
     <ClInclude Include="PhysicsSystem.h" />
-    <ClInclude Include="PlayerControllerComponent.h" />
+    <ClInclude Include="AlexControllerComponent.h" />
     <ClInclude Include="PolygonColliderComponent.h" />
     <ClInclude Include="RequestBuildSceneMessage.h" />
     <ClInclude Include="RequestSaveSceneMessage.h" />
@@ -355,14 +355,14 @@
     <ClCompile Include="EditorEngineInterface.cpp" />
     <ClCompile Include="EditorInputInterface.cpp" />
     <ClCompile Include="EditorSceneInterface.cpp" />
-    <ClCompile Include="GameComponentFactory.cpp" />
+    <ClCompile Include="AlexComponentFactory.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="ObjectGrid.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
-    <ClCompile Include="PlayerControllerComponent.cpp" />
+    <ClCompile Include="AlexControllerComponent.cpp" />
     <ClCompile Include="PolygonColliderComponent.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />

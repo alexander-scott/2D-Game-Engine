@@ -137,6 +137,14 @@ namespace GEPAA_Editor
                         return;
                     }
                 }
+                else
+                {
+                    _playing = true;
+                    btnPlay.Text = "STOP";
+                    this.BackColor = Color.AliceBlue;
+                    EngineInterface.PlayStarted(_editorSystem);
+                    _hierarchy.CreateHierachyList(_sceneManagerSystem);
+                }
             }
             else
             {

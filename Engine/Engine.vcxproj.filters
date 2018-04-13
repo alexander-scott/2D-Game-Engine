@@ -304,12 +304,6 @@
     <ClInclude Include="IStartableComponent.h">
       <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponentFactory.h">
-      <Filter>Game\Alex</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerControllerComponent.h">
-      <Filter>Game\Alex</Filter>
-    </ClInclude>
     <ClInclude Include="AddForceMessage.h">
       <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
@@ -321,6 +315,12 @@
     </ClInclude>
     <ClInclude Include="GlobalVariables.h">
       <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="AlexComponentFactory.h">
+      <Filter>Game\Alex</Filter>
+    </ClInclude>
+    <ClInclude Include="AlexControllerComponent.h">
+      <Filter>Game\Alex</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -424,17 +424,17 @@
     <ClCompile Include="DXErr.cpp">
       <Filter>Engine\Systems\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponentFactory.cpp">
-      <Filter>Game\Alex</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerControllerComponent.cpp">
-      <Filter>Game\Alex</Filter>
-    </ClCompile>
     <ClCompile Include="AudioSoundFileManager.cpp">
       <Filter>Engine\Systems\Audio</Filter>
     </ClCompile>
     <ClCompile Include="AudioSystem.cpp">
       <Filter>Engine\Systems\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AlexComponentFactory.cpp">
+      <Filter>Game\Alex</Filter>
+    </ClCompile>
+    <ClCompile Include="AlexControllerComponent.cpp">
+      <Filter>Game\Alex</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

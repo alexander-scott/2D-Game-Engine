@@ -167,6 +167,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Engine\AlexComponentFactory.cpp" />
+    <ClCompile Include="..\Engine\AlexControllerComponent.cpp" />
     <ClCompile Include="..\Engine\Animation.cpp" />
     <ClCompile Include="..\Engine\AudioSoundFileManager.cpp" />
     <ClCompile Include="..\Engine\AudioSystem.cpp" />
@@ -180,14 +182,12 @@
     <ClCompile Include="..\Engine\DxGraphics.cpp" />
     <ClCompile Include="..\Engine\Editor.cpp" />
     <ClCompile Include="..\Engine\Engine.cpp" />
-    <ClCompile Include="..\Engine\GameComponentFactory.cpp" />
     <ClCompile Include="..\Engine\GameObject.cpp" />
     <ClCompile Include="..\Engine\InputHandler.cpp" />
     <ClCompile Include="..\Engine\Main.cpp" />
     <ClCompile Include="..\Engine\MainWindow.cpp" />
     <ClCompile Include="..\Engine\ObjectGrid.cpp" />
     <ClCompile Include="..\Engine\PhysicsSystem.cpp" />
-    <ClCompile Include="..\Engine\PlayerControllerComponent.cpp" />
     <ClCompile Include="..\Engine\PolygonColliderComponent.cpp" />
     <ClCompile Include="..\Engine\RigidBodyComponent.cpp" />
     <ClCompile Include="..\Engine\Scene.cpp" />
@@ -205,6 +205,8 @@
     <ClCompile Include="SceneBuilderTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Engine\AlexComponentFactory.h" />
+    <ClInclude Include="..\Engine\AlexControllerComponent.h" />
     <ClInclude Include="..\Engine\Animation.h" />
     <ClInclude Include="..\Engine\AudioSoundFileManager.h" />
     <ClInclude Include="..\Engine\AudioSystem.h" />
@@ -224,7 +226,6 @@
     <ClInclude Include="..\Engine\DxGraphics.h" />
     <ClInclude Include="..\Engine\Editor.h" />
     <ClInclude Include="..\Engine\Engine.h" />
-    <ClInclude Include="..\Engine\GameComponentFactory.h" />
     <ClInclude Include="..\Engine\GameObject.h" />
     <ClInclude Include="..\Engine\IComponent.h" />
     <ClInclude Include="..\Engine\IComponentMessage.h" />
@@ -248,7 +249,6 @@
     <ClInclude Include="..\Engine\ObjectGrid.h" />
     <ClInclude Include="..\Engine\PhysicsSystem.h" />
     <ClInclude Include="..\Engine\PlayAudioMessage.h" />
-    <ClInclude Include="..\Engine\PlayerControllerComponent.h" />
     <ClInclude Include="..\Engine\PolygonColliderComponent.h" />
     <ClInclude Include="..\Engine\rapidxml.hpp" />
     <ClInclude Include="..\Engine\rapidxml_print.hpp" />

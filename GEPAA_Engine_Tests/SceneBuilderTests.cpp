@@ -51,7 +51,7 @@ namespace GEPAA_Engine_Tests
 		{
 			auto dispatcher = make_shared<SystemMessageDispatcher>();
 			SceneBuilderFixture sceneBuilder(dispatcher);
-			auto scene = sceneBuilder.TestBuildScene(std::string(GetDirectoryName(TEST_CASE_DIRECTORY)) 
+			auto scene = sceneBuilder.TestBuildScene(std::string(TEST_CASE_DIRECTORY) 
 				+ std::string("Resources\\Scenes\\TestScene.xml"));
 		
 			// Test scene is not null and scene name is correct

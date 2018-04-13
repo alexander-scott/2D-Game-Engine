@@ -123,10 +123,10 @@
     <ClCompile Include="..\Engine\Animation.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\PlayerControllerComponent.cpp">
+    <ClCompile Include="..\Engine\AlexComponentFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\GameComponentFactory.cpp">
+    <ClCompile Include="..\Engine\AlexControllerComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -317,10 +317,10 @@
     <ClInclude Include="..\Engine\Animation.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\PlayerControllerComponent.h">
+    <ClInclude Include="..\Engine\AlexComponentFactory.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\GameComponentFactory.h">
+    <ClInclude Include="..\Engine\AlexControllerComponent.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
