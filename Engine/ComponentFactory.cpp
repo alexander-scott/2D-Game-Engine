@@ -10,7 +10,6 @@ TransformComponent * ComponentFactory::MakeTransformComponent(Vec2 position, flo
 SpriteRendererComponent * ComponentFactory::MakeSpriteRendererComponent(RECT* rect, Vec2 offset, string text, string name, string animation)
 {
 	SpriteRendererComponent * sprite = new SpriteRendererComponent(rect, offset, text, name, animation);
-
 	return sprite;
 }
 
@@ -18,6 +17,12 @@ TextRendererComponent * ComponentFactory::MakeTextRendererComponent(RECT * rect,
 {
 	TextRendererComponent * textComponent = new TextRendererComponent(rect, offset, text, rgb3);
 	return textComponent;
+}
+
+SpriteAnimatedComponent * ComponentFactory::MakeSpriteAnimatedComponent(RECT * rect, Vec2 offset, string text, string name, string animation)
+{
+	SpriteAnimatedComponent * sprite = new SpriteAnimatedComponent(rect, offset, text, name, animation);
+	return sprite;
 }
 
 RigidBodyComponent * ComponentFactory::MakeRigidbodyComponent(float staticF, float dynamicF, float rest, float density, bool isStatic, bool lockRotation)

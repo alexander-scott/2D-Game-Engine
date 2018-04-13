@@ -7,6 +7,7 @@ shared_ptr<Scene> _scene;
 // Define component build functions here
 inline IComponent * BuildTransformComponent();
 inline IComponent * BuildSpriteRendererComponent();
+inline IComponent * BuildSpriteAnimatedComponent();
 inline IComponent * BuildTextRendererComponent();
 inline IComponent * BuildRigidbodyComponent();
 inline IComponent * BuildCircleColliderComponent();
@@ -19,6 +20,7 @@ IComponent * dependencyComponent;
 inline void FetchCircleColliderDependencies();
 inline void FetchBoxColliderDependencies();
 inline void FetchSpriteRendererDependencies();
+inline void FetchSpriteAnimatedDependencies();
 inline void FetchTextRendererDependencies();
 
 ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
@@ -28,6 +30,7 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 	// Insert build functions here
 	_buildMapper.Insert("TransformComponent", BuildTransformComponent);
 	_buildMapper.Insert("SpriteRendererComponent", BuildSpriteRendererComponent);
+	_buildMapper.Insert("SpriteAnimatedComponent", BuildSpriteAnimatedComponent);
 	_buildMapper.Insert("TextRendererComponent", BuildTextRendererComponent);
 	_buildMapper.Insert("RigidbodyComponent", BuildRigidbodyComponent);
 	_buildMapper.Insert("CircleColliderComponent", BuildCircleColliderComponent);
@@ -37,6 +40,7 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 	_dependencyBuildMapper.Insert("CircleColliderComponent", FetchCircleColliderDependencies);
 	_dependencyBuildMapper.Insert("BoxColliderComponent", FetchBoxColliderDependencies);
 	_dependencyBuildMapper.Insert("SpriteRendererComponent", FetchSpriteRendererDependencies);
+	_dependencyBuildMapper.Insert("SpriteAnimatedComponent", FetchSpriteAnimatedDependencies);
 	_dependencyBuildMapper.Insert("TextRendererComponent", FetchTextRendererDependencies);
 }
 
@@ -105,6 +109,26 @@ IComponent * BuildSpriteRendererComponent()
 	std::string animation = (std::string)(_node->first_attribute("animation")->value()); //name of animation (ex : walk, crawl, etc)
 
 	return ComponentFactory::MakeSpriteRendererComponent(rect, offset, text, name, animation);
+}
+
+inline IComponent * BuildSpriteAnimatedComponent()
+{
+	LONG rectTop = (LONG)atof(_node->first_attribute("rectTop")->value());
+	LONG rectBottom = (LONG)atof(_node->first_attribute("rectBottom")->value());
+	LONG rectLeft = (LONG)atof(_node->first_attribute("rectLeft")->value());
+	LONG rectRight = (LONG)atof(_node->first_attribute("rectRight")->value());
+
+	float offset1 = (float)atof(_node->first_attribute("offset1")->value());
+	float offset2 = (float)atof(_node->first_attribute("offset2")->value());
+
+	RECT *rect = new RECT(); rect->top = rectTop; rect->left = rectLeft; rect->right = rectRight; rect->bottom = rectBottom;
+	Vec2 offset = Vec2(offset1, offset2);
+
+	std::string text = (std::string)(_node->first_attribute("text")->value()); //path to texture "file"
+	std::string name = (std::string)(_node->first_attribute("name")->value()); //name of the object (ex : PlayerGreen,etc.)
+	std::string animation = (std::string)(_node->first_attribute("animation")->value()); //name of animation (ex : walk, crawl, etc)
+
+	return ComponentFactory::MakeSpriteAnimatedComponent(rect, offset, text, name, animation);
 }
 
 IComponent * BuildTextRendererComponent()
@@ -226,6 +250,24 @@ void FetchBoxColliderDependencies()
 void FetchSpriteRendererDependencies()
 {
 	SpriteRendererComponent* renderer = static_cast<SpriteRendererComponent*>(dependencyComponent);
+	TransformComponent* transform;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+			break;
+		}
+	}
+
+	renderer->SetDependencies(transform);
+}
+
+void FetchSpriteAnimatedDependencies()
+{
+	SpriteAnimatedComponent* renderer = static_cast<SpriteAnimatedComponent*>(dependencyComponent);
 	TransformComponent* transform;
 
 	map<string, GUID>::iterator it;

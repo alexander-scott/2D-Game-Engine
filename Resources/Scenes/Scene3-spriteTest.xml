@@ -2,7 +2,7 @@
 <scene name="scene3">
 	<GameObject tag="TestSpriteDraw" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
     <Component xpos="150.000000" ypos="-150.000000" rotation="2.000000" scale="3.000000" type="TransformComponent"></Component>
-    <Component rectTop ="44" rectBottom="94" rectLeft="247" rectRight="285" offset1="27.000000" offset2="22.500000" text ="../Resources/Sprites/Players/spritesheet_players.dds" name = "PlayerGreen" animation = "Walk" type="SpriteRendererComponent">
+    <Component rectTop ="44" rectBottom="94" rectLeft="247" rectRight="285" offset1="27.000000" offset2="22.500000" text ="../Resources/Sprites/Players/spritesheet_players.dds" name = "PlayerGreen" animation = "Crawl2" type="SpriteAnimatedComponent">
       <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
     </Component>
     <Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="0" lockrotation="0" type="RigidbodyComponent" ></Component>

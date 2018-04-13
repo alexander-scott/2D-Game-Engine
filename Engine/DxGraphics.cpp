@@ -238,6 +238,13 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 		{
 			SpriteRendererComponent * drawComponent = dynamic_cast<SpriteRendererComponent*>(component);
 			DrawSprite(drawComponent->GetText(), drawComponent->GetPosition(), drawComponent->GetRect(),
+				drawComponent->GetRotation(), drawComponent->GetScale(), drawComponent->GetOffset(), drawComponent->GetName());
+			break;
+		}
+		case DrawableComponentType::eSpriteAnimated:
+		{
+			SpriteAnimatedComponent * drawComponent = dynamic_cast<SpriteAnimatedComponent*>(component);
+			DrawSpriteAnimated(drawComponent->GetText(), drawComponent->GetPosition(), drawComponent->GetRect(),
 				drawComponent->GetRotation(), drawComponent->GetScale(), drawComponent->GetOffset(), drawComponent->GetName(), drawComponent->GetAnimation());
 			break;
 		}
@@ -246,11 +253,8 @@ void DxGraphics::DrawComponent(IDrawableComponent * component)
 	}
 }
 
-void DxGraphics::DrawSprite(std::string text, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset, std::string name, std::string animation)
+void DxGraphics::DrawSprite(std::string text, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset, std::string name)
 {
-	//TODO : Add name object+action in parameters to pick the correct animation from the name/animation map. 
-	//TODO : Also, do that in scene object to draw
-	//TODO : ALso, add action we want the object to do ( ex : "GreenPlayerWalk" ) in scene object to draw (xml file)
 	
 	ID3D11ShaderResourceView* texture = nullptr;
 	
@@ -266,12 +270,28 @@ void DxGraphics::DrawSprite(std::string text, Vec2 pos, RECT * rect, float rot, 
 		//y = rect.height/2 = 45 / 2 = 22.5
 		//wouldn't it be better to calculate the offset in code? else we'd have to do it for each sprite we want to draw 
 
-	//Animation *test = RetrieveAnimationFromMap("PlayerGreenCrawl2.xml");
-//	Animation *test = RetrieveAnimationFromMap("PlayerGreenWalk.xml");
+	_sprites->Draw(texture, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
+}
+
+void DxGraphics::DrawSpriteAnimated(std::string text, Vec2 pos, RECT * rect, float rot, float scale, Vec2 offset, std::string name, std::string animation)
+{
+	//TODO : Add name object+action in parameters to pick the correct animation from the name/animation map. 
+	//TODO : Also, do that in scene object to draw
+	//TODO : ALso, add action we want the object to do ( ex : "GreenPlayerWalk" ) in scene object to draw (xml file)
+
+	ID3D11ShaderResourceView* texture = nullptr;
+
+	if (GetTexture(text) == nullptr) { //Texture has not been loaded yet
+		if (FAILED(LoadTexture(text)))
+			MessageBox(0, L"Problem loading texture", 0, 0);
+	}
+	if (GetTexture(text) != nullptr) { //texture successfully loaded and now we retrieve it
+		texture = GetTexture(text);
+	}
+
 	Animation *test = RetrieveAnimationFromMap(name + animation + ".xml");
 	test->UpdateRect(0.0f); //TODO : fix - Use FrameTimer?
-	
-//	_sprites->Draw(text, XMFLOAT2(pos.x, pos.y), rect, Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
+
 	_sprites->Draw(texture, XMFLOAT2(pos.x, pos.y), test->GetRect(), Colors::White, rot, XMFLOAT2(offset.x, offset.y), scale); //todo : change offset
 }
 

@@ -295,6 +295,12 @@
     <ClInclude Include="IStartableComponent.h">
       <Filter>Engine\GameObject\Components\ComponentInterfaces</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteAnimatedComponent.h">
+      <Filter>Engine\GameObject\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ISpriteComponent.h">
+      <Filter>Engine\GameObject\Components\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -396,6 +402,12 @@
     </ClCompile>
     <ClCompile Include="DXErr.cpp">
       <Filter>Engine\Systems\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAnimatedComponent.cpp">
+      <Filter>Engine\GameObject\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ISpriteComponent.cpp">
+      <Filter>Engine\GameObject\Components\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
