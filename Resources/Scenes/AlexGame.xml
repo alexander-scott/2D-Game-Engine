@@ -5,7 +5,7 @@
     <Component rectTop ="44" rectBottom="94" rectLeft="247" rectRight="285" offset1="27.000000" offset2="22.500000" text ="/Sprites/Players/spritesheet_players.dds" name = "PlayerGreen" animation = "Walk" type="SpriteRendererComponent">
       <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
     </Component>
-    <Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="0" lockrotation="0" type="RigidbodyComponent" ></Component>
+    <Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="0" lockrotation="1" type="RigidbodyComponent" ></Component>
     <Component width="64" height="64" type="BoxColliderComponent">
       <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
     </Component>
