@@ -95,6 +95,7 @@ enum DrawableComponentType
 {
 	eTestDrawingType,
 	eSprite,
+	eSpriteAnimated,
 	eText
 };
 

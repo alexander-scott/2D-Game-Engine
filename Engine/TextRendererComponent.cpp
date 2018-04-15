@@ -2,10 +2,6 @@
 
 
 
-/*TextRendererComponent::TextRendererComponent() : IComponent("TextRendererComponent")
-{
-
-}*/
 
 TextRendererComponent::TextRendererComponent(RECT *rect, Vec2 offset, std::string text, float* rgb) : IComponent("TextRendererComponent")
 {
@@ -13,7 +9,6 @@ TextRendererComponent::TextRendererComponent(RECT *rect, Vec2 offset, std::strin
 	SetRect(rect);
 	SetOffset(offset);
 	_text = text;
-	//_rgb = rgb;
 	SetRgb(rgb);
 }
 

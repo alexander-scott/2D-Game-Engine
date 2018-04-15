@@ -302,6 +302,7 @@
     <ClInclude Include="InputKeyboardMessage.h" />
     <ClInclude Include="InputMouseMessage.h" />
     <ClInclude Include="IRenderableComponent.h" />
+    <ClInclude Include="ISpriteComponent.h" />
     <ClInclude Include="IStartableComponent.h" />
     <ClInclude Include="ISystemMessage.h" />
     <ClInclude Include="IMessenger.h" />
@@ -322,6 +323,7 @@
     <ClInclude Include="SceneSaver.h" />
     <ClInclude Include="SceneMessage.h" />
     <ClInclude Include="SetParentTransformMessage.h" />
+    <ClInclude Include="SpriteAnimatedComponent.h" />
     <ClInclude Include="SpriteRendererComponent.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />
     <ClInclude Include="SystemMessageListener.h" />
@@ -358,6 +360,7 @@
     <ClCompile Include="AlexComponentFactory.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="ISpriteComponent.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="ObjectGrid.cpp" />
@@ -368,6 +371,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneSaver.cpp" />
+    <ClCompile Include="SpriteAnimatedComponent.cpp" />
     <ClCompile Include="SpriteRendererComponent.cpp" />
     <ClCompile Include="SystemMessageDispatcher.cpp" />
     <ClCompile Include="SceneBuilder.cpp" />
