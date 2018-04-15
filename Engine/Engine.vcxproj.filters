@@ -89,6 +89,15 @@
     <Filter Include="Engine\GameObject\Components\Physics">
       <UniqueIdentifier>{c1006ffe-8b5b-4d40-bd0e-6f9ac9cb0992}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{c1c38dd6-b903-453e-a643-7cea8deebd61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Alex">
+      <UniqueIdentifier>{34df43a6-740e-4c87-b1dc-15541d7e57a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Audio">
+      <UniqueIdentifier>{68560b5e-dd0a-4e75-b712-16578cb612ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -301,6 +310,24 @@
     <ClInclude Include="ISpriteComponent.h">
       <Filter>Engine\GameObject\Components\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="AddForceMessage.h">
+      <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSoundFileManager.h">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSystem.h">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalVariables.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="AlexComponentFactory.h">
+      <Filter>Game\Alex</Filter>
+    </ClInclude>
+    <ClInclude Include="AlexControllerComponent.h">
+      <Filter>Game\Alex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -408,6 +435,18 @@
     </ClCompile>
     <ClCompile Include="ISpriteComponent.cpp">
       <Filter>Engine\GameObject\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSoundFileManager.cpp">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSystem.cpp">
+      <Filter>Engine\Systems\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AlexComponentFactory.cpp">
+      <Filter>Game\Alex</Filter>
+    </ClCompile>
+    <ClCompile Include="AlexControllerComponent.cpp">
+      <Filter>Game\Alex</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

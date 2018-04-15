@@ -1,0 +1,13 @@
+<?xml?>
+<PlayerInputMap number="1">
+	<Peripheral name="keyboard">
+		<Map context="main">
+			<Command key=" " name="rebind_swap" ID="5"/>
+			<Command key="A" name="move_left" ID="3"/>
+			<Command key="D" name="move_right" ID="4"/>
+			<Command key="S" name="move_down" ID="2"/>
+			<Command key="W" name="move_up" ID="1"/>
+		</Map>
+	</Peripheral>
+</PlayerInputMap>
+

@@ -1,0 +1,25 @@
+<?xml?>
+<scene name="AlexGame">
+	<GameObject tag="PlayerSprite" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
+    <Component xpos="128.000000" ypos="00.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
+    <Component rectTop ="44" rectBottom="94" rectLeft="247" rectRight="285" offset1="27.000000" offset2="22.500000" text ="/Sprites/Players/spritesheet_players.dds" name = "PlayerGreen" animation = "Walk" type="SpriteAnimatedComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
+    </Component>
+    <Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="0" lockrotation="0" type="RigidbodyComponent" ></Component>
+    <Component width="64" height="64" type="BoxColliderComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
+    </Component>
+    <Component type="AlexControllerComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
+    </Component>
+  </GameObject>
+
+  <GameObject tag="Floor" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05">
+    <Component xpos="128.000000" ypos="-600.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"></Component>
+    <Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" type="RigidbodyComponent" ></Component>
+    <Component width="500" height="64" type="BoxColliderComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
+    </Component>  
+  </GameObject>  
+</scene>
+

@@ -263,6 +263,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AddForceMessage.h" />
+    <ClInclude Include="AudioSoundFileManager.h" />
+    <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BuildSceneMessage.h" />
@@ -281,7 +284,9 @@
     <ClInclude Include="EditorEngineInterface.h" />
     <ClInclude Include="EditorInputInterface.h" />
     <ClInclude Include="EditorSceneInterface.h" />
+    <ClInclude Include="AlexComponentFactory.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GlobalVariables.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentMessage.h" />
@@ -308,6 +313,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="ObjectGrid.h" />
     <ClInclude Include="PhysicsSystem.h" />
+    <ClInclude Include="AlexControllerComponent.h" />
     <ClInclude Include="PolygonColliderComponent.h" />
     <ClInclude Include="RequestBuildSceneMessage.h" />
     <ClInclude Include="RequestSaveSceneMessage.h" />
@@ -336,6 +342,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AudioSoundFileManager.cpp" />
+    <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="CircleColliderComponent.cpp" />
@@ -349,6 +357,7 @@
     <ClCompile Include="EditorEngineInterface.cpp" />
     <ClCompile Include="EditorInputInterface.cpp" />
     <ClCompile Include="EditorSceneInterface.cpp" />
+    <ClCompile Include="AlexComponentFactory.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="ISpriteComponent.cpp" />
@@ -356,6 +365,7 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="ObjectGrid.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
+    <ClCompile Include="AlexControllerComponent.cpp" />
     <ClCompile Include="PolygonColliderComponent.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />

@@ -1,6 +1,7 @@
 #include "DxGraphics.h"
 
 #include "MainWindow.h"
+#include "GlobalVariables.h"
 #include "DXErr.h"
 #include <assert.h>
 #include <string>
@@ -208,14 +209,14 @@ void DxGraphics::Initalise(HWNDKey& key)
 		throw GFX_EXCEPTION(hr, L"Creating sampler state");
 	}
 
-	std::string fontFile = "..\\Resources\\fonts\\italic.spritefont";
+	std::string fontFile = std::string(GlobalVariables::Instance().ResourcesFilePath + "\\fonts\\italic.spritefont");
 	std::wstring widestr = std::wstring(fontFile.begin(), fontFile.end());	
 
 	_sprites.reset(new SpriteBatch(_immediateContext.Get()));
 	_primitiveBatch = std::make_unique<PrimitiveBatch<VertexPositionColor>>(_immediateContext.Get());
 
 	//Create font 
-	_fonts.reset(new SpriteFont(_device.Get(), L"..\\Resources\\fonts\\italic.spritefont"));
+	_fonts.reset(new SpriteFont(_device.Get(), widestr.c_str()));
 }
 
 void DxGraphics::DrawComponent(IDrawableComponent * component)
@@ -257,13 +258,15 @@ void DxGraphics::DrawSprite(std::string text, Vec2 pos, RECT * rect, float rot, 
 {
 	
 	ID3D11ShaderResourceView* texture = nullptr;
+
+	std::string pathToTexture = GlobalVariables::Instance().ResourcesFilePath + text;
 	
-	if (GetTexture(text)==nullptr) { //Texture has not been loaded yet
-		if (FAILED(LoadTexture(text)))
+	if (GetTexture(pathToTexture)==nullptr) { //Texture has not been loaded yet
+		if (FAILED(LoadTexture(pathToTexture)))
 			MessageBox(0, L"Problem loading texture", 0, 0);
 	}
-	if (GetTexture(text) != nullptr) { //texture successfully loaded and now we retrieve it
-		texture = GetTexture(text);
+	if (GetTexture(pathToTexture) != nullptr) { //texture successfully loaded and now we retrieve it
+		texture = GetTexture(pathToTexture);
 	}
 		//offset has been set manually in the scene object (xml file). For the test sprite used here it is set on the center
 		//ie : x = rect.width/2 = 54 / 2 = 27
@@ -281,12 +284,14 @@ void DxGraphics::DrawSpriteAnimated(std::string text, Vec2 pos, RECT * rect, flo
 
 	ID3D11ShaderResourceView* texture = nullptr;
 
-	if (GetTexture(text) == nullptr) { //Texture has not been loaded yet
-		if (FAILED(LoadTexture(text)))
+	std::string pathToTexture = GlobalVariables::Instance().ResourcesFilePath + text;
+
+	if (GetTexture(pathToTexture) == nullptr) { //Texture has not been loaded yet
+		if (FAILED(LoadTexture(pathToTexture)))
 			MessageBox(0, L"Problem loading texture", 0, 0);
 	}
-	if (GetTexture(text) != nullptr) { //texture successfully loaded and now we retrieve it
-		texture = GetTexture(text);
+	if (GetTexture(pathToTexture) != nullptr) { //texture successfully loaded and now we retrieve it
+		texture = GetTexture(pathToTexture);
 	}
 
 	Animation *test = RetrieveAnimationFromMap(name + animation + ".xml");
@@ -427,7 +432,7 @@ void DxGraphics::LoadAnimationNames() //Retrieves xml file that has all path str
 	xml_document<> doc;
 	xml_node<>* node;
 
-	std::ifstream file("..\\Resources\\Animations\\Animations.xml");
+	std::ifstream file(std::string(GlobalVariables::Instance().ResourcesFilePath + "\\Animations\\Animations.xml"));
 	std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 	buffer.push_back('\0');
 
@@ -440,7 +445,7 @@ void DxGraphics::LoadAnimationNames() //Retrieves xml file that has all path str
 	for (xml_node<>* nodeAnimation = node->first_node("Anim"); nodeAnimation; nodeAnimation = nodeAnimation->next_sibling()) {
 		Animation a;
 		string animName = nodeAnimation->first_attribute("name")->value();
-		string animPath = "..\\Resources\\Animations\\" + animName;
+		string animPath = GlobalVariables::Instance().ResourcesFilePath + "\\Animations\\" + animName;
 
 		_animationNames.push_back(animName);
 		
@@ -451,7 +456,7 @@ void DxGraphics::LoadAnimations() {
 	for each (std::string  name in _animationNames)
 	{
 		Animation *a = new Animation(); 
-		a->LoadXml("..\\Resources\\Animations\\" + name);
+		a->LoadXml(GlobalVariables::Instance().ResourcesFilePath + "\\Animations\\" + name);
 		_nameAndAnimations[name] = a;
 	}
 }

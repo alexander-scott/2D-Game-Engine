@@ -80,7 +80,7 @@ namespace GEPAA_Editor
 
         private void EditorLoading(object sender, EventArgs e)
         {
-            _engine = EngineInterface.InitaliseEngine(panel1.Handle);
+            _engine = EngineInterface.InitaliseEngine(panel1.Handle, _resoucesPath);
 
             _editorSystem = EngineInterface.GetEditorSystem(_engine);
             _sceneManagerSystem = EngineInterface.GetSceneManagerSystem(_engine);
@@ -136,6 +136,14 @@ namespace GEPAA_Editor
                     {
                         return;
                     }
+                }
+                else
+                {
+                    _playing = true;
+                    btnPlay.Text = "STOP";
+                    this.BackColor = Color.AliceBlue;
+                    EngineInterface.PlayStarted(_editorSystem);
+                    _hierarchy.CreateHierachyList(_sceneManagerSystem);
                 }
             }
             else
