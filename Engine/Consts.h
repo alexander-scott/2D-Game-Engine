@@ -69,6 +69,7 @@ enum SystemMessageType
 
 	// Windows messages
 	eWindowLostFocus,
+	eWindowGainedFocus,
 
 	// Editor messages
 	ePlayStarted, // SENT BY: Engine/Editor - RECIEVED BY: SceneManager - WHEN: When the scene should be played. Tells the scene to start updating

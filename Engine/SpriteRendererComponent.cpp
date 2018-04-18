@@ -20,3 +20,20 @@ void SpriteRendererComponent::Draw(float deltaTime)
 {
 	//TODO - delete?
 }
+
+Vec2 SpriteRendererComponent::GetPosition()
+{
+	float halfSpriteWidth = (std::abs(_rect->right - _rect->left) / 2) * _transformComponent->GetWorldScale();
+	float halfSpriteHeight = (std::abs(_rect->bottom - _rect->top) / 2) * _transformComponent->GetWorldScale();
+
+	Vec2 pos = _transformComponent->GetWorldPosition();
+	float newPosX = pos.x
+		- halfSpriteWidth * cos(_transformComponent->GetWorldRotation())
+		+ halfSpriteHeight * sin(_transformComponent->GetWorldRotation());
+
+	float newPosY = pos.y
+		- halfSpriteHeight * cos(_transformComponent->GetWorldRotation())
+		+ halfSpriteWidth * sin(_transformComponent->GetWorldRotation());
+
+	return Vec2(newPosX, newPosY);
+}

@@ -114,13 +114,6 @@ bool MainWindow::ProcessMessage()
 		{
 			return false;
 		}
-		
-		//else
-			//testgraphics update
-			//testgraphics draw
-		
-
-
 	}
 	return true;
 }
@@ -164,6 +157,12 @@ LRESULT MainWindow::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_KILLFOCUS:
 	{
 		ISystemMessage message(SystemMessageType::eWindowLostFocus);
+		SendMessageToDispatcher(message);
+		break;
+	}
+	case WM_SETFOCUS:
+	{
+		ISystemMessage message(SystemMessageType::eWindowGainedFocus);
 		SendMessageToDispatcher(message);
 		break;
 	}

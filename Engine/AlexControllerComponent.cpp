@@ -39,7 +39,7 @@ void AlexControllerComponent::Update(float deltaTime)
 
 	if (force.x != 0 || force.y != 0)
 	{
-		AddForceMessage addForceMsg(force, 100000000);
+		AddForceMessage addForceMsg(force, 1000000);
 		_rigidbody->RecieveMessage(addForceMsg);
 	}
 }
