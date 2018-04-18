@@ -19,7 +19,7 @@ namespace ComponentFactory
 	SpriteAnimatedComponent * MakeSpriteAnimatedComponent(RECT* rect, Vec2 offset, string text, string name, string animation);
 
 	// Physics
-	RigidBodyComponent * MakeRigidbodyComponent(float staticF, float dynamicF, float rest, float density, bool isStatic, bool lockRotation);
+	RigidBodyComponent * MakeRigidbodyComponent(float staticF, float dynamicF, float rest, float density, bool isStatic, bool lockRotation, bool isKinematic);
 	CircleColliderComponent * MakeCircleColliderComponent(float radius);
 	PolygonColliderComponent * MakePolygonCollider(Vec2* verticies, int vertexCount);
 	BoxColliderComponent * MakeBoxCollider(float width, float height);

@@ -60,6 +60,12 @@ void Collision::ResolveCollision()
 		return;
 	}
 
+	// If either are kinematic don't resolve collisions
+	if (_colliderA->GetRigidbodyComponent()->IsKinematic() || _colliderB->GetRigidbodyComponent()->IsKinematic())
+	{
+		return;
+	}
+
 	for (int i = 0; i < _contactCount; ++i)
 	{
 		// Calculate radii from positions to contact
@@ -123,6 +129,12 @@ void Collision::ResolveCollision()
 
 void Collision::PenetrationCorrection()
 {
+	// If either are kinematic don't resolve penetrations
+	if (_colliderA->GetRigidbodyComponent()->IsKinematic() || _colliderB->GetRigidbodyComponent()->IsKinematic())
+	{
+		return;
+	}
+
 	float allowance = 0.05f; // Penetration allowance
 	float percent = 0.4f; // Penetration percentage to correct
 

@@ -2,6 +2,7 @@
 
 #include "SceneMessage.h"
 #include "UpdateSystemMessage.h"
+#include "CollisionMessage.h"
 
 PhysicsSystem::PhysicsSystem(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: ISystem(SystemType::ePhysics, dispatcher)
@@ -125,12 +126,12 @@ void PhysicsSystem::Update(float deltaTime)
 					if (A->GetRigidbodyComponent()->GetActive() && B->GetRigidbodyComponent()->GetActive())
 						contacts.emplace_back(collision);
 
-					// TODO: Tell each gameobject that a collision has taken place
-					/*CollisionMessage colMsg(_gameObjects[i]);
-					_gameObjects[element]->SendMessageToComponents(colMsg);
+					// Tell each gameobject that a collision has taken place
+					CollisionMessage colMsg(_gameObjects[i], _gameObjects[i]->GetTag());
+					_gameObjects[element]->SendMessageToComponent(colMsg);
 
-					CollisionMessage colMsg2(_gameObjects[element]);
-					_gameObjects[i]->SendMessageToComponents(colMsg2);*/
+					CollisionMessage colMsg2(_gameObjects[element], _gameObjects[element]->GetTag());
+					_gameObjects[i]->SendMessageToComponent(colMsg2);
 				}
 			}
 		}

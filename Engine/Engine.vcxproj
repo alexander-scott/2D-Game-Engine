@@ -273,6 +273,7 @@
     <ClInclude Include="CircleColliderComponent.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="CollisionMessage.h" />
     <ClInclude Include="ComponentBuilder.h" />
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="ComponentSaver.h" />
@@ -323,6 +324,7 @@
     <ClInclude Include="SceneSaver.h" />
     <ClInclude Include="SceneMessage.h" />
     <ClInclude Include="SetParentTransformMessage.h" />
+    <ClInclude Include="SetVelocityMessage.h" />
     <ClInclude Include="SpriteAnimatedComponent.h" />
     <ClInclude Include="SpriteRendererComponent.h" />
     <ClInclude Include="SystemMessageDispatcher.h" />

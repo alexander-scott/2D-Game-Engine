@@ -173,7 +173,11 @@ IComponent * BuildRigidbodyComponent()
 	if (bool(atoi(_node->first_attribute("lockrotation")->value())))
 		lockRotation = true;
 
-	return ComponentFactory::MakeRigidbodyComponent(staticF, dynamicF, restitution, density, isStatic, lockRotation);
+	bool isKinematic = false;
+	if (bool(atoi(_node->first_attribute("kinematic")->value())))
+		isKinematic = true;
+
+	return ComponentFactory::MakeRigidbodyComponent(staticF, dynamicF, restitution, density, isStatic, lockRotation, isKinematic);
 }
 
 IComponent * BuildCircleColliderComponent()

@@ -7,7 +7,7 @@ struct Vec2;
 class AddForceMessage : public IComponentMessage
 {
 public:
-	AddForceMessage(Vec2 dir, float power) : IComponentMessage(ComponentMessageType::eAddForce)
+	AddForceMessage(Vec2 dir, float power) : IComponentMessage(ComponentMessageType::eAddForceMessage)
 	{
 		Direction = dir;
 		Power = power;

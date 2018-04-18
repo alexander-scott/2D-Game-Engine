@@ -15,9 +15,6 @@ public:
 	void ApplyForce(const Vec2& f, float power);
 	void ApplyImpulse(const Vec2& impulse, const Vec2& contactVector);
 
-	void SetStatic();
-	void LockRotation() { _rotationLocked = true; }
-
 	Mat2 GetOrientationMatrix() { return _orientationMatrix; }
 	void SetOrientationMatrix(Mat2 mat) { _orientationMatrix = mat; }
 
@@ -57,8 +54,13 @@ public:
 	float GetDensity() { return _density; }
 	void SetDensity(float density) { _density = density; }
 
+	void SetStatic();
+	void LockRotation() { _rotationLocked = true; }
+	void SetKinematic() { _isKinematic = true; }
+
 	bool RotationLocked() {	return _rotationLocked;	}
 	bool IsStatic() { return _isStatic; }
+	bool IsKinematic() { return _isKinematic; }
 
 	// Editable Component
 	virtual int GetEditorFieldCount() override;
@@ -87,5 +89,6 @@ private:
 
 	bool				_rotationLocked;
 	bool				_isStatic;
+	bool				_isKinematic;
 };
 
