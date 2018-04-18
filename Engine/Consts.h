@@ -90,7 +90,8 @@ enum ComponentMessageType
 	eAddForceMessage,
 	eActivateRebindingKeyboardCommands,
 	eInputHandlerToGameObjectMessage,
-	eCollisionMessage
+	eCollisionMessage,
+	eSetVelocityMessage
 };
 
 enum DrawableComponentType

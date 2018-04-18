@@ -28,5 +28,8 @@ private:
 	RigidBodyComponent* _rigidbody;
 
 	bool _leftPressed, _rightPressed, _upPressed, _downPressed;
+	float _previousBounceTimer;
+
+	const float JUMP_VELOCITY = 200;
 };
 

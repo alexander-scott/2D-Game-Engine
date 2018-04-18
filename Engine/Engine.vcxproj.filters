@@ -211,9 +211,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Engine\Systems\SceneManagement</Filter>
     </ClInclude>
-    <ClInclude Include="ISystemToGameObjectMessage.h">
-      <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
-    </ClInclude>
     <ClInclude Include="Editor.h">
       <Filter>Engine\Systems\Editor</Filter>
     </ClInclude>
@@ -313,9 +310,6 @@
     <ClInclude Include="ISpriteComponent.h">
       <Filter>Engine\GameObject\Components\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="AddForceMessage.h">
-      <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
-    </ClInclude>
     <ClInclude Include="AudioSoundFileManager.h">
       <Filter>Engine\Systems\Audio</Filter>
     </ClInclude>
@@ -332,6 +326,15 @@
       <Filter>Game\Alex</Filter>
     </ClInclude>
     <ClInclude Include="CollisionMessage.h">
+      <Filter>Engine\Messaging\Messages\PhysicsMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="AddForceMessage.h">
+      <Filter>Engine\Messaging\Messages\PhysicsMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystemToGameObjectMessage.h">
+      <Filter>Engine\Messaging\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVelocityMessage.h">
       <Filter>Engine\Messaging\Messages\PhysicsMessages</Filter>
     </ClInclude>
   </ItemGroup>

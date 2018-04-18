@@ -1,6 +1,7 @@
 #include "RigidBodyComponent.h"
 
 #include "AddForceMessage.h"
+#include "SetVelocityMessage.h"
 
 RigidBodyComponent::RigidBodyComponent(float staticF, float dynamicF, float rest, float density)
 	: IComponent("RigidbodyComponent")
@@ -26,10 +27,18 @@ void RigidBodyComponent::RecieveMessage(IComponentMessage & message)
 {
 	switch (message.MessageType)
 	{
-	case ComponentMessageType::eAddForceMessage:
-		AddForceMessage& addForceMsg = static_cast<AddForceMessage &> (message);
-		ApplyForce(addForceMsg.Direction, addForceMsg.Power);
-		break;
+		case ComponentMessageType::eAddForceMessage:
+		{
+			AddForceMessage& addForceMsg = static_cast<AddForceMessage &> (message);
+			ApplyForce(addForceMsg.Direction, addForceMsg.Power);
+			break;
+		}
+		case ComponentMessageType::eSetVelocityMessage:
+		{
+			SetVelocityMessage& setVelocityMsg = static_cast<SetVelocityMessage&>(message);
+			SetVelocity(setVelocityMsg.Velocity);
+			break;
+		}
 	}
 }
 

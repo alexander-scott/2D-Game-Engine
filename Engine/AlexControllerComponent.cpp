@@ -2,6 +2,7 @@
 
 #include "InputHandlerToGameObjectMessage.h"
 #include "AddForceMessage.h"
+#include "SetVelocityMessage.h"
 #include "CollisionMessage.h"
 
 AlexControllerComponent::AlexControllerComponent() : IComponent("AlexControllerComponent")
@@ -10,6 +11,7 @@ AlexControllerComponent::AlexControllerComponent() : IComponent("AlexControllerC
 	_rightPressed = false;
 	_upPressed = false;
 	_downPressed = false;
+	_previousBounceTimer = 0;
 }
 
 
@@ -43,6 +45,8 @@ void AlexControllerComponent::Update(float deltaTime)
 		AddForceMessage addForceMsg(force, 1000000);
 		_rigidbody->RecieveMessage(addForceMsg);
 	}
+
+	_previousBounceTimer += deltaTime;
 }
 
 void AlexControllerComponent::RecieveMessage(IComponentMessage & message)
@@ -58,10 +62,18 @@ void AlexControllerComponent::RecieveMessage(IComponentMessage & message)
 
 		case ComponentMessageType::eCollisionMessage:
 		{
+			// This prevents any double jumps
+			if (_previousBounceTimer < 0.1f)
+				return;
+
 			CollisionMessage& msg = static_cast<CollisionMessage&>(message);
 			if (msg.CollidedObjectTag == "Platform")
 			{
-				
+				Vec2 velocity = Vec2(_rigidbody->GetVelocity().x, -JUMP_VELOCITY);
+				SetVelocityMessage setVelMsg(velocity);
+				_rigidbody->RecieveMessage(setVelMsg);
+
+				_previousBounceTimer = 0;
 			}
 			break;
 		}
