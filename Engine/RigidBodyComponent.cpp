@@ -17,6 +17,8 @@ RigidBodyComponent::RigidBodyComponent(float staticF, float dynamicF, float rest
 	_density = density;
 
 	_rotationLocked = false;
+	_isStatic = false;
+	_isKinematic = false;
 }
 
 RigidBodyComponent::~RigidBodyComponent()

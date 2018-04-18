@@ -25,13 +25,15 @@ SpriteAnimatedComponent * ComponentFactory::MakeSpriteAnimatedComponent(RECT * r
 	return sprite;
 }
 
-RigidBodyComponent * ComponentFactory::MakeRigidbodyComponent(float staticF, float dynamicF, float rest, float density, bool isStatic, bool lockRotation)
+RigidBodyComponent * ComponentFactory::MakeRigidbodyComponent(float staticF, float dynamicF, float rest, float density, bool isStatic, bool lockRotation, bool isKinematic)
 {
 	RigidBodyComponent * rigidBody = new RigidBodyComponent(staticF, dynamicF, rest, density);
 	if (isStatic)
 		rigidBody->SetStatic();
 	if (lockRotation)
 		rigidBody->LockRotation();
+	if (isKinematic)
+		rigidBody->SetKinematic();
 
 	return rigidBody;
 }
