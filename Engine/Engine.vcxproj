@@ -273,6 +273,7 @@
     <ClInclude Include="CircleColliderComponent.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="CollisionMessage.h" />
     <ClInclude Include="ComponentBuilder.h" />
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="ComponentSaver.h" />

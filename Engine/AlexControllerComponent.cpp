@@ -2,6 +2,7 @@
 
 #include "InputHandlerToGameObjectMessage.h"
 #include "AddForceMessage.h"
+#include "CollisionMessage.h"
 
 AlexControllerComponent::AlexControllerComponent() : IComponent("AlexControllerComponent")
 {
@@ -52,6 +53,16 @@ void AlexControllerComponent::RecieveMessage(IComponentMessage & message)
 		{
 			InputHandlerToGameObjectMessage& msg = static_cast<InputHandlerToGameObjectMessage&>(message);
 			ProcessCommand(msg.MessageType, msg.Command, msg.Range);
+			break;
+		}
+
+		case ComponentMessageType::eCollisionMessage:
+		{
+			CollisionMessage& msg = static_cast<CollisionMessage&>(message);
+			if (msg.CollidedObjectTag == "Platform")
+			{
+				
+			}
 			break;
 		}
 	}

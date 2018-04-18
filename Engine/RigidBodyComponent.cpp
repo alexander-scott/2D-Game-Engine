@@ -26,7 +26,7 @@ void RigidBodyComponent::RecieveMessage(IComponentMessage & message)
 {
 	switch (message.MessageType)
 	{
-	case ComponentMessageType::eAddForce:
+	case ComponentMessageType::eAddForceMessage:
 		AddForceMessage& addForceMsg = static_cast<AddForceMessage &> (message);
 		ApplyForce(addForceMsg.Direction, addForceMsg.Power);
 		break;
