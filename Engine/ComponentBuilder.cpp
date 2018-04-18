@@ -109,9 +109,9 @@ IComponent * BuildSpriteRendererComponent()
 
 	std::string text = (std::string)(_node->first_attribute("text")->value()); //path to texture "file"
 	std::string name = (std::string)(_node->first_attribute("name")->value()); //name of the object (ex : PlayerGreen,etc.)
-	std::string animation = (std::string)(_node->first_attribute("animation")->value()); //name of animation (ex : walk, crawl, etc)
+	//std::string animation = (std::string)(_node->first_attribute("animation")->value()); //name of animation (ex : walk, crawl, etc)
 
-	return ComponentFactory::MakeSpriteRendererComponent(rect, offset, text, name, animation);
+	return ComponentFactory::MakeSpriteRendererComponent(rect, offset, text, name);
 }
 
 inline IComponent * BuildSpriteAnimatedComponent()

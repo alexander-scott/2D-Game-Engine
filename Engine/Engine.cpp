@@ -56,7 +56,7 @@ Engine::Engine(HINSTANCE hInst, wchar_t * pArgs, std::string resourcesFilePath)
 	Initalise();
 
 	Logger::Instance().LogMessage("Requesting a new scene be built by the SceneBuilder system", LogSeverity::eInfo);
-	string sceneToBuild = string(GlobalVariables::Instance().ResourcesFilePath + "\\Scenes\\AlexGame.xml");
+	string sceneToBuild = string(GlobalVariables::Instance().ResourcesFilePath + "\\Scenes\\AlexGame2.xml");
 	RequestBuildSceneMessage message(sceneToBuild); // Still hardcoded
 
 	_messageDispatcher->SendMessageToListeners(message);

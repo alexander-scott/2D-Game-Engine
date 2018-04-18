@@ -6,7 +6,7 @@ class SpriteRendererComponent : /*public IRenderableComponent,*/ public ISpriteC
 {
 public:
 	SpriteRendererComponent();
-	SpriteRendererComponent(RECT *rect, Vec2 offset, string text, string name, string animation);
+	SpriteRendererComponent(RECT *rect, Vec2 offset, string text, string name);
 
 	~SpriteRendererComponent();
 

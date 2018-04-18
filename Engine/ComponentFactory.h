@@ -14,7 +14,7 @@ namespace ComponentFactory
 {
 	// Core
 	TransformComponent * MakeTransformComponent(Vec2 position, float rotation, float scale);
-	SpriteRendererComponent * MakeSpriteRendererComponent(RECT* rect, Vec2 offset, string text, string name, string animation);
+	SpriteRendererComponent * MakeSpriteRendererComponent(RECT* rect, Vec2 offset, string text, string name);
 	TextRendererComponent * MakeTextRendererComponent(RECT * rect, Vec2 offset, std::string text, float4 * rgb3);
 	SpriteAnimatedComponent * MakeSpriteAnimatedComponent(RECT* rect, Vec2 offset, string text, string name, string animation);
 
