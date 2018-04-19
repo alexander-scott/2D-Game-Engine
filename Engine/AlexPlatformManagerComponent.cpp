@@ -35,6 +35,14 @@ AlexPlatformManagerComponent::Platform AlexPlatformManagerComponent::GetNewPlatf
 void AlexPlatformManagerComponent::ReturnPlatformToPool(Platform platform)
 {
 	platform.GameObject->SetActive(false);
-	_activePlatforms.erase(_activePlatforms.begin() + platform.ActivePlatformIndex);
-	_inActivePlatforms.push_back(platform.GameObject);
+
+	for (int i = 0; i < (int)_activePlatforms.size(); i++)
+	{
+		if (_activePlatforms[i] == platform.GameObject)
+		{
+			_activePlatforms.erase(_activePlatforms.begin() + i);
+			_inActivePlatforms.push_back(platform.GameObject);
+			break;
+		}
+	}
 }

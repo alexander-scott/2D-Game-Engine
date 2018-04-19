@@ -44,4 +44,6 @@ private:
 	std::default_random_engine		_randNumGenerator;
 	const int						MIN_HEIGHT_BETWEEN_PLATFORMS = 50;
 	const int						MAX_HEIGHT_BETWEEN_PLATFORMS = 150;
+
+	std::vector<AlexPlatformManagerComponent::Platform> _platforms;
 };

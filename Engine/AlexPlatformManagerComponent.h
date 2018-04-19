@@ -12,9 +12,13 @@ public:
 	struct Platform 
 	{
 	public:
-		Platform(shared_ptr<GameObject> gameObj, int index) : GameObject(gameObj), ActivePlatformIndex(index) { }
+		Platform(shared_ptr<GameObject> gameObj, int index) : GameObject(gameObj), ActivePlatformIndex(index) 
+		{ 
+			Transform = GameObject->GetComponent<TransformComponent>();
+		}
 
 		shared_ptr<GameObject>	GameObject;
+		TransformComponent*		Transform;
 		int						ActivePlatformIndex;
 	};
 

@@ -26,7 +26,7 @@ void AlexGameManagerComponent::Update(float deltaTime)
 				_platformStartHeight = _platformManager->GetTransform()->GetWorldPosition().y;
 			}
 
-			float playerDiff = std::abs(_player->GetTransform()->GetWorldPosition().y - MOVEMENT_ZONE_HEIGHT);
+			float playerDiff = std::abs(_player->GetTransform()->GetWorldPosition().y - MOVEMENT_ZONE_HEIGHT) * 3;
 			_platformManager->GetTransform()->SetWorldPosition(Vec2(_platformManager->GetTransform()->GetWorldPosition().x, _platformStartHeight + playerDiff));
 		}
 	}
@@ -36,23 +36,31 @@ void AlexGameManagerComponent::Update(float deltaTime)
 		_platformManager->GetTransform()->SetChanged(false);
 	}
 
-	//_platformManager->GetTransform()->SetWorldPosition(Vec2(_platformManager->GetTransform()->GetWorldPosition().x, _platformManager->GetTransform()->GetWorldPosition().y + 0.1f));
+	// Remove bottom platforms
+	for (int i = 0; i < (int)_platforms.size(); i++)
+	{
+		if (_platforms[i].Transform->GetWorldPosition().y > SCREEN_HEIGHT)
+		{
+			_platformManager->ReturnPlatformToPool(_platforms[i]);
+			_platforms.erase(_platforms.begin() + i);
+		}
+	}
+
+	// Add new platforms
+	// If the most recent platform added is currently on screen then add another one above it
+	if (_platforms[_platforms.size() - 1].Transform->GetWorldPosition().y > 0)
+	{
+		SpawnNewPlatform();
+	}
 }
 
 void AlexGameManagerComponent::Start()
 {
-	/*auto platform = _platformManager->GetNewPlatformFromPool();
-	platform.GameObject->GetComponent<TransformComponent>()->SetLocalPosition(Vec2(128, 550));
-
-	auto platform2 = _platformManager->GetNewPlatformFromPool();
-	platform2.GameObject->GetComponent<TransformComponent>()->SetLocalPosition(Vec2(200, 400));
-
-	auto platform3 = _platformManager->GetNewPlatformFromPool();
-	platform3.GameObject->GetComponent<TransformComponent>()->SetLocalPosition(Vec2(272, 250));*/
-
+	// Spawn start platform
 	SpawnNewPlatform(Vec2(128, 550));
 
-	for (int i = 0; i < 20; i++)
+	// Spawn 10 additional platforms
+	for (int i = 0; i < 10; i++)
 	{
 		SpawnNewPlatform();
 	}
@@ -68,6 +76,7 @@ void AlexGameManagerComponent::SpawnNewPlatform(Vec2 position)
 {
 	auto platform = _platformManager->GetNewPlatformFromPool();
 	platform.GameObject->GetComponent<TransformComponent>()->SetLocalPosition(position);
+	_platforms.push_back(platform);
 	_previousSpawnPos = position;
 }
 
