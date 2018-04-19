@@ -50,6 +50,8 @@ public:
 	IComponent * BuildComponent(xml_node<>* node);
 	void BuildComponentDependecies(IComponent* component, map<string, GUID>* dependecies);
 
+	static GUID StringToGUID(const std::string& guid);
+
 private:
 	FunctionMapper _buildMapper;
 	FunctionMapper _dependencyBuildMapper;

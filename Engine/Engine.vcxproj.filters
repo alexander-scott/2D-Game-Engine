@@ -101,6 +101,9 @@
     <Filter Include="Engine\Messaging\Messages\PhysicsMessages">
       <UniqueIdentifier>{85437339-476d-4102-bbed-f896b5d81635}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Alex\Components">
+      <UniqueIdentifier>{2e820dbd-a6d8-4dff-b1d1-e4157abcd015}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -322,9 +325,6 @@
     <ClInclude Include="AlexComponentFactory.h">
       <Filter>Game\Alex</Filter>
     </ClInclude>
-    <ClInclude Include="AlexControllerComponent.h">
-      <Filter>Game\Alex</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionMessage.h">
       <Filter>Engine\Messaging\Messages\PhysicsMessages</Filter>
     </ClInclude>
@@ -336,6 +336,12 @@
     </ClInclude>
     <ClInclude Include="SetVelocityMessage.h">
       <Filter>Engine\Messaging\Messages\PhysicsMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="AlexControllerComponent.h">
+      <Filter>Game\Alex\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AlexPlatformManagerComponent.h">
+      <Filter>Game\Alex\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -455,7 +461,10 @@
       <Filter>Game\Alex</Filter>
     </ClCompile>
     <ClCompile Include="AlexControllerComponent.cpp">
-      <Filter>Game\Alex</Filter>
+      <Filter>Game\Alex\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AlexPlatformManagerComponent.cpp">
+      <Filter>Game\Alex\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
