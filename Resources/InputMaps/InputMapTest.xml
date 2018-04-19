@@ -9,5 +9,14 @@
 			<Command key="W" name="move_up" ID="1"/>
 		</Map>
 	</Peripheral>
+	<Peripheral name="gamepad">
+		<Map context="main">
+			<Command key="BACK" name="rebind_swap" ID="5"/>
+			<Command key="DPAD_LEFT" name="move_left" ID="3"/>
+			<Command key="DPAD_RIGHT" name="move_right" ID="4"/>
+			<Command key="DPAD_DOWN" name="move_down" ID="2"/>
+			<Command key="DPAD_UP" name="move_up" ID="1"/>
+		</Map>
+	</Peripheral>
 </PlayerInputMap>
 
