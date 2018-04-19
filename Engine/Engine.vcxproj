@@ -264,6 +264,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AddForceMessage.h" />
+    <ClInclude Include="AlexGameManagerComponent.h" />
     <ClInclude Include="AlexPlatformManagerComponent.h" />
     <ClInclude Include="AudioSoundFileManager.h" />
     <ClInclude Include="AudioSystem.h" />
@@ -344,6 +345,7 @@
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AlexGameManagerComponent.cpp" />
     <ClCompile Include="AlexPlatformManagerComponent.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AudioSoundFileManager.cpp" />

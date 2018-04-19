@@ -36,6 +36,10 @@ inline IComponent * BuildAlexController();
 inline void FetchAlexControllerDependencies();
 
 inline IComponent * BuildAlexPlatformManager();
+inline void FetchAlexPlatformManagerDependencies();
+
+inline IComponent * BuildAlexGameManager();
+inline void FetchAlexGameManagerDependencies();
 
 #pragma endregion
 
@@ -72,6 +76,10 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 	_dependencyBuildMapper.Insert("AlexControllerComponent", FetchAlexControllerDependencies);
 
 	_buildMapper.Insert("AlexPlatformManagerComponent", BuildAlexPlatformManager);
+	_dependencyBuildMapper.Insert("AlexPlatformManagerComponent", FetchAlexPlatformManagerDependencies);
+
+	_buildMapper.Insert("AlexGameManagerComponent", BuildAlexGameManager);
+	_dependencyBuildMapper.Insert("AlexGameManagerComponent", FetchAlexGameManagerDependencies);
 
 #pragma endregion	
 
@@ -373,6 +381,50 @@ inline IComponent * BuildAlexPlatformManager()
 	}
 
 	return ComponentFactory::MakeAlexPlatformManagerComponent(platforms);
+}
+
+inline void FetchAlexPlatformManagerDependencies()
+{
+	AlexPlatformManagerComponent* platformManager = static_cast<AlexPlatformManagerComponent*>(dependencyComponent);
+	TransformComponent* transform;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+		}
+	}
+
+	platformManager->SetDependencies(transform);
+}
+
+inline IComponent * BuildAlexGameManager()
+{
+	return ComponentFactory::MakeAlexGameManagerComponent();
+}
+
+inline void FetchAlexGameManagerDependencies()
+{
+	AlexGameManagerComponent* alexController = static_cast<AlexGameManagerComponent*>(dependencyComponent);
+	AlexControllerComponent* controller;
+	AlexPlatformManagerComponent* platformManager;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "controllercomponent")
+		{
+			controller = _scene->GetGameObject(it->second)->GetComponent<AlexControllerComponent>();
+		}
+		else if (it->first == "platformmanagercomponent")
+		{
+			platformManager = _scene->GetGameObject(it->second)->GetComponent<AlexPlatformManagerComponent>();
+		}
+	}
+
+	alexController->SetDependencies(controller, platformManager);
 }
 
 #pragma endregion

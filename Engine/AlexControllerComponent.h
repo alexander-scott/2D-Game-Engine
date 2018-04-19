@@ -21,6 +21,9 @@ public:
 	virtual void Update(float deltaTime) override;
 	virtual void RecieveMessage(IComponentMessage& message) override;
 
+	TransformComponent* GetTransform() { return _transform; }
+	RigidBodyComponent* GetRigidbody() { return _rigidbody; }
+
 private:
 	void ProcessCommand(InputGenericStateMessageType type, sCommand command, float range);
 

@@ -9,3 +9,8 @@ AlexPlatformManagerComponent * ComponentFactory::MakeAlexPlatformManagerComponen
 {
 	return new AlexPlatformManagerComponent(platforms);
 }
+
+AlexGameManagerComponent * ComponentFactory::MakeAlexGameManagerComponent()
+{
+	return new AlexGameManagerComponent();
+}

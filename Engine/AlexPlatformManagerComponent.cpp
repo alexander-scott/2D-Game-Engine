@@ -15,22 +15,6 @@ AlexPlatformManagerComponent::~AlexPlatformManagerComponent()
 {
 }
 
-void AlexPlatformManagerComponent::Update(float deltaTime)
-{
-}
-
-void AlexPlatformManagerComponent::Start()
-{
-	auto platform = GetNewPlatformFromPool();
-	platform->GetComponent<TransformComponent>()->SetWorldPosition(Vec2(128, 550));
-
-	auto platform2 = GetNewPlatformFromPool();
-	platform2->GetComponent<TransformComponent>()->SetWorldPosition(Vec2(200, 400));
-
-	auto platform3 = GetNewPlatformFromPool();
-	platform3->GetComponent<TransformComponent>()->SetWorldPosition(Vec2(272, 250));
-}
-
 shared_ptr<GameObject> AlexPlatformManagerComponent::GetNewPlatformFromPool()
 {
 	if (_inActivePlatforms.size() > 0)

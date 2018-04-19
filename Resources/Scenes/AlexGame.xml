@@ -19,8 +19,16 @@ Platform box collider width is 50 whereas actual with is 64.
 
   <GameObject tag="PlatformManager"  guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd16">
     <Component xpos="0.000000" ypos="00.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"></Component>
-    <Component type="AlexPlatformManagerComponent" platformcount="20" platformtag="Platform" parentgameobjectid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd16"></Component>
+    <Component type="AlexPlatformManagerComponent" platformcount="50" platformtag="Platform" parentgameobjectid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd16">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd16"></Dependency>
+    </Component>
   </GameObject>
 
+  <GameObject tag="GameManager"  guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dc06">
+    <Component type="AlexGameManagerComponent">
+      <Dependency controllercomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" platformmanagercomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd16"></Dependency>
+    </Component>
+  </GameObject>
+  
 </scene>
 
