@@ -13,6 +13,7 @@ public:
 	void Draw(float deltaTime) override;
 
 	std::string GetAnimation(); 
+	void SetAnimation(std::string animation) { _animation = animation; };
 
 private:
 	std::string _animation;

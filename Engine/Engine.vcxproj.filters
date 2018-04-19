@@ -338,6 +338,9 @@
     <ClInclude Include="MCharacterComponent.h">
       <Filter>Game\Myriam</Filter>
     </ClInclude>
+    <ClInclude Include="MBackgroundComponent.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -463,6 +466,9 @@
       <Filter>Game\Myriam</Filter>
     </ClCompile>
     <ClCompile Include="MCharacterComponent.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MBackgroundComponent.cpp">
       <Filter>Game\Myriam</Filter>
     </ClCompile>
   </ItemGroup>

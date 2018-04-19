@@ -42,6 +42,9 @@ inline void FetchAlexControllerDependencies();
 inline IComponent * BuildMCharacterComponent();
 inline void FetchMCharacterDependencies();
 
+inline IComponent * BuildMBackgroundComponent();
+inline void FetchMBackgroundDependencies();
+
 #pragma endregion
 
 ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
@@ -82,6 +85,8 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 
 	_buildMapper.Insert("MCharacterComponent", BuildMCharacterComponent);
 	_dependencyBuildMapper.Insert("MCharacterComponent", FetchMCharacterDependencies);
+	_buildMapper.Insert("MCharacterComponent", BuildMCharacterComponent);
+	_dependencyBuildMapper.Insert("MCharacterComponent", FetchMCharacterDependencies);
 
 #pragma endregion	
 
@@ -108,7 +113,7 @@ IComponent * BuildTransformComponent()
 	return ComponentFactory::MakeTransformComponent(Vec2(xPos, yPos), rot, scale);
 }
 
-IComponent * BuildSpriteRendererComponent()
+inline IComponent * BuildSpriteRendererComponent()
 {
 	LONG rectTop = (LONG)atof(_node->first_attribute("rectTop")->value());
 	LONG rectBottom = (LONG)atof(_node->first_attribute("rectBottom")->value());
@@ -282,7 +287,7 @@ void FetchSpriteAnimatedDependencies()
 {
 	SpriteAnimatedComponent* renderer = static_cast<SpriteAnimatedComponent*>(dependencyComponent);
 	TransformComponent* transform;
-
+	SpriteAnimatedComponent *spriteanimatedcomponent;
 	map<string, GUID>::iterator it;
 	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
 	{
@@ -291,6 +296,12 @@ void FetchSpriteAnimatedDependencies()
 			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
 			break;
 		}
+		if (it->first == "spriteanimatedcomponent")
+		{
+			spriteanimatedcomponent = _scene->GetGameObject(it->second)->GetComponent<SpriteAnimatedComponent>(); 
+			break;
+		}
+
 	}
 
 	renderer->SetDependencies(transform);
@@ -359,6 +370,38 @@ void FetchMCharacterDependencies()
 	MCharacterComponent* mCharacter = static_cast<MCharacterComponent*>(dependencyComponent);
 	TransformComponent* transform;
 	RigidBodyComponent* rigidbody;
+	SpriteAnimatedComponent *spriteanimatedcomponent = new SpriteAnimatedComponent();
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+		}
+		else if (it->first == "rigidbodycomponent")
+		{
+			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
+		}
+		else if (it->first == "spriteanimatedcomponent")
+		{
+			spriteanimatedcomponent = _scene->GetGameObject(it->second)->GetComponent<SpriteAnimatedComponent>();
+		}
+
+	}
+
+	mCharacter->SetDependencies(transform, rigidbody, spriteanimatedcomponent); //TODO - define method - see if i need to add any other dependency
+}
+
+inline IComponent * BuildMBackgroundComponent()
+{
+	return ComponentFactory::MakeMBackgroundComponent();
+}
+
+void FetchMBackgroundDependencies()
+{
+	MBackgroundComponent* mBackground = static_cast<MBackgroundComponent*>(dependencyComponent);
+	TransformComponent* transform;
+	RigidBodyComponent* rigidbody;
 
 	map<string, GUID>::iterator it;
 	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
@@ -371,9 +414,11 @@ void FetchMCharacterDependencies()
 		{
 			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
 		}
+
 	}
 
-	mCharacter->SetDependencies(transform, rigidbody); //TODO - define method - see if i need to add any other dependency
+	mBackground->SetDependencies(transform, rigidbody); //TODO - define method - see if i need to add any other dependency
 }
+
 
 #pragma endregion
