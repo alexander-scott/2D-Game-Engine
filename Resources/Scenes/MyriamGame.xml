@@ -1,5 +1,19 @@
 <?xml?>
 <scene name="MyriamGame">
+  <GameObject tag="Background" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05">
+	<Component xpos="150.000000" ypos="-150.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
+	<Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/Players/basictiles.dds" name = "grass" type="SpriteRendererComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
+	</Component>
+	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" type="RigidbodyComponent" ></Component>
+	<Component width="16" height="16" type="BoxColliderComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
+	</Component>
+	<Component type="MBackgroundComponent">	
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" boxcollidercomponent= "54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
+	</Component>
+  </GameObject>  
+
 	<GameObject tag="PlayerSprite" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
     <Component xpos="50.000000" ypos="-50.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
     <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/Players/characters.dds" name = "Girl" animation = "WalkBot" type="SpriteAnimatedComponent">
@@ -16,19 +30,7 @@
   </GameObject>
 
 
-  <GameObject tag="Background" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05">
-	  <Component xpos="150.000000" ypos="-150.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
-	  <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/Players/basictiles.dds" name = "grass" type="SpriteRendererComponent">
-	  	<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
-	  </Component>
-  	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" type="RigidbodyComponent" ></Component>
-	  <Component width="16" height="16" type="BoxColliderComponent">
-	  	<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
-  	</Component>
-    <Component type="MBackgroundComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
-    </Component>
-  </GameObject>  
+
 
 </scene>
 

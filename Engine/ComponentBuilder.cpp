@@ -85,8 +85,9 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 
 	_buildMapper.Insert("MCharacterComponent", BuildMCharacterComponent);
 	_dependencyBuildMapper.Insert("MCharacterComponent", FetchMCharacterDependencies);
-	_buildMapper.Insert("MCharacterComponent", BuildMCharacterComponent);
-	_dependencyBuildMapper.Insert("MCharacterComponent", FetchMCharacterDependencies);
+
+	_buildMapper.Insert("MBackgroundComponent", BuildMBackgroundComponent);
+	_dependencyBuildMapper.Insert("MBackgroundComponent", FetchMBackgroundDependencies);
 
 #pragma endregion	
 
@@ -402,6 +403,7 @@ void FetchMBackgroundDependencies()
 	MBackgroundComponent* mBackground = static_cast<MBackgroundComponent*>(dependencyComponent);
 	TransformComponent* transform;
 	RigidBodyComponent* rigidbody;
+	BoxColliderComponent* boxCollider;
 
 	map<string, GUID>::iterator it;
 	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
@@ -414,10 +416,14 @@ void FetchMBackgroundDependencies()
 		{
 			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
 		}
+		else if (it->first == "boxcollidercomponent")
+		{
+			boxCollider = _scene->GetGameObject(it->second)->GetComponent<BoxColliderComponent>();
+		}
 
 	}
 
-	mBackground->SetDependencies(transform, rigidbody); //TODO - define method - see if i need to add any other dependency
+	mBackground->SetDependencies(transform, rigidbody, boxCollider); //TODO - define method - see if i need to add any other dependency
 }
 
 

@@ -1,11 +1,12 @@
 #pragma once
 #include "IComponent.h"
 #include "IUpdateableComponent.h"
-#include "RigidBodyComponent.h"
 #include "IMessageableComponent.h"
+
+#include "RigidBodyComponent.h"
 #include "TransformComponent.h"
 #include "InputHandlerToGameObjectMessage.h"
-#include "SpriteAnimatedComponent.h"
+#include "SpriteAnimatedComponent.h" //added so that we can change the sprite animation when turning left, etc but doesn't work yet. 
 
 class MCharacterComponent : public IComponent, public IUpdateableComponent, public IMessageableComponent
 {
