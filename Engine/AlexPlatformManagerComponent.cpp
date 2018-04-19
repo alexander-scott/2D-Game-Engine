@@ -15,7 +15,7 @@ AlexPlatformManagerComponent::~AlexPlatformManagerComponent()
 {
 }
 
-shared_ptr<GameObject> AlexPlatformManagerComponent::GetNewPlatformFromPool()
+AlexPlatformManagerComponent::Platform AlexPlatformManagerComponent::GetNewPlatformFromPool()
 {
 	if (_inActivePlatforms.size() > 0)
 	{
@@ -24,16 +24,17 @@ shared_ptr<GameObject> AlexPlatformManagerComponent::GetNewPlatformFromPool()
 		_inActivePlatforms.erase(_inActivePlatforms.begin());
 
 		platform->SetActive(true);
-		return platform;
+		return Platform(platform, (int)_activePlatforms.size() - 1);
 	}
 	else
 	{
 		throw std::exception("Run out of platforms in AlexPlatformManagerComponent!");
-		return nullptr;
 	}
 }
 
-void AlexPlatformManagerComponent::ReturnPlatformToPool(shared_ptr<GameObject> platform)
+void AlexPlatformManagerComponent::ReturnPlatformToPool(Platform platform)
 {
-
+	platform.GameObject->SetActive(false);
+	_activePlatforms.erase(_activePlatforms.begin() + platform.ActivePlatformIndex);
+	_inActivePlatforms.push_back(platform.GameObject);
 }

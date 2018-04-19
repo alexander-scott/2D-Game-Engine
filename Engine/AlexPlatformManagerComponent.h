@@ -9,13 +9,22 @@
 class AlexPlatformManagerComponent : public IComponent
 {
 public:
+	struct Platform 
+	{
+	public:
+		Platform(shared_ptr<GameObject> gameObj, int index) : GameObject(gameObj), ActivePlatformIndex(index) { }
+
+		shared_ptr<GameObject>	GameObject;
+		int						ActivePlatformIndex;
+	};
+
 	AlexPlatformManagerComponent(std::vector<shared_ptr<GameObject>> platformPool);
 	~AlexPlatformManagerComponent();
 
 	void SetDependencies(TransformComponent* transform) { _transform = transform; }
 
-	shared_ptr<GameObject> GetNewPlatformFromPool();
-	void ReturnPlatformToPool(shared_ptr<GameObject> platform);
+	Platform GetNewPlatformFromPool();
+	void ReturnPlatformToPool(Platform platform);
 
 	TransformComponent* GetTransform() { return _transform; }
 

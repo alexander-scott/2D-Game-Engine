@@ -135,6 +135,12 @@
     <ClCompile Include="..\Engine\SpriteAnimatedComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\Engine\AlexGameManagerComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\AlexPlatformManagerComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Engine\BuildSceneMessage.h">
@@ -333,6 +339,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\SpriteAnimatedComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\AlexGameManagerComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\AlexPlatformManagerComponent.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

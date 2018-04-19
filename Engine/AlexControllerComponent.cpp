@@ -67,7 +67,7 @@ void AlexControllerComponent::RecieveMessage(IComponentMessage & message)
 				return;
 
 			// This only allows jumps to happen if the player is falling downward
-			if (_rigidbody->GetVelocity().y < 0)
+			if (_rigidbody->GetVelocity().y < -1.0f)
 				return;
 
 			CollisionMessage& msg = static_cast<CollisionMessage&>(message);

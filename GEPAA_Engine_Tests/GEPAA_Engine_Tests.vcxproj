@@ -169,6 +169,8 @@
   <ItemGroup>
     <ClCompile Include="..\Engine\AlexComponentFactory.cpp" />
     <ClCompile Include="..\Engine\AlexControllerComponent.cpp" />
+    <ClCompile Include="..\Engine\AlexGameManagerComponent.cpp" />
+    <ClCompile Include="..\Engine\AlexPlatformManagerComponent.cpp" />
     <ClCompile Include="..\Engine\Animation.cpp" />
     <ClCompile Include="..\Engine\AudioSoundFileManager.cpp" />
     <ClCompile Include="..\Engine\AudioSystem.cpp" />
@@ -209,6 +211,8 @@
   <ItemGroup>
     <ClInclude Include="..\Engine\AlexComponentFactory.h" />
     <ClInclude Include="..\Engine\AlexControllerComponent.h" />
+    <ClInclude Include="..\Engine\AlexGameManagerComponent.h" />
+    <ClInclude Include="..\Engine\AlexPlatformManagerComponent.h" />
     <ClInclude Include="..\Engine\Animation.h" />
     <ClInclude Include="..\Engine\AudioSoundFileManager.h" />
     <ClInclude Include="..\Engine\AudioSystem.h" />
