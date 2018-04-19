@@ -23,9 +23,10 @@ void InputHandler::InitaliseListeners()
 	SubscribeToMessageType(SystemMessageType::eInputUpdateGamePad);
 
 	AddMapToVectorOfCommands();
-	LoadMapFromXMLFile(GlobalVariables::Instance().ResourcesFilePath + "//InputMaps//InputMapTest2.xml");
+	LoadMapFromXMLFile(GlobalVariables::Instance().ResourcesFilePath + "//InputMaps//InputMapTest.xml");
 	AddMapToVectorOfCommands();
 	LoadKeyboardGameMapping();
+	LoadGamePadGameMapping();
 	SaveMapInput();
 }
 /*
@@ -52,6 +53,12 @@ void InputHandler::LoadKeyboardGameMapping()
 {
 	_keyboardCurrentCommandMap = _keyboardListOfCommandMap[0];
 	_keyboardCurrentActivatedMap = 0;
+}
+
+void InputHandler::LoadGamePadGameMapping()
+{
+	_gamePadCurrentCommandMap = _gamePadListOfCommandMap[0];
+	_gamePadCurrentActivatedMap = 0;
 }
 
 void InputHandler::RecieveMessage(ISystemMessage & message)
@@ -110,6 +117,9 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 		case SystemMessageType::eInputUpdateGamePad:
 		{
 			_stateGamePadP1 = _gamePadP1->GetState(0);
+			_buttonStateTrackerP1.Update(_stateGamePadP1);
+			SendGamePadButtonState(_buttonStateTrackerP1, DirectX::GamePad::ButtonStateTracker::PRESSED);
+			SendGamePadButtonState(_buttonStateTrackerP1, DirectX::GamePad::ButtonStateTracker::RELEASED);
 			break;
 		}
 		//case add a map context (mode) to vector just pushback
@@ -142,6 +152,69 @@ void InputHandler::AddMapToVectorOfCommands()
 {
 	//test purposes code, not final
 	_keyboardListOfCommandMap.push_back(std::map<unsigned char, sCommand>());
+	_gamePadListOfCommandMap.push_back(std::map<std::string, sCommand>());
+}
+
+void InputHandler::SendGamePadButtonState(DirectX::GamePad::ButtonStateTracker & buttonStateTracker,
+	DirectX::GamePad::ButtonStateTracker::ButtonState buttonStateEnum)
+{
+	sCommand keyMessage;
+	InputGenericStateMessageType buttonStateMessage;
+	if (buttonStateEnum == DirectX::GamePad::ButtonStateTracker::PRESSED)
+		buttonStateMessage = InputGenericStateMessageType::eKeyPressed;
+	else
+		buttonStateMessage = InputGenericStateMessageType::eKeyReleased;
+
+
+	if (buttonStateTracker.a == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["A"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+	if (buttonStateTracker.b == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["B"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+	if (buttonStateTracker.x == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["X"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+	if (buttonStateTracker.y == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["Y"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+	if (buttonStateTracker.dpadUp == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["DPAD_UP"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+	if (buttonStateTracker.dpadDown == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["DPAD_DOWN"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+	if (buttonStateTracker.dpadLeft == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["DPAD_LEFT"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+	if (buttonStateTracker.dpadRight == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["DPAD_RIGHT"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+
 }
 
 void InputHandler::SaveMapInput()
@@ -223,26 +296,57 @@ void InputHandler::LoadMapFromXMLFile(std::string fileName)//not final, only wor
 			string peripheralName = peripheralNode->first_attribute("name")->value();
 			xml_node<>* mapNode = peripheralNode->first_node("Map");
 			xml_node<>* commandNode = mapNode->first_node("Command");
+			map<unsigned char, sCommand> entryPointKeyboardVector;
+			map<std::string, sCommand> entryPointGamePadVector;
+			sCommand dataRetrieved;
 			if (peripheralName == "keyboard")
 			{
-				map<unsigned char, sCommand>& entryPointVector = _keyboardListOfCommandMap[peripheralCount];
-				sCommand dataRetrieved;
 				while (commandNode)
 				{
 					dataRetrieved._name = commandNode->first_attribute("name")->value();
 					dataRetrieved._ID = atoi(commandNode->first_attribute("ID")->value());
 					const unsigned char* pKey = (reinterpret_cast<const unsigned char*>(commandNode->first_attribute("key")->value()));
-					entryPointVector[*pKey] = dataRetrieved;
+					entryPointKeyboardVector[*pKey] = dataRetrieved;
 					commandNode = commandNode->next_sibling("Command");
 				}
+				_keyboardListOfCommandMap[peripheralCount] = entryPointKeyboardVector;
+				entryPointKeyboardVector.clear();
+			}
+			if (peripheralName == "gamepad")
+			{
+				bool buttonExists;
+				while (commandNode)
+				{
+					buttonExists = false;
+					dataRetrieved._name = commandNode->first_attribute("name")->value();
+					dataRetrieved._ID = atoi(commandNode->first_attribute("ID")->value());
+					std::string sKey = commandNode->first_attribute("key")->value();
+					//check if key provided in the xml file is a correct key
+					for each (std::string button in _listOfAvailableGamepadButtons)
+					{
+						if (sKey == button)
+						{
+							entryPointGamePadVector[sKey] = dataRetrieved;
+							buttonExists = true;
+							break;
+						}
+					}
+					//if not, note this in the log
+					if (!buttonExists)
+						Logger::Instance().LogMessage("A gamepad command has a incorrect button assigned to it."
+							, "INPUT_HANDLER", LogSeverity::eWarning);
+					commandNode = commandNode->next_sibling("Command");
+				}
+				_gamePadListOfCommandMap[peripheralCount] = entryPointGamePadVector;
+				entryPointGamePadVector.clear();
 			}
 			peripheralNode = peripheralNode->next_sibling("Peripheral");
 		}
-		
+
 	}
 	catch (exception& e)
 	{
-		Logger::Instance().LogMessage(e.what(),"INPUT_HANDLER", LogSeverity::eError);
+		Logger::Instance().LogMessage(e.what(), "INPUT_HANDLER", LogSeverity::eError);
 	}
 }
 
