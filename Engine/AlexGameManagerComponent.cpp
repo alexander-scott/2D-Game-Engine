@@ -30,6 +30,7 @@ void AlexGameManagerComponent::Update(float deltaTime)
 	else
 	{
 		_platformsMoving = false;
+		_platformManager->GetTransform()->SetChanged(false);
 	}
 
 	//_platformManager->GetTransform()->SetWorldPosition(Vec2(_platformManager->GetTransform()->GetWorldPosition().x, _platformManager->GetTransform()->GetWorldPosition().y + 0.1f));

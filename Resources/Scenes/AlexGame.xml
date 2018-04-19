@@ -1,7 +1,4 @@
 <?xml?>
-<!-- -
-Platform box collider width is 50 whereas actual with is 64.
-<!- -->
 <scene name="AlexGame">
 	<GameObject tag="PlayerSprite" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
     <Component xpos="128.000000" ypos="00.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"></Component>
