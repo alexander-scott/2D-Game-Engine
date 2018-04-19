@@ -60,8 +60,3 @@ BoxColliderComponent * ComponentFactory::MakeBoxCollider(float width, float heig
 	return boxCollider;
 }
 
-//
-//MCharacterComponent * ComponentFactory::MakeMCharacterComponent()
-//{
-//	return new MCharacterComponent();
-//}

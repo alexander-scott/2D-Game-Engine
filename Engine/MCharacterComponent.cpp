@@ -4,8 +4,8 @@
 
 MCharacterComponent::MCharacterComponent() : IComponent("MCharacterComponent")
 {
-	_transformComponent = nullptr;
-	_rigidBodyComponent = nullptr;
+	//_transformComponent = nullptr;
+	//_rigidBodyComponent = nullptr;
 }
 
 

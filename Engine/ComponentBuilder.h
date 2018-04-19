@@ -4,7 +4,6 @@
 
 #include "ComponentFactory.h"
 #include "AlexComponentFactory.h"
-//#include "MCharacterComponent.h"
 #include "MComponentFactory.h"
 
 #include <typeindex>

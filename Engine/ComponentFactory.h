@@ -1,4 +1,5 @@
 #pragma once
+#include "MCharacterComponent.h"
 
 #include "TransformComponent.h"
 #include "SpriteRendererComponent.h"
@@ -25,5 +26,4 @@ namespace ComponentFactory
 	PolygonColliderComponent * MakePolygonCollider(Vec2* verticies, int vertexCount);
 	BoxColliderComponent * MakeBoxCollider(float width, float height);
 
-	//MCharacterComponent * MakeMCharacterComponent();
 }
