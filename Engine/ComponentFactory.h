@@ -10,6 +10,7 @@
 #include "PolygonColliderComponent.h"
 #include "BoxColliderComponent.h"
 
+
 namespace ComponentFactory
 {
 	// Core
@@ -23,4 +24,6 @@ namespace ComponentFactory
 	CircleColliderComponent * MakeCircleColliderComponent(float radius);
 	PolygonColliderComponent * MakePolygonCollider(Vec2* verticies, int vertexCount);
 	BoxColliderComponent * MakeBoxCollider(float width, float height);
+
+	//MCharacterComponent * MakeMCharacterComponent();
 }

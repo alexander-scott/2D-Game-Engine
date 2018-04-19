@@ -37,6 +37,13 @@ inline void FetchAlexControllerDependencies();
 
 #pragma endregion
 
+#pragma region MGame inline methods
+
+inline IComponent * BuildMCharacterComponent();
+inline void FetchMCharacterDependencies();
+
+#pragma endregion
+
 ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 {
 	_scene = scene;
@@ -68,6 +75,13 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 
 	_buildMapper.Insert("AlexControllerComponent", BuildAlexController);
 	_dependencyBuildMapper.Insert("AlexControllerComponent", FetchAlexControllerDependencies);
+
+#pragma endregion	
+
+#pragma region MGame 
+
+	_buildMapper.Insert("MCharacterComponent", BuildMCharacterComponent);
+	_dependencyBuildMapper.Insert("MCharacterComponent", FetchMCharacterDependencies);
 
 #pragma endregion	
 
@@ -329,6 +343,37 @@ void FetchAlexControllerDependencies()
 	}
 
 	alexController->SetDependencies(transform, rigidbody);
+}
+
+#pragma endregion
+
+#pragma region MGame methods definitions
+
+IComponent * BuildMCharacterComponent()
+{
+	return ComponentFactory::MakeMCharacterComponent();
+}
+
+void FetchMCharacterDependencies()
+{
+	MCharacterComponent* mCharacter = static_cast<MCharacterComponent*>(dependencyComponent);
+	TransformComponent* transform;
+	RigidBodyComponent* rigidbody;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+		}
+		else if (it->first == "rigidbodycomponent")
+		{
+			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
+		}
+	}
+
+	mCharacter->SetDependencies(transform, rigidbody); //TODO - define method - see if i need to add any other dependency
 }
 
 #pragma endregion

@@ -1,0 +1,15 @@
+<?xml?>
+<Animation name="WalkRight">
+	<StartPosition xpos="0" ypos="0"/>
+	<Dimensions width="16" height = "16"/>
+	<Type name = "WalkTop"/>
+		
+	<Rectangles>
+		<Rect id = "0" top = "48" right = "112" bottom = "64" left = "96"/>
+		<Rect id = "1" top = "48" right = "128" bottom = "64" left = "112"/>
+		<Rect id = "2" top = "48" right = "144" bottom = "64" left = "128"/>
+	</Rectangles>	
+		
+	<Sequence seq="0" seq = "1" seq = "2" seq = "1"/>
+
+</Animation>
