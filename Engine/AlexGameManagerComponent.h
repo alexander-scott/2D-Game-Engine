@@ -29,12 +29,18 @@ private:
 	void SpawnNewPlatform();
 	void SpawnNewPlatform(Vec2 position);
 
+	void AddGameProgression();
+
 	AlexControllerComponent *		_player;
 	AlexPlatformManagerComponent *	_platformManager;
+
+	int								_score;
+	const int						TERMINAL_SCORE = 10000;
 
 	// Platform movement
 	bool							_platformsMoving;
 	float							_platformStartHeight;
+	float							_playerHeight;
 	const float						MOVEMENT_ZONE_HEIGHT = 300;
 
 	// Platform spawning
@@ -42,6 +48,7 @@ private:
 	int								_widthBoundaries;
 	Vec2							_previousSpawnPos;
 	std::default_random_engine		_randNumGenerator;
+	const int						WIDTH_BOUNDARIES = 200;
 	const int						MIN_HEIGHT_BETWEEN_PLATFORMS = 50;
 	const int						MAX_HEIGHT_BETWEEN_PLATFORMS = 150;
 

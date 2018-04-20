@@ -4,8 +4,10 @@ AlexGameManagerComponent::AlexGameManagerComponent()
 	: IComponent("AlexGameManagerComponent")
 {
 	_currentMaxDistBetweenPlatforms = MIN_HEIGHT_BETWEEN_PLATFORMS;
-	_widthBoundaries = 200;
+	_widthBoundaries = WIDTH_BOUNDARIES;
 	_platformsMoving = false;
+
+	_score = 0;
 
 	//_previousSpawnPos = _platformManager->GetTransform()->GetWorldPosition().y +
 }
@@ -20,17 +22,25 @@ void AlexGameManagerComponent::Update(float deltaTime)
 	{
 		if (_player->GetTransform()->GetWorldPosition().y < MOVEMENT_ZONE_HEIGHT) // If the player is within the zone where platform movement occurs
 		{
-			if (!_platformsMoving)
+			if (!_platformsMoving) // If the platforms aren't already moving, reset the variables
 			{
 				_platformsMoving = true;
 				_platformStartHeight = _platformManager->GetTransform()->GetWorldPosition().y;
+				_playerHeight = MOVEMENT_ZONE_HEIGHT;
 			}
 
-			float playerDiff = std::abs(_player->GetTransform()->GetWorldPosition().y - MOVEMENT_ZONE_HEIGHT) * 3;
-			_platformManager->GetTransform()->SetWorldPosition(Vec2(_platformManager->GetTransform()->GetWorldPosition().x, _platformStartHeight + playerDiff));
+			// Calculate the height that the player would be at based on its current velocity
+			_playerHeight -= _player->GetRigidbody()->GetVelocity().y * deltaTime;
+			// Limit the players actual height however
+			_player->GetTransform()->SetWorldPosition(Vec2(_player->GetTransform()->GetWorldPosition().x, MOVEMENT_ZONE_HEIGHT));
+
+			// Move the platform manager to simulate the player moving even though the player is static at this point
+			float playerDiff = std::abs(_playerHeight - MOVEMENT_ZONE_HEIGHT) * 3;
+			_platformManager->GetTransform()->SetWorldPosition(
+				Vec2(_platformManager->GetTransform()->GetWorldPosition().x, _platformStartHeight + playerDiff));
 		}
 	}
-	else
+	else // Else the player is movement downwards. Wait for a bounce
 	{
 		_platformsMoving = false;
 		_platformManager->GetTransform()->SetChanged(false);
@@ -52,6 +62,8 @@ void AlexGameManagerComponent::Update(float deltaTime)
 	{
 		SpawnNewPlatform();
 	}
+
+	AddGameProgression();
 }
 
 void AlexGameManagerComponent::Start()
@@ -78,6 +90,28 @@ void AlexGameManagerComponent::SpawnNewPlatform(Vec2 position)
 	platform.GameObject->GetComponent<TransformComponent>()->SetLocalPosition(position);
 	_platforms.push_back(platform);
 	_previousSpawnPos = position;
+}
+
+void AlexGameManagerComponent::AddGameProgression()
+{
+	_score = (int)_platformManager->GetTransform()->GetWorldPosition().y;
+
+	double percentToTermScore = ((double)_score / (double)TERMINAL_SCORE);
+	percentToTermScore *= 100;
+
+	if (percentToTermScore > 100)
+		percentToTermScore = 100;
+
+	if (_widthBoundaries > 0)
+	{		
+		_widthBoundaries = WIDTH_BOUNDARIES - (2 * (int)percentToTermScore);
+	}
+
+	if (_currentMaxDistBetweenPlatforms < MAX_HEIGHT_BETWEEN_PLATFORMS)
+	{
+		_currentMaxDistBetweenPlatforms = MIN_HEIGHT_BETWEEN_PLATFORMS +
+			(((std::abs(MAX_HEIGHT_BETWEEN_PLATFORMS - MIN_HEIGHT_BETWEEN_PLATFORMS) / 100) * (int)percentToTermScore));
+	}
 }
 
 Vec2 AlexGameManagerComponent::GetNewPositionForPlatform()
