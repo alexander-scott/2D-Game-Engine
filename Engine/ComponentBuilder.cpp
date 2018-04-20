@@ -45,6 +45,7 @@ inline void FetchMCharacterDependencies();
 inline IComponent * BuildMBackgroundComponent();
 inline void FetchMBackgroundDependencies();
 
+
 #pragma endregion
 
 ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
