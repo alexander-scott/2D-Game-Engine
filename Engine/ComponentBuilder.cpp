@@ -387,7 +387,6 @@ void FetchMCharacterDependencies()
 		{
 			spriteanimatedcomponent = _scene->GetGameObject(it->second)->GetComponent<SpriteAnimatedComponent>();
 		}
-
 	}
 
 	mCharacter->SetDependencies(transform, rigidbody, spriteanimatedcomponent); //TODO - define method - see if i need to add any other dependency

@@ -41,6 +41,7 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 		InputHandlerToGameObjectMessage &msgHandler = static_cast<InputHandlerToGameObjectMessage&>(msg);
 		ProcessInput(msgHandler.MessageType, msgHandler.Command, msgHandler.Range);
 	}
+	//add collision case with rigidbody
 	}
 }
 
