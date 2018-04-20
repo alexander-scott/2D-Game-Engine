@@ -4,6 +4,7 @@
 
 AudioSoundFileManager::AudioSoundFileManager(std::shared_ptr<DirectX::AudioEngine> audioEngine)
 {
+	// Preload all audio files
 	for (auto s : AudioFilePaths)
 	{
 		std::string filePath = std::string(GlobalVariables::Instance().ResourcesFilePath + s.second);

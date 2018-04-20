@@ -28,6 +28,8 @@ inline void FetchCircleColliderDependencies();
 inline IComponent * BuildBoxColliderComponent();
 inline void FetchBoxColliderDependencies();
 
+inline IComponent * BuildAudioSourceComponent();
+
 #pragma endregion
 
 #pragma region AlexGame component function declarations
@@ -67,6 +69,8 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 
 	_buildMapper.Insert("BoxColliderComponent", BuildBoxColliderComponent);
 	_dependencyBuildMapper.Insert("BoxColliderComponent", FetchBoxColliderDependencies);
+
+	_buildMapper.Insert("AudioSourceComponent", BuildAudioSourceComponent);
 
 #pragma endregion
 
@@ -207,6 +211,11 @@ IComponent * BuildBoxColliderComponent()
 	return ComponentFactory::MakeBoxCollider(width, height);
 }
 
+inline IComponent * BuildAudioSourceComponent()
+{
+	return ComponentFactory::MakeAudioSourceComponent();
+}
+
 void ComponentBuilder::BuildComponentDependecies(IComponent * component, map<string, GUID>* dependecies)
 {
 	depdendecies = dependecies;
@@ -330,6 +339,7 @@ void FetchAlexControllerDependencies()
 	AlexControllerComponent* alexController = static_cast<AlexControllerComponent*>(dependencyComponent);
 	TransformComponent* transform;
 	RigidBodyComponent* rigidbody;
+	AudioSourceComponent* audioSource;
 
 	map<string, GUID>::iterator it;
 	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
@@ -342,9 +352,13 @@ void FetchAlexControllerDependencies()
 		{
 			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
 		}
+		else if (it->first == "audiosourcecomponent")
+		{
+			audioSource = _scene->GetGameObject(it->second)->GetComponent<AudioSourceComponent>();
+		}
 	}
 
-	alexController->SetDependencies(transform, rigidbody);
+	alexController->SetDependencies(transform, rigidbody, audioSource);
 }
 
 inline IComponent * BuildAlexPlatformManager()
@@ -410,6 +424,7 @@ inline void FetchAlexGameManagerDependencies()
 	AlexGameManagerComponent* alexController = static_cast<AlexGameManagerComponent*>(dependencyComponent);
 	AlexControllerComponent* controller;
 	AlexPlatformManagerComponent* platformManager;
+	TextRendererComponent* text;
 
 	map<string, GUID>::iterator it;
 	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
@@ -422,9 +437,13 @@ inline void FetchAlexGameManagerDependencies()
 		{
 			platformManager = _scene->GetGameObject(it->second)->GetComponent<AlexPlatformManagerComponent>();
 		}
+		else if (it->first == "textrenderercomponent")
+		{
+			text = _scene->GetGameObject(it->second)->GetComponent<TextRendererComponent>();
+		}
 	}
 
-	alexController->SetDependencies(controller, platformManager);
+	alexController->SetDependencies(controller, platformManager, text);
 }
 
 #pragma endregion

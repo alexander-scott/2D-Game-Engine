@@ -95,6 +95,8 @@ bool Engine::UpdateLoop()
 
 	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eInputUpdateGamePad));
 
+	_messageDispatcher->SendMessageToListeners(ISystemMessage(SystemMessageType::eUpdateAudio));
+	
 	// This while loop processes scene updates and physics at a fixed rate.
 	// Whilst allowing graphics to render as fast as possible.
 	while (_deltaTime >= MS_PER_UPDATE)

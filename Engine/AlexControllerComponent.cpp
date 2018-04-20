@@ -14,7 +14,6 @@ AlexControllerComponent::AlexControllerComponent() : IComponent("AlexControllerC
 	_previousBounceTimer = 0;
 }
 
-
 AlexControllerComponent::~AlexControllerComponent()
 {
 }
@@ -76,6 +75,8 @@ void AlexControllerComponent::RecieveMessage(IComponentMessage & message)
 				Vec2 velocity = Vec2(_rigidbody->GetVelocity().x, -JUMP_VELOCITY);
 				SetVelocityMessage setVelMsg(velocity);
 				_rigidbody->RecieveMessage(setVelMsg);
+
+				_audioSource->PlayAudioFile("Bounce");
 
 				_previousBounceTimer = 0;
 			}

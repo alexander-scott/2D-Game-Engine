@@ -6,6 +6,7 @@
 
 #include "TransformComponent.h"
 #include "RigidBodyComponent.h"
+#include "AudioSourceComponent.h"
 
 class AlexControllerComponent : public IComponent, public IMessageableComponent, public IUpdateableComponent
 {
@@ -13,9 +14,9 @@ public:
 	AlexControllerComponent();
 	~AlexControllerComponent();
 
-	void SetDependencies(TransformComponent* transform, RigidBodyComponent* rigidbody) 
+	void SetDependencies(TransformComponent* transform, RigidBodyComponent* rigidbody, AudioSourceComponent* audioSource)
 	{
-		_transform = transform; _rigidbody = rigidbody;
+		_transform = transform; _rigidbody = rigidbody; _audioSource = audioSource;
 	}
 
 	virtual void Update(float deltaTime) override;
@@ -27,8 +28,9 @@ public:
 private:
 	void ProcessCommand(InputGenericStateMessageType type, sCommand command, float range);
 
-	TransformComponent * _transform;
-	RigidBodyComponent* _rigidbody;
+	TransformComponent *			_transform;
+	RigidBodyComponent*				_rigidbody;
+	AudioSourceComponent*			_audioSource;
 
 	bool _leftPressed, _rightPressed, _upPressed, _downPressed;
 	float _previousBounceTimer;

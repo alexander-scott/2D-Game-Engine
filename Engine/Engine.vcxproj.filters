@@ -50,9 +50,6 @@
     <Filter Include="Engine\Messaging\Messages\SceneSystemMessages">
       <UniqueIdentifier>{ddc152fd-c3a7-46d0-8459-635731dc7dd4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Messaging\Messages\ComponentMessages">
-      <UniqueIdentifier>{b0e39682-ba6b-41da-b8b6-c14133a36eb4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Messaging\ComponentMessaging">
       <UniqueIdentifier>{7edb3620-1674-4d24-b5b0-3180993d6781}</UniqueIdentifier>
     </Filter>
@@ -103,6 +100,9 @@
     </Filter>
     <Filter Include="Game\Alex\Components">
       <UniqueIdentifier>{2e820dbd-a6d8-4dff-b1d1-e4157abcd015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Components\Audio">
+      <UniqueIdentifier>{a589f804-df28-405b-ad93-4a24b817c9de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -189,9 +189,6 @@
     </ClInclude>
     <ClInclude Include="InputMouseMessage.h">
       <Filter>Engine\Messaging\Messages\InputMessages</Filter>
-    </ClInclude>
-    <ClInclude Include="SetParentTransformMessage.h">
-      <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
     <ClInclude Include="RequestBuildSceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
@@ -346,6 +343,9 @@
     <ClInclude Include="AlexGameManagerComponent.h">
       <Filter>Game\Alex\Components</Filter>
     </ClInclude>
+    <ClInclude Include="AudioSourceComponent.h">
+      <Filter>Engine\GameObject\Components\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -471,6 +471,9 @@
     </ClCompile>
     <ClCompile Include="AlexGameManagerComponent.cpp">
       <Filter>Game\Alex\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSourceComponent.cpp">
+      <Filter>Engine\GameObject\Components\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

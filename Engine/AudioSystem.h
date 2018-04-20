@@ -3,6 +3,9 @@
 #include "ISystem.h"
 #include "AudioSoundFileManager.h"
 
+#include "Scene.h"
+#include "AudioSourceComponent.h"
+
 #include "DirectXTK\Inc\Audio.h"
 
 class AudioSystem : public ISystem
@@ -19,8 +22,13 @@ private:
 	void Suspend();
 	void Resume();
 
+	void Update(float deltaTime);
+
+	void AddGameObjectToSystem(shared_ptr<GameObject> gameObject);
+
 	std::unique_ptr<AudioSoundFileManager>		_audioFileManager;
 	std::shared_ptr<DirectX::AudioEngine>		_audioEngine;
 	bool										_retryAudio;
+	std::vector<AudioSourceComponent*>			_audioSources;
 };
 

@@ -267,6 +267,7 @@
     <ClInclude Include="AlexGameManagerComponent.h" />
     <ClInclude Include="AlexPlatformManagerComponent.h" />
     <ClInclude Include="AudioSoundFileManager.h" />
+    <ClInclude Include="AudioSourceComponent.h" />
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="Animation.h" />
@@ -325,7 +326,6 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneSaver.h" />
     <ClInclude Include="SceneMessage.h" />
-    <ClInclude Include="SetParentTransformMessage.h" />
     <ClInclude Include="SetVelocityMessage.h" />
     <ClInclude Include="SpriteAnimatedComponent.h" />
     <ClInclude Include="SpriteRendererComponent.h" />
@@ -349,6 +349,7 @@
     <ClCompile Include="AlexPlatformManagerComponent.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AudioSoundFileManager.cpp" />
+    <ClCompile Include="AudioSourceComponent.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="BoxColliderComponent.cpp" />

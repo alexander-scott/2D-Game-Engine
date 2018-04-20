@@ -82,6 +82,7 @@ enum SystemMessageType
 	ePlaySound,
 	eSuspendAudio,
 	eResumeAudio,
+	eUpdateAudio,
 };
 
 enum ComponentMessageType

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TransformComponent.h"
+
 #include "SpriteRendererComponent.h"
 #include "TextRendererComponent.h"
 #include "SpriteAnimatedComponent.h"
@@ -10,10 +11,14 @@
 #include "PolygonColliderComponent.h"
 #include "BoxColliderComponent.h"
 
+#include "AudioSourceComponent.h"
+
 namespace ComponentFactory
 {
 	// Core
 	TransformComponent * MakeTransformComponent(Vec2 position, float rotation, float scale);
+
+	// Graphics
 	SpriteRendererComponent * MakeSpriteRendererComponent(RECT* rect, Vec2 offset, string text, string name, string animation);
 	TextRendererComponent * MakeTextRendererComponent(RECT * rect, Vec2 offset, std::string text, float4 * rgb3);
 	SpriteAnimatedComponent * MakeSpriteAnimatedComponent(RECT* rect, Vec2 offset, string text, string name, string animation);
@@ -23,4 +28,7 @@ namespace ComponentFactory
 	CircleColliderComponent * MakeCircleColliderComponent(float radius);
 	PolygonColliderComponent * MakePolygonCollider(Vec2* verticies, int vertexCount);
 	BoxColliderComponent * MakeBoxCollider(float width, float height);
+
+	// Audio
+	AudioSourceComponent * MakeAudioSourceComponent();
 }

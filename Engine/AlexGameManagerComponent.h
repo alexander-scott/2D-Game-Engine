@@ -7,6 +7,7 @@
 
 #include "AlexPlatformManagerComponent.h"
 #include "AlexControllerComponent.h"
+#include "TextRendererComponent.h"
 
 #include <random>
 
@@ -16,13 +17,13 @@ public:
 	AlexGameManagerComponent();
 	~AlexGameManagerComponent();
 
-	void SetDependencies(AlexControllerComponent* player, AlexPlatformManagerComponent* platformManager)
+	void SetDependencies(AlexControllerComponent* player, AlexPlatformManagerComponent* platformManager, TextRendererComponent* text)
 	{
-		_player = player; _platformManager = platformManager;
+		_player = player; _platformManager = platformManager; _scoreText = text; 
 	}
 
-	virtual void Update(float deltaTime) override;
 	virtual void Start() override;
+	virtual void Update(float deltaTime) override;
 
 private:
 	Vec2 GetNewPositionForPlatform();
@@ -33,6 +34,7 @@ private:
 
 	AlexControllerComponent *		_player;
 	AlexPlatformManagerComponent *	_platformManager;
+	TextRendererComponent *			_scoreText;
 
 	int								_score;
 	const int						TERMINAL_SCORE = 10000;

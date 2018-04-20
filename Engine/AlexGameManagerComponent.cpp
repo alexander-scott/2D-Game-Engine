@@ -16,6 +16,18 @@ AlexGameManagerComponent::~AlexGameManagerComponent()
 {
 }
 
+void AlexGameManagerComponent::Start()
+{
+	// Spawn start platform
+	SpawnNewPlatform(Vec2(128, 550));
+
+	// Spawn 10 additional platforms
+	for (int i = 0; i < 10; i++)
+	{
+		SpawnNewPlatform();
+	}
+}
+
 void AlexGameManagerComponent::Update(float deltaTime)
 {
 	if (_player->GetRigidbody()->GetVelocity().y < 0) // If the player is moving upward
@@ -35,7 +47,7 @@ void AlexGameManagerComponent::Update(float deltaTime)
 			_player->GetTransform()->SetWorldPosition(Vec2(_player->GetTransform()->GetWorldPosition().x, MOVEMENT_ZONE_HEIGHT));
 
 			// Move the platform manager to simulate the player moving even though the player is static at this point
-			float playerDiff = std::abs(_playerHeight - MOVEMENT_ZONE_HEIGHT) * 3;
+			float playerDiff = std::abs(_playerHeight - MOVEMENT_ZONE_HEIGHT) * 2;
 			_platformManager->GetTransform()->SetWorldPosition(
 				Vec2(_platformManager->GetTransform()->GetWorldPosition().x, _platformStartHeight + playerDiff));
 		}
@@ -64,18 +76,7 @@ void AlexGameManagerComponent::Update(float deltaTime)
 	}
 
 	AddGameProgression();
-}
-
-void AlexGameManagerComponent::Start()
-{
-	// Spawn start platform
-	SpawnNewPlatform(Vec2(128, 550));
-
-	// Spawn 10 additional platforms
-	for (int i = 0; i < 10; i++)
-	{
-		SpawnNewPlatform();
-	}
+	_scoreText->SetText("Score: " + std::to_string(_score));
 }
 
 void AlexGameManagerComponent::SpawnNewPlatform()
