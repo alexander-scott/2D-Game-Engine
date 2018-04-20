@@ -1,6 +1,4 @@
 #pragma once
-#include "MCharacterComponent.h"
-
 #include "TransformComponent.h"
 
 #include "SpriteRendererComponent.h"

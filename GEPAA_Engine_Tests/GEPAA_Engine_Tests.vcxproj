@@ -167,12 +167,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Engine\AlexComponentFactory.cpp" />
-    <ClCompile Include="..\Engine\AlexControllerComponent.cpp" />
-    <ClCompile Include="..\Engine\AlexGameManagerComponent.cpp" />
-    <ClCompile Include="..\Engine\AlexPlatformManagerComponent.cpp" />
+    <ClCompile Include="..\Engine\AComponentFactory.cpp" />
+    <ClCompile Include="..\Engine\AControllerComponent.cpp" />
+    <ClCompile Include="..\Engine\AGameManagerComponent.cpp" />
     <ClCompile Include="..\Engine\Animation.cpp" />
+    <ClCompile Include="..\Engine\APlatformManagerComponent.cpp" />
     <ClCompile Include="..\Engine\AudioSoundFileManager.cpp" />
+    <ClCompile Include="..\Engine\AudioSourceComponent.cpp" />
     <ClCompile Include="..\Engine\AudioSystem.cpp" />
     <ClCompile Include="..\Engine\BoxColliderComponent.cpp" />
     <ClCompile Include="..\Engine\CircleColliderComponent.cpp" />
@@ -187,8 +188,12 @@
     <ClCompile Include="..\Engine\GameObject.cpp" />
     <ClCompile Include="..\Engine\InputHandler.cpp" />
     <ClCompile Include="..\Engine\ISpriteComponent.cpp" />
+    <ClCompile Include="..\Engine\LevelManager.cpp" />
     <ClCompile Include="..\Engine\Main.cpp" />
     <ClCompile Include="..\Engine\MainWindow.cpp" />
+    <ClCompile Include="..\Engine\MBackgroundComponent.cpp" />
+    <ClCompile Include="..\Engine\MCharacterComponent.cpp" />
+    <ClCompile Include="..\Engine\MComponentFactory.cpp" />
     <ClCompile Include="..\Engine\ObjectGrid.cpp" />
     <ClCompile Include="..\Engine\PhysicsSystem.cpp" />
     <ClCompile Include="..\Engine\PolygonColliderComponent.cpp" />
@@ -209,12 +214,13 @@
     <ClCompile Include="SceneBuilderTests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Engine\AlexComponentFactory.h" />
-    <ClInclude Include="..\Engine\AlexControllerComponent.h" />
-    <ClInclude Include="..\Engine\AlexGameManagerComponent.h" />
-    <ClInclude Include="..\Engine\AlexPlatformManagerComponent.h" />
+    <ClInclude Include="..\Engine\AComponentFactory.h" />
+    <ClInclude Include="..\Engine\AControllerComponent.h" />
+    <ClInclude Include="..\Engine\AGameManagerComponent.h" />
     <ClInclude Include="..\Engine\Animation.h" />
+    <ClInclude Include="..\Engine\APlatformManagerComponent.h" />
     <ClInclude Include="..\Engine\AudioSoundFileManager.h" />
+    <ClInclude Include="..\Engine\AudioSourceComponent.h" />
     <ClInclude Include="..\Engine\AudioSystem.h" />
     <ClInclude Include="..\Engine\BoxColliderComponent.h" />
     <ClInclude Include="..\Engine\BuildSceneMessage.h" />
@@ -251,8 +257,12 @@
     <ClInclude Include="..\Engine\ISystemMessage.h" />
     <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h" />
     <ClInclude Include="..\Engine\IUpdateableComponent.h" />
+    <ClInclude Include="..\Engine\LevelManager.h" />
     <ClInclude Include="..\Engine\MainWindow.h" />
     <ClInclude Include="..\Engine\Math.h" />
+    <ClInclude Include="..\Engine\MBackgroundComponent.h" />
+    <ClInclude Include="..\Engine\MCharacterComponent.h" />
+    <ClInclude Include="..\Engine\MComponentFactory.h" />
     <ClInclude Include="..\Engine\ObjectGrid.h" />
     <ClInclude Include="..\Engine\PhysicsSystem.h" />
     <ClInclude Include="..\Engine\PlayAudioMessage.h" />

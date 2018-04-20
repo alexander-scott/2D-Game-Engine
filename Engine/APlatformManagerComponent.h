@@ -6,7 +6,7 @@
 
 #include "TransformComponent.h"
 
-class AlexPlatformManagerComponent : public IComponent
+class APlatformManagerComponent : public IComponent
 {
 public:
 	struct Platform 
@@ -22,8 +22,8 @@ public:
 		int						ActivePlatformIndex;
 	};
 
-	AlexPlatformManagerComponent(std::vector<shared_ptr<GameObject>> platformPool);
-	~AlexPlatformManagerComponent();
+	APlatformManagerComponent(std::vector<shared_ptr<GameObject>> platformPool);
+	~APlatformManagerComponent();
 
 	void SetDependencies(TransformComponent* transform) { _transform = transform; }
 

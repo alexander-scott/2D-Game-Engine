@@ -86,14 +86,14 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 
 #pragma region AlexGame component function mapping
 
-	_buildMapper.Insert("AlexControllerComponent", BuildAlexController);
-	_dependencyBuildMapper.Insert("AlexControllerComponent", FetchAlexControllerDependencies);
+	_buildMapper.Insert("AControllerComponent", BuildAlexController);
+	_dependencyBuildMapper.Insert("AControllerComponent", FetchAlexControllerDependencies);
 
-	_buildMapper.Insert("AlexPlatformManagerComponent", BuildAlexPlatformManager);
-	_dependencyBuildMapper.Insert("AlexPlatformManagerComponent", FetchAlexPlatformManagerDependencies);
+	_buildMapper.Insert("APlatformManagerComponent", BuildAlexPlatformManager);
+	_dependencyBuildMapper.Insert("APlatformManagerComponent", FetchAlexPlatformManagerDependencies);
 
-	_buildMapper.Insert("AlexGameManagerComponent", BuildAlexGameManager);
-	_dependencyBuildMapper.Insert("AlexGameManagerComponent", FetchAlexGameManagerDependencies);
+	_buildMapper.Insert("AGameManagerComponent", BuildAlexGameManager);
+	_dependencyBuildMapper.Insert("AGameManagerComponent", FetchAlexGameManagerDependencies);
 
 #pragma endregion	
 
@@ -362,7 +362,7 @@ IComponent * BuildAlexController()
 
 void FetchAlexControllerDependencies()
 {
-	AlexControllerComponent* alexController = static_cast<AlexControllerComponent*>(dependencyComponent);
+	AControllerComponent* alexController = static_cast<AControllerComponent*>(dependencyComponent);
 	TransformComponent* transform;
 	RigidBodyComponent* rigidbody;
 	AudioSourceComponent* audioSource;
@@ -425,7 +425,7 @@ inline IComponent * BuildAlexPlatformManager()
 
 inline void FetchAlexPlatformManagerDependencies()
 {
-	AlexPlatformManagerComponent* platformManager = static_cast<AlexPlatformManagerComponent*>(dependencyComponent);
+	APlatformManagerComponent* platformManager = static_cast<APlatformManagerComponent*>(dependencyComponent);
 	TransformComponent* transform;
 
 	map<string, GUID>::iterator it;
@@ -447,9 +447,9 @@ inline IComponent * BuildAlexGameManager()
 
 inline void FetchAlexGameManagerDependencies()
 {
-	AlexGameManagerComponent* alexController = static_cast<AlexGameManagerComponent*>(dependencyComponent);
-	AlexControllerComponent* controller;
-	AlexPlatformManagerComponent* platformManager;
+	AGameManagerComponent* alexController = static_cast<AGameManagerComponent*>(dependencyComponent);
+	AControllerComponent* controller;
+	APlatformManagerComponent* platformManager;
 	TextRendererComponent* text;
 
 	map<string, GUID>::iterator it;
@@ -457,11 +457,11 @@ inline void FetchAlexGameManagerDependencies()
 	{
 		if (it->first == "controllercomponent")
 		{
-			controller = _scene->GetGameObject(it->second)->GetComponent<AlexControllerComponent>();
+			controller = _scene->GetGameObject(it->second)->GetComponent<AControllerComponent>();
 		}
 		else if (it->first == "platformmanagercomponent")
 		{
-			platformManager = _scene->GetGameObject(it->second)->GetComponent<AlexPlatformManagerComponent>();
+			platformManager = _scene->GetGameObject(it->second)->GetComponent<APlatformManagerComponent>();
 		}
 		else if (it->first == "textrenderercomponent")
 		{

@@ -5,19 +5,19 @@
 #include "IUpdateableComponent.h"
 #include "IStartableComponent.h"
 
-#include "AlexPlatformManagerComponent.h"
-#include "AlexControllerComponent.h"
+#include "APlatformManagerComponent.h"
+#include "AControllerComponent.h"
 #include "TextRendererComponent.h"
 
 #include <random>
 
-class AlexGameManagerComponent : public IComponent, public IUpdateableComponent, public IStartableComponent
+class AGameManagerComponent : public IComponent, public IUpdateableComponent, public IStartableComponent
 {
 public:
-	AlexGameManagerComponent();
-	~AlexGameManagerComponent();
+	AGameManagerComponent();
+	~AGameManagerComponent();
 
-	void SetDependencies(AlexControllerComponent* player, AlexPlatformManagerComponent* platformManager, TextRendererComponent* text)
+	void SetDependencies(AControllerComponent* player, APlatformManagerComponent* platformManager, TextRendererComponent* text)
 	{
 		_player = player; _platformManager = platformManager; _scoreText = text; 
 	}
@@ -32,8 +32,8 @@ private:
 
 	void AddGameProgression();
 
-	AlexControllerComponent *		_player;
-	AlexPlatformManagerComponent *	_platformManager;
+	AControllerComponent *		_player;
+	APlatformManagerComponent *	_platformManager;
 	TextRendererComponent *			_scoreText;
 
 	int								_score;
@@ -54,5 +54,5 @@ private:
 	const int						MIN_HEIGHT_BETWEEN_PLATFORMS = 50;
 	const int						MAX_HEIGHT_BETWEEN_PLATFORMS = 150;
 
-	std::vector<AlexPlatformManagerComponent::Platform> _platforms;
+	std::vector<APlatformManagerComponent::Platform> _platforms;
 };

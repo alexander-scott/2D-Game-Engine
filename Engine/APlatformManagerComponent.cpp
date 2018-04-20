@@ -1,9 +1,9 @@
-#include "AlexPlatformManagerComponent.h"
+#include "APlatformManagerComponent.h"
 
 #include "TransformComponent.h"
 
-AlexPlatformManagerComponent::AlexPlatformManagerComponent(std::vector<shared_ptr<GameObject>> platformPool) 
-	: IComponent("AlexPlatformManagerComponent")
+APlatformManagerComponent::APlatformManagerComponent(std::vector<shared_ptr<GameObject>> platformPool) 
+	: IComponent("APlatformManagerComponent")
 {
 	_platformPool = platformPool;
 
@@ -11,11 +11,11 @@ AlexPlatformManagerComponent::AlexPlatformManagerComponent(std::vector<shared_pt
 	_inActivePlatforms = std::vector<shared_ptr<GameObject>>(_platformPool);
 }
 
-AlexPlatformManagerComponent::~AlexPlatformManagerComponent()
+APlatformManagerComponent::~APlatformManagerComponent()
 {
 }
 
-AlexPlatformManagerComponent::Platform AlexPlatformManagerComponent::GetNewPlatformFromPool()
+APlatformManagerComponent::Platform APlatformManagerComponent::GetNewPlatformFromPool()
 {
 	if (_inActivePlatforms.size() > 0)
 	{
@@ -28,11 +28,11 @@ AlexPlatformManagerComponent::Platform AlexPlatformManagerComponent::GetNewPlatf
 	}
 	else
 	{
-		throw std::exception("Run out of platforms in AlexPlatformManagerComponent!");
+		throw std::exception("Run out of platforms in APlatformManagerComponent!");
 	}
 }
 
-void AlexPlatformManagerComponent::ReturnPlatformToPool(Platform platform)
+void APlatformManagerComponent::ReturnPlatformToPool(Platform platform)
 {
 	platform.GameObject->SetActive(false);
 

@@ -1,7 +1,7 @@
-#include "AlexGameManagerComponent.h"
+#include "AGameManagerComponent.h"
 
-AlexGameManagerComponent::AlexGameManagerComponent()
-	: IComponent("AlexGameManagerComponent")
+AGameManagerComponent::AGameManagerComponent()
+	: IComponent("AGameManagerComponent")
 {
 	_currentMaxDistBetweenPlatforms = MIN_HEIGHT_BETWEEN_PLATFORMS;
 	_widthBoundaries = WIDTH_BOUNDARIES;
@@ -12,11 +12,11 @@ AlexGameManagerComponent::AlexGameManagerComponent()
 	//_previousSpawnPos = _platformManager->GetTransform()->GetWorldPosition().y +
 }
 
-AlexGameManagerComponent::~AlexGameManagerComponent()
+AGameManagerComponent::~AGameManagerComponent()
 {
 }
 
-void AlexGameManagerComponent::Start()
+void AGameManagerComponent::Start()
 {
 	// Spawn start platform
 	SpawnNewPlatform(Vec2(128, 550));
@@ -28,7 +28,7 @@ void AlexGameManagerComponent::Start()
 	}
 }
 
-void AlexGameManagerComponent::Update(float deltaTime)
+void AGameManagerComponent::Update(float deltaTime)
 {
 	if (_player->GetRigidbody()->GetVelocity().y < 0) // If the player is moving upward
 	{
@@ -79,13 +79,13 @@ void AlexGameManagerComponent::Update(float deltaTime)
 	_scoreText->SetText("Score: " + std::to_string(_score));
 }
 
-void AlexGameManagerComponent::SpawnNewPlatform()
+void AGameManagerComponent::SpawnNewPlatform()
 {
 	Vec2 pos = GetNewPositionForPlatform();
 	SpawnNewPlatform(pos);
 }
 
-void AlexGameManagerComponent::SpawnNewPlatform(Vec2 position)
+void AGameManagerComponent::SpawnNewPlatform(Vec2 position)
 {
 	auto platform = _platformManager->GetNewPlatformFromPool();
 	platform.GameObject->GetComponent<TransformComponent>()->SetLocalPosition(position);
@@ -93,7 +93,7 @@ void AlexGameManagerComponent::SpawnNewPlatform(Vec2 position)
 	_previousSpawnPos = position;
 }
 
-void AlexGameManagerComponent::AddGameProgression()
+void AGameManagerComponent::AddGameProgression()
 {
 	_score = (int)_platformManager->GetTransform()->GetWorldPosition().y;
 
@@ -115,7 +115,7 @@ void AlexGameManagerComponent::AddGameProgression()
 	}
 }
 
-Vec2 AlexGameManagerComponent::GetNewPositionForPlatform()
+Vec2 AGameManagerComponent::GetNewPositionForPlatform()
 {
 	int xLeftBoundary = 0 + _widthBoundaries;
 	int xRightBoundary = SCREEN_WIDTH - _widthBoundaries;

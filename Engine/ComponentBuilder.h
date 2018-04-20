@@ -3,7 +3,7 @@
 #include "rapidxml.hpp"
 
 #include "ComponentFactory.h"
-#include "AlexComponentFactory.h"
+#include "AComponentFactory.h"
 #include "MComponentFactory.h"
 
 #include <typeindex>

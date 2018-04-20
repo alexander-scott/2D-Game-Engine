@@ -1,11 +1,11 @@
-#include "AlexControllerComponent.h"
+#include "AControllerComponent.h"
 
 #include "InputHandlerToGameObjectMessage.h"
 #include "AddForceMessage.h"
 #include "SetVelocityMessage.h"
 #include "CollisionMessage.h"
 
-AlexControllerComponent::AlexControllerComponent() : IComponent("AlexControllerComponent")
+AControllerComponent::AControllerComponent() : IComponent("AControllerComponent")
 {
 	_leftPressed = false;
 	_rightPressed = false;
@@ -14,11 +14,11 @@ AlexControllerComponent::AlexControllerComponent() : IComponent("AlexControllerC
 	_previousBounceTimer = 0;
 }
 
-AlexControllerComponent::~AlexControllerComponent()
+AControllerComponent::~AControllerComponent()
 {
 }
 
-void AlexControllerComponent::Update(float deltaTime)
+void AControllerComponent::Update(float deltaTime)
 {
 	Vec2 force = Vec2(0.0f, 0.0f);
 
@@ -48,7 +48,7 @@ void AlexControllerComponent::Update(float deltaTime)
 	_previousBounceTimer += deltaTime;
 }
 
-void AlexControllerComponent::RecieveMessage(IComponentMessage & message)
+void AControllerComponent::RecieveMessage(IComponentMessage & message)
 {
 	switch (message.MessageType)
 	{
@@ -85,7 +85,7 @@ void AlexControllerComponent::RecieveMessage(IComponentMessage & message)
 	}
 }
 
-void AlexControllerComponent::ProcessCommand(InputGenericStateMessageType type, sCommand command, float range)
+void AControllerComponent::ProcessCommand(InputGenericStateMessageType type, sCommand command, float range)
 {
 	/*
 	<Command key="A" name="move_left" ID="3"/>

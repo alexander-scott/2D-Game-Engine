@@ -8,11 +8,11 @@
 #include "RigidBodyComponent.h"
 #include "AudioSourceComponent.h"
 
-class AlexControllerComponent : public IComponent, public IMessageableComponent, public IUpdateableComponent
+class AControllerComponent : public IComponent, public IMessageableComponent, public IUpdateableComponent
 {
 public:
-	AlexControllerComponent();
-	~AlexControllerComponent();
+	AControllerComponent();
+	~AControllerComponent();
 
 	void SetDependencies(TransformComponent* transform, RigidBodyComponent* rigidbody, AudioSourceComponent* audioSource)
 	{

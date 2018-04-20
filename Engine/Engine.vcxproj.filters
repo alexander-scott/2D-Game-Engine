@@ -104,6 +104,12 @@
     <Filter Include="Engine\GameObject\Components\Audio">
       <UniqueIdentifier>{a589f804-df28-405b-ad93-4a24b817c9de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Myriam">
+      <UniqueIdentifier>{2a070f02-9f01-45f5-88d1-ad40757286b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Myriam\Components">
+      <UniqueIdentifier>{4c38039c-3b07-4c05-a06a-73cbf47941f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -319,9 +325,6 @@
     <ClInclude Include="GlobalVariables.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="AlexComponentFactory.h">
-      <Filter>Game\Alex</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionMessage.h">
       <Filter>Engine\Messaging\Messages\PhysicsMessages</Filter>
     </ClInclude>
@@ -334,17 +337,32 @@
     <ClInclude Include="SetVelocityMessage.h">
       <Filter>Engine\Messaging\Messages\PhysicsMessages</Filter>
     </ClInclude>
-    <ClInclude Include="AlexControllerComponent.h">
-      <Filter>Game\Alex\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="AlexPlatformManagerComponent.h">
-      <Filter>Game\Alex\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="AlexGameManagerComponent.h">
-      <Filter>Game\Alex\Components</Filter>
-    </ClInclude>
     <ClInclude Include="AudioSourceComponent.h">
       <Filter>Engine\GameObject\Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="MComponentFactory.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
+    <ClInclude Include="MBackgroundComponent.h">
+      <Filter>Game\Myriam\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MCharacterComponent.h">
+      <Filter>Game\Myriam\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AComponentFactory.h">
+      <Filter>Game\Alex</Filter>
+    </ClInclude>
+    <ClInclude Include="APlatformManagerComponent.h">
+      <Filter>Game\Alex\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AGameManagerComponent.h">
+      <Filter>Game\Alex\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AControllerComponent.h">
+      <Filter>Game\Alex\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -460,20 +478,32 @@
     <ClCompile Include="AudioSystem.cpp">
       <Filter>Engine\Systems\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="AlexComponentFactory.cpp">
-      <Filter>Game\Alex</Filter>
-    </ClCompile>
-    <ClCompile Include="AlexControllerComponent.cpp">
-      <Filter>Game\Alex\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="AlexPlatformManagerComponent.cpp">
-      <Filter>Game\Alex\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="AlexGameManagerComponent.cpp">
-      <Filter>Game\Alex\Components</Filter>
-    </ClCompile>
     <ClCompile Include="AudioSourceComponent.cpp">
       <Filter>Engine\GameObject\Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MComponentFactory.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MBackgroundComponent.cpp">
+      <Filter>Game\Myriam\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MCharacterComponent.cpp">
+      <Filter>Game\Myriam\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AComponentFactory.cpp">
+      <Filter>Game\Alex</Filter>
+    </ClCompile>
+    <ClCompile Include="APlatformManagerComponent.cpp">
+      <Filter>Game\Alex\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AGameManagerComponent.cpp">
+      <Filter>Game\Alex\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AControllerComponent.cpp">
+      <Filter>Game\Alex\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
