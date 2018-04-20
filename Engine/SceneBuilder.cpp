@@ -4,7 +4,6 @@
 
 #include "BuildSceneMessage.h"
 #include "RequestBuildSceneMessage.h"
-
 #include <fstream>
 
 #include "Logger.h"

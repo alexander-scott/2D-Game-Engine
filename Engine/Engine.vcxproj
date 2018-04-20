@@ -313,8 +313,12 @@
     <ClInclude Include="ISystem.h" />
     <ClInclude Include="ISystemToGameObjectMessage.h" />
     <ClInclude Include="IUpdateableComponent.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="MBackgroundComponent.h" />
+    <ClInclude Include="MCharacterComponent.h" />
+    <ClInclude Include="MComponentFactory.h" />
     <ClInclude Include="ObjectGrid.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="AlexControllerComponent.h" />
@@ -368,8 +372,12 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="ISpriteComponent.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="MBackgroundComponent.cpp" />
+    <ClCompile Include="MCharacterComponent.cpp" />
+    <ClCompile Include="MComponentFactory.cpp" />
     <ClCompile Include="ObjectGrid.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="AlexControllerComponent.cpp" />

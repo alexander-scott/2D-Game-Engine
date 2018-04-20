@@ -2,4 +2,8 @@
 <Animations>	
 	<Anim name = "PlayerGreenWalk.xml"/>
 	<Anim name = "PlayerGreenCrawl2.xml"/> 
+	<Anim name = "GirlWalkBot.xml"/> 
+	<Anim name = "GirlWalkTop.xml"/>
+	<Anim name = "GirlWalkRight.xml"/>
+	<Anim name = "GirlWalkLeft.xml"/>
 </Animations>

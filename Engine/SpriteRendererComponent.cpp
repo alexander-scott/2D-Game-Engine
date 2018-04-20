@@ -5,7 +5,7 @@ SpriteRendererComponent::SpriteRendererComponent() : IComponent("SpriteRendererC
 {
 }
 
-SpriteRendererComponent::SpriteRendererComponent(RECT *rect, Vec2 offset, string text, string name, string animation) : ISpriteComponent(rect, offset, text, name), IComponent("SpriteRendererComponent")
+SpriteRendererComponent::SpriteRendererComponent(RECT *rect, Vec2 offset, string text, string name) : ISpriteComponent(rect, offset, text, name), IComponent("SpriteRendererComponent")
 {
 	Type = eSprite;
 }
