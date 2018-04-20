@@ -7,9 +7,9 @@ TransformComponent * ComponentFactory::MakeTransformComponent(Vec2 position, flo
 	return transform;
 }
 
-SpriteRendererComponent * ComponentFactory::MakeSpriteRendererComponent(RECT* rect, Vec2 offset, string text, string name, string animation)
+SpriteRendererComponent * ComponentFactory::MakeSpriteRendererComponent(RECT* rect, Vec2 offset, string text, string name)
 {
-	SpriteRendererComponent * sprite = new SpriteRendererComponent(rect, offset, text, name, animation);
+	SpriteRendererComponent * sprite = new SpriteRendererComponent(rect, offset, text, name);
 	return sprite;
 }
 
@@ -61,3 +61,4 @@ BoxColliderComponent * ComponentFactory::MakeBoxCollider(float width, float heig
 
 	return boxCollider;
 }
+
