@@ -25,7 +25,7 @@ public:
 	float GetWorldScale() const;
 	Vec2 GetWorldPosition() const;
 
-	bool CheckChanged() { return _hasChanged; }
+	bool CheckChanged();
 	void SetChanged(bool changed) { _hasChanged = changed; }
 
 	void SetParent(TransformComponent* parent) { _parent = parent; }

@@ -81,7 +81,10 @@ public:
 				map<int, vector<IDrawableComponent*>> renderLayers;
 				for (auto go : gameObjects)
 				{
-					go->GetDrawableComponents(renderLayers);
+					if (go->GetActive())
+					{
+						go->GetDrawableComponents(renderLayers);
+					}	
 				}
 
 				// Draw render layers in order

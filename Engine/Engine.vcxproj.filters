@@ -50,9 +50,6 @@
     <Filter Include="Engine\Messaging\Messages\SceneSystemMessages">
       <UniqueIdentifier>{ddc152fd-c3a7-46d0-8459-635731dc7dd4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Messaging\Messages\ComponentMessages">
-      <UniqueIdentifier>{b0e39682-ba6b-41da-b8b6-c14133a36eb4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Messaging\ComponentMessaging">
       <UniqueIdentifier>{7edb3620-1674-4d24-b5b0-3180993d6781}</UniqueIdentifier>
     </Filter>
@@ -100,6 +97,18 @@
     </Filter>
     <Filter Include="Engine\Messaging\Messages\PhysicsMessages">
       <UniqueIdentifier>{85437339-476d-4102-bbed-f896b5d81635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Alex\Components">
+      <UniqueIdentifier>{2e820dbd-a6d8-4dff-b1d1-e4157abcd015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Components\Audio">
+      <UniqueIdentifier>{a589f804-df28-405b-ad93-4a24b817c9de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Myriam">
+      <UniqueIdentifier>{2a070f02-9f01-45f5-88d1-ad40757286b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Myriam\Components">
+      <UniqueIdentifier>{4c38039c-3b07-4c05-a06a-73cbf47941f3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -186,9 +195,6 @@
     </ClInclude>
     <ClInclude Include="InputMouseMessage.h">
       <Filter>Engine\Messaging\Messages\InputMessages</Filter>
-    </ClInclude>
-    <ClInclude Include="SetParentTransformMessage.h">
-      <Filter>Engine\Messaging\Messages\ComponentMessages</Filter>
     </ClInclude>
     <ClInclude Include="RequestBuildSceneMessage.h">
       <Filter>Engine\Messaging\Messages\SceneSystemMessages</Filter>
@@ -319,12 +325,6 @@
     <ClInclude Include="GlobalVariables.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="AlexComponentFactory.h">
-      <Filter>Game\Alex</Filter>
-    </ClInclude>
-    <ClInclude Include="AlexControllerComponent.h">
-      <Filter>Game\Alex</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionMessage.h">
       <Filter>Engine\Messaging\Messages\PhysicsMessages</Filter>
     </ClInclude>
@@ -336,6 +336,33 @@
     </ClInclude>
     <ClInclude Include="SetVelocityMessage.h">
       <Filter>Engine\Messaging\Messages\PhysicsMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSourceComponent.h">
+      <Filter>Engine\GameObject\Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="MComponentFactory.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
+    <ClInclude Include="MBackgroundComponent.h">
+      <Filter>Game\Myriam\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MCharacterComponent.h">
+      <Filter>Game\Myriam\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AComponentFactory.h">
+      <Filter>Game\Alex</Filter>
+    </ClInclude>
+    <ClInclude Include="APlatformManagerComponent.h">
+      <Filter>Game\Alex\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AGameManagerComponent.h">
+      <Filter>Game\Alex\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AControllerComponent.h">
+      <Filter>Game\Alex\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -451,11 +478,32 @@
     <ClCompile Include="AudioSystem.cpp">
       <Filter>Engine\Systems\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="AlexComponentFactory.cpp">
+    <ClCompile Include="AudioSourceComponent.cpp">
+      <Filter>Engine\GameObject\Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MComponentFactory.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MBackgroundComponent.cpp">
+      <Filter>Game\Myriam\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MCharacterComponent.cpp">
+      <Filter>Game\Myriam\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AComponentFactory.cpp">
       <Filter>Game\Alex</Filter>
     </ClCompile>
-    <ClCompile Include="AlexControllerComponent.cpp">
-      <Filter>Game\Alex</Filter>
+    <ClCompile Include="APlatformManagerComponent.cpp">
+      <Filter>Game\Alex\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AGameManagerComponent.cpp">
+      <Filter>Game\Alex\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AControllerComponent.cpp">
+      <Filter>Game\Alex\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@
 #include "rapidxml.hpp"
 
 #include "ComponentFactory.h"
-#include "AlexComponentFactory.h"
+#include "AComponentFactory.h"
 #include "MComponentFactory.h"
 
 #include <typeindex>
@@ -50,6 +50,8 @@ public:
 
 	IComponent * BuildComponent(xml_node<>* node);
 	void BuildComponentDependecies(IComponent* component, map<string, GUID>* dependecies);
+
+	static GUID StringToGUID(const std::string& guid);
 
 private:
 	FunctionMapper _buildMapper;

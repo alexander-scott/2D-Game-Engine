@@ -1,9 +1,6 @@
 <?xml?>
-<!-- -
-Platform box collider width is 50 whereas actual with is 64.
-<!- -->
 <scene name="AlexGame">
-	<GameObject tag="PlayerSprite" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
+	<GameObject tag="Player" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
     <Component xpos="128.000000" ypos="00.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"></Component>
     <Component rectTop ="0" rectBottom="64" rectLeft="0" rectRight="64" offset1="0.000000" offset2="0.000000" text ="/Sprites/AlexGame/DoodlerJump.dds" name = "PlayerGreen" animation = "Walk" type="SpriteRendererComponent">
       <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
@@ -12,43 +9,35 @@ Platform box collider width is 50 whereas actual with is 64.
     <Component width="64" height="64" type="BoxColliderComponent">
       <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
     </Component>
-    <Component type="AlexControllerComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
+    <Component type="AControllerComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" audiosourcecomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dc06"></Dependency>
     </Component>
   </GameObject>
 
-  <GameObject tag="Platform" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05">
-    <Component xpos="128.000000" ypos="-550.000000" rotation="0.000000" scale="1.200000" type="TransformComponent"></Component>
-    <Component rectTop ="0" rectBottom="20" rectLeft="0" rectRight="64" offset1="0.000000" offset2="0.000000" text ="/Sprites/AlexGame/Platform.dds" name = "PlayerGreen" animation = "Walk" type="SpriteRendererComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
-    </Component>
-    <Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic="1" type="RigidbodyComponent" ></Component>
-    <Component width="50" height="20" type="BoxColliderComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
-    </Component>  
-  </GameObject>
-
-  <GameObject tag="Platform" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd06">
-    <Component xpos="228.000000" ypos="-400.000000" rotation="0.000000" scale="1.200000" type="TransformComponent"></Component>
-    <Component rectTop ="0" rectBottom="20" rectLeft="0" rectRight="64" offset1="0.000000" offset2="0.000000" text ="/Sprites/AlexGame/Platform.dds" name = "PlayerGreen" animation = "Walk" type="SpriteRendererComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd06"></Dependency>
-    </Component>
-    <Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic="1" type="RigidbodyComponent" ></Component>
-    <Component width="50" height="20" type="BoxColliderComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd06" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd06"></Dependency>
+  <GameObject tag="PlatformManager"  guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd16">
+    <Component xpos="0.000000" ypos="00.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"></Component>
+    <Component type="APlatformManagerComponent" platformcount="50" platformtag="Platform" parentgameobjectid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd16">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd16"></Dependency>
     </Component>
   </GameObject>
 
-  <GameObject tag="Platform" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07">
-    <Component xpos="308.000000" ypos="-250.000000" rotation="0.000000" scale="1.200000" type="TransformComponent"></Component>
-    <Component rectTop ="0" rectBottom="20" rectLeft="0" rectRight="64" offset1="0.000000" offset2="0.000000" text ="/Sprites/AlexGame/Platform.dds" name = "PlayerGreen" animation = "Walk" type="SpriteRendererComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07"></Dependency>
-    </Component>
-    <Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic="1" type="RigidbodyComponent" ></Component>
-    <Component width="50" height="20" type="BoxColliderComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07"></Dependency>
+  <GameObject tag="GameManager"  guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dc06">
+    <Component type="AudioSourceComponent"></Component>
+    <Component type="AGameManagerComponent">
+      <Dependency controllercomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" 
+                  platformmanagercomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd16" 
+                  textrenderercomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dc34"></Dependency>
     </Component>
   </GameObject>
+
+  <GameObject tag="ScoreText" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dc34">
+    <Component xpos="0.000000" ypos="00.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"></Component>
+    <Component rectTop ="0" rectBottom="0" rectLeft="0" rectRight="0" offset1="0.000000" offset2="0.000000" text ="TEST TEXT" rgb1="255" rgb2="255" rgb3="255" rgb4="255" type="TextRendererComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dc34"></Dependency>
+    </Component>
+   </GameObject>
+  
+  
 
 </scene>
 

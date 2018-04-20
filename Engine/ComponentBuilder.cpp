@@ -28,12 +28,20 @@ inline void FetchCircleColliderDependencies();
 inline IComponent * BuildBoxColliderComponent();
 inline void FetchBoxColliderDependencies();
 
+inline IComponent * BuildAudioSourceComponent();
+
 #pragma endregion
 
 #pragma region AlexGame component function declarations
 
 inline IComponent * BuildAlexController();
 inline void FetchAlexControllerDependencies();
+
+inline IComponent * BuildAlexPlatformManager();
+inline void FetchAlexPlatformManagerDependencies();
+
+inline IComponent * BuildAlexGameManager();
+inline void FetchAlexGameManagerDependencies();
 
 #pragma endregion
 
@@ -72,12 +80,20 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 	_buildMapper.Insert("BoxColliderComponent", BuildBoxColliderComponent);
 	_dependencyBuildMapper.Insert("BoxColliderComponent", FetchBoxColliderDependencies);
 
+	_buildMapper.Insert("AudioSourceComponent", BuildAudioSourceComponent);
+
 #pragma endregion
 
 #pragma region AlexGame component function mapping
 
-	_buildMapper.Insert("AlexControllerComponent", BuildAlexController);
-	_dependencyBuildMapper.Insert("AlexControllerComponent", FetchAlexControllerDependencies);
+	_buildMapper.Insert("AControllerComponent", BuildAlexController);
+	_dependencyBuildMapper.Insert("AControllerComponent", FetchAlexControllerDependencies);
+
+	_buildMapper.Insert("APlatformManagerComponent", BuildAlexPlatformManager);
+	_dependencyBuildMapper.Insert("APlatformManagerComponent", FetchAlexPlatformManagerDependencies);
+
+	_buildMapper.Insert("AGameManagerComponent", BuildAlexGameManager);
+	_dependencyBuildMapper.Insert("AGameManagerComponent", FetchAlexGameManagerDependencies);
 
 #pragma endregion	
 
@@ -215,6 +231,11 @@ IComponent * BuildBoxColliderComponent()
 	return ComponentFactory::MakeBoxCollider(width, height);
 }
 
+inline IComponent * BuildAudioSourceComponent()
+{
+	return ComponentFactory::MakeAudioSourceComponent();
+}
+
 void ComponentBuilder::BuildComponentDependecies(IComponent * component, map<string, GUID>* dependecies)
 {
 	depdendecies = dependecies;
@@ -341,9 +362,10 @@ IComponent * BuildAlexController()
 
 void FetchAlexControllerDependencies()
 {
-	AlexControllerComponent* alexController = static_cast<AlexControllerComponent*>(dependencyComponent);
+	AControllerComponent* alexController = static_cast<AControllerComponent*>(dependencyComponent);
 	TransformComponent* transform;
 	RigidBodyComponent* rigidbody;
+	AudioSourceComponent* audioSource;
 
 	map<string, GUID>::iterator it;
 	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
@@ -356,9 +378,98 @@ void FetchAlexControllerDependencies()
 		{
 			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
 		}
+		else if (it->first == "audiosourcecomponent")
+		{
+			audioSource = _scene->GetGameObject(it->second)->GetComponent<AudioSourceComponent>();
+		}
 	}
 
-	alexController->SetDependencies(transform, rigidbody);
+	alexController->SetDependencies(transform, rigidbody, audioSource);
+}
+
+inline IComponent * BuildAlexPlatformManager()
+{
+	int platformCount = atoi(_node->first_attribute("platformcount")->value());
+	std::string platformTag = string(_node->first_attribute("platformtag")->value());
+	std::string parentGameObjectID = string(_node->first_attribute("parentgameobjectid")->value());
+
+	vector<shared_ptr<GameObject>> platforms;
+	for (int i = 0; i < platformCount; i++)
+	{
+		auto platformGO = GameObject::MakeGameObject(platformTag);
+
+		TransformComponent* platformTrans = ComponentFactory::MakeTransformComponent(Vec2(0, 0), 0, 1.2f);
+		platformGO->AddComponent(platformTrans);
+
+		RigidBodyComponent* platformRB = ComponentFactory::MakeRigidbodyComponent(0.5f, 0.3f, 0.5f, 1, true, false, true);
+		platformGO->AddComponent(platformRB);
+
+		BoxColliderComponent* platformCollider = ComponentFactory::MakeBoxCollider(50, 20);
+		platformCollider->SetDependencies(platformTrans, platformRB);
+		platformGO->AddComponent(platformCollider);
+
+		RECT* rect = new RECT();
+		rect->left = 0; rect->right = 64; rect->top = 0; rect->bottom = 20;
+		SpriteRendererComponent* platformRenderer = ComponentFactory::MakeSpriteRendererComponent(rect, Vec2(0, 0), "/Sprites/AlexGame/Platform.dds", "PlayerGreen");
+		platformRenderer->SetDependencies(platformTrans);
+		platformGO->AddComponent(platformRenderer);
+
+		platformGO->SetParent(_scene->GetGameObject(ComponentBuilder::StringToGUID(parentGameObjectID)));
+		platformGO->SetActive(false); // Set to inactive as it is not being used yet
+		platforms.push_back(platformGO);
+		_scene->AddGameObject(platformGO); // Add this to the scene here as it is being built outside of the normal process
+	}
+
+	return ComponentFactory::MakeAlexPlatformManagerComponent(platforms);
+}
+
+inline void FetchAlexPlatformManagerDependencies()
+{
+	APlatformManagerComponent* platformManager = static_cast<APlatformManagerComponent*>(dependencyComponent);
+	TransformComponent* transform;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+		}
+	}
+
+	platformManager->SetDependencies(transform);
+}
+
+inline IComponent * BuildAlexGameManager()
+{
+	return ComponentFactory::MakeAlexGameManagerComponent();
+}
+
+inline void FetchAlexGameManagerDependencies()
+{
+	AGameManagerComponent* alexController = static_cast<AGameManagerComponent*>(dependencyComponent);
+	AControllerComponent* controller;
+	APlatformManagerComponent* platformManager;
+	TextRendererComponent* text;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "controllercomponent")
+		{
+			controller = _scene->GetGameObject(it->second)->GetComponent<AControllerComponent>();
+		}
+		else if (it->first == "platformmanagercomponent")
+		{
+			platformManager = _scene->GetGameObject(it->second)->GetComponent<APlatformManagerComponent>();
+		}
+		else if (it->first == "textrenderercomponent")
+		{
+			text = _scene->GetGameObject(it->second)->GetComponent<TextRendererComponent>();
+		}
+	}
+
+	alexController->SetDependencies(controller, platformManager, text);
 }
 
 #pragma endregion
@@ -429,5 +540,30 @@ void FetchMBackgroundDependencies()
 	mBackground->SetDependencies(transform, rigidbody, boxCollider); //TODO - define method - see if i need to add any other dependency
 }
 
-
 #pragma endregion
+
+GUID ComponentBuilder::StringToGUID(const std::string& guid) {
+	GUID output;
+	unsigned long p0;
+	int p1, p2, p3, p4, p5, p6, p7, p8, p9, p10;
+
+	int err = sscanf_s(guid.c_str(), "%08lX-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
+		&p0, &p1, &p2, &p3, &p4, &p5, &p6, &p7, &p8, &p9, &p10);
+
+	if (err != 11)
+		throw std::logic_error("Invalid GUID, format should be {00000000-0000-0000-0000-000000000000}");
+
+	// Set the data like this to avoid corrupting the stack
+	output.Data1 = p0;
+	output.Data2 = p1;
+	output.Data3 = p2;
+	output.Data4[0] = p3;
+	output.Data4[1] = p4;
+	output.Data4[2] = p5;
+	output.Data4[3] = p6;
+	output.Data4[4] = p7;
+	output.Data4[5] = p8;
+	output.Data4[6] = p9;
+	output.Data4[7] = p10;
+	return output;
+}

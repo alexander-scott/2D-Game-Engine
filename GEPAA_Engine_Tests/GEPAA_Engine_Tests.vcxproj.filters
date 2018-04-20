@@ -123,16 +123,37 @@
     <ClCompile Include="..\Engine\Animation.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\AlexComponentFactory.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Engine\AlexControllerComponent.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Engine\ISpriteComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine\SpriteAnimatedComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\AComponentFactory.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\AControllerComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\AGameManagerComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\APlatformManagerComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\MBackgroundComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\MCharacterComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\MComponentFactory.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\LevelManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\AudioSourceComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -323,16 +344,37 @@
     <ClInclude Include="..\Engine\Animation.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\AlexComponentFactory.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Engine\AlexControllerComponent.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\Engine\ISpriteComponent.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\SpriteAnimatedComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\AComponentFactory.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\AControllerComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\AGameManagerComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\APlatformManagerComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\MBackgroundComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\MCharacterComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\MComponentFactory.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\LevelManager.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\AudioSourceComponent.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

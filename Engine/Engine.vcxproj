@@ -264,7 +264,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AddForceMessage.h" />
+    <ClInclude Include="AGameManagerComponent.h" />
+    <ClInclude Include="APlatformManagerComponent.h" />
     <ClInclude Include="AudioSoundFileManager.h" />
+    <ClInclude Include="AudioSourceComponent.h" />
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="Animation.h" />
@@ -285,7 +288,7 @@
     <ClInclude Include="EditorEngineInterface.h" />
     <ClInclude Include="EditorInputInterface.h" />
     <ClInclude Include="EditorSceneInterface.h" />
-    <ClInclude Include="AlexComponentFactory.h" />
+    <ClInclude Include="AComponentFactory.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GlobalVariables.h" />
     <ClInclude Include="ICommand.h" />
@@ -318,7 +321,7 @@
     <ClInclude Include="MComponentFactory.h" />
     <ClInclude Include="ObjectGrid.h" />
     <ClInclude Include="PhysicsSystem.h" />
-    <ClInclude Include="AlexControllerComponent.h" />
+    <ClInclude Include="AControllerComponent.h" />
     <ClInclude Include="PolygonColliderComponent.h" />
     <ClInclude Include="RequestBuildSceneMessage.h" />
     <ClInclude Include="RequestSaveSceneMessage.h" />
@@ -327,7 +330,6 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneSaver.h" />
     <ClInclude Include="SceneMessage.h" />
-    <ClInclude Include="SetParentTransformMessage.h" />
     <ClInclude Include="SetVelocityMessage.h" />
     <ClInclude Include="SpriteAnimatedComponent.h" />
     <ClInclude Include="SpriteRendererComponent.h" />
@@ -347,8 +349,11 @@
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AGameManagerComponent.cpp" />
+    <ClCompile Include="APlatformManagerComponent.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AudioSoundFileManager.cpp" />
+    <ClCompile Include="AudioSourceComponent.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="BoxColliderComponent.cpp" />
@@ -363,7 +368,7 @@
     <ClCompile Include="EditorEngineInterface.cpp" />
     <ClCompile Include="EditorInputInterface.cpp" />
     <ClCompile Include="EditorSceneInterface.cpp" />
-    <ClCompile Include="AlexComponentFactory.cpp" />
+    <ClCompile Include="AComponentFactory.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="ISpriteComponent.cpp" />
@@ -375,7 +380,7 @@
     <ClCompile Include="MComponentFactory.cpp" />
     <ClCompile Include="ObjectGrid.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
-    <ClCompile Include="AlexControllerComponent.cpp" />
+    <ClCompile Include="AControllerComponent.cpp" />
     <ClCompile Include="PolygonColliderComponent.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />

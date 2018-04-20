@@ -7,6 +7,7 @@
 static std::map<std::string, std::string> AudioFilePaths =
 {
 	{ "Whoosh",			"\\Audio\\Whoosh.wav" },
+	{ "Bounce",			"\\Audio\\Bounce.wav" },
 };
 
 class AudioSoundFileManager
