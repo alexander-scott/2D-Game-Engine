@@ -7,6 +7,7 @@
 #include "TransformComponent.h"
 #include "InputHandlerToGameObjectMessage.h"
 #include "SpriteAnimatedComponent.h" //added so that we can change the sprite animation when turning left, etc but doesn't work yet. 
+#include "CollisionMessage.h"
 
 class MCharacterComponent : public IComponent, public IUpdateableComponent, public IMessageableComponent
 {

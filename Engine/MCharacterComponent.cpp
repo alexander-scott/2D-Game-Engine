@@ -40,8 +40,19 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 	{
 		InputHandlerToGameObjectMessage &msgHandler = static_cast<InputHandlerToGameObjectMessage&>(msg);
 		ProcessInput(msgHandler.MessageType, msgHandler.Command, msgHandler.Range);
+		break;
 	}
 	//add collision case with rigidbody
+	case ComponentMessageType::eCollisionMessage: {
+		int i = 0;
+		CollisionMessage &message = static_cast<CollisionMessage&>(msg);
+		if (message.CollidedObjectTag == "Stone") {
+			int i = 0; //just to test 
+		}
+
+
+		break;
+	}
 	}
 }
 
