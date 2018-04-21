@@ -53,7 +53,6 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 		int i = 0;
 		CollisionMessage &message = static_cast<CollisionMessage&>(msg);
 		if (message.CollidedObjectTag == "Trap") {
-			int i = 0; //just to test 
 			if (_goesBot == true) {
 				_canGoBot = false;
 			}
@@ -67,6 +66,9 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 				//_goesLeft = false;
 				_canGoLeft = false;
 			}
+		}
+		if (message.CollidedObjectTag == "Phantom") {
+			int i = 0; 
 		}
 
 		break;

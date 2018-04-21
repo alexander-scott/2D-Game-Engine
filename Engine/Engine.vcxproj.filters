@@ -350,6 +350,9 @@
     <ClInclude Include="MComponentFactory.h">
       <Filter>Game\Myriam</Filter>
     </ClInclude>
+    <ClInclude Include="MPhantomComponent.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -478,6 +481,9 @@
       <Filter>Game\Myriam</Filter>
     </ClCompile>
     <ClCompile Include="MComponentFactory.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MPhantomComponent.cpp">
       <Filter>Game\Myriam</Filter>
     </ClCompile>
   </ItemGroup>

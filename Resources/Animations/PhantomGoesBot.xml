@@ -1,0 +1,15 @@
+<?xml?>
+<Animation name="GoesBot">
+	<StartPosition xpos="0" ypos="0"/>
+	<Dimensions width="16" height = "16"/>
+	<Type name = "GoesBot"/>
+		
+	<Rectangles>
+		<Rect id = "0" top = "64" right = "112" bottom = "80" left = "96"/>
+		<Rect id = "1" top = "64" right = "128" bottom = "80" left = "112"/>
+		<Rect id = "2" top = "64" right = "144" bottom = "80" left = "128"/>
+	</Rectangles>	
+		
+	<Sequence seq="0" seq = "0" seq = "1" seq = "1" seq = "2" seq = "2" seq = "1" seq = "1"/>
+
+</Animation>

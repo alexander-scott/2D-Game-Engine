@@ -316,6 +316,7 @@
     <ClInclude Include="MBackgroundComponent.h" />
     <ClInclude Include="MCharacterComponent.h" />
     <ClInclude Include="MComponentFactory.h" />
+    <ClInclude Include="MPhantomComponent.h" />
     <ClInclude Include="ObjectGrid.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="AlexControllerComponent.h" />
@@ -373,6 +374,7 @@
     <ClCompile Include="MBackgroundComponent.cpp" />
     <ClCompile Include="MCharacterComponent.cpp" />
     <ClCompile Include="MComponentFactory.cpp" />
+    <ClCompile Include="MPhantomComponent.cpp" />
     <ClCompile Include="ObjectGrid.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="AlexControllerComponent.cpp" />

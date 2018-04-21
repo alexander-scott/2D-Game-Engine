@@ -45,6 +45,9 @@ inline void FetchMCharacterDependencies();
 inline IComponent * BuildMBackgroundComponent();
 inline void FetchMBackgroundDependencies();
 
+inline IComponent * BuildMPhantomComponent();
+inline void FetchMPhantomDependencies();
+
 
 #pragma endregion
 
@@ -89,6 +92,10 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 
 	_buildMapper.Insert("MBackgroundComponent", BuildMBackgroundComponent);
 	_dependencyBuildMapper.Insert("MBackgroundComponent", FetchMBackgroundDependencies);
+
+
+	_buildMapper.Insert("MPhantomComponent", BuildMPhantomComponent);
+	_dependencyBuildMapper.Insert("MPhantomComponent", FetchMPhantomDependencies);
 
 #pragma endregion	
 
@@ -428,6 +435,39 @@ void FetchMBackgroundDependencies()
 	}
 
 	mBackground->SetDependencies(transform, rigidbody, boxCollider); //TODO - define method - see if i need to add any other dependency
+}
+
+inline IComponent * BuildMPhantomComponent()
+{
+	return ComponentFactory::MakeMPhantomComponent();
+}
+
+void FetchMPhantomDependencies()
+{
+	MPhantomComponent* mPhantom = static_cast<MPhantomComponent*>(dependencyComponent);
+	TransformComponent* transform;
+	RigidBodyComponent* rigidbody;
+	SpriteAnimatedComponent* spriteAnimatedComponent;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+		}
+		else if (it->first == "rigidbodycomponent")
+		{
+			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
+		}
+		else if (it->first == "spriteanimatedcomponent")
+		{
+			spriteAnimatedComponent = _scene->GetGameObject(it->second)->GetComponent<SpriteAnimatedComponent>();
+		}
+
+	}
+
+	mPhantom->SetDependencies(transform, rigidbody, spriteAnimatedComponent); //TODO - define method - see if i need to add any other dependency
 }
 
 
