@@ -22,5 +22,10 @@ private :
 	TransformComponent * _transformComponent;
 	RigidBodyComponent * _rigidBodyComponent;
 	SpriteAnimatedComponent *_spriteAnimatedComponent;
+
+	bool _goesBot;
+	bool _goesTop;
+	bool _goesLeft;
+	bool _goesRight;
 };
 
