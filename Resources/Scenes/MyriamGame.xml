@@ -3,25 +3,67 @@
 
   <GameObject tag="Background" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd01"> 
     	<Component xpos="0.000000" ypos="0.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"></Component>
-    <Component rectTop ="0" rectBottom="600" rectLeft="0" rectRight="800" offset1="-400.000000" offset2="-300.000000" text ="/Sprites/firstbackground.dds" name = "background" animation="" type="SpriteRendererComponent">
+    <Component rectTop ="0" rectBottom="600" rectLeft="0" rectRight="800" offset1="-400.000000" offset2="-300.000000" text ="/Sprites/MyriamGame/stonebackground.dds" name = "background" animation="" type="SpriteRendererComponent">
     		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd01"></Dependency>
     </Component>
   </GameObject>
 
 
-  <GameObject tag="Stone" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05">
-	<Component xpos="300.000000" ypos="-150.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"></Component>
-	<Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/Players/basictiles.dds" name = "grass" type="SpriteRendererComponent">
+  <GameObject tag="Trap" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05">
+	<Component xpos="300.000000" ypos="-150.000000" rotation="0.000000" scale="2.500000" type="TransformComponent"></Component>
+	<Component rectTop ="188" rectBottom="211" rectLeft="93" rectRight="116" offset1="1.000000" offset2="1.000000" text ="/Sprites/Players/basictiles.dds" name = "grass" type="SpriteRendererComponent">
 		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
 	</Component>
-	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "0" type="RigidbodyComponent" ></Component>
-	<Component width="16" height="16" type="BoxColliderComponent">
+	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "1" type="RigidbodyComponent" ></Component>
+	<Component width="10" height="10" type="BoxColliderComponent">
 		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
 	</Component>
 	<Component type="MBackgroundComponent">	
 		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" boxcollidercomponent= "54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
 	</Component>
   </GameObject>  
+<GameObject tag="Trap" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07">
+	<Component xpos="50.000000" ypos="-400.000000" rotation="0.000000" scale="2.500000" type="TransformComponent"></Component>
+	<Component rectTop ="188" rectBottom="211" rectLeft="93" rectRight="116" offset1="-10.000000" offset2="-10.000000" text ="/Sprites/Players/basictiles.dds" name = "grass" type="SpriteRendererComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07"></Dependency>
+	</Component>
+	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "1" type="RigidbodyComponent" ></Component>
+	<Component width="10" height="10" type="BoxColliderComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07"></Dependency>
+	</Component>
+	<Component type="MBackgroundComponent">	
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07" boxcollidercomponent= "54be7823-fa72-4b1c-acf2-b2ffa6a4dd07"></Dependency>
+	</Component>
+  </GameObject> 
+
+<GameObject tag="Trap" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08">
+	<Component xpos="450.000000" ypos="-300.000000" rotation="0.000000" scale="2.500000" type="TransformComponent"></Component>
+	<Component rectTop ="188" rectBottom="211" rectLeft="93" rectRight="116" offset1="-10.000000" offset2="-10.000000" text ="/Sprites/Players/basictiles.dds" name = "grass" type="SpriteRendererComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08"></Dependency>
+	</Component>
+	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "1" type="RigidbodyComponent" ></Component>
+	<Component width="10" height="10" type="BoxColliderComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08"></Dependency>
+	</Component>
+	<Component type="MBackgroundComponent">	
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08" boxcollidercomponent= "54be7823-fa72-4b1c-acf2-b2ffa6a4dd08"></Dependency>
+	</Component>
+  </GameObject> 
+
+<GameObject tag="Trap" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09">
+	<Component xpos="550.000000" ypos="-350.000000" rotation="0.000000" scale="2.500000" type="TransformComponent"></Component>
+	<Component rectTop ="188" rectBottom="211" rectLeft="93" rectRight="116" offset1="-10.000000" offset2="-10.000000" text ="/Sprites/Players/basictiles.dds" name = "grass" type="SpriteRendererComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09"></Dependency>
+	</Component>
+	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "1" type="RigidbodyComponent" ></Component>
+	<Component width="10" height="10" type="BoxColliderComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09"></Dependency>
+	</Component>
+	<Component type="MBackgroundComponent">	
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09" boxcollidercomponent= "54be7823-fa72-4b1c-acf2-b2ffa6a4dd09"></Dependency>
+	</Component>
+  </GameObject> 
+
 
 
 	<GameObject tag="PlayerSprite" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
@@ -37,19 +79,7 @@
       <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" spriteanimatedcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
     </Component>
   </GameObject>
-	  <GameObject tag="Stone" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07">
-	<Component xpos="50.000000" ypos="-400.000000" rotation="0.000000" scale="2.000000" type="TransformComponent"></Component>
-	<Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/Players/basictiles.dds" name = "grass" type="SpriteRendererComponent">
-		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07"></Dependency>
-	</Component>
-	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "0" type="RigidbodyComponent" ></Component>
-	<Component width="32" height="32" type="BoxColliderComponent">
-		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07"></Dependency>
-	</Component>
-	<Component type="MBackgroundComponent">	
-		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07" boxcollidercomponent= "54be7823-fa72-4b1c-acf2-b2ffa6a4dd07"></Dependency>
-	</Component>
-  </GameObject>  
+	   
 
 
 

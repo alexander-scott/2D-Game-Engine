@@ -37,5 +37,10 @@ private :
 	bool _goesLeft;
 	bool _goesRight;
 
+	bool _canGoTop;
+	bool _canGoBot;
+	bool _canGoLeft;
+	bool _canGoRight;
+	
 };
 

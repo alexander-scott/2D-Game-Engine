@@ -10,6 +10,12 @@ MCharacterComponent::MCharacterComponent() : IComponent("MCharacterComponent")
 	_goesTop = false;
 	_goesLeft = false;
 	_goesRight = false;
+
+	_canGoTop = true; 
+	_canGoBot = true;
+	_canGoLeft = true;
+	_canGoRight = true;
+
 }
 
 
@@ -19,16 +25,16 @@ MCharacterComponent::~MCharacterComponent()
 
 void MCharacterComponent::Update(float deltaTime)
 {
-	if (_goesRight) {
+	if (_goesRight && _canGoRight) {
 		_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x+1.0f, _transformComponent->GetWorldPosition().y ));
 	}
-	if (_goesLeft) {
+	if (_goesLeft && _canGoLeft) {
 		_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x - 1.0f, _transformComponent->GetWorldPosition().y));
 	}
-	if (_goesTop) {
+	if (_goesTop && _canGoTop) {
 		_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x, _transformComponent->GetWorldPosition().y-1.0f));
 	}
-	if (_goesBot) {
+	if (_goesBot && _canGoBot) {
 		_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x, _transformComponent->GetWorldPosition().y + 1.0f));
 	}
 }
@@ -46,12 +52,27 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 	case ComponentMessageType::eCollisionMessage: {
 		int i = 0;
 		CollisionMessage &message = static_cast<CollisionMessage&>(msg);
-		if (message.CollidedObjectTag == "Stone") {
+		if (message.CollidedObjectTag == "Trap") {
 			int i = 0; //just to test 
+			if (_goesBot == true) {
+				_canGoBot = false;
+			}
+			if (_goesTop == true) {
+				_canGoTop = false;
+			}
+			if (_goesRight == true) {
+				_canGoRight = false;
+			}
+			if (_goesLeft == true) {
+				//_goesLeft = false;
+				_canGoLeft = false;
+			}
 		}
 
-
 		break;
+
+
+		
 	}
 	}
 }

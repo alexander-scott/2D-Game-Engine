@@ -101,6 +101,9 @@
     <Filter Include="Engine\Messaging\Messages\PhysicsMessages">
       <UniqueIdentifier>{85437339-476d-4102-bbed-f896b5d81635}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Myriam">
+      <UniqueIdentifier>{d4cebe77-7a10-41dc-9f03-e0db4a88bd2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -337,6 +340,16 @@
     <ClInclude Include="SetVelocityMessage.h">
       <Filter>Engine\Messaging\Messages\PhysicsMessages</Filter>
     </ClInclude>
+    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="MBackgroundComponent.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
+    <ClInclude Include="MCharacterComponent.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
+    <ClInclude Include="MComponentFactory.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -456,6 +469,16 @@
     </ClCompile>
     <ClCompile Include="AlexControllerComponent.cpp">
       <Filter>Game\Alex</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="MBackgroundComponent.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MCharacterComponent.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MComponentFactory.cpp">
+      <Filter>Game\Myriam</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
