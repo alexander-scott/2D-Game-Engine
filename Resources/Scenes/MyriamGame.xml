@@ -29,7 +29,7 @@
     <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/Players/characters.dds" name = "Girl" animation = "WalkBot" type="SpriteAnimatedComponent">
       <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
     </Component>
-    <Component staticfriction="1" dynamicfriction="1" restitution="0.5" density="1" static="1" lockrotation="1" kinematic = "0" type="RigidbodyComponent" ></Component>
+    <Component staticfriction="1" dynamicfriction="1" restitution="0.5" density="1" static="0" lockrotation="1" kinematic = "1" type="RigidbodyComponent" ></Component>
     <Component width="16" height="16" type="BoxColliderComponent">
       <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
     </Component>
