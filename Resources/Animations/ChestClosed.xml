@@ -1,0 +1,13 @@
+<?xml?>
+<Animation name="Closed">
+	<StartPosition xpos="0" ypos="0"/>
+	<Dimensions width="45" height = "54"/>
+	<Type name = "Closed"/>
+		
+	<Rectangles>
+		<Rect id = "0" top = "0" right = "112" bottom = "16" left = "96"/>
+	</Rectangles>	
+		
+	<Sequence seq="0" />
+
+</Animation>

@@ -68,7 +68,7 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 			}
 		}
 		if (message.CollidedObjectTag == "Phantom") {
-			int i = 0; 
+			_spriteAnimatedComponent->SetAnimation("Dead");
 		}
 
 		break;
