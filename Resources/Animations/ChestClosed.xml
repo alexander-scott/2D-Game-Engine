@@ -1,7 +1,7 @@
 <?xml?>
 <Animation name="Closed">
 	<StartPosition xpos="0" ypos="0"/>
-	<Dimensions width="45" height = "54"/>
+	<Dimensions width="16" height = "16"/>
 	<Type name = "Closed"/>
 		
 	<Rectangles>

@@ -50,11 +50,11 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 	}
 	//add collision case with rigidbody
 	case ComponentMessageType::eCollisionMessage: {
-		int i = 0;
+		int i = 0;	
 		CollisionMessage &message = static_cast<CollisionMessage&>(msg);
 		if (message.CollidedObjectTag == "Trap") {
 			if (_goesBot == true) {
-				_canGoBot = false;
+				_canGoBot = false; //TODO : add time count so that it can move again after like, 2 sec or so
 			}
 			if (_goesTop == true) {
 				_canGoTop = false;
@@ -67,6 +67,12 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 				_canGoLeft = false;
 			}
 		}
+		else {
+			_canGoLeft = true;
+			_canGoRight = true;
+			_canGoTop = true;
+			_canGoBot = true;
+		}
 		if (message.CollidedObjectTag == "Phantom") {
 			_spriteAnimatedComponent->SetAnimation("Dead");
 		}
@@ -75,6 +81,14 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 
 
 		
+	}
+	default:
+	{
+		_canGoLeft = true;
+		_canGoRight = true;
+		_canGoTop = true;
+		_canGoBot = true;
+		break;
 	}
 	}
 }

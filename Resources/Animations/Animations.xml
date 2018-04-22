@@ -11,6 +11,6 @@
 	<Anim name = "PhantomGoesRight.xml"/>
 	<Anim name = "PhantomGoesTop.xml"/>
 	<Anim name = "PhantomGoesBot.xml"/>
-	<Anim name = "ChestOpened.xml"/>
+	<Anim name = "ChestOpened.xml"/>	
 	<Anim name = "ChestClosed.xml"/>
 </Animations>

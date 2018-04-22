@@ -48,6 +48,9 @@ inline void FetchMBackgroundDependencies();
 inline IComponent * BuildMPhantomComponent();
 inline void FetchMPhantomDependencies();
 
+inline IComponent * BuildMChestComponent();
+inline void FetchMChestDependencies();
+
 
 #pragma endregion
 
@@ -93,9 +96,11 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 	_buildMapper.Insert("MBackgroundComponent", BuildMBackgroundComponent);
 	_dependencyBuildMapper.Insert("MBackgroundComponent", FetchMBackgroundDependencies);
 
-
 	_buildMapper.Insert("MPhantomComponent", BuildMPhantomComponent);
 	_dependencyBuildMapper.Insert("MPhantomComponent", FetchMPhantomDependencies);
+
+	_buildMapper.Insert("MChestComponent", BuildMChestComponent);
+	_dependencyBuildMapper.Insert("MChestComponent", FetchMChestDependencies);
 
 #pragma endregion	
 
@@ -469,6 +474,40 @@ void FetchMPhantomDependencies()
 
 	mPhantom->SetDependencies(transform, rigidbody, spriteAnimatedComponent); //TODO - define method - see if i need to add any other dependency
 }
+
+inline IComponent * BuildMChestComponent()
+{
+	return ComponentFactory::MakeMChestComponent();
+}
+
+void FetchMChestDependencies()
+{
+	MChestComponent* mChest = static_cast<MChestComponent*>(dependencyComponent);
+	TransformComponent* transform;
+	RigidBodyComponent* rigidbody;
+	SpriteAnimatedComponent* spriteAnimatedComponent;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+		}
+		else if (it->first == "rigidbodycomponent")
+		{
+			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
+		}
+		else if (it->first == "spriteanimatedcomponent")
+		{
+			spriteAnimatedComponent = _scene->GetGameObject(it->second)->GetComponent<SpriteAnimatedComponent>();
+		}
+
+	}
+
+	mChest->SetDependencies(transform, rigidbody, spriteAnimatedComponent); //TODO - define method - see if i need to add any other dependency
+}
+
 
 
 #pragma endregion

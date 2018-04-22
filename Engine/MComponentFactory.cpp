@@ -17,3 +17,8 @@ MPhantomComponent * ComponentFactory::MakeMPhantomComponent()
 {
 	return new MPhantomComponent();
 }
+
+MChestComponent * ComponentFactory::MakeMChestComponent()
+{
+	return new MChestComponent();
+}
