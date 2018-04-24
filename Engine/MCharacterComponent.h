@@ -22,10 +22,13 @@ public:
 		_transformComponent = transformComponent;
 		_rigidBodyComponent = rigidBodyComponent;
 		_spriteAnimatedComponent = spriteAnimatedComponent;
+		_startPosition = _transformComponent->GetWorldPosition();
 	}
 
 
 	void ProcessInput(InputGenericStateMessageType msgType, sCommand msgCommand, float msgRange);
+
+	void ResetPosition();
 
 private :
 	TransformComponent * _transformComponent;
@@ -41,6 +44,9 @@ private :
 	bool _canGoBot;
 	bool _canGoLeft;
 	bool _canGoRight;
+
+	Vec2 _startPosition;
+	SpriteAnimatedComponent *_lifeBar;
 	
 };
 

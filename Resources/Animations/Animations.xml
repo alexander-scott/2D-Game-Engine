@@ -7,6 +7,7 @@
 	<Anim name = "GirlWalkRight.xml"/>
 	<Anim name = "GirlWalkLeft.xml"/>
 	<Anim name = "GirlDead.xml"/>
+	<Anim name = "GirlWinning.xml"/>
 	<Anim name = "PhantomGoesLeft.xml"/>
 	<Anim name = "PhantomGoesRight.xml"/>
 	<Anim name = "PhantomGoesTop.xml"/>

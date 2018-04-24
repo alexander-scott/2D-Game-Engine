@@ -5,7 +5,7 @@
 	<Type name = "Opened"/>
 		
 	<Rectangles>
-		<Rect id = "0" top = "80" right = "112" bottom = "96" left = "96"/>
+		<Rect id = "0" top = "48" right = "112" bottom = "64" left = "96"/>
 	</Rectangles>	
 		
 	<Sequence seq="0" />

@@ -50,21 +50,24 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 	}
 	//add collision case with rigidbody
 	case ComponentMessageType::eCollisionMessage: {
-		int i = 0;	
 		CollisionMessage &message = static_cast<CollisionMessage&>(msg);
 		if (message.CollidedObjectTag == "Trap") {
 			if (_goesBot == true) {
-				_canGoBot = false; //TODO : add time count so that it can move again after like, 2 sec or so
+				ResetPosition();
+				//_canGoBot = false; //TODO : add time count so that it can move again after like, 2 sec or so
 			}
 			if (_goesTop == true) {
-				_canGoTop = false;
+				ResetPosition();
+				//_canGoTop = false;
 			}
 			if (_goesRight == true) {
-				_canGoRight = false;
+				ResetPosition();
+				//_canGoRight = false;
 			}
 			if (_goesLeft == true) {
+				ResetPosition();
 				//_goesLeft = false;
-				_canGoLeft = false;
+				//_canGoLeft = false;
 			}
 		}
 		else {
@@ -76,7 +79,13 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 		if (message.CollidedObjectTag == "Phantom") {
 			_spriteAnimatedComponent->SetAnimation("Dead");
 		}
-
+		if (message.CollidedObjectTag == "Chest") {
+			_spriteAnimatedComponent->SetAnimation("Winning");
+			_canGoTop = false;
+			_canGoBot = false;
+			_canGoLeft = false;
+			_canGoRight = false;
+		}
 		break;
 
 
@@ -127,6 +136,23 @@ void MCharacterComponent::ProcessInput(InputGenericStateMessageType msgType, sCo
 		_spriteAnimatedComponent->SetAnimation("WalkRight");
 		break;
 	}
+	case 5: //space to restart
+	{
+		if (_spriteAnimatedComponent->GetAnimation() == "Winning") {
+			ResetPosition();
+			_canGoLeft = true;
+			_canGoRight = true;
+			_canGoTop = true;
+			_canGoBot = true;
+			_spriteAnimatedComponent->SetAnimation("WalkBot");
+		}
+		break;
 	}
+	}
+}
+
+void MCharacterComponent::ResetPosition()
+{
+	_transformComponent->SetWorldPosition(_startPosition);
 }
 
