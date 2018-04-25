@@ -19,11 +19,11 @@ public:
 	virtual void SetScale(float scale) { _transformComponent->SetWorldScale(scale); }
 	virtual void SetRotation(float rotation) { _transformComponent->SetWorldRotation(rotation); }
 
-	TransformComponent *_transformComponent = nullptr; //to do : set it as private
 protected:
 	//informations needed to draw the component from the scene file
 	//Would shared_ptr be better for these attributes?
 	//TODO : delete and retrieve from transform component (add pointer transform comp)
+	TransformComponent *_transformComponent = nullptr; 
 	RECT * _rect;
 	Vec2 _offset;
 

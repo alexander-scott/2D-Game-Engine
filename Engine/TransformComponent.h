@@ -8,7 +8,7 @@ class TransformComponent : public IComponent, public IEditableComponent
 {
 public:
 	TransformComponent(Vec2 worldPosition, float worldRotation, float worldScale);
-
+	~TransformComponent();
 	void SetLocalPosition(Vec2 position); 
 	void SetLocalScale(float scale);
 	void SetLocalRotation(float rot);
