@@ -8,6 +8,7 @@ AGameManagerComponent::AGameManagerComponent()
 	_platformsMoving = false;
 
 	_score = 0;
+	_gameOver = false;
 
 	//_previousSpawnPos = _platformManager->GetTransform()->GetWorldPosition().y +
 }
@@ -30,6 +31,14 @@ void AGameManagerComponent::Start()
 
 void AGameManagerComponent::Update(float deltaTime)
 {
+	if (_gameOver)
+		return;
+
+	if (_player->GetTransform()->GetWorldPosition().y > SCREEN_HEIGHT)
+	{
+		_gameOver = true;
+	}
+
 	if (_player->GetRigidbody()->GetVelocity().y < 0) // If the player is moving upward
 	{
 		if (_player->GetTransform()->GetWorldPosition().y < MOVEMENT_ZONE_HEIGHT) // If the player is within the zone where platform movement occurs
@@ -56,6 +65,18 @@ void AGameManagerComponent::Update(float deltaTime)
 	{
 		_platformsMoving = false;
 		_platformManager->GetTransform()->SetChanged(false);
+	}
+
+	// If player is off left side of the screen warp to right
+	if (_player->GetTransform()->GetWorldPosition().x < 0)
+	{
+		_player->GetTransform()->SetWorldPosition(Vec2((float)SCREEN_WIDTH, _player->GetTransform()->GetWorldPosition().y));
+	}
+
+	// If player is off right side of the screen warp to left
+	if (_player->GetTransform()->GetWorldPosition().x > (float)SCREEN_WIDTH)
+	{
+		_player->GetTransform()->SetWorldPosition(Vec2(0, _player->GetTransform()->GetWorldPosition().y));
 	}
 
 	// Remove bottom platforms

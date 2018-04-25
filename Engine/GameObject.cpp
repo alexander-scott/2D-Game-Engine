@@ -17,6 +17,8 @@ GameObject::~GameObject()
 			component = nullptr;
 		}
 	}
+
+	_components.clear();
 }
 
 void GameObject::Start()

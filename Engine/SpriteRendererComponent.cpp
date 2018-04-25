@@ -33,7 +33,7 @@ Vec2 SpriteRendererComponent::GetPosition()
 
 	float newPosY = pos.y
 		- halfSpriteHeight * cos(_transformComponent->GetWorldRotation())
-		+ halfSpriteWidth * sin(_transformComponent->GetWorldRotation());
+		- halfSpriteWidth * sin(_transformComponent->GetWorldRotation());
 
 	return Vec2(newPosX, newPosY);
 }

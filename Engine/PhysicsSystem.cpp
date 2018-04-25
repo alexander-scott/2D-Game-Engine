@@ -17,6 +17,7 @@ PhysicsSystem::~PhysicsSystem()
 void PhysicsSystem::InitaliseListeners()
 {
 	SubscribeToMessageType(SystemMessageType::eSceneSelectedToPlay);
+	SubscribeToMessageType(SystemMessageType::ePlayStopped);
 	SubscribeToMessageType(SystemMessageType::eUpdatePhysics);
 }
 
@@ -32,6 +33,13 @@ void PhysicsSystem::RecieveMessage(ISystemMessage & message)
 			{
 				AddGameObjectToSystem(gameObjects[i]);
 			}
+			break;
+		}
+
+		case SystemMessageType::ePlayStopped:
+		{
+			_gameObjects.clear();
+			_colliders.clear();
 			break;
 		}
 
@@ -168,7 +176,10 @@ void PhysicsSystem::Update(float deltaTime)
 
 void PhysicsSystem::IntegrateForces(ColliderComponent * collider, float deltaTime)
 {
-	if (collider->GetRigidbodyComponent()->GetInverseMass() == 0.0f || !collider->GetActive() || !collider->GetRigidbodyComponent()->GetActive())
+	if (collider->GetRigidbodyComponent()->GetInverseMass() == 0.0f 
+		|| collider->GetRigidbodyComponent()->IsKinematic()
+		|| !collider->GetActive() 
+		|| !collider->GetRigidbodyComponent()->GetActive())
 		return;
 
 	collider->GetRigidbodyComponent()->SetVelocity(collider->GetRigidbodyComponent()->GetVelocity() +
@@ -181,7 +192,10 @@ void PhysicsSystem::IntegrateForces(ColliderComponent * collider, float deltaTim
 
 void PhysicsSystem::IntegrateVelocity(ColliderComponent * collider, float deltaTime)
 {
-	if (collider->GetRigidbodyComponent()->GetInverseMass() == 0.0f || !collider->GetActive() || !collider->GetRigidbodyComponent()->GetActive())
+	if (collider->GetRigidbodyComponent()->GetInverseMass() == 0.0f 
+		|| collider->GetRigidbodyComponent()->IsKinematic()
+		|| !collider->GetActive() 
+		|| !collider->GetRigidbodyComponent()->GetActive())
 		return;
 
 	// Calculate position

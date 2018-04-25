@@ -33,6 +33,7 @@ AudioSystem::~AudioSystem()
 void AudioSystem::InitaliseListeners()
 {
 	SubscribeToMessageType(SystemMessageType::eSceneSelectedToPlay);
+	SubscribeToMessageType(SystemMessageType::ePlayStopped);
 	SubscribeToMessageType(SystemMessageType::eUpdateAudio);
 	SubscribeToMessageType(SystemMessageType::ePlaySound);
 	SubscribeToMessageType(SystemMessageType::eSuspendAudio);
@@ -66,6 +67,12 @@ void AudioSystem::RecieveMessage(ISystemMessage & message)
 			{
 				AddGameObjectToSystem(gameObjects[i]);
 			}
+			break;
+		}
+
+		case SystemMessageType::ePlayStopped:
+		{
+			_audioSources.clear();
 			break;
 		}
 

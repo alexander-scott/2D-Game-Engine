@@ -22,6 +22,9 @@ Engine::Engine(std::string resourcesFilePath)
 	_messageDispatcher = make_shared<SystemMessageDispatcher>();
 
 	GlobalVariables::Instance().ResourcesFilePath = resourcesFilePath;
+
+	_lastTime = std::chrono::steady_clock::now();
+	_deltaTime = 0;
 }
 
 // Called from the editor

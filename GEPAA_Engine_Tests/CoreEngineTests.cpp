@@ -117,11 +117,11 @@ namespace GEPAA_Engine_Tests
 			Assert::AreEqual(0, sceneManager->UpdateCount);
 
 			int loopCount = 0;
-			while (loopCount < 1) // FIX THIS
+			while (loopCount < 10)
 			{
 				engine.Update();
 				loopCount++;
-				Sleep(100);
+				Sleep(16);
 			}
 
 			// Draw count should have incremented

@@ -39,6 +39,8 @@ private:
 	int								_score;
 	const int						TERMINAL_SCORE = 10000;
 
+	bool							_gameOver;
+
 	// Platform movement
 	bool							_platformsMoving;
 	float							_platformStartHeight;
