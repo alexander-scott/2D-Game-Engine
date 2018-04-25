@@ -3,7 +3,7 @@
 #include <WindowsNumerics.h>
 using namespace Windows::Foundation::Numerics;
 
-class TextRendererComponent : public IRenderableComponent, public IComponent
+class TextRendererComponent : public IComponent, public IRenderableComponent
 {
 public:
 	//TextRendererComponent();

@@ -2,7 +2,7 @@
 #include "IRenderableComponent.h"
 #include "ISpriteComponent.h"
 
-class SpriteAnimatedComponent : public ISpriteComponent, public IComponent
+class SpriteAnimatedComponent : public IComponent, public ISpriteComponent
 {
 public:
 	SpriteAnimatedComponent();
