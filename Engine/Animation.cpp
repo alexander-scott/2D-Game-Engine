@@ -175,10 +175,7 @@ void Animation::LoadXml(std::string pathToFile)
 
 	//retrieve root node
 	node = doc.first_node("Animation");
-	//for (xml_node<>*nodeAnimation = node->first_node("Animation"); nodeAnimation; nodeAnimation = nodeAnimation->next_sibling()) {
 
-
-		//float xPos = (float)atof(_node->first_attribute("xpos")->value());
 		nodePos = node->first_node("StartPosition");
 
 		int xPos = (int)atof(nodePos->first_attribute("xpos")->value());
@@ -217,7 +214,7 @@ void Animation::LoadXml(std::string pathToFile)
 		//create animation with those values. Add them to the map with the type of the anim as string key
 		//Animation anim = CreateAnimationFromXml(xPos, yPos, width, height, type, sequence, idRect);
 		//_nameAnimations[type] = anim;
-	//}
+
 }
 
 void Animation::SetValuesFromXml(int xStartPos, int yStartPos, int width, int height, std::string type, std::vector<int> sequence, std::map<int, RECT*> idRect)
@@ -274,10 +271,6 @@ Animation Animation::CreateAnimationFromXml(int xPos, int yPos, int width, int h
 
 Animation Animation::RetrieveAnimationFromType(std::string type)
 {
-	/*	std::map<std::string, ID3D11ShaderResourceView*>::iterator it = dxGraphics._textures.find(path);
-	if (it != dxGraphics._textures.end()) { //texture found
-		return it->second;
-	}*/
 	std::map<std::string, Animation>::iterator it = _nameAnimations.find(type);
 	if (it != _nameAnimations.end())
 		return it->second;

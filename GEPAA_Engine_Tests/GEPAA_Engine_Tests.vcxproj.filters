@@ -135,6 +135,9 @@
     <ClCompile Include="..\Engine\SpriteAnimatedComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="DxGraphicTests.cpp">
+      <Filter>EngineTests\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Engine\BuildSceneMessage.h">

@@ -202,6 +202,7 @@
     <ClCompile Include="..\Engine\TextRendererComponent.cpp" />
     <ClCompile Include="..\Engine\TransformComponent.cpp" />
     <ClCompile Include="CoreEngineTests.cpp" />
+    <ClCompile Include="DxGraphicTests.cpp" />
     <ClCompile Include="GameObjectTests.cpp" />
     <ClCompile Include="MessagingTests.cpp" />
     <ClCompile Include="SceneBuilderTests.cpp" />
