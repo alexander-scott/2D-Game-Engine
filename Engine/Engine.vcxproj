@@ -317,6 +317,7 @@
     <ClInclude Include="MCharacterComponent.h" />
     <ClInclude Include="MChestComponent.h" />
     <ClInclude Include="MComponentFactory.h" />
+    <ClInclude Include="MIntroComponent.h" />
     <ClInclude Include="MPhantomComponent.h" />
     <ClInclude Include="ObjectGrid.h" />
     <ClInclude Include="PhysicsSystem.h" />
@@ -376,6 +377,7 @@
     <ClCompile Include="MCharacterComponent.cpp" />
     <ClCompile Include="MChestComponent.cpp" />
     <ClCompile Include="MComponentFactory.cpp" />
+    <ClCompile Include="MIntroComponent.cpp" />
     <ClCompile Include="MPhantomComponent.cpp" />
     <ClCompile Include="ObjectGrid.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />

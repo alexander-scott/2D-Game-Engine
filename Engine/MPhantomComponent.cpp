@@ -19,9 +19,6 @@ void MPhantomComponent::Update(float deltaTime)
 {
 
 	if ((_transformComponent->GetWorldPosition().x < -10.0f) ){
-		//float x = (float)(rand() % 100) + 600;
-		//float y = (float)(rand() % 100) + 800;
-		//_transformComponent->SetWorldPosition(Vec2(x, y));
 		_transformComponent->SetWorldPosition(Vec2( 805.0f, (float)(rand() % 600)));
 	}
 	if ((_transformComponent->GetWorldPosition().y < 0.0f)) {

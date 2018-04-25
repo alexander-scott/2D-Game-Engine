@@ -22,3 +22,8 @@ MChestComponent * ComponentFactory::MakeMChestComponent()
 {
 	return new MChestComponent();
 }
+
+MIntroComponent * ComponentFactory::MakeMIntroComponent()
+{
+	return new MIntroComponent();
+}

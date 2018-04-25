@@ -16,7 +16,7 @@ void MChestComponent::Update(float deltaTime)
 
 }
 
-void MChestComponent::RecieveMessage(IComponentMessage & msg) //doesn't work, i don't understand why...
+void MChestComponent::RecieveMessage(IComponentMessage & msg) 
 {
 	switch (msg.MessageType) {
 		case ComponentMessageType::eCollisionMessage: {
@@ -26,11 +26,11 @@ void MChestComponent::RecieveMessage(IComponentMessage & msg) //doesn't work, i 
 			}
 			break;
 		}
+		
 		default: {
 			_spriteAnimatedComponent->SetAnimation("Closed");
 			break;
 		}
-
 
 	}
 }

@@ -4,8 +4,6 @@
 
 MCharacterComponent::MCharacterComponent() : IComponent("MCharacterComponent")
 {
-	//_transformComponent = nullptr;
-	//_rigidBodyComponent = nullptr;
 	_goesBot = false;
 	_goesTop = false;
 	_goesLeft = false;
@@ -16,6 +14,8 @@ MCharacterComponent::MCharacterComponent() : IComponent("MCharacterComponent")
 	_canGoLeft = true;
 	_canGoRight = true;
 
+	_isAlive = true;
+	_won = false;
 }
 
 
@@ -25,17 +25,23 @@ MCharacterComponent::~MCharacterComponent()
 
 void MCharacterComponent::Update(float deltaTime)
 {
-	if (_goesRight && _canGoRight) {
-		_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x+1.0f, _transformComponent->GetWorldPosition().y ));
+	if (_isAlive) {
+
+		if (_goesRight && _canGoRight) {
+			_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x+1.0f, _transformComponent->GetWorldPosition().y ));
+		}
+		if (_goesLeft && _canGoLeft) {
+			_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x - 1.0f, _transformComponent->GetWorldPosition().y));
+		}
+		if (_goesTop && _canGoTop) {
+			_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x, _transformComponent->GetWorldPosition().y-1.0f));
+		}
+		if (_goesBot && _canGoBot) {
+			_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x, _transformComponent->GetWorldPosition().y + 1.0f));
+		}
 	}
-	if (_goesLeft && _canGoLeft) {
-		_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x - 1.0f, _transformComponent->GetWorldPosition().y));
-	}
-	if (_goesTop && _canGoTop) {
-		_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x, _transformComponent->GetWorldPosition().y-1.0f));
-	}
-	if (_goesBot && _canGoBot) {
-		_transformComponent->SetWorldPosition(Vec2(_transformComponent->GetWorldPosition().x, _transformComponent->GetWorldPosition().y + 1.0f));
+	else {
+		_spriteAnimatedComponent->SetAnimation("Dead");
 	}
 }
 
@@ -52,32 +58,16 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 	case ComponentMessageType::eCollisionMessage: {
 		CollisionMessage &message = static_cast<CollisionMessage&>(msg);
 		if (message.CollidedObjectTag == "Trap") {
-			if (_goesBot == true) {
+			if(!_won)
 				ResetPosition();
-				//_canGoBot = false; //TODO : add time count so that it can move again after like, 2 sec or so
-			}
-			if (_goesTop == true) {
-				ResetPosition();
-				//_canGoTop = false;
-			}
-			if (_goesRight == true) {
-				ResetPosition();
-				//_canGoRight = false;
-			}
-			if (_goesLeft == true) {
-				ResetPosition();
-				//_goesLeft = false;
-				//_canGoLeft = false;
-			}
 		}
-		else {
-			_canGoLeft = true;
-			_canGoRight = true;
-			_canGoTop = true;
-			_canGoBot = true;
-		}
+
 		if (message.CollidedObjectTag == "Phantom") {
-			_spriteAnimatedComponent->SetAnimation("Dead");
+			if(!_won){
+				_spriteAnimatedComponent->SetAnimation("Dead");
+				_isAlive = false;
+			}
+			break;
 		}
 		if (message.CollidedObjectTag == "Chest") {
 			_spriteAnimatedComponent->SetAnimation("Winning");
@@ -85,6 +75,7 @@ void MCharacterComponent::RecieveMessage(IComponentMessage & msg)
 			_canGoBot = false;
 			_canGoLeft = false;
 			_canGoRight = false;
+			_won = true;
 		}
 		break;
 
@@ -138,13 +129,11 @@ void MCharacterComponent::ProcessInput(InputGenericStateMessageType msgType, sCo
 	}
 	case 5: //space to restart
 	{
-		if (_spriteAnimatedComponent->GetAnimation() == "Winning") {
-			ResetPosition();
-			_canGoLeft = true;
-			_canGoRight = true;
-			_canGoTop = true;
-			_canGoBot = true;
-			_spriteAnimatedComponent->SetAnimation("WalkBot");
+		if (_won) {
+			Restart();
+		}
+		if (!_isAlive) {
+			Restart();
 		}
 		break;
 	}
@@ -154,5 +143,17 @@ void MCharacterComponent::ProcessInput(InputGenericStateMessageType msgType, sCo
 void MCharacterComponent::ResetPosition()
 {
 	_transformComponent->SetWorldPosition(_startPosition);
+}
+
+void MCharacterComponent::Restart()
+{
+	_isAlive = true;
+	_won = false;
+	_canGoLeft = true;
+	_canGoRight = true;
+	_canGoTop = true;
+	_canGoBot = true;
+	ResetPosition();
+	_spriteAnimatedComponent->SetAnimation("WalkBot");
 }
 

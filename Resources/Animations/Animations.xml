@@ -14,4 +14,6 @@
 	<Anim name = "PhantomGoesBot.xml"/>
 	<Anim name = "ChestOpened.xml"/>	
 	<Anim name = "ChestClosed.xml"/>
+	<Anim name = "IntroDisplayed.xml"/>
+	<Anim name = "IntroHidden.xml"/>
 </Animations>
