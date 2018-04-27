@@ -107,36 +107,36 @@ void MCharacterComponent::ProcessInput(InputGenericStateMessageType msgType, sCo
 	case 1: //W
 	{
 		_goesTop = keyPressed;
-		_goesBot = false;
-		_goesRight = false;
-		_goesLeft = false;
+		//_goesBot = false;
+		//_goesRight = false;
+		//_goesLeft = false;
 		_spriteAnimatedComponent->SetAnimation("WalkTop"); 
 		break;
 	}
 	case 2://S
 	{
 		_goesBot = keyPressed;
-		_goesTop = false;
-		_goesRight = false;
-		_goesLeft = false;
+		//_goesTop = false;
+		//_goesRight = false;
+		//_goesLeft = false;
 		_spriteAnimatedComponent->SetAnimation("WalkBot");
 		break;
 	}
 	case 3://A
 	{
 		_goesLeft = keyPressed;
-		_goesRight = false;
-		_goesBot = false;
-		_goesTop = false;
+		//_goesRight = false;
+		//_goesBot = false;
+		//_goesTop = false;
 		_spriteAnimatedComponent->SetAnimation("WalkLeft");
 		break;
 	}
 	case 4://D
 	{
 		_goesRight = keyPressed;
-		_goesLeft = false;
-		_goesBot = false;
-		_goesTop = false;
+		//_goesLeft = false;
+		//_goesBot = false;
+		//_goesTop = false;
 		_spriteAnimatedComponent->SetAnimation("WalkRight");
 		break;
 	}
