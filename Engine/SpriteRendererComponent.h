@@ -1,8 +1,9 @@
 #pragma once
+#include "IComponent.h"
 #include "IRenderableComponent.h"
 #include "ISpriteComponent.h"
 
-class SpriteRendererComponent :public IComponent, public ISpriteComponent
+class SpriteRendererComponent : public IComponent, public ISpriteComponent
 {
 public:
 	SpriteRendererComponent();
@@ -17,17 +18,8 @@ public:
 	// Added by Alex 18/04/18. This now takes into account rotations and scale and will return the centre point rather than the scaled/rotated top left point
 	virtual Vec2 GetPosition() override;
 	
-	//getters & setters for scene informations
-	//void SetName(std::string name);
-	//std::string GetName();
-	//std::string GetText();
-	//std::string GetAnimation(); //TODO : delete
 
 
-protected:
 
-	//std::string _name;
-	//std::string _text;
-	////std::string _animation;
 };
 

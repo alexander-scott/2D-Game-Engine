@@ -1,0 +1,13 @@
+<?xml?>
+<Animation name="Opened">
+	<StartPosition xpos="0" ypos="0"/>
+	<Dimensions width="45" height = "54"/>
+	<Type name = "Opened"/>
+		
+	<Rectangles>
+		<Rect id = "0" top = "48" right = "112" bottom = "64" left = "96"/>
+	</Rectangles>	
+		
+	<Sequence seq="0" />
+
+</Animation>

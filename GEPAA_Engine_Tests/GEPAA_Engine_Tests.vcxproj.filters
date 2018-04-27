@@ -156,6 +156,18 @@
     <ClCompile Include="..\Engine\EditorSystem.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="DxGraphicTests.cpp">
+      <Filter>EngineTests\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\MPhantomComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\MChestComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\MIntroComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Engine\BuildSceneMessage.h">
@@ -375,6 +387,15 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\EditorSystem.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\MPhantomComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\MChestComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\MIntroComponent.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

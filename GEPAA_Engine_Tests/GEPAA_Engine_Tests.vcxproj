@@ -193,7 +193,10 @@
     <ClCompile Include="..\Engine\MainWindow.cpp" />
     <ClCompile Include="..\Engine\MBackgroundComponent.cpp" />
     <ClCompile Include="..\Engine\MCharacterComponent.cpp" />
+    <ClCompile Include="..\Engine\MChestComponent.cpp" />
     <ClCompile Include="..\Engine\MComponentFactory.cpp" />
+    <ClCompile Include="..\Engine\MIntroComponent.cpp" />
+    <ClCompile Include="..\Engine\MPhantomComponent.cpp" />
     <ClCompile Include="..\Engine\ObjectGrid.cpp" />
     <ClCompile Include="..\Engine\PhysicsSystem.cpp" />
     <ClCompile Include="..\Engine\PolygonColliderComponent.cpp" />
@@ -209,6 +212,7 @@
     <ClCompile Include="..\Engine\TextRendererComponent.cpp" />
     <ClCompile Include="..\Engine\TransformComponent.cpp" />
     <ClCompile Include="CoreEngineTests.cpp" />
+    <ClCompile Include="DxGraphicTests.cpp" />
     <ClCompile Include="GameObjectTests.cpp" />
     <ClCompile Include="MessagingTests.cpp" />
     <ClCompile Include="SceneBuilderTests.cpp" />
@@ -262,7 +266,10 @@
     <ClInclude Include="..\Engine\Math.h" />
     <ClInclude Include="..\Engine\MBackgroundComponent.h" />
     <ClInclude Include="..\Engine\MCharacterComponent.h" />
+    <ClInclude Include="..\Engine\MChestComponent.h" />
     <ClInclude Include="..\Engine\MComponentFactory.h" />
+    <ClInclude Include="..\Engine\MIntroComponent.h" />
+    <ClInclude Include="..\Engine\MPhantomComponent.h" />
     <ClInclude Include="..\Engine\ObjectGrid.h" />
     <ClInclude Include="..\Engine\PhysicsSystem.h" />
     <ClInclude Include="..\Engine\PlayAudioMessage.h" />

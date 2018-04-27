@@ -1,42 +1,183 @@
 <?xml?>
 <scene name="MyriamGame">
 
-  <GameObject tag="Background" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd01">
-    <Component xpos="0.000000" ypos="0.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"></Component>
-    <Component rectTop ="0" rectBottom="600" rectLeft="0" rectRight="800" offset1="-400.000000" offset2="-300.000000" text ="/Sprites/firstbackground.dds" name = "background" animation="" type="SpriteRendererComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd01"></Dependency>
+  <GameObject tag="Background" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd01"> 
+    	<Component xpos="0.000000" ypos="0.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"></Component>
+    <Component rectTop ="0" rectBottom="600" rectLeft="0" rectRight="800" offset1="-400.000000" offset2="-300.000000" text ="/Sprites/MyriamGame/stonebackground.dds" name = "background" animation="" type="SpriteRendererComponent">
+    		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd01"></Dependency>
     </Component>
   </GameObject>
 
 
-  <GameObject tag="Background" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05">
-    <Component xpos="150.000000" ypos="-150.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
-    <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/Players/basictiles.dds" name = "grass" type="SpriteRendererComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
+
+  <GameObject tag="Trap" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05">
+	<Component xpos="300.000000" ypos="-150.000000" rotation="0.000000" scale="2.500000" type="TransformComponent"></Component>
+	<Component rectTop ="188" rectBottom="211" rectLeft="93" rectRight="116" offset1="1.000000" offset2="1.000000" text ="/Sprites/MyriamGame/basictiles.dds" name = "grass" type="SpriteRendererComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
+	</Component>
+	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "1" type="RigidbodyComponent" ></Component>
+	<Component width="10" height="10" type="BoxColliderComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
+	</Component>
+	<Component type="MBackgroundComponent">	
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" boxcollidercomponent= "54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
+	</Component>
+  </GameObject>  
+<GameObject tag="Trap" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07">
+	<Component xpos="50.000000" ypos="-400.000000" rotation="0.000000" scale="2.500000" type="TransformComponent"></Component>
+	<Component rectTop ="188" rectBottom="211" rectLeft="93" rectRight="116" offset1="-10.000000" offset2="-10.000000" text ="/Sprites/MyriamGame/basictiles.dds" name = "grass" type="SpriteRendererComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07"></Dependency>
+	</Component>
+	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "1" type="RigidbodyComponent" ></Component>
+	<Component width="10" height="10" type="BoxColliderComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07"></Dependency>
+	</Component>
+	<Component type="MBackgroundComponent">	
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd07" boxcollidercomponent= "54be7823-fa72-4b1c-acf2-b2ffa6a4dd07"></Dependency>
+	</Component>
+  </GameObject> 
+
+<GameObject tag="Trap" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08">
+	<Component xpos="450.000000" ypos="-300.000000" rotation="0.000000" scale="2.500000" type="TransformComponent"></Component>
+	<Component rectTop ="188" rectBottom="211" rectLeft="93" rectRight="116" offset1="-10.000000" offset2="-10.000000" text ="/Sprites/MyriamGame/basictiles.dds" name = "grass" type="SpriteRendererComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08"></Dependency>
+	</Component>
+	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "1" type="RigidbodyComponent" ></Component>
+	<Component width="10" height="10" type="BoxColliderComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08"></Dependency>
+	</Component>
+	<Component type="MBackgroundComponent">	
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd08" boxcollidercomponent= "54be7823-fa72-4b1c-acf2-b2ffa6a4dd08"></Dependency>
+	</Component>
+  </GameObject> 
+
+<GameObject tag="Trap" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09">
+	<Component xpos="550.000000" ypos="-350.000000" rotation="0.000000" scale="2.500000" type="TransformComponent"></Component>
+	<Component rectTop ="188" rectBottom="211" rectLeft="93" rectRight="116" offset1="-10.000000" offset2="-10.000000" text ="/Sprites/MyriamGame/basictiles.dds" name = "grass" type="SpriteRendererComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09"></Dependency>
+	</Component>
+	<Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "1" type="RigidbodyComponent" ></Component>
+	<Component width="10" height="10" type="BoxColliderComponent">
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09"></Dependency>
+	</Component>
+	<Component type="MBackgroundComponent">	
+		<Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd09" boxcollidercomponent= "54be7823-fa72-4b1c-acf2-b2ffa6a4dd09"></Dependency>
+	</Component>
+  </GameObject> 
+
+
+
+
+	<GameObject tag="Phantom" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd10">
+    <Component xpos="650.000000" ypos="-450.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
+    <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/MyriamGame/characters.dds" name = "Phantom" animation = "GoesLeft" type="SpriteAnimatedComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd10"></Dependency>
     </Component>
-    <Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "0" type="RigidbodyComponent" ></Component>
+    <Component staticfriction="1" dynamicfriction="1" restitution="0.5" density="1" static="0" lockrotation="1" kinematic = "1" type="RigidbodyComponent" ></Component>
     <Component width="16" height="16" type="BoxColliderComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd10" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd10"></Dependency>
     </Component>
-    <Component type="MBackgroundComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd05" boxcollidercomponent= "54be7823-fa72-4b1c-acf2-b2ffa6a4dd05"></Dependency>
+    <Component type="MPhantomComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd10" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd10" spriteanimatedcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd10"></Dependency>
     </Component>
   </GameObject>
-
-
-  <GameObject tag="PlayerSprite" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
-    <Component xpos="50.000000" ypos="-50.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
-    <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="-8.000000" offset2="-8.000000" text ="/Sprites/Players/characters.dds" name = "Girl" animation = "WalkBot" type="SpriteAnimatedComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
-      <Dependency spriteanimatedcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
+	
+<GameObject tag="Phantom" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd11">
+    <Component xpos="350.000000" ypos="-250.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
+    <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/MyriamGame/characters.dds" name = "Phantom" animation = "GoesLeft" type="SpriteAnimatedComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd11"></Dependency>
     </Component>
-    <Component staticfriction="0.5" dynamicfriction="0.3" restitution="0.5" density="1" static="1" lockrotation="0" kinematic = "0" type="RigidbodyComponent" ></Component>
+    <Component staticfriction="1" dynamicfriction="1" restitution="0.5" density="1" static="0" lockrotation="1" kinematic = "1" type="RigidbodyComponent" ></Component>
+    <Component width="16" height="16" type="BoxColliderComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd11" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd11"></Dependency>
+    </Component>
+    <Component type="MPhantomComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd11" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd11" spriteanimatedcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd11"></Dependency>
+    </Component>
+  </GameObject>   
+
+<GameObject tag="Phantom" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd12">
+    <Component xpos="550.000000" ypos="-650.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
+    <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/MyriamGame/characters.dds" name = "Phantom" animation = "GoesLeft" type="SpriteAnimatedComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd12"></Dependency>
+    </Component>
+    <Component staticfriction="1" dynamicfriction="1" restitution="0.5" density="1" static="0" lockrotation="1" kinematic = "1" type="RigidbodyComponent" ></Component>
+    <Component width="16" height="16" type="BoxColliderComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd12" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd12"></Dependency>
+    </Component>
+    <Component type="MPhantomComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd12" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd12" spriteanimatedcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd12"></Dependency>
+    </Component>
+  </GameObject>   
+
+<GameObject tag="Phantom" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd13">
+    <Component xpos="650.000000" ypos="-250.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
+    <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/MyriamGame/characters.dds" name = "Phantom" animation = "GoesLeft" type="SpriteAnimatedComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd13"></Dependency>
+    </Component>
+    <Component staticfriction="1" dynamicfriction="1" restitution="0.5" density="1" static="0" lockrotation="1" kinematic = "1" type="RigidbodyComponent" ></Component>
+    <Component width="16" height="16" type="BoxColliderComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd13" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd13"></Dependency>
+    </Component>
+    <Component type="MPhantomComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd13" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd13" spriteanimatedcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd13"></Dependency>
+    </Component>
+  </GameObject>   
+
+<GameObject tag="Phantom" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd14">
+    <Component xpos="100.000000" ypos="-650.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
+    <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/MyriamGame/characters.dds" name = "Phantom" animation = "GoesLeft" type="SpriteAnimatedComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd14"></Dependency>
+    </Component>
+    <Component staticfriction="1" dynamicfriction="1" restitution="0.5" density="1" static="0" lockrotation="1" kinematic = "1" type="RigidbodyComponent" ></Component>
+    <Component width="16" height="16" type="BoxColliderComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd14" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd14"></Dependency>
+    </Component>
+    <Component type="MPhantomComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd14" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd14" spriteanimatedcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd14"></Dependency>
+    </Component>
+  </GameObject>   
+
+<GameObject tag="Chest" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd15">
+    <Component xpos="600.000000" ypos="-400.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
+    <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/MyriamGame/things.dds" name = "Chest" animation = "Closed" type="SpriteAnimatedComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd15"></Dependency>
+    </Component>
+    <Component staticfriction="1" dynamicfriction="1" restitution="0.5" density="1" static="0" lockrotation="1" kinematic = "1" type="RigidbodyComponent" ></Component>
+    <Component width="16" height="16" type="BoxColliderComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd15" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd15"></Dependency>
+    </Component>
+    <Component type="MChestComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd15" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd15" spriteanimatedcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd15"></Dependency>
+    </Component>
+  </GameObject>   
+
+	<GameObject tag="PlayerSprite" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00">
+    <Component xpos="50.000000" ypos="-50.000000" rotation="0.000000" scale="3.000000" type="TransformComponent"></Component>
+    <Component rectTop ="0" rectBottom="16" rectLeft="0" rectRight="16" offset1="0.000000" offset2="0.000000" text ="/Sprites/MyriamGame/characters.dds" name = "Girl" animation = "WalkBot" type="SpriteAnimatedComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
+    </Component>
+    <Component staticfriction="1" dynamicfriction="1" restitution="0.5" density="1" static="0" lockrotation="1" kinematic = "1" type="RigidbodyComponent" ></Component>
     <Component width="16" height="16" type="BoxColliderComponent">
       <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
     </Component>
     <Component type="MCharacterComponent">
-      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" spriteanimatedcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00"></Dependency>
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" rigidbodycomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" spriteanimatedcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd00" ></Dependency>
     </Component>
   </GameObject>
+
+<GameObject tag="Intro" guid="54be7823-fa72-4b1c-acf2-b2ffa6a4dd21">
+    <Component xpos="0.000000" ypos="0.000000" rotation="0.000000" scale="1.000000" type="TransformComponent"></Component>
+    <Component rectTop ="0" rectBottom="600" rectLeft="0" rectRight="800" offset1="0.000000" offset2="0.000000" text ="/Sprites/MyriamGame/introTexture2.dds" name = "Intro" animation = "Displayed" type="SpriteAnimatedComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd21"></Dependency>
+    </Component>
+    <Component type="MIntroComponent">
+      <Dependency transformcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd21" spriteanimatedcomponent="54be7823-fa72-4b1c-acf2-b2ffa6a4dd21"></Dependency>
+    </Component>
+  </GameObject>   
+
+
+
+
 
 </scene>

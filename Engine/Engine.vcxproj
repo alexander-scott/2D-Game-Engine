@@ -318,7 +318,10 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="MBackgroundComponent.h" />
     <ClInclude Include="MCharacterComponent.h" />
+    <ClInclude Include="MChestComponent.h" />
     <ClInclude Include="MComponentFactory.h" />
+    <ClInclude Include="MIntroComponent.h" />
+    <ClInclude Include="MPhantomComponent.h" />
     <ClInclude Include="ObjectGrid.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="AControllerComponent.h" />
@@ -377,7 +380,10 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="MBackgroundComponent.cpp" />
     <ClCompile Include="MCharacterComponent.cpp" />
+    <ClCompile Include="MChestComponent.cpp" />
     <ClCompile Include="MComponentFactory.cpp" />
+    <ClCompile Include="MIntroComponent.cpp" />
+    <ClCompile Include="MPhantomComponent.cpp" />
     <ClCompile Include="ObjectGrid.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="AControllerComponent.cpp" />

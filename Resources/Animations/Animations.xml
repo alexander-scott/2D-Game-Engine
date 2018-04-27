@@ -6,4 +6,14 @@
 	<Anim name = "GirlWalkTop.xml"/>
 	<Anim name = "GirlWalkRight.xml"/>
 	<Anim name = "GirlWalkLeft.xml"/>
+	<Anim name = "GirlDead.xml"/>
+	<Anim name = "GirlWinning.xml"/>
+	<Anim name = "PhantomGoesLeft.xml"/>
+	<Anim name = "PhantomGoesRight.xml"/>
+	<Anim name = "PhantomGoesTop.xml"/>
+	<Anim name = "PhantomGoesBot.xml"/>
+	<Anim name = "ChestOpened.xml"/>	
+	<Anim name = "ChestClosed.xml"/>
+	<Anim name = "IntroDisplayed.xml"/>
+	<Anim name = "IntroHidden.xml"/>
 </Animations>

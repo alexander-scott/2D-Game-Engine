@@ -95,6 +95,9 @@
     <Filter Include="Engine\Messaging\Messages\PhysicsMessages">
       <UniqueIdentifier>{85437339-476d-4102-bbed-f896b5d81635}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Myriam">
+      <UniqueIdentifier>{d4cebe77-7a10-41dc-9f03-e0db4a88bd2f}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Game\Alex\Components">
       <UniqueIdentifier>{2e820dbd-a6d8-4dff-b1d1-e4157abcd015}</UniqueIdentifier>
     </Filter>
@@ -334,10 +337,26 @@
     <ClInclude Include="SetVelocityMessage.h">
       <Filter>Engine\Messaging\Messages\PhysicsMessages</Filter>
     </ClInclude>
+    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="MBackgroundComponent.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
+    <ClInclude Include="MCharacterComponent.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
     <ClInclude Include="AudioSourceComponent.h">
       <Filter>Engine\GameObject\Components\Audio</Filter>
     </ClInclude>
     <ClInclude Include="MComponentFactory.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
+    <ClInclude Include="MPhantomComponent.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
+    <ClInclude Include="MChestComponent.h">
+      <Filter>Game\Myriam</Filter>
+    </ClInclude>
+    <ClInclude Include="MIntroComponent.h">
       <Filter>Game\Myriam</Filter>
     </ClInclude>
     <ClInclude Include="LevelManager.h">
@@ -493,7 +512,26 @@
     <ClCompile Include="AComponentFactory.cpp">
       <Filter>Game\Alex</Filter>
     </ClCompile>
-    <ClCompile Include="APlatformManagerComponent.cpp">
+    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="MBackgroundComponent.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MCharacterComponent.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MComponentFactory.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MPhantomComponent.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MChestComponent.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+    <ClCompile Include="MIntroComponent.cpp">
+      <Filter>Game\Myriam</Filter>
+    </ClCompile>
+      <ClCompile Include="APlatformManagerComponent.cpp">
       <Filter>Game\Alex\Components</Filter>
     </ClCompile>
     <ClCompile Include="AGameManagerComponent.cpp">

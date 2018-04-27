@@ -12,6 +12,10 @@ TransformComponent::TransformComponent(Vec2 localPosition, float localRotation, 
 	_parent = nullptr;
 }
 
+TransformComponent::~TransformComponent()
+{
+}
+
 void TransformComponent::SetLocalPosition(Vec2 position)
 {
 	//assert(this); //todo : delete after error fixed -can be deleted

@@ -80,7 +80,7 @@ private:
 	std::vector<std::string>_animationNames;
 	std::map<std::string, Animation*> _nameAndAnimations; //TODO : load all animations according to the texture path
 	
-	Animation _animation;
+	//Animation _animation;
 };
 
 class TextureManager

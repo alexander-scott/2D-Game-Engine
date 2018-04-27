@@ -1,0 +1,17 @@
+<?xml?>
+<Animation name="WalkLeft">
+	<StartPosition xpos="0" ypos="0"/>
+	<Dimensions width="16" height = "16"/>
+	<Type name = "WalkLeft"/>
+		
+	<Rectangles>
+		<Rect id = "0" top = "0" right = "128" bottom = "16" left = "112"/>
+		<Rect id = "1" top = "16" right = "128" bottom = "32" left = "112"/>
+		<Rect id = "2" top = "48" right = "128" bottom = "64" left = "112"/>
+		<Rect id = "3" top = "32" right = "128" bottom = "48" left = "112"/>
+		
+	</Rectangles>	
+		
+	<Sequence seq = "0" seq = "0"seq = "0"seq = "0"seq = "0" seq = "1" seq = "1"seq = "1"seq = "1"seq = "1" seq = "2" seq = "2" seq = "2" seq = "2" seq = "2" seq = "3" seq = "3"seq = "3" seq = "3"/>
+
+</Animation>
