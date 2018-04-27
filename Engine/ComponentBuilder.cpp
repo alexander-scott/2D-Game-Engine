@@ -64,6 +64,13 @@ inline void FetchMIntroDependencies();
 
 #pragma endregion
 
+#pragma region PGame inline methods
+
+inline IComponent * BuildPCarComponent();
+inline void FetchPCarDependencies();
+
+#pragma endregion
+
 ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 {
 	_scene = scene;
@@ -122,6 +129,13 @@ ComponentBuilder::ComponentBuilder(shared_ptr<Scene> scene)
 
 	_buildMapper.Insert("MIntroComponent", BuildMIntroComponent);
 	_dependencyBuildMapper.Insert("MIntroComponent", FetchMIntroDependencies);
+
+#pragma endregion	
+
+#pragma region PGame 
+
+	_buildMapper.Insert("PCarComponent", BuildPCarComponent);
+	_dependencyBuildMapper.Insert("PCarComponent", FetchPCarDependencies);
 
 #pragma endregion	
 
@@ -656,6 +670,38 @@ void FetchMIntroDependencies()
 	}
 
 	mIntro->SetDependencies(transform, spriteAnimatedComponent);
+}
+
+#pragma endregion
+
+#pragma region PGame component functions
+
+IComponent * BuildPCarComponent()
+{
+	return ComponentFactory::MakePCarComponent();
+}
+
+void FetchPCarDependencies()
+{
+	PCarComponent * carComponent = static_cast<PCarComponent*>(dependencyComponent);
+
+	TransformComponent* transform;
+	RigidBodyComponent* rigidbody;
+
+	map<string, GUID>::iterator it;
+	for (it = depdendecies->begin(); it != depdendecies->end(); it++)
+	{
+		if (it->first == "transformcomponent")
+		{
+			transform = _scene->GetGameObject(it->second)->GetComponent<TransformComponent>();
+		}
+		else if (it->first == "rigidbodycomponent")
+		{
+			rigidbody = _scene->GetGameObject(it->second)->GetComponent<RigidBodyComponent>();
+		}
+	}
+
+	carComponent->SetDependencies(transform, rigidbody);
 }
 
 #pragma endregion

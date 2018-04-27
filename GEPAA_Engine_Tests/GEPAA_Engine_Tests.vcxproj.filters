@@ -168,6 +168,12 @@
     <ClCompile Include="..\Engine\MIntroComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\Engine\PCarComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\PComponentFactory.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Engine\BuildSceneMessage.h">
@@ -396,6 +402,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\MIntroComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\PCarComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\PComponentFactory.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

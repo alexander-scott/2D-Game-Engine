@@ -323,6 +323,8 @@
     <ClInclude Include="MIntroComponent.h" />
     <ClInclude Include="MPhantomComponent.h" />
     <ClInclude Include="ObjectGrid.h" />
+    <ClInclude Include="PCarComponent.h" />
+    <ClInclude Include="PComponentFactory.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="AControllerComponent.h" />
     <ClInclude Include="PolygonColliderComponent.h" />
@@ -385,6 +387,8 @@
     <ClCompile Include="MIntroComponent.cpp" />
     <ClCompile Include="MPhantomComponent.cpp" />
     <ClCompile Include="ObjectGrid.cpp" />
+    <ClCompile Include="PCarComponent.cpp" />
+    <ClCompile Include="PComponentFactory.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="AControllerComponent.cpp" />
     <ClCompile Include="PolygonColliderComponent.cpp" />

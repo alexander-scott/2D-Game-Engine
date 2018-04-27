@@ -106,7 +106,10 @@ enum DrawableComponentType
 enum InputGenericStateMessageType
 {
 	eKeyReleased,
-	eKeyPressed
+	eKeyPressed,
+	eAnalogStickAxisXMessage,
+	eAnalogStickAxisYMessage,
+	eAnalogTriggerMessage
 };
 
 enum KeyboardMessageType

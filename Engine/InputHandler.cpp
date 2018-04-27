@@ -14,6 +14,7 @@ InputHandler::InputHandler(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 { 
 	_gamePadP1 = std::make_unique<DirectX::GamePad>();
 	_bKeyboardSwapCommands = false;
+	_connectedGamePadP1 = false;
 }
 
 void InputHandler::InitaliseListeners()
@@ -27,28 +28,9 @@ void InputHandler::InitaliseListeners()
 	AddMapToVectorOfCommands();
 	LoadKeyboardGameMapping();
 	LoadGamePadGameMapping();
-	SaveMapInput();
+	SaveMapsInput();
 }
-/*
-void InputHandler::TestKeyboardInitialCommands() //to remove after I have a function to load commands list from a file at initialization
-{
-	MoveUpCommand* move_up = new MoveUpCommand();
-	MoveLeftCommand* move_left = new MoveLeftCommand();
-	MoveRightCommand* move_right = new MoveRightCommand();
-	MoveDownCommand* move_down = new MoveDownCommand();
-	RebindSwapCommand* swap = new RebindSwapCommand();
 
-	_keyboardGameCommandMap['W'] = move_up;
-	_keyboardGameCommandMap['A'] = move_left;
-	_keyboardGameCommandMap['S'] = move_down;
-	_keyboardGameCommandMap['D'] = move_right;
-	_keyboardGameCommandMap[' '] = swap;//spacebar to swap commands
-
-	_bKeyboardSwapCommands = false;
-
-	SaveMapInput();
-}
-*/
 void InputHandler::LoadKeyboardGameMapping()
 {
 	_keyboardCurrentCommandMap = _keyboardListOfCommandMap[0];
@@ -96,13 +78,13 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 					if (msg.MessageType == KeyboardMessageType::eKeyDown)
 					{
 						InputHandlerToGameObjectMessage message(InputGenericStateMessageType::eKeyPressed, 
-							keyMessage,-1.0f);
+							keyMessage,-2.0f);
 						SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 					}
 					else if (msg.MessageType == KeyboardMessageType::eKeyUp)
 					{
 						InputHandlerToGameObjectMessage message(InputGenericStateMessageType::eKeyReleased,
-							keyMessage,-1.0f);
+							keyMessage,-2.0f);
 						SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 					}
 				}
@@ -117,9 +99,25 @@ void InputHandler::RecieveMessage(ISystemMessage & message)
 		case SystemMessageType::eInputUpdateGamePad:
 		{
 			_stateGamePadP1 = _gamePadP1->GetState(0);
-			_buttonStateTrackerP1.Update(_stateGamePadP1);
-			SendGamePadButtonState(_buttonStateTrackerP1, DirectX::GamePad::ButtonStateTracker::PRESSED);
-			SendGamePadButtonState(_buttonStateTrackerP1, DirectX::GamePad::ButtonStateTracker::RELEASED);
+			if (_stateGamePadP1.IsConnected() && !_connectedGamePadP1)
+			{
+				_connectedGamePadP1 = true;
+			}
+			else if (!(_stateGamePadP1.IsConnected()) && _connectedGamePadP1)
+			{
+				_connectedGamePadP1 = false;
+				//reset inputs in case of a disconnection
+				SendGamePadNeutralState();
+			}
+
+			if(_connectedGamePadP1) //send updates of gamepad to game components only if it's connected
+			{
+				_buttonStateTrackerP1.Update(_stateGamePadP1);
+				SendGamePadButtonState(_buttonStateTrackerP1, DirectX::GamePad::ButtonStateTracker::PRESSED);
+				SendGamePadButtonState(_buttonStateTrackerP1, DirectX::GamePad::ButtonStateTracker::RELEASED);
+				SendGamePadAnalogStickState(_stateGamePadP1);
+				SendGamePadAnalogTriggerState(_stateGamePadP1);
+			}
 			break;
 		}
 		//case add a map context (mode) to vector just pushback
@@ -165,61 +163,177 @@ void InputHandler::SendGamePadButtonState(DirectX::GamePad::ButtonStateTracker &
 	else
 		buttonStateMessage = InputGenericStateMessageType::eKeyReleased;
 
-
+	//ABXY buttons
 	if (buttonStateTracker.a == buttonStateEnum)
 	{
 		keyMessage = _gamePadCurrentCommandMap["A"];
-		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
 		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 	}
 	if (buttonStateTracker.b == buttonStateEnum)
 	{
 		keyMessage = _gamePadCurrentCommandMap["B"];
-		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
 		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 	}
 	if (buttonStateTracker.x == buttonStateEnum)
 	{
 		keyMessage = _gamePadCurrentCommandMap["X"];
-		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
 		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 	}
 	if (buttonStateTracker.y == buttonStateEnum)
 	{
 		keyMessage = _gamePadCurrentCommandMap["Y"];
-		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
 		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 	}
+
+	//Back and Start buttons
+	if (buttonStateTracker.back == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["BACK"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+	if (buttonStateTracker.start == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["START"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+
+	//Left and right stick clicks
+	if (buttonStateTracker.leftStick == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["LEFT_STICK"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+	if (buttonStateTracker.rightStick == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["RIGHT_STICK"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+
+	//Left and right bumpers
+	if (buttonStateTracker.leftShoulder == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["LEFT_BUMPER"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+	if (buttonStateTracker.rightShoulder == buttonStateEnum)
+	{
+		keyMessage = _gamePadCurrentCommandMap["RIGHT_BUMPER"];
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
+		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
+	}
+
+	//DPAD buttons
 	if (buttonStateTracker.dpadUp == buttonStateEnum)
 	{
 		keyMessage = _gamePadCurrentCommandMap["DPAD_UP"];
-		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
 		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 	}
 	if (buttonStateTracker.dpadDown == buttonStateEnum)
 	{
 		keyMessage = _gamePadCurrentCommandMap["DPAD_DOWN"];
-		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
 		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 	}
 	if (buttonStateTracker.dpadLeft == buttonStateEnum)
 	{
 		keyMessage = _gamePadCurrentCommandMap["DPAD_LEFT"];
-		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
 		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 	}
 	if (buttonStateTracker.dpadRight == buttonStateEnum)
 	{
 		keyMessage = _gamePadCurrentCommandMap["DPAD_RIGHT"];
-		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -1.0f);
+		InputHandlerToGameObjectMessage message(buttonStateMessage, keyMessage, -2.0f);
 		SendMessageToDispatcher(ISystemToGameObjectMessage(message));
 	}
-
 }
 
-void InputHandler::SaveMapInput()
+void InputHandler::SendGamePadAnalogStickState(DirectX::GamePad::State & state)
 {
-	std::ofstream file("InputMapTestSave.xml");
+	sCommand keyMessage;
+	InputGenericStateMessageType stateAxisXMessage,stateAxisYMessage;
+	float posX;
+	float posY;
+
+	stateAxisXMessage = InputGenericStateMessageType::eAnalogStickAxisXMessage;
+	stateAxisYMessage = InputGenericStateMessageType::eAnalogStickAxisYMessage;
+	//send left stick state
+	posX = state.thumbSticks.leftX;
+	posY = state.thumbSticks.leftY;
+	keyMessage = _gamePadCurrentCommandMap["LEFT_STICK_ANALOG"];
+	InputHandlerToGameObjectMessage messageLX(stateAxisXMessage, keyMessage, posX);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageLX));
+	InputHandlerToGameObjectMessage messageLY(stateAxisYMessage, keyMessage, posY);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageLY));
+
+	//send right stick state
+	posX = state.thumbSticks.rightX;
+	posY = state.thumbSticks.rightY;
+	keyMessage = _gamePadCurrentCommandMap["RIGHT_STICK_ANALOG"];
+	InputHandlerToGameObjectMessage messageRX(stateAxisXMessage, keyMessage, posX);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageRX));
+	InputHandlerToGameObjectMessage messageRY(stateAxisYMessage, keyMessage, posY);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageRY));
+}
+
+void InputHandler::SendGamePadAnalogTriggerState(DirectX::GamePad::State & state)
+{
+	sCommand keyMessage;
+	InputGenericStateMessageType stateMessage;
+	stateMessage = InputGenericStateMessageType::eAnalogTriggerMessage;
+
+	float triggerLeftAmount = state.triggers.left;
+	keyMessage = _gamePadCurrentCommandMap["LEFT_TRIGGER"];
+	InputHandlerToGameObjectMessage messageL(stateMessage, keyMessage, triggerLeftAmount);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageL));
+
+	float triggerRightAmount = state.triggers.right;
+	keyMessage = _gamePadCurrentCommandMap["RIGHT_TRIGGER"];
+	InputHandlerToGameObjectMessage messageR(stateMessage, keyMessage, triggerRightAmount);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageR));
+}
+
+void InputHandler::SendGamePadNeutralState()
+{
+	sCommand keyMessage;
+	InputGenericStateMessageType stateAxisXMessage, stateAxisYMessage, stateTriggerMessage;
+
+	stateAxisXMessage = InputGenericStateMessageType::eAnalogStickAxisXMessage;
+	stateAxisYMessage = InputGenericStateMessageType::eAnalogStickAxisYMessage;
+	stateTriggerMessage = InputGenericStateMessageType::eAnalogTriggerMessage;
+
+	keyMessage = _gamePadCurrentCommandMap["LEFT_STICK_ANALOG"];
+	InputHandlerToGameObjectMessage messageLX(stateAxisXMessage, keyMessage, 0.0f);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageLX));
+	InputHandlerToGameObjectMessage messageLY(stateAxisYMessage, keyMessage, 0.0f);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageLY));
+
+	keyMessage = _gamePadCurrentCommandMap["RIGHT_STICK_ANALOG"];
+	InputHandlerToGameObjectMessage messageRX(stateAxisXMessage, keyMessage, 0.0f);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageRX));
+	InputHandlerToGameObjectMessage messageRY(stateAxisYMessage, keyMessage, 0.0f);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageRY));
+
+	InputHandlerToGameObjectMessage messageL(stateTriggerMessage, keyMessage, 0.0f);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageL));
+	InputHandlerToGameObjectMessage messageR(stateTriggerMessage, keyMessage, 0.0f);
+	SendMessageToDispatcher(ISystemToGameObjectMessage(messageR));
+}
+
+//TODO Input: Refactor this
+void InputHandler::SaveMapsInput()
+{
+	std::ofstream file(GlobalVariables::Instance().ResourcesFilePath + "//InputMaps//InputMapTestSave.xml");
 	xml_document<> doc;
 	xml_node<>* decl = doc.allocate_node(node_declaration);
 	doc.append_node(decl);
@@ -249,6 +363,29 @@ void InputHandler::SaveMapInput()
 			string stringID = to_string((currentCommand._ID));
 			command->append_attribute(doc.allocate_attribute("ID", doc.allocate_string(stringID.c_str())));
 			map->append_node(command);
+		}
+	}
+
+	xml_node<>* peripheral2 = doc.allocate_node(node_element, "Peripheral");
+	peripheral2->append_attribute(doc.allocate_attribute("name", "gamepad"));
+	root->append_node(peripheral2);
+	xml_node<>* map2 = doc.allocate_node(node_element, "Map");
+	map2->append_attribute(doc.allocate_attribute("context", "main"));
+	peripheral2->append_node(map2);
+	
+
+	for (int i = 0; i < _gamePadListOfCommandMap.size(); i++)
+	{
+		for (auto& it : _gamePadListOfCommandMap[i])
+		{
+			xml_node<>* command = doc.allocate_node(node_element, "Command");
+			const std::string pKey = (it.first);
+			command->append_attribute(doc.allocate_attribute("key", doc.allocate_string(pKey.c_str())));
+			const sCommand currentCommand = (it.second);
+			command->append_attribute(doc.allocate_attribute("name", doc.allocate_string(currentCommand._name.c_str())));
+			string stringID = to_string((currentCommand._ID));
+			command->append_attribute(doc.allocate_attribute("ID", doc.allocate_string(stringID.c_str())));
+			map2->append_node(command);
 		}
 	}
 

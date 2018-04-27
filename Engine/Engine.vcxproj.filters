@@ -113,6 +113,9 @@
     <Filter Include="Engine\Systems\Editor\EditorInterface">
       <UniqueIdentifier>{79a17cc0-d40b-4f62-baa1-4952dddb647c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Paul">
+      <UniqueIdentifier>{bacdf97d-8a41-4bc2-9ed9-aaab857f8b94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomException.h">
@@ -383,6 +386,12 @@
     <ClInclude Include="EditorSystem.h">
       <Filter>Engine\Systems\Editor</Filter>
     </ClInclude>
+    <ClInclude Include="PCarComponent.h">
+      <Filter>Game\Paul</Filter>
+    </ClInclude>
+    <ClInclude Include="PComponentFactory.h">
+      <Filter>Game\Paul</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -531,7 +540,7 @@
     <ClCompile Include="MIntroComponent.cpp">
       <Filter>Game\Myriam</Filter>
     </ClCompile>
-      <ClCompile Include="APlatformManagerComponent.cpp">
+    <ClCompile Include="APlatformManagerComponent.cpp">
       <Filter>Game\Alex\Components</Filter>
     </ClCompile>
     <ClCompile Include="AGameManagerComponent.cpp">
@@ -542,6 +551,12 @@
     </ClCompile>
     <ClCompile Include="EditorSystem.cpp">
       <Filter>Engine\Systems\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="PCarComponent.cpp">
+      <Filter>Game\Paul</Filter>
+    </ClCompile>
+    <ClCompile Include="PComponentFactory.cpp">
+      <Filter>Game\Paul</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

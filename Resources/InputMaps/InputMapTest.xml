@@ -7,7 +7,7 @@
 			<Command key="D" name="move_right" ID="4"/>
 			<Command key="S" name="move_down" ID="2"/>
 			<Command key="W" name="move_up" ID="1"/>
-			<Command key="R" name="restart" ID="6"/>
+			<Command key="T" name="throttle" ID="6"/>
 		</Map>
 	</Peripheral>
 	<Peripheral name="gamepad">

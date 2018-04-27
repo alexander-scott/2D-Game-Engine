@@ -5,6 +5,7 @@
 #include "ComponentFactory.h"
 #include "AComponentFactory.h"
 #include "MComponentFactory.h"
+#include "PComponentFactory.h"
 
 #include <typeindex>
 
