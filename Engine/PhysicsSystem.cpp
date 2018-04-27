@@ -7,7 +7,7 @@
 PhysicsSystem::PhysicsSystem(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: ISystem(SystemType::ePhysics, dispatcher)
 {
-	_objectGrid = new ObjectGrid(1000, 1000, 10, 10); // TODO: REMOVE HARD-CODED VALUES
+	_objectGrid = new ObjectGrid(1000, 1000, 50, 50); // TODO: REMOVE HARD-CODED VALUES
 }
 
 PhysicsSystem::~PhysicsSystem()

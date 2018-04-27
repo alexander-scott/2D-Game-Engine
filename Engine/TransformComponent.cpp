@@ -130,6 +130,17 @@ Vec2 TransformComponent::GetWorldPosition() const
 		return _localPosition;
 }
 
+bool TransformComponent::CheckChanged()
+{
+	if (_parent != nullptr)
+	{
+		if (_parent->CheckChanged())
+			return true;
+	}
+
+	return _hasChanged;
+}
+
 #pragma region Editor Functions
 
 int TransformComponent::GetEditorFieldCount()

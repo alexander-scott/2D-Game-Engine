@@ -93,7 +93,7 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 	while (gameObjectNode)
 	{
 		string tag = gameObjectNode->first_attribute("tag")->value();
-		GUID guid = StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
+		GUID guid = ComponentBuilder::StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
 
 		scene->AddGameObject(GameObject::MakeGameObject(tag, guid));
 		gameObjectNode = gameObjectNode->next_sibling("GameObject");
@@ -105,7 +105,7 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 	gameObjectNode = root->first_node("GameObject");
 	while (gameObjectNode)
 	{
-		GUID guid = StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
+		GUID guid = ComponentBuilder::StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
 		auto gameObject = scene->GetGameObject(guid);
 
 		// Create this gameobjects components
@@ -125,7 +125,7 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 	gameObjectNode = root->first_node("GameObject");
 	while (gameObjectNode)
 	{
-		GUID guid = StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
+		GUID guid = ComponentBuilder::StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
 		auto gameObject = scene->GetGameObject(guid);
 
 		xml_node<>* componentNode = gameObjectNode->first_node("Component");
@@ -140,7 +140,7 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 				map<string, GUID> dependecies; // Gather all dependencies
 				for (const xml_attribute<>* attribute = dependencyNode->first_attribute(); attribute; attribute = attribute->next_attribute()) 
 				{
-					dependecies.insert(make_pair(attribute->name(), StringToGUID(string(attribute->value()))));
+					dependecies.insert(make_pair(attribute->name(), ComponentBuilder::StringToGUID(string(attribute->value()))));
 				}
 
 				// Build the dependencies
@@ -158,13 +158,13 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 	gameObjectNode = root->first_node("GameObject");
 	while (gameObjectNode)
 	{
-		GUID guid = StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
+		GUID guid = ComponentBuilder::StringToGUID(string(gameObjectNode->first_attribute("guid")->value()));
 		auto gameObject = scene->GetGameObject(guid);
 
 		// Check if the GameObject has a parent
 		if (gameObjectNode->first_attribute("parent"))
 		{
-			GUID parentGuid = StringToGUID(string(gameObjectNode->first_attribute("parent")->value()));
+			GUID parentGuid = ComponentBuilder::StringToGUID(string(gameObjectNode->first_attribute("parent")->value()));
 			auto parentGO = scene->GetGameObject(parentGuid);
 			gameObject->SetParent(parentGO);
 		}
@@ -173,30 +173,4 @@ shared_ptr<Scene> SceneBuilder::BuildScene(string filePath)
 	}
 
 	return scene;
-}
-
-GUID SceneBuilder::StringToGUID(const std::string& guid) {
-	GUID output;
-	unsigned long p0;
-	int p1, p2, p3, p4, p5, p6, p7, p8, p9, p10;
-
-	int err = sscanf_s(guid.c_str(), "%08lX-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
-		&p0, &p1, &p2, &p3, &p4, &p5, &p6, &p7, &p8, &p9, &p10);
-
-	if (err != 11)
-		throw std::logic_error("Invalid GUID, format should be {00000000-0000-0000-0000-000000000000}");
-
-	// Set the data like this to avoid corrupting the stack
-	output.Data1 = p0;
-	output.Data2 = p1;
-	output.Data3 = p2;
-	output.Data4[0] = p3;
-	output.Data4[1] = p4;
-	output.Data4[2] = p5;
-	output.Data4[3] = p6;
-	output.Data4[4] = p7;
-	output.Data4[5] = p8;
-	output.Data4[6] = p9;
-	output.Data4[7] = p10;
-	return output;
 }

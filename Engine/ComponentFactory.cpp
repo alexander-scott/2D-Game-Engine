@@ -62,3 +62,7 @@ BoxColliderComponent * ComponentFactory::MakeBoxCollider(float width, float heig
 	return boxCollider;
 }
 
+AudioSourceComponent * ComponentFactory::MakeAudioSourceComponent()
+{
+	return new AudioSourceComponent();
+}
