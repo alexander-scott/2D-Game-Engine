@@ -8,7 +8,7 @@
 #include "SceneSaver.h"
 #include "InputHandler.h"
 #include "MainWindow.h"
-#include "Editor.h"
+#include "EditorSystem.h"
 #include "PhysicsSystem.h"
 #include "AudioSystem.h"
 
@@ -39,7 +39,7 @@ Engine::Engine(HWND hWnd, std::string resourcesFilePath)
 	_systems.insert(std::make_pair(_mainWindow->SysType,_mainWindow));
 
 	Logger::Instance().LogMessage("Initalising the Editor system", LogSeverity::eInfo);
-	auto editorSystem = make_shared<Editor>(_messageDispatcher);
+	auto editorSystem = make_shared<EditorSystem>(_messageDispatcher);
 	_systems.insert(std::make_pair(editorSystem->SysType, editorSystem));
 
 	Initalise();

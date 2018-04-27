@@ -63,9 +63,6 @@
     <ClCompile Include="..\Engine\Scene.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\Editor.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Engine\SceneManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -154,6 +151,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine\AudioSourceComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\EditorSystem.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -278,9 +278,6 @@
     <ClInclude Include="..\Engine\Scene.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\Editor.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -375,6 +372,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\AudioSourceComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\EditorSystem.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

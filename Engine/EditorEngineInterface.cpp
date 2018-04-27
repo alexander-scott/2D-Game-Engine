@@ -3,7 +3,7 @@
 #include "Logger.h"
 #include "Engine.h"
 
-#include "Editor.h"
+#include "EditorSystem.h"
 
 void * EditorEngineInterface::InitaliseEngine(HWND hWnd, const char * filePath)
 {
@@ -73,24 +73,24 @@ void EditorEngineInterface::CleanD3D(void * enginePtr)
 
 void EditorEngineInterface::LoadNewScene(void * editorPtr, const char * filePath)
 {
-	Editor* editor = static_cast<Editor*>(editorPtr);
+	EditorSystem* editor = static_cast<EditorSystem*>(editorPtr);
 	editor->LoadNewScene(filePath);
 }
 
 void EditorEngineInterface::SaveScene(void * editorPtr, const char * filePath)
 {
-	Editor* editor = static_cast<Editor*>(editorPtr);
+	EditorSystem* editor = static_cast<EditorSystem*>(editorPtr);
 	editor->SaveScene(filePath);
 }
 
 void EditorEngineInterface::PlayStarted(void * editorPtr)
 {
-	Editor* editor = static_cast<Editor*>(editorPtr);
+	EditorSystem* editor = static_cast<EditorSystem*>(editorPtr);
 	editor->PlayStarted();
 }
 
 void EditorEngineInterface::PlayStopped(void * editorPtr)
 {
-	Editor* editor = static_cast<Editor*>(editorPtr);
+	EditorSystem* editor = static_cast<EditorSystem*>(editorPtr);
 	editor->PlayStopped();
 }

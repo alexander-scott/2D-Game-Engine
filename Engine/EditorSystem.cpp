@@ -1,4 +1,4 @@
-#include "Editor.h"
+#include "EditorSystem.h"
 
 #include "RequestBuildSceneMessage.h"
 #include "RequestSaveSceneMessage.h"
@@ -6,56 +6,56 @@
 #include "InputKeyboardMessage.h"
 #include "InputMouseMessage.h"
 
-Editor::Editor(std::shared_ptr<SystemMessageDispatcher> dispatcher)
+EditorSystem::EditorSystem(std::shared_ptr<SystemMessageDispatcher> dispatcher)
 	: ISystem(SystemType::eEditor, dispatcher)
 {
 }
 
-Editor::~Editor()
+EditorSystem::~EditorSystem()
 {
 }
 
-void Editor::InitaliseListeners()
+void EditorSystem::InitaliseListeners()
 {
 
 }
 
-void Editor::RecieveMessage(ISystemMessage & message)
+void EditorSystem::RecieveMessage(ISystemMessage & message)
 {
 }
 
-void Editor::PlayStarted()
+void EditorSystem::PlayStarted()
 {
 	// Start playing
 	SendMessageToDispatcher(ISystemMessage(SystemMessageType::ePlayStarted));
 }
 
-void Editor::PlayStopped()
+void EditorSystem::PlayStopped()
 {
 	// Stop playing
 	SendMessageToDispatcher(ISystemMessage(SystemMessageType::ePlayStopped));
 }
 
-void Editor::LoadNewScene(const char * filePath)
+void EditorSystem::LoadNewScene(const char * filePath)
 {
 	// Request a new scene be built by the SceneBuilder system
 	RequestBuildSceneMessage message(filePath); // Hardcoded for now
 	SendMessageToDispatcher(message);
 }
 
-void Editor::SaveScene(const char * filePath)
+void EditorSystem::SaveScene(const char * filePath)
 {
 	RequestSaveSceneMessage message(filePath);
 	SendMessageToDispatcher(message);
 }
 
-void Editor::KeyboardInput(int keyCode, KeyboardMessageType messageType)
+void EditorSystem::KeyboardInput(int keyCode, KeyboardMessageType messageType)
 {
 	InputKeyboardMessage message(messageType, static_cast<unsigned char>(keyCode));
 	SendMessageToDispatcher(message);
 }
 
-void Editor::MouseInput(int xpos, int ypos, MouseMessageType messageType)
+void EditorSystem::MouseInput(int xpos, int ypos, MouseMessageType messageType)
 {
 	InputMouseMessage message(messageType, xpos, ypos);
 	SendMessageToDispatcher(message);

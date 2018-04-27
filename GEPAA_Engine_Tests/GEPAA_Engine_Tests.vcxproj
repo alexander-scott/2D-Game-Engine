@@ -183,7 +183,7 @@
     <ClCompile Include="..\Engine\ComponentSaver.cpp" />
     <ClCompile Include="..\Engine\DXErr.cpp" />
     <ClCompile Include="..\Engine\DxGraphics.cpp" />
-    <ClCompile Include="..\Engine\Editor.cpp" />
+    <ClCompile Include="..\Engine\EditorSystem.cpp" />
     <ClCompile Include="..\Engine\Engine.cpp" />
     <ClCompile Include="..\Engine\GameObject.cpp" />
     <ClCompile Include="..\Engine\InputHandler.cpp" />
@@ -236,7 +236,7 @@
     <ClInclude Include="..\Engine\DrawTextMessage.h" />
     <ClInclude Include="..\Engine\DXErr.h" />
     <ClInclude Include="..\Engine\DxGraphics.h" />
-    <ClInclude Include="..\Engine\Editor.h" />
+    <ClInclude Include="..\Engine\EditorSystem.h" />
     <ClInclude Include="..\Engine\Engine.h" />
     <ClInclude Include="..\Engine\GameObject.h" />
     <ClInclude Include="..\Engine\IComponent.h" />

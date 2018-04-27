@@ -284,7 +284,7 @@
     <ClInclude Include="CustomException.h" />
     <ClInclude Include="DxGraphics.h" />
     <ClInclude Include="DXErr.h" />
-    <ClInclude Include="Editor.h" />
+    <ClInclude Include="EditorSystem.h" />
     <ClInclude Include="EditorEngineInterface.h" />
     <ClInclude Include="EditorInputInterface.h" />
     <ClInclude Include="EditorSceneInterface.h" />
@@ -364,7 +364,7 @@
     <ClCompile Include="ComponentSaver.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="DxGraphics.cpp" />
-    <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="EditorSystem.cpp" />
     <ClCompile Include="EditorEngineInterface.cpp" />
     <ClCompile Include="EditorInputInterface.cpp" />
     <ClCompile Include="EditorSceneInterface.cpp" />
