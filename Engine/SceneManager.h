@@ -10,10 +10,7 @@ public:
 	SceneManager(std::shared_ptr<SystemMessageDispatcher> dispatcher);
 
 	void InitaliseListeners() override;
-
 	void RecieveMessage(ISystemMessage& message) override;
-
-	//TODO ?: Add method Draw that populates the DrawSceneMessage sent to the Graphics
 
 	shared_ptr<Scene> GetScene() { return _currentScene; }
 

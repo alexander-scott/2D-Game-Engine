@@ -188,7 +188,6 @@
     <ClCompile Include="..\Engine\GameObject.cpp" />
     <ClCompile Include="..\Engine\InputHandler.cpp" />
     <ClCompile Include="..\Engine\ISpriteComponent.cpp" />
-    <ClCompile Include="..\Engine\LevelManager.cpp" />
     <ClCompile Include="..\Engine\Main.cpp" />
     <ClCompile Include="..\Engine\MainWindow.cpp" />
     <ClCompile Include="..\Engine\MBackgroundComponent.cpp" />
@@ -263,7 +262,6 @@
     <ClInclude Include="..\Engine\ISystemMessage.h" />
     <ClInclude Include="..\Engine\ISystemToGameObjectMessage.h" />
     <ClInclude Include="..\Engine\IUpdateableComponent.h" />
-    <ClInclude Include="..\Engine\LevelManager.h" />
     <ClInclude Include="..\Engine\MainWindow.h" />
     <ClInclude Include="..\Engine\Math.h" />
     <ClInclude Include="..\Engine\MBackgroundComponent.h" />

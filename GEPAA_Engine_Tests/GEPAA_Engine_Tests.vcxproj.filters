@@ -147,9 +147,6 @@
     <ClCompile Include="..\Engine\MComponentFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\LevelManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Engine\AudioSourceComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -384,9 +381,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\MComponentFactory.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Engine\LevelManager.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\AudioSourceComponent.h">

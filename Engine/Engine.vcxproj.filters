@@ -506,9 +506,6 @@
     <ClCompile Include="AudioSourceComponent.cpp">
       <Filter>Engine\GameObject\Components\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="LevelManager.cpp">
-      <Filter>Game\Myriam</Filter>
-    </ClCompile>
     <ClCompile Include="MComponentFactory.cpp">
       <Filter>Game\Myriam</Filter>
     </ClCompile>
